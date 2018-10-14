@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <!-- sem dajte svoje meno aby sme vedeli ze to kazdemu ide :) -->
-        <title>Majo, Brano , , ,</title>
+        <title>Majo, Brano ,Samuel , ,</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
