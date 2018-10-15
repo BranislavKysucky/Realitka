@@ -79,7 +79,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    Hádam to už pôjde dpc :)
                 </div>
 
                 <div class="links">
