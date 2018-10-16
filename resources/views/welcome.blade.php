@@ -80,7 +80,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Hádam to už pôjde dpc :)
+                    Hádam to už pôjde dpc :) <!-- slapee to :D  -->
                 </div>
 
                 <div class="links">
