@@ -74,8 +74,28 @@
                     <h4>VYHĽADÁVANIE</h4>
                 </div>
                 <form >
+
+                    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"></script>
+                    <script type="text/javascript">
+                        function initialize() {
+
+                            var options = {
+                                types: ['(regions)'],
+                                componentRestrictions: {country: "sk"}
+                            };
+
+                            var input = document.getElementById('lokalita');
+                            var autocomplete = new google.maps.places.Autocomplete(input, options);
+
+
+                        }
+                        google.maps.event.addDomListener(window, 'load', initialize);
+                    </script>
+
                     <label for="lokalita">Lokalita</label>
-                    <input id="lokalita" class="form-control"/>
+                    <input id="lokalita" class="form-control" placeholder="Zadajte lokalitu"/>
+
+
 
                     <div class="form-group">
                         <label for="kategoria">Kategória</label>
@@ -192,6 +212,7 @@
                 <p class="lead">popis inzerátu..... samozrejme toto je len náčrt, vyhľadávanie a  inzeráty budú v samostatných
                     súboroch.... prihlásenie a registrácia sa upraví :D </p>
                 <!-- <p><a class="btn btn-lg btn-success" href="#" role="button">Get started today</a></p> -->
+
             </div>
         </div>
         @yield('content')
