@@ -11,10 +11,14 @@
 |
 */
 
+
 Route::get('/', function () {
     return view('layouts/app');
 });
 
-Auth::routes();
+Route::resource('inzeraty', 'InzeratyController');
 
 Route::get('/home', 'HomeController@index')->name('home');
+Auth::routes();
+
+

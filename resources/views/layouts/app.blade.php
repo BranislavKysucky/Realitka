@@ -73,7 +73,8 @@
                 <div align="center">
                     <h4>VYHĽADÁVANIE</h4>
                 </div>
-                <form >
+                <form action="/inzeraty" method="get">
+                    {{csrf_field()}}
 
                     <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"></script>
                     <script type="text/javascript">
@@ -93,104 +94,104 @@
                     </script>
 
                     <label for="lokalita">Lokalita</label>
-                    <input id="lokalita" class="form-control" placeholder="Zadajte lokalitu"/>
+                    <input id="lokalita" class="form-control" placeholder="Zadajte lokalitu" name="lokalita"/>
 
 
 
                     <div class="form-group">
                         <label for="kategoria">Kategória</label>
-                        <select id="kategoria" class="form-control">
-                            <option value="">Všetky nehnuteľnosti</option>
-                            <option value="1">Ponuka real. kancelárií</option>
-                            <option value="2">Súkromná inzercia</option>
+                        <select id="kategoria" class="form-control" name="kategoria">
+                            <option value="1">Všetky nehnuteľnosti</option>
+                            <option value="2">Ponuka real. kancelárií</option>
+                            <option value="3">Súkromná inzercia</option>
                         </select>
 
                         <label for="typ">Typ</label>
-                        <select id="typ" class="form-control">
-                            <option value="">Predaj</option>
-                            <option value="">Prenájom</option>
-                            <option value="">Kúpa</option>
-                            <option value="">Podnájom</option>
-                            <option value="">Výmena</option>
-                            <option value="">Dražba</option>
+                        <select id="typ" class="form-control" name="typ">
+                            <option value="1">Predaj</option>
+                            <option value="2">Prenájom</option>
+                            <option value="3">Kúpa</option>
+                            <option value="4">Podnájom</option>
+                            <option value="5">Výmena</option>
+                            <option value="6">Dražba</option>
                         </select>
 
                         <label for="druh">Druh</label>
-                        <select  class="form-control" id="druh">
-                            <option value="">Všetko</option>
+                        <select  class="form-control" id="druh" name="druh">
+                            <option value="1">Všetko</option>
                             <optgroup label="BYTY">
-                                <option value="">Garsónka</option>
-                                <option value="">1 izbový byt</option>
-                                <option value="">2 izbový byt</option>
-                                <option value="">3 izbový byt</option>
-                                <option value="">4 izbový byt</option>
-                                <option value="">5 a viac izbový byt</option>
-                                <option value="">Mezonet</option>
-                                <option value="">Apartmán</option>
-                                <option value="">Iný byt</option>
-                                <option value="">Všetky byty</option>
+                                <option value="101">Garsónka</option>
+                                <option value="102">1 izbový byt</option>
+                                <option value="103">2 izbový byt</option>
+                                <option value="104">3 izbový byt</option>
+                                <option value="105">4 izbový byt</option>
+                                <option value="106">5 a viac izbový byt</option>
+                                <option value="107">Mezonet</option>
+                                <option value="108">Apartmán</option>
+                                <option value="109">Iný byt</option>
+                                <option value="110">Všetky byty</option>
                             </optgroup>
                             <optgroup label="DOMY">
-                                <option value="">Chata</option>
-                                <option value="">Chalupa</option>
-                                <option value="">Rodinný dom</option>
-                                <option value="">Rodinná vila</option>
-                                <option value="">Bývalá poľnohosp. usadlosť</option>
-                                <option value="">Iný objekt na bývanie a rekreáciu</option>
-                                <option value="">Všetky domy</option>
+                                <option value="201">Chata</option>
+                                <option value="202">Chalupa</option>
+                                <option value="203">Rodinný dom</option>
+                                <option value="204">Rodinná vila</option>
+                                <option value="205">Bývalá poľnohosp. usadlosť</option>
+                                <option value="206">Iný objekt na bývanie a rekreáciu</option>
+                                <option value="207">Všetky domy</option>
                             </optgroup>
                             <optgroup label="PRIESTORY">
-                                <option value="">Kancelárie, administratívne priestory</option>
-                                <option value="">Obchodné priestory</option>
-                                <option value="">Reštauračné priestory</option>
-                                <option value="">Športové priestory</option><
-                                <option value="">Iné komerčné priestory</option>
-                                <option value="">Priestor pre výrobu</option>
-                                <option value="">Priestor pre sklad</option>
-                                <option value="">Opravárenský priestor</option>
-                                <option value="">Priestor pre chov zvierat</option>
-                                <option value="">Iný prevádzkovy priestor</option>
-                                <option value="">Všetky priestory</option>
+                                <option value="301">Kancelárie, administratívne priestory</option>
+                                <option value="302">Obchodné priestory</option>
+                                <option value="303">Reštauračné priestory</option>
+                                <option value="304">Športové priestory</option><
+                                <option value="305">Iné komerčné priestory</option>
+                                <option value="306">Priestor pre výrobu</option>
+                                <option value="307">Priestor pre sklad</option>
+                                <option value="308">Opravárenský priestor</option>
+                                <option value="309">Priestor pre chov zvierat</option>
+                                <option value="310">Iný prevádzkovy priestor</option>
+                                <option value="311">Všetky priestory</option>
                             </optgroup>
                             <optgroup label="POZEMKY">
-                                <option value="">Rekreačný pozemok</option>
-                                <option value="">Pozemok pre rodinné domy</option>
-                                <option value="">Pozemok pre bytovú výstavbu</option>
-                                <option value="">Komerčná zóna</option>
-                                <option value="">Priemyselná zóna</option>
-                                <option value="">Záhrada</option>
-                                <option value="">Sad</option>
-                                <option value="">Lúka, pasienok</option>
-                                <option value="">Orná poda</option>
-                                <option value="">Chmelnica, vinica</option>
-                                <option value="">Lesná pôda</option>
-                                <option value="">Vodná plocha</option>
-                                <option value="">Iný poľnohosp. pozemok</option>
-                                <option value="">Hrobové miesto</option>
-                                <option value="">Všetky pozemky</option>
+                                <option value="401">Rekreačný pozemok</option>
+                                <option value="402">Pozemok pre rodinné domy</option>
+                                <option value="403">Pozemok pre bytovú výstavbu</option>
+                                <option value="404">Komerčná zóna</option>
+                                <option value="405">Priemyselná zóna</option>
+                                <option value="406">Záhrada</option>
+                                <option value="407">Sad</option>
+                                <option value="407">Lúka, pasienok</option>
+                                <option value="408">Orná poda</option>
+                                <option value="409">Chmelnica, vinica</option>
+                                <option value="410">Lesná pôda</option>
+                                <option value="411">Vodná plocha</option>
+                                <option value="412">Iný poľnohosp. pozemok</option>
+                                <option value="413">Hrobové miesto</option>
+                                <option value="414">Všetky pozemky</option>
                             </optgroup>
                         </select>
                         <label for="stav">Stav</label>
-                        <select id="stav" class="form-control">
-                            <option value="">Všetky stavy</option>
-                            <option value="">Novostavba</option>
-                            <option value="">Čiastočná rekonštrukcia</option>
-                            <option value="">Kompletná rekonštrukcia</option>
-                            <option value="">Pôvodný stav</option>
-                            <option value="">Vo výstavbe</option>
-                            <option value="">developerský projekt</option>
+                        <select id="stav" class="form-control" name="stav">
+                            <option value="1">Všetky stavy</option>
+                            <option value="2">Novostavba</option>
+                            <option value="3">Čiastočná rekonštrukcia</option>
+                            <option value="4">Kompletná rekonštrukcia</option>
+                            <option value="5">Pôvodný stav</option>
+                            <option value="6">Vo výstavbe</option>
+                            <option value="7">developerský projekt</option>
                         </select>
                         <label for="cena">Cena(€)</label>
                         <div class="input-group" id="cena">
-                            <input  placeholder="od" class="form-control" type="number" min="0"/>
+                            <input  placeholder="od" class="form-control" type="number" min="0" name="cena_od"/>
                             <span class="input-group-addon"></span>
-                            <input  placeholder="do" class="form-control" type="number" min="0"/>
+                            <input  placeholder="do" class="form-control" type="number" min="0" name="cena_do"/>
                         </div>
                         <label for="vymera">Výmera (m<sup>2</sup>)</label>
                         <div class="input-group" id="vymera">
-                            <input  placeholder="od" class="form-control" type="number" min="0"/>
+                            <input  placeholder="od" class="form-control" type="number" min="0" name="vymera_od"/>
                             <span class="input-group-addon"></span>
-                            <input  placeholder="do" class="form-control" type="number" min="0"/>
+                            <input  placeholder="do" class="form-control" type="number" min="0" name="vymera_do"/>
                         </div>
 
                     </div>

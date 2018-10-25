@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Registrovany_pouzivatel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 
 class HomeController extends Controller
 {
