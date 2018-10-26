@@ -10,4 +10,20 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
+    public function MojeInzeraty () {
+        return view('welcome');
+
+    }
+
+    public function RealitneKancelarie () {
+        return view('welcome');
+
+    }
+
+    public function PridatInzerat () {
+        return view('welcome');
+
+    }
+
 }

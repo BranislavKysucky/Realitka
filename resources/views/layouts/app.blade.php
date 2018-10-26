@@ -28,10 +28,10 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                        <li><a href="">Úvod</a></li>
-                        <li><a href="">Realitné kancelárie</a></li>
-                        <li><a href="">Moje inzeráty</a></li>
-                        <li><a href="">Pridať inzerát</a></li>
+                        <li><a href="/">Úvod</a></li>
+                        <li><a href="realitnekancelarie">Realitné kancelárie</a></li>
+                        <li><a href="mojeinzeraty">Moje inzeráty</a></li>
+                        <li><a href="pridatinzerat">Pridať inzerát</a></li>
 
                     </ul>
 
