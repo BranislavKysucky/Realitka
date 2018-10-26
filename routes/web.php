@@ -17,4 +17,6 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Rote::get('inzeraty', 'InzeratyController');
+
 Route::get('/home', 'HomeController@index')->name('home');
