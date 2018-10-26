@@ -199,6 +199,7 @@
                     <div class="form-group">
                         <input type="submit" class="btn btn-danger form-control" value="VYHĽADAŤ"/>
                     </div>
+                    @include('errors')
                 </form>
 
 
@@ -212,13 +213,12 @@
                 <h1>Inzerát</h1>
                 <p class="lead">popis inzerátu..... samozrejme toto je len náčrt, vyhľadávanie a  inzeráty budú v samostatných
                     súboroch.... prihlásenie a registrácia sa upraví :D </p>
-                <!-- <p><a class="btn btn-lg btn-success" href="#" role="button">Get started today</a></p> -->
+            <!-- <p><a class="btn btn-lg btn-success" href="#" role="button">Get started today</a></p> -->
 
             </div>
         </div>
         @yield('content')
     </div>
-
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
 </body>
