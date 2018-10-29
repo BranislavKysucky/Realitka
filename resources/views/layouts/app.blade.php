@@ -31,7 +31,7 @@
                         <li><a href="{{ route('inzeraty.index') }}">Domov</a></li>
                         <li><a href="realitnekancelarie">Realitné kancelárie</a></li>
                         <li><a href="mojeinzeraty">Moje inzeráty</a></li>
-                        <li><a href="pridatinzerat">Pridať inzerát</a></li>
+                        <li><a href={{ route('inzeraty.create') }}>Pridať inzerát</a></li>
 
                     </ul>
 

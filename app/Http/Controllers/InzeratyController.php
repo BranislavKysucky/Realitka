@@ -79,6 +79,7 @@ class InzeratyController extends Controller
      */
     public function store(Request $request)
     {
+       
         //toto je len pomocka
         $image=$request->file('image');
         $input['imagename']=time().$image->getClientOriginalName().'.'.$image->getClientOriginalExtension();
