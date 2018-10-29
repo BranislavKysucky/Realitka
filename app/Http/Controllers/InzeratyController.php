@@ -126,7 +126,7 @@ class InzeratyController extends Controller
         $fotografia->url = $path;
         $fotografia->save();
 
-        return view('inzeraty.index');
+        return view('inzeraty.hotovo');
 
 
 
