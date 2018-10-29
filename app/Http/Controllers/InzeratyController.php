@@ -7,6 +7,7 @@ use App\Kategoria;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rules\In;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class InzeratyController extends Controller
 {
@@ -17,6 +18,10 @@ class InzeratyController extends Controller
      */
     public function index(Request $request, Inzerat $inzeraty)
     {
+        /*predpokladam ze toto je len predpriprava, lebo index metoda by mala primarne zobrazit vsetky inzeraty.
+        a ked das vsetko required tak pouzivatelovi nepojde filtrovanie spravne. Zatial som to dal do komentu teda.
+        */
+        /*
         $this->validate(request(), [
             'name' => 'required',
             'cena_od' => 'required',
@@ -45,7 +50,12 @@ class InzeratyController extends Controller
                 ->get();
         }
 
-        return view('filtrovane_inzeraty', compact('inzeraty'));
+        return view('inzeraty.filtrovane_inzeraty', compact('inzeraty'));*/
+
+        //zatial vracia teda len vsetky inzeraty
+        $inzeraty=Inzerat::all();
+        return view('inzeraty.filtrovane_inzeraty',['inzeraty'=>$inzeraty]);
+
     }
 
     /**
@@ -55,7 +65,10 @@ class InzeratyController extends Controller
      */
     public function create()
     {
-        //
+        //tato metoda otvori view pre vytvorenie inzeratu
+        //cesta je inzeraty/create
+        // kto by nevedel preco tak kuk sem https://laravel.com/docs/5.5/controllers#resource-controllers
+        return view('inzeraty.vytvorit_inzerat');
     }
 
     /**
@@ -66,7 +79,13 @@ class InzeratyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //toto je len pomocka
+        $image=$request->file('image');
+        $input['imagename']=time().$image->getClientOriginalName().'.'.$image->getClientOriginalExtension();
+        $path=public_path('/images');
+        $image->move($path,$input['imagename']);
+
+        echo 'tu bude nieco velmi zaujimave :D';
     }
 
     /**
