@@ -78,7 +78,7 @@
                             <option value="107">Mezonet</option>
                             <option value="108">Apartmán</option>
                             <option value="109">Iný byt</option>
-                            <option value="110">Všetky byty</option>
+
                         </optgroup>
                         <optgroup label="DOMY">
                             <option value="201">Chata</option>
@@ -87,7 +87,7 @@
                             <option value="204">Rodinná vila</option>
                             <option value="205">Bývalá poľnohosp. usadlosť</option>
                             <option value="206">Iný objekt na bývanie a rekreáciu</option>
-                            <option value="207">Všetky domy</option>
+
                         </optgroup>
                         <optgroup label="PRIESTORY">
                             <option value="301">Kancelárie, administratívne priestory</option>
@@ -100,7 +100,7 @@
                             <option value="308">Opravárenský priestor</option>
                             <option value="309">Priestor pre chov zvierat</option>
                             <option value="310">Iný prevádzkovy priestor</option>
-                            <option value="311">Všetky priestory</option>
+
                         </optgroup>
                         <optgroup label="POZEMKY">
                             <option value="401">Rekreačný pozemok</option>
@@ -117,7 +117,7 @@
                             <option value="411">Vodná plocha</option>
                             <option value="412">Iný poľnohosp. pozemok</option>
                             <option value="413">Hrobové miesto</option>
-                            <option value="414">Všetky pozemky</option>
+
                         </optgroup>
                     </select>
                     <label for="stav">Stav</label>
@@ -135,11 +135,31 @@
                         <input  placeholder="cena" class="form-control" type="number" min="0" name="cena_od"/>
 
                     </div>
-                    <label for="vymera">Výmera (m<sup>2</sup>)</label>
-                    <div class="input-group" id="vymera">
-                        <input  placeholder="vymera" class="form-control" type="number" min="0" name="vymera_od"/>
+
+                    <label for="cena_dohodou">Cena dohodou </label>
+                    <label class="radio-inline"><input type="radio" [value] = 1 name="optradio" checked>Ano</label>
+                    <label class="radio-inline"><input type="radio" [value] = 0 name="optradio">Nie</label>
+                    <br>
+
+                    <label for="vymera_domu">Výmera domu(m<sup>2</sup>)</label>
+                    <div class="input-group" id="vymera_domu">
+                        <input  placeholder="vymera domu" class="form-control" type="number" min="0" name="vymera_domu"/>
 
                     </div>
+
+
+                    <label for="vymera_pozemku">Výmera pozemku(m<sup>2</sup>)</label>
+                    <div class="input-group" id="vymera_pozemku">
+                        <input  placeholder="vymera pozemku" class="form-control" type="number" min="0" name="vymera_pozemku"/>
+
+                    </div>
+
+                    <label for="uzitkova_plocha">Uzitkova plocha(m<sup>2</sup>)</label>
+                    <div class="input-group" id="uzitkova_plocha">
+                        <input  placeholder="uzitkova plocha" class="form-control" type="number" min="0" name="uzitkova_plocha"/>
+
+                    </div>
+
 
                 </div>
                 <div class="well well-lg">

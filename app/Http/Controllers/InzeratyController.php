@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Fotografia;
 use App\Inzerat;
 use App\Kategoria;
 use Illuminate\Http\Request;
@@ -79,14 +80,59 @@ class InzeratyController extends Controller
      */
     public function store(Request $request)
     {
-       
-        //toto je len pomocka
+
+        $this->validate(request(), [
+
+            'nazov' => 'required',
+            'popis' => 'required',
+            'adresa' => 'required',
+            'cena' => 'required',
+
+           'vymera_domu' => 'required',    // treba domysliet vymeru
+           'vymera_pozemku' => 'required',
+           'uzitkova_plocha' => 'required',
+            'cena_dohodou' => 'required',
+            'stav' => 'required',
+            'druh' => 'required',
+            'typ' => 'required',
+            'kategoria' => 'required'
+]);
+
+
+
+        //ulozenie image, do db ide iba url teda path
         $image=$request->file('image');
         $input['imagename']=time().$image->getClientOriginalName().'.'.$image->getClientOriginalExtension();
         $path=public_path('/images');
         $image->move($path,$input['imagename']);
 
-        echo 'tu bude nieco velmi zaujimave :D';
+        // vytvorenie inzeratu
+        $inzerat = new Inzerat;
+        $inzerat->stav = $request->get('stav');
+        $inzerat->druh = $request->get('druh');
+        $inzerat->typ = $request->get('typ');
+        $inzerat->kategoria = $request->get('kategoria');
+        $inzerat->anonym_id = 1;
+        $inzerat->nazov = $request->get('nazov');
+        $inzerat->popis = $request->get('popis');
+        $inzerat->adresa = $request->get('adresa');
+        $inzerat->cena = $request->get('cena');
+        $inzerat->vymera_domu = $request->get('vymera_domu');
+        $inzerat->cena_dohodou = $request->get('cena_dohodou');
+        $inzerat->save();
+        // vytvorenie fotografie zatial iba jeden obrazok
+        $fotografia = new Fotografia;
+        $fotografia->inzerat_id = $inzerat->id;
+        $fotografia->url = $path;
+        $fotografia->save();
+
+        return view('inzeraty.index');
+
+
+
+
+
+        //echo 'tu bude nieco velmi zaujimave :D';
     }
 
     /**
