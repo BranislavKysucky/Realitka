@@ -14,6 +14,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon"/>
     <link href="layout/styles/layout.css" rel="stylesheet" type="text/css" media="all">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
