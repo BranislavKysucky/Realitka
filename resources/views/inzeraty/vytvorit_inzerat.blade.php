@@ -166,7 +166,7 @@
 
 
                         <label>Select image to upload:</label>
-                        <input type="file" name="image" id="image">
+                        <input type="file" name="images[]"  multiple>
 
 
                 </div>

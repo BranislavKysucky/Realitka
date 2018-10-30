@@ -95,18 +95,14 @@ class InzeratyController extends Controller
             'stavy' => 'required',
             'druh' => 'required',
             'typ' => 'required',
-            'image' => 'required | mimes:jpeg,jpg,png',   // zatial validacia iba pre typy v buducnosti mozno aj velkost/mnozstvo
+            'images' => 'required',
+            'images.*' => 'image|mimes:jpeg,jpg,png', // zatial validacia iba pre typy v buducnosti mozno aj velkost/mnozstvo
             'kategoria' => 'required'
 ]);
 
 
-        if ($request->hasFile('image')) {  // pre istotu este raz overenie
-            //ulozenie image, do db ide iba url teda path
-            $image = $request->file('image');
-            $file_name = $image->hashName();
-            $input['imagename'] = time() . $image->getClientOriginalName() . '.' . $image->getClientOriginalExtension();
-            $path = public_path('/images');
-            $image->move($path, $input['imagename']);
+        if ($request->hasFile('images')) {  // pre istotu este raz overenie
+
 
 
             // vytvorenie inzeratu
@@ -142,11 +138,23 @@ class InzeratyController extends Controller
             $inzerat->save();
 
 
+            foreach($request->file('images') as $image) {
+
+            //ulozenie image, do db ide iba url teda path
+
+            $file_name = $image->hashName();
+            $input['imagename'] = time() . $image->getClientOriginalName() . '.' . $image->getClientOriginalExtension();
+            $path = public_path('/images');
+            $image->move($path, $input['imagename']);
+
             // vytvorenie fotografie zatial iba jeden obrazok
             $fotografia = new Fotografia;
             $fotografia->inzerat_id = $inzerat->id;
             $fotografia->url = "/public/images/" . $file_name;
             $fotografia->save();
+            }
+
+
         }
         return view('inzeraty.hotovo');
 
