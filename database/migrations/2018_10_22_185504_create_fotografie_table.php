@@ -17,6 +17,7 @@ class CreateFotografieTable extends Migration
             $table->increments('id');
             $table->integer('inzerat_id');
             $table->string('url');
+            $table->timestamps();
         });
     }
 
