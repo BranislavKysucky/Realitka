@@ -92,7 +92,7 @@ class InzeratyController extends Controller
            'vymera_pozemku' => 'required',
            'uzitkova_plocha' => 'required',
             'cena_dohodou' => 'required',
-            'stav' => 'required',
+            'stavy' => 'required',
             'druh' => 'required',
             'typ' => 'required',
             'kategoria' => 'required'
@@ -108,18 +108,38 @@ class InzeratyController extends Controller
 
         // vytvorenie inzeratu
         $inzerat = new Inzerat;
-        $inzerat->stav = $request->get('stav');
-        $inzerat->druh = $request->get('druh');
-        $inzerat->typ = $request->get('typ');
-        $inzerat->kategoria = $request->get('kategoria');
+        $inzerat->stav_id = $request->get('stavy');
+        $inzerat->druh_id = $request->get('druh');
+        $inzerat->typ_id = $request->get('typ');
+        $inzerat->kategoria_id = $request->get('kategoria');
+
+        // zatial iba natvrdo dane, musia byt vsetky 3 lebo su not null :D
+
         $inzerat->anonym_id = 1;
+        $inzerat->registrovany_pouzivatel_id = 1;
+        $inzerat->pocet_zobrazeni = 112;
+
+
         $inzerat->nazov = $request->get('nazov');
         $inzerat->popis = $request->get('popis');
         $inzerat->adresa = $request->get('adresa');
         $inzerat->cena = $request->get('cena');
         $inzerat->vymera_domu = $request->get('vymera_domu');
-        $inzerat->cena_dohodou = $request->get('cena_dohodou');
+        $inzerat->vymera_pozemku = $request->get('vymera_pozemku');
+        $inzerat->uzitkova_plocha = $request->get('uzitkova_plocha');
+
+        $cena_dohodou = $request->get('cena_dohodou');
+        if($cena_dohodou == true){
+            $inzerat->cena_dohodou = 1;
+        } else {
+            $inzerat->cena_dohodou = 0;
+        }
+
+        $inzerat->updated_at = today();
         $inzerat->save();
+
+
+
         // vytvorenie fotografie zatial iba jeden obrazok
         $fotografia = new Fotografia;
         $fotografia->inzerat_id = $inzerat->id;
@@ -127,8 +147,6 @@ class InzeratyController extends Controller
         $fotografia->save();
 
         return view('inzeraty.hotovo');
-
-
 
 
 

@@ -120,8 +120,8 @@
 
                         </optgroup>
                     </select>
-                    <label for="stav">Stav</label>
-                    <select id="stav" class="form-control" name="stav">
+                    <label for="stavy">Stav</label>
+                    <select id="stavy" class="form-control" name="stavy">
 
                         <option value="1">Novostavba</option>
                         <option value="2">Čiastočná rekonštrukcia</option>
@@ -132,13 +132,13 @@
                     </select>
                     <label for="cena">Cena(€)</label>
                     <div class="input-group" id="cena">
-                        <input  placeholder="cena" class="form-control" type="number" min="0" name="cena_od"/>
+                        <input  placeholder="cena" class="form-control" type="number" min="0" name="cena"/>
 
                     </div>
 
                     <label for="cena_dohodou">Cena dohodou </label>
-                    <label class="radio-inline"><input type="radio" [value] = 1 name="optradio" checked>Ano</label>
-                    <label class="radio-inline"><input type="radio" [value] = 0 name="optradio">Nie</label>
+                    <label class="radio-inline"><input value = true name = "cena_dohodou" id = "cena_dohodou" type="radio"  name="optradio" checked>Ano</label>
+                    <label class="radio-inline"><input value = false name = "cena_dohodou" id = "cena_dohodou" type="radio"  name="optradio">Nie</label>
                     <br>
 
                     <label for="vymera_domu">Výmera domu(m<sup>2</sup>)</label>
