@@ -95,57 +95,59 @@ class InzeratyController extends Controller
             'stavy' => 'required',
             'druh' => 'required',
             'typ' => 'required',
+            'image' => 'required | mimes:jpeg,jpg,png',   // zatial validacia iba pre typy v buducnosti mozno aj velkost/mnozstvo
             'kategoria' => 'required'
 ]);
 
 
-
-        //ulozenie image, do db ide iba url teda path
-        $image=$request->file('image');
-        $input['imagename']=time().$image->getClientOriginalName().'.'.$image->getClientOriginalExtension();
-        $path=public_path('/images');
-        $image->move($path,$input['imagename']);
-
-        // vytvorenie inzeratu
-        $inzerat = new Inzerat;
-        $inzerat->stav_id = $request->get('stavy');
-        $inzerat->druh_id = $request->get('druh');
-        $inzerat->typ_id = $request->get('typ');
-        $inzerat->kategoria_id = $request->get('kategoria');
-
-        // zatial iba natvrdo dane, musia byt vsetky 3 lebo su not null :D
-
-        $inzerat->anonym_id = 1;
-        $inzerat->registrovany_pouzivatel_id = 1;
-        $inzerat->pocet_zobrazeni = 112;
+        if ($request->hasFile('image')) {  // pre istotu este raz overenie
+            //ulozenie image, do db ide iba url teda path
+            $image = $request->file('image');
+            $file_name = $image->hashName();
+            $input['imagename'] = time() . $image->getClientOriginalName() . '.' . $image->getClientOriginalExtension();
+            $path = public_path('/images');
+            $image->move($path, $input['imagename']);
 
 
-        $inzerat->nazov = $request->get('nazov');
-        $inzerat->popis = $request->get('popis');
-        $inzerat->adresa = $request->get('adresa');
-        $inzerat->cena = $request->get('cena');
-        $inzerat->vymera_domu = $request->get('vymera_domu');
-        $inzerat->vymera_pozemku = $request->get('vymera_pozemku');
-        $inzerat->uzitkova_plocha = $request->get('uzitkova_plocha');
+            // vytvorenie inzeratu
+            $inzerat = new Inzerat;
+            $inzerat->stav_id = $request->get('stavy');
+            $inzerat->druh_id = $request->get('druh');
+            $inzerat->typ_id = $request->get('typ');
+            $inzerat->kategoria_id = $request->get('kategoria');
 
-        $cena_dohodou = $request->get('cena_dohodou');
-        if($cena_dohodou == true){
-            $inzerat->cena_dohodou = 1;
-        } else {
-            $inzerat->cena_dohodou = 0;
+            // zatial iba natvrdo dane, musia byt vsetky 3 lebo su not null :D
+
+            $inzerat->anonym_id = 1;
+            $inzerat->registrovany_pouzivatel_id = 1;
+            $inzerat->pocet_zobrazeni = 112;
+
+
+            $inzerat->nazov = $request->get('nazov');
+            $inzerat->popis = $request->get('popis');
+            $inzerat->adresa = $request->get('adresa');
+            $inzerat->cena = $request->get('cena');
+            $inzerat->vymera_domu = $request->get('vymera_domu');
+            $inzerat->vymera_pozemku = $request->get('vymera_pozemku');
+            $inzerat->uzitkova_plocha = $request->get('uzitkova_plocha');
+
+            $cena_dohodou = $request->get('cena_dohodou');
+            if ($cena_dohodou == true) {
+                $inzerat->cena_dohodou = 1;
+            } else {
+                $inzerat->cena_dohodou = 0;
+            }
+
+            $inzerat->updated_at = today();
+            $inzerat->save();
+
+
+            // vytvorenie fotografie zatial iba jeden obrazok
+            $fotografia = new Fotografia;
+            $fotografia->inzerat_id = $inzerat->id;
+            $fotografia->url = "/public/images/" . $file_name;
+            $fotografia->save();
         }
-
-        $inzerat->updated_at = today();
-        $inzerat->save();
-
-
-
-        // vytvorenie fotografie zatial iba jeden obrazok
-        $fotografia = new Fotografia;
-        $fotografia->inzerat_id = $inzerat->id;
-        $fotografia->url = $path;
-        $fotografia->save();
-
         return view('inzeraty.hotovo');
 
 
