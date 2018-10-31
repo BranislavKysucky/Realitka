@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Fotografia;
 use App\Inzerat;
 use App\Kategoria;
+use App\Typ;
+use App\Druh;
+use App\Stav;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rules\In;
@@ -64,12 +67,14 @@ class InzeratyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create()   // otvorenie viewu pre vytvorenie inzeratu + dynamicke data z db
     {
-        //tato metoda otvori view pre vytvorenie inzeratu
-        //cesta je inzeraty/create
-        // kto by nevedel preco tak kuk sem https://laravel.com/docs/5.5/controllers#resource-controllers
-        return view('inzeraty.vytvorit_inzerat');
+        $kategorie = Kategoria::all();
+        $typy = Typ::all();
+        $druhy = Druh::all();
+        $druhy_nazov = Druh::select('nazov')->groupBy('nazov')->get();
+        $stavy = Stav::all();
+        return view('inzeraty.vytvorit_inzerat',['kategorie'=>$kategorie,'typy'=>$typy,'druhy'=>$druhy,'stavy'=>$stavy,'druhy_nazov'=>$druhy_nazov]);
     }
 
     /**
@@ -78,7 +83,7 @@ class InzeratyController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)         // zatial predbezny kod -> neskusat/nekukat nan !!! :D :D
+    public function store(Request $request)         // metoda pre ulozenie inzeratu + fotiek
     {
 
         $this->validate(request(), [
@@ -127,7 +132,7 @@ class InzeratyController extends Controller
             $inzerat->vymera_pozemku = $request->get('vymera_pozemku');
             $inzerat->uzitkova_plocha = $request->get('uzitkova_plocha');
 
-            $cena_dohodou = $request->get('cena_dohodou');
+            $cena_dohodou = $request->get('cena_dohodou');              // prichadza z radiobuttonu ako true or false
             if ($cena_dohodou == true) {
                 $inzerat->cena_dohodou = 1;
             } else {
@@ -140,7 +145,7 @@ class InzeratyController extends Controller
 
             foreach($request->file('images') as $image) {
 
-            //ulozenie image, do db ide iba url teda path
+            //ulozenie image, do db ide iba url teda path resp.  /public/images/ + image name
 
             $file_name = $image->hashName();
             $input['imagename'] = time() . $image->getClientOriginalName() . '.' . $image->getClientOriginalExtension();
@@ -157,10 +162,6 @@ class InzeratyController extends Controller
 
         }
         return view('inzeraty.hotovo');
-
-
-
-        //echo 'tu bude nieco velmi zaujimave :D';
     }
 
     /**

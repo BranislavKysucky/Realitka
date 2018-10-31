@@ -50,85 +50,54 @@
                 <div class="form-group">
                     <label for="kategoria">Kategória</label>
                     <select id="kategoria" class="form-control" name="kategoria">
+                        @foreach($kategorie as $kategoria)
 
-                        <option value="1">Ponuka real. kancelárií</option>
-                        <option value="2">Súkromná inzercia</option>
+                            <option value={{$kategoria->value}}>{{$kategoria->nazov}}</option>
+
+                        @endforeach
+
                     </select>
 
                     <label for="typ">Typ</label>
                     <select id="typ" class="form-control" name="typ">
-                        <option value="1">Predaj</option>
-                        <option value="2">Prenájom</option>
-                        <option value="3">Kúpa</option>
-                        <option value="4">Podnájom</option>
-                        <option value="5">Výmena</option>
-                        <option value="6">Dražba</option>
+                        @foreach($typy as $typ)
+
+                            <option value={{$typ->value}}>{{$typ->nazov}}</option>
+
+                        @endforeach
                     </select>
 
                     <label for="druh">Druh</label>
                     <select  class="form-control" id="druh" name="druh">
+                        @foreach($druhy_nazov as $druh_nazov)
+                            <optgroup label={{$druh_nazov->nazov}}>
 
-                        <optgroup label="BYTY">
-                            <option value="101">Garsónka</option>
-                            <option value="102">1 izbový byt</option>
-                            <option value="103">2 izbový byt</option>
-                            <option value="104">3 izbový byt</option>
-                            <option value="105">4 izbový byt</option>
-                            <option value="106">5 a viac izbový byt</option>
-                            <option value="107">Mezonet</option>
-                            <option value="108">Apartmán</option>
-                            <option value="109">Iný byt</option>
 
-                        </optgroup>
-                        <optgroup label="DOMY">
-                            <option value="201">Chata</option>
-                            <option value="202">Chalupa</option>
-                            <option value="203">Rodinný dom</option>
-                            <option value="204">Rodinná vila</option>
-                            <option value="205">Bývalá poľnohosp. usadlosť</option>
-                            <option value="206">Iný objekt na bývanie a rekreáciu</option>
+                            @foreach($druhy as $druh)
 
-                        </optgroup>
-                        <optgroup label="PRIESTORY">
-                            <option value="301">Kancelárie, administratívne priestory</option>
-                            <option value="302">Obchodné priestory</option>
-                            <option value="303">Reštauračné priestory</option>
-                            <option value="304">Športové priestory</option><
-                            <option value="305">Iné komerčné priestory</option>
-                            <option value="306">Priestor pre výrobu</option>
-                            <option value="307">Priestor pre sklad</option>
-                            <option value="308">Opravárenský priestor</option>
-                            <option value="309">Priestor pre chov zvierat</option>
-                            <option value="310">Iný prevádzkovy priestor</option>
 
-                        </optgroup>
-                        <optgroup label="POZEMKY">
-                            <option value="401">Rekreačný pozemok</option>
-                            <option value="402">Pozemok pre rodinné domy</option>
-                            <option value="403">Pozemok pre bytovú výstavbu</option>
-                            <option value="404">Komerčná zóna</option>
-                            <option value="405">Priemyselná zóna</option>
-                            <option value="406">Záhrada</option>
-                            <option value="407">Sad</option>
-                            <option value="407">Lúka, pasienok</option>
-                            <option value="408">Orná poda</option>
-                            <option value="409">Chmelnica, vinica</option>
-                            <option value="410">Lesná pôda</option>
-                            <option value="411">Vodná plocha</option>
-                            <option value="412">Iný poľnohosp. pozemok</option>
-                            <option value="413">Hrobové miesto</option>
 
-                        </optgroup>
+                                    @if($druh_nazov->nazov == $druh->nazov)
+                                    <option value={{$druh->value}}>{{$druh->podnazov}}</option>
+                                    @endif
+
+
+                            @endforeach
+
+                            </optgroup>
+
+                        @endforeach
                     </select>
+
                     <label for="stavy">Stav</label>
                     <select id="stavy" class="form-control" name="stavy">
 
-                        <option value="1">Novostavba</option>
-                        <option value="2">Čiastočná rekonštrukcia</option>
-                        <option value="3">Kompletná rekonštrukcia</option>
-                        <option value="4">Pôvodný stav</option>
-                        <option value="5">Vo výstavbe</option>
-                        <option value="6">Developerský projekt</option>
+                        @foreach($stavy as $stav)
+
+                            <option value={{$stav->value}}>{{$stav->nazov}}</option>
+
+                        @endforeach
+
                     </select>
                     <label for="cena">Cena(€)</label>
                     <div class="input-group" id="cena">
