@@ -1,6 +1,5 @@
 
 <!DOCTYPE html>
-
 <html lang="sk">
 <head>
     <title>Realitky</title>
@@ -13,20 +12,139 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
     <link rel="icon" href="images/favicon.ico" type="image/x-icon"/>
-    <link href="layout/styles/layout.css" rel="stylesheet" type="text/css" media="all">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
+    <link rel="stylesheet" href="{{ URL::asset('layout/styles/layout.css') }}">
 </head>
+<!-- #################################################################### -->
 
-<body>
+<body id="top">
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<div class="wrapper row0">
+    <div id="topbar" class="hoc clear">
+        <!-- ################################################################################################ -->
+        <div class="fl_left">
+            <ul class="nospace">
+                <li><a href="/"><i class="fas fa-home fa-lg"></i></a></li>
+                <li><a href="">Prihlásiť sa</a></li>
+                <li><a href="#">Registrovať sa</a></li>
+            </ul>
+        </div>
+        <div class="fl_right">
+            <ul class="nospace">
+                <li><i class="fas fa-phone rgtspace-5"></i> +00 (123) 456 7890</li>
+                <li><i class="fas fa-envelope rgtspace-5"></i> info@ksu.sk</li>
+            </ul>
+        </div>
+        <!-- ################################################################################################ -->
+    </div>
+</div>
+<!-- ################################################################################################ -->
+
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<div class="wrapper row1">
+    <header id="header" class="hoc clear">
+        <!-- ################################################################################################ -->
+        <div id="logo" class="one_half first">
+            <h1 class="logoname"><a href=""><span>REA</span>LITKY</a></h1>
+        </div>
+        <div class="one_half">
+            <ul class="nospace clear">
+                <li class="one_half first">
+                    <div class="block clear"><i class="fas fa-star"></i> <span><strong class="block"><hr>Jednotka na trhu </strong> </span> </hr>
+                    </div>
+                </li>
+                <li class="one_half">
+                </li>
+            </ul>
+        </div>
+        <!-- ################################################################################################ -->
+    </header>
+    <nav id="mainav" class="hoc clear">
+        <!-- ################################################################################################ -->
+        <ul class="clear">
+            <li class="active"><a href="/">Domov</a></li>
+            <li><a href="">Realitné kancelárie</a></li>
+            <li><a href="#">Moje inzeráty</a></li>
+            <li><a href="{{ route('inzeraty.create') }}">Pridať inzerat</a></li>
+            <li><a href="#">Kontakt</a></li>
+        </ul>
+        <!-- ################################################################################################ -->
+    </nav>
+</div>
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
 
 
+<!-- ################################################################################################ -->
+{{-- Tu je zatial pripraveny kod na prihlasovanie, registraciu - potom sa pouzije }}
+
+
+{{--<ul class="nav navbar-nav navbar-right">--}}
+{{--<!-- Authentication Links -->--}}
+{{--@guest <li><a href="{{ route('login') }}">Prihlásenie</a></li>--}}
+{{--<li><a href="{{ route('register') }}">Registrácia</a></li>--}}
+{{----}}
+{{--@else--}}
+{{--<li class="dropdown">--}}
+{{--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" v-pre>--}}
+{{--{{ Auth::user()->name }} <span class="caret"></span>--}}
+{{--</a>--}}
+
+{{--<ul class="dropdown-menu">--}}
+{{--<li>--}}
+{{--<a href="{{ route('logout') }}"--}}
+{{--onclick="event.preventDefault();--}}
+{{--document.getElementById('logout-form').submit();">--}}
+{{--Odhlásiť--}}
+{{--</a>--}}
+
+{{--<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">--}}
+{{--{{ csrf_field() }}--}}
+{{--</form>--}}
+{{--</li>--}}
+{{--</ul>--}}
+{{--</li>--}}
+{{--@endguest--}}
+{{--</ul>--}}
+{{--</div>--}}
+{{--</div>--}}
+
+
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- / main body -->
+<main>
+    <div class="clear"></div>
+</main>
+</div>
 
 
 @yield('content')
-
-
 </body>
+
+<footer>
+    <div id="copyright" class="hoc clear">
+        <!-- ################################################################################################ -->
+        <p class="fl_left"> &copy; 2018 - <a href="#">KSU</a></p>
+
+        <!-- ################################################################################################ -->
+    </div>
+    </div>
+    <a id="backtotop" href="#top"><i class="fas fa-chevron-up"></i></a>
+</footer>
+
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- JAVASCRIPTS -->
+<script src="layout/scripts/jquery.min.js"></script>
+<script src="layout/scripts/jquery.backtotop.js"></script>
+<script src="layout/scripts/jquery.mobilemenu.js"></script>
 </html>
