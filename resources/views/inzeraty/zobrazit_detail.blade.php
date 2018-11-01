@@ -114,6 +114,12 @@
     </body>
 
     </body>
+
+    <a id="backtotop" href="#top"><i class="fas fa-chevron-up"></i></a>
+    <!-- JAVASCRIPTS -->
+
+    <script src="../layout/scripts/jquery.backtotop.js"></script>
+
     </html>
 
 

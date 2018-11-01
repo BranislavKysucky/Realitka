@@ -202,7 +202,7 @@
                                 <li><i class="fas fa-tags"></i> <a href="#">Tag 1</a>, <a href="#">Tag 2</a></li>
                             </ul>
                             <p>Popis... [<a href="#">&hellip;</a>]</p>
-                            <footer><a class="btn" href="#">Zobraziť detail</a></footer>
+                            <footer><a class="btn" href="inzeraty/1 ">Zobraziť detail</a></footer>
                         </div>
                     </article>
                 </li>
@@ -220,7 +220,7 @@
                                 <li><i class="fas fa-tags"></i> <a href="#">Tag 1</a>, <a href="#">Tag 2</a></li>
                             </ul>
                             <p>Popis... [<a href="#">&hellip;</a>]</p>
-                            <footer><a class="btn" href="#">Zobraziť detail</a></footer>
+                            <footer><a class="btn" href="inzeraty/1">Zobraziť detail</a></footer>
                         </div>
                     </article>
                 </li>
@@ -238,7 +238,7 @@
                                 <li><i class="fas fa-tags"></i> <a href="#">Tag 1</a>, <a href="#">Tag 2</a></li>
                             </ul>
                             <p>Popis... [<a href="#">&hellip;</a>]</p>
-                            <footer><a class="btn" href="#">Zobraziť detail</a></footer>
+                            <footer><a class="btn" href="inzeraty/1">Zobraziť detail</a></footer>
                         </div>
 
                     </article>
