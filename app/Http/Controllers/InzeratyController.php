@@ -8,6 +8,7 @@ use App\Kategoria;
 use App\Typ;
 use App\Druh;
 use App\Stav;
+use App\Registrovany_pouzivatel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rules\In;
@@ -170,9 +171,34 @@ class InzeratyController extends Controller
      * @param  \App\Inzerat  $inzerat
      * @return \Illuminate\Http\Response
      */
-    public function show(Inzerat $inzerat)
+    public function show(Inzerat $inzerat, $id)
     {
-        //
+        // adresa pre zobrazenie detailu inzeratu je nazovstranky/inzeraty/1 (cislo 1 - predstavuje id  konkretneho inzeratu)
+        //zatial som si pridal vsetky modely, aby som si mohol spravit view a zobrazit v nom udaje zo vsetkych tabuliek, funguje to ak zobrazujete
+        // len  prvy inzerat s cislom 1, potom da chybu page not found pri dvojke  napr., ak by som zmazal takto pridane modely
+        // a nechal tam len inzerat kategoria (cize udaje taham len z dvoch tabuliek), tak to funguje a mozete zobrazovat hocijake inzeraty na zaklade id (napr 2)
+        // cize bude tam chyba v zapise - toto musim doriesit - lebo takto sa to nedefinuje ako som si to zatial dal,
+        // ale na odskusanie je to zatial dobre... toto bude len uprava v zapise
+
+
+        $inzerat = Inzerat::findOrFail($id);
+        $kategoria = Kategoria::findOrFail($id);
+        $druh = Druh::findOrFail($id);
+        $stav = Stav::findOrFail($id);
+        $typ= Typ::findOrFail($id);
+        $registrovany_pouzivatel = Registrovany_pouzivatel::findOrFail($id);
+
+ //    funkcia compact vytvara pole  z premennych a ich hodnot..
+        // vdaka zadefinovaniu napr. inzerat si mozeme v blade zobrazit konkretny udaj v tabulke
+        // napr.  $inzerat->id ,, zobrazilo by mi id z tabulky inzerat..
+
+        return view('inzeraty.zobrazit_detail')
+            ->with(compact('inzerat'))
+            ->with(compact('kategoria'))
+            ->with(compact('druh'))
+            ->with(compact('stav'))
+            ->with(compact('typ'))
+            ->with(compact('registrovany_pouzivatel'));
     }
 
     /**
