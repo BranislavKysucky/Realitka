@@ -52,7 +52,7 @@
                     <select id="kategoria" class="form-control" name="kategoria">
                         @foreach($kategorie as $kategoria)
 
-                            <option value={{$kategoria->value}}>{{$kategoria->nazov}}</option>
+                            <option value={{$kategoria->id}}>{{$kategoria->nazov}}</option>
 
                         @endforeach
 
@@ -62,7 +62,7 @@
                     <select id="typ" class="form-control" name="typ">
                         @foreach($typy as $typ)
 
-                            <option value={{$typ->value}}>{{$typ->nazov}}</option>
+                            <option value={{$typ->id}}>{{$typ->nazov}}</option>
 
                         @endforeach
                     </select>
@@ -78,7 +78,7 @@
 
 
                                     @if($druh_nazov->nazov == $druh->nazov)
-                                    <option value={{$druh->value}}>{{$druh->podnazov}}</option>
+                                    <option value={{$druh->id}}>{{$druh->podnazov}}</option>
                                     @endif
 
 
@@ -94,7 +94,7 @@
 
                         @foreach($stavy as $stav)
 
-                            <option value={{$stav->value}}>{{$stav->nazov}}</option>
+                            <option value={{$stav->id}}>{{$stav->nazov}}</option>
 
                         @endforeach
 
