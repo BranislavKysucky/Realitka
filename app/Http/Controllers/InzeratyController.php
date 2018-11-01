@@ -62,12 +62,12 @@ class InzeratyController extends Controller
         return view('inzeraty.filtrovane_inzeraty',['inzeraty'=>$inzeraty]);
 
     }
-
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
+
     public function create()   // otvorenie viewu pre vytvorenie inzeratu + dynamicke data z db
     {
         $kategorie = Kategoria::all();
@@ -104,7 +104,7 @@ class InzeratyController extends Controller
             'images' => 'required',
             'images.*' => 'image|mimes:jpeg,jpg,png', // zatial validacia iba pre typy v buducnosti mozno aj velkost/mnozstvo
             'kategoria' => 'required'
-]);
+    ]);
 
 
         if ($request->hasFile('images')) {  // pre istotu este raz overenie

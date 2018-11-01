@@ -142,26 +142,19 @@
 
     </div>
 
-    <!-- toto divko je len na ukazku....-->
+    <!-- toto divko je len na ukazku
+        Sem to hod Samson :D
+    ....-->
+    @foreach($inzeraty as $inzerat)
     <div class="col-md-9 col-lg-9 col-sm-9 pull-right">
 
         <div class="well well-lg">
-            <h1>Inzerát</h1>
-            <p class="lead">popis inzerátu..... samozrejme toto je len náčrt, vyhľadávanie a  inzeráty budú v samostatných
-                súboroch.... prihlásenie a registrácia sa upraví :D </p>
+            <h1>Názov: {{$inzerat->nazov}}</h1>
+            <p class="lead">Popis: {{$inzerat->popis}}</p>
             <!-- <p><a class="btn btn-lg btn-success" href="#" role="button">Get started today</a></p> -->
         </div>
     </div>
+    @endforeach
 
-    <!-- ako predpripravil  mato, tu budu zobrazene inzeraty, ktore posle kontroler(InzeratyController)-->
-            @foreach($inzeraty as $inzerat)
-                <div class="col-md-9 col-lg-9 col-sm-9 pull-right">
-                    <h1>Názov: {{$inzerat->nazov}}</h1>
-                    <h3>Kategória: {{$inzerat->kategoria}}</h3>
-                    <h3>Druh: {{$inzerat->druh}}</h3>
-                    <h3>Typ: {{$inzerat->typ}}</h3>
-                    <h3>Stav: {{$inzerat->stav}}</h3>
-                </div>
-            @endforeach
 
 @endsection

@@ -11,12 +11,14 @@
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
+Route::get('/', 'InzeratyController@index');
 
 Auth::routes();
 
 Route::resource('inzeraty', 'InzeratyController');
+
+Route::get('moje_inzeraty',function (){
+  return view('inzeraty/moje_inzeraty');
+});
 
 Route::get('/home', 'HomeController@index')->name('home');
