@@ -57,10 +57,16 @@ class InzeratyController extends Controller
 
         return view('inzeraty.filtrovane_inzeraty', compact('inzeraty'));*/
 
-        //zatial vracia teda len vsetky inzeraty
-        $inzeraty=Inzerat::all();
-        return view('inzeraty.filtrovane_inzeraty',['inzeraty'=>$inzeraty]);
-
+        //zobrazenie inzeratov podla telefonneho cisla
+        if($request->has('telefon')){
+            $anonym_id=DB::table('anonym')->where('telefon',$request->input('telefon'))->value('id');
+            $inzeraty=DB::table('inzeraty')->where('anonym_id',$anonym_id)->get();
+            return view('inzeraty.filtrovane_inzeraty',['inzeraty' => $inzeraty]);
+        }
+        else {
+            $inzeraty = Inzerat::all();
+            return view('inzeraty.filtrovane_inzeraty', ['inzeraty' => $inzeraty]);
+        }
     }
     /**
      * Show the form for creating a new resource.
