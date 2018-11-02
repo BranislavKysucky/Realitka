@@ -143,18 +143,21 @@
     </div>
 
     <!-- toto divko je len na ukazku
-        Sem to hod Samson :D
+        Sem to hod Samson :D ok
     ....-->
     @foreach($inzeraty as $inzerat)
     <div class="col-md-9 col-lg-9 col-sm-9 pull-right">
 
         <div class="well well-lg">
-            <h1>Názov: {{$inzerat->nazov}}</h1>
-            <p class="lead">Popis: {{$inzerat->popis}}</p>
+            <h2>PREDAJ - {{$inzerat->popis}} </h2><br>
+            <p><b>{{$inzerat->adresa}}</b></p><br>
+            <h3>Názov: {{$inzerat->nazov}}</h3>
+            <p><b>{{$inzerat->uzitkova-plocha}}</b></p><br>
+            <p><b>Cena - {{$inzerat->cena}}</b></p><br>
+            <p>Pocet zobrazeni - {{$inzerat->adresa}}</p>
             <!-- <p><a class="btn btn-lg btn-success" href="#" role="button">Get started today</a></p> -->
         </div>
     </div>
     @endforeach
-
 
 @endsection
