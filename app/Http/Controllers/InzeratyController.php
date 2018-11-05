@@ -28,29 +28,86 @@ class InzeratyController extends Controller
         */
         /*
         $this->validate(request(), [
-            'name' => 'required',
-            'cena_od' => 'required',
-            'cena_do' => 'required',
-            'vymera_od' => 'required',
-            'vymera_do' => 'required'
+            'lokalita' => 'required',
+//            'cena_od' => 'required',
+//            'cena_do' => 'required',
+//            'vymera_od' => 'required',
+//            'vymera_do' => 'required'
         ]);
 
-        if ($request->has('kategoria') && $request->has('typ') &&
-            $request->has('druh') && $request->has('stav') && $request->has('lokalita')) {
-            $inzeraty = Inzerat::select(DB::raw('inzeraty.*, kategorie.nazov as kategoria, druhy.nazov as druh, typy.nazov as typ, stavy.nazov as stav'))
+
+        $kategoria = $request->input('kategoria');
+        $druh = $request->input('druh');
+        $stav = $request->input('stav');
+
+        $kategoria_od = 0;
+        $kategoria_do = 0;
+
+        $druh_od = 0;
+        $druh_do = 0;
+
+        $stav_od = 0;
+        $stav_do = 0;
+
+        if($kategoria == 1){
+            $kategoria_od = 1;
+            $kategoria_do = 3;
+        }else{
+            $kategoria_od = $kategoria;
+            $kategoria_do = $kategoria;
+        }
+
+        if($stav == 1){
+            $stav_od = 1;
+            $stav_do = 7;
+        }else{
+            $stav_od = $stav;
+            $stav_do = $stav;
+        }
+
+        if($druh = 1){
+            $druh_od = 1;
+            $druh_do = 500;
+        }else
+            if($druh == 110){
+                $druh_od = 101;
+                $druh_do = 109;
+            }else
+                if($druh = 207){
+                    $druh_od = 201;
+                    $druh_do = 206;
+                }else
+                    if($druh == 311){
+                        $druh_od = 301;
+                        $druh_do = 310;
+                    }else
+                        if($druh == 415){
+                            $druh_od = 401;
+                            $druh_do = 414;
+                        }else{
+                            $druh_od = $druh;
+                            $druh_do = $druh;
+                        }
+
+
+
+        if ($request->has('lokalita') && $request->has('cena_od') &&
+            $request->has('cena_do') && $request->has('cena_do') &&
+            $request->has('vymera_od') && $request->has('vymera_do')) {
+            $inzeraty = Inzerat::select(DB::raw('inzeraty.*, kategorie.nazov as kategoria, druhy.nazov as druh, druhy.podnazov as podnazov, typy.nazov as typ, stavy.nazov as stav, fotografie.url as url'))
                 ->join('kategorie', 'kategoria_id', '=', 'kategorie.id')
                 ->join('typy', 'typ_id', '=', 'typy.id')
                 ->join('druhy', 'druh_id', '=', 'druhy.id')
                 ->join('stavy', 'stav_id', '=', 'stavy.id')
-                ->where('kategorie.value', $request->input('kategoria'))
-                ->where('druhy.value', $request->input('druh'))
+                ->join('fotografie', 'inzerat_id', '=', 'inzeraty.id')
                 ->where('typy.value', $request->input('typ'))
-                ->where('stavy.value', $request->input('stav'))
-                ->where('adresa', $request->input('lokalita'))
-                ->where('cena', '>=', $request->input('cena_od'))
-                ->where('cena', '<=', $request->input('cena_do'))
-                ->where('vymera_domu', '>=', $request->input('vymera_od'))
-                ->where('vymera_domu', '<=', $request->input('vymera_do'))
+                ->whereBetween('kategorie.value', array($kategoria_od, $kategoria_do))
+                ->whereBetween('druhy.value', array($druh_od, $druh_do))
+                ->whereBetween('stavy.value', array($stav_od, $stav_do))
+//                    ->where('cena', '>=', $request->input('cena_od'))
+//                    ->where('cena', '<=', $request->input('cena_do'))
+//                    ->where('vymera_domu', '>=', $request->input('vymera_od'))
+//                    ->where('vymera_domu', '<=', $request->input('vymera_do'))
                 ->getQuery()
                 ->get();
         }
