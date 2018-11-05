@@ -46,16 +46,15 @@
                         <h1 class=" loop-title" itemprop="headline">{{$inzerat->nazov}}</h1>
                         <p class="price"> <span  class="woocommerce-Price-amount amount">Cena: {{ $inzerat->cena }}&nbsp;<span class="woocommerce-Price-currencySymbol">&euro;</span></span></p>
                         <div class="woocommerce-product-details__short-description">
-                            <p>Inzerát číslo: {{$inzerat->id}}<br />
-                                Druh: {{$druh->nazov}}<br />
+                            <p> Druh: {{$druh->nazov}}<br />
                                 Typ:{{$typ->nazov}} <br />
                                 Stav: {{$stav->nazov}} <br />
+                                Kategória: <font color="red">{{$kategoria->nazov}}</font> </span> <br /> </p>
                         </div>
 
 
                         <div class="product_meta">
-                            <span class="posted_in">Kategória: <font color="red">{{$kategoria->nazov}}</font> </span>
-                            <br>  <span class="posted_in">Tento inzerát bol zobrazený: <font color="green">{{$inzerat->pocet_zobrazeni}}x</font> </span>
+                            <br>  <span class="posted_in">Tento inzerát bol zobrazený: <font color="green">{{$inzerat->pocet_zobrazeni}}-krát</font> </span>
                         </div>
                     </div>
 
