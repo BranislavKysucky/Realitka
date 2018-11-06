@@ -152,7 +152,7 @@
             <h2>PREDAJ - {{$inzerat->popis}} </h2><br>
             <p><b>{{$inzerat->adresa}}</b></p><br>
             <h3>Názov: {{$inzerat->nazov}}</h3>
-            <p><b>{{$inzerat->uzitkova-plocha}}</b></p><br>
+            <p><b>{{$inzerat->uzitkova_plocha}}</b></p><br>
             <p><b>Cena - {{$inzerat->cena}}</b></p><br>
             <p>Pocet zobrazeni - {{$inzerat->adresa}}</p>
             <!-- <p><a class="btn btn-lg btn-success" href="#" role="button">Get started today</a></p> -->
