@@ -23,6 +23,7 @@ class CreateInzeratyTable extends Migration
             $table->string('nazov');
             $table->longText('popis');
             $table->string('mesto');
+            $table->string('heslo',191)->nullable();
             $table->integer('kraj_id');
             $table->integer('cena')->nullable();
             $table->integer('vymera_domu')->nullable();
