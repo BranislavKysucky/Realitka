@@ -8,7 +8,7 @@ use App\Kategoria;
 use App\Typ;
 use App\Druh;
 use App\Stav;
-use App\Registrovany_pouzivatel;
+use App\Pouzivatel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rules\In;

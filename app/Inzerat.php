@@ -12,12 +12,8 @@ class Inzerat extends Model
         return $this->hasMany(Fotografia::class);
     }
 
-    public function anonym(){
-        return $this->belongsTo(Anonym::class);
-    }
-
-    public function registrovany_pouzivatel(){
-        return $this->belongsTo(Registrovany_pouzivatel::class);
+    public function pouzivatel(){
+        return $this->belongsTo(Pouzivatel::class);
     }
 
     public function druh(){
@@ -34,5 +30,8 @@ class Inzerat extends Model
 
     public function typ(){
         return $this->belongsTo(Typ::class);
+    }
+    public function kraj(){
+        return $this->belongsTo(Kraj::class);
     }
 }

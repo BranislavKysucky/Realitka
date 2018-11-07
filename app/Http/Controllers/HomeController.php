@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Registrovany_pouzivatel;
+use App\Pouzivatel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 
