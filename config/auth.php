@@ -92,7 +92,7 @@ return [
     */
 
     'passwords' => [
-        'users' => [
+        'pouzivatelia' => [
             'provider' => 'pouzivatelia',
             'table' => 'password_resets',
             'expire' => 60,

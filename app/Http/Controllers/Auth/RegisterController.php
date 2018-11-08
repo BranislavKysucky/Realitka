@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Pouzivatel;
 use App\Realitna_kancelaria;
 use App\User;
 use App\Http\Controllers\Controller;
@@ -28,7 +29,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -49,7 +50,7 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'email' => 'required|string|email|max:255|unique:pouzivatelia',
+            //'email' => 'required|string|email|max:255|unique:pouzivatelia',
             'password' => 'required|string|min:6|confirmed',
         ]);
     }
@@ -76,7 +77,7 @@ class RegisterController extends Controller
         $realitka->updated_at = today();
         $realitka->save();
 
-        return User::create([
+        return Pouzivatel::create([
             'kraj_id'=>$data['kraj_pouzivatel'],
             'realitna_kancelaria_id'=>$realitka->id,
             'ulica_cislo'=>$data['ulica_pouzivatel'],

@@ -195,7 +195,7 @@
                                         <label for="kraj_pouzivatel" class="col-md-4 control-label">Kraj</label>
 
                                         <div class="col-md-6">
-                                            <select id="kraj_pouzivatel" class="form-control" name="kraj">
+                                            <select id="kraj_pouzivatel" class="form-control" name="kraj_pouzivatel">
                                                 <option value="1">Bratislavský kraj</option>
                                                 <option value="2">Trnavský kraj</option>
                                                 <option value="3">Trenčiansky kraj</option>
