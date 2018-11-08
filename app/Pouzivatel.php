@@ -3,18 +3,40 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Pouzivatel extends Model
+class Pouzivatel extends Authenticatable
 {
     protected $table = 'pouzivatelia';
 
-    public function inzeraty(){
+    protected $fillable = [
+        'kraj_id',
+        'realitna_kancelaria_id',
+        'ulica_cislo',
+        'mesto',
+        'PSC',
+        'telefon',
+        'email',
+        'heslo',
+        'rola'
+    ];
+
+    protected $hidden = [
+        'heslo', 'remember_token',
+    ];
+
+    public function inzeraty()
+    {
         return $this->hasMany(Inzerat::class);
     }
-    public function realitna_kancelaria(){
+
+    public function realitna_kancelaria()
+    {
         return $this->belongsTo(Realitna_kancelaria::class);
     }
-    public function kraj(){
+
+    public function kraj()
+    {
         return $this->belongsTo(Kraj::class);
     }
 }

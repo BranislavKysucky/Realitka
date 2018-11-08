@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Realitna_kancelaria;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
@@ -48,8 +49,7 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
+            'email' => 'required|string|email|max:255|unique:pouzivatelia',
             'password' => 'required|string|min:6|confirmed',
         ]);
     }
@@ -62,10 +62,30 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $realitka = new Realitna_kancelaria;
+        $realitka-> kraj_id= $data['kraj'];
+        $realitka->nazov = $data['nazov'];
+        $realitka->ulica_cislo = $data['ulica'];
+        $realitka->mesto = $data['mesto'];
+        $realitka->PSC = $data['psc'];
+        $realitka->kontaktna_osoba = $data['kontaktna_osoba'];
+        $realitka->telefon = $data['telefon'];
+        $realitka->email = $data['email_realitka'];
+        $realitka->ICO = $data['ico'];
+        $realitka->DIC = $data['dic'];
+        $realitka->updated_at = today();
+        $realitka->save();
+
         return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
+            'kraj_id'=>$data['kraj_pouzivatel'],
+            'realitna_kancelaria_id'=>$realitka->id,
+            'ulica_cislo'=>$data['ulica_pouzivatel'],
+            'mesto'=>$data['mesto_pouzivatel'],
+            'PSC'=>$data['psc_pouzivatel'],
+            'telefon'=>$data['telefon_pouzivatel'],
+            'email' => $data['email_pouzivatel'],
+            'heslo' => bcrypt($data['password']),
+            'rola'=>1
         ]);
     }
 }
