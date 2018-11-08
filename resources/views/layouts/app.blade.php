@@ -96,6 +96,7 @@
 
 <br>
 <br>
+
 @yield('content')
 
 </body>

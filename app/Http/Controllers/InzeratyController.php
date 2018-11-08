@@ -156,15 +156,9 @@ class InzeratyController extends Controller
             'popis' => 'required',
             'adresa' => 'required',
             'cena' => 'required',
-
-           'vymera_domu' => 'required',    // treba domysliet vymeru
-           'vymera_pozemku' => 'required',
-           'uzitkova_plocha' => 'required',
-            'cena_dohodou' => 'required',
-            'stavy' => 'required',
             'druh' => 'required',
             'typ' => 'required',
-            'images' => 'required',
+            'images' => 'required',                   // je potreba mat povinny image ??
             'images.*' => 'image|mimes:jpeg,jpg,png', // zatial validacia iba pre typy v buducnosti mozno aj velkost/mnozstvo
             'kategoria' => 'required'
     ]);
