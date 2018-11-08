@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRegistrovanyPouzivateliaTable extends Migration
+class CreateRealitneKancelarieTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,21 +13,19 @@ class CreateRegistrovanyPouzivateliaTable extends Migration
      */
     public function up()
     {
-        Schema::create('registrovany_pouzivatelia', function (Blueprint $table) {
+        Schema::create('realitne_kancelarie', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('kraj_id');
             $table->string('nazov');
             $table->string('ulica_cislo');
-            $table->string('okres');
             $table->string('mesto');
             $table->integer('PSC');
             $table->string('kontaktna_osoba');
             $table->string('telefon');
             $table->string('email');
-            $table->integer('ICO');
-            $table->integer('DIC');
-            $table->string('heslo');
-            $table->integer('rola');
-            $table->rememberToken();
+            $table->string('ICO');
+            $table->string('DIC');
+            $table->string('url_logo')->nullable();
             $table->timestamps();
         });
     }
@@ -39,6 +37,6 @@ class CreateRegistrovanyPouzivateliaTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('registrovany_pouzivatelia');
+        Schema::dropIfExists('realitne_kancelarie');
     }
 }

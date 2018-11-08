@@ -19,11 +19,12 @@ class CreateInzeratyTable extends Migration
             $table->integer('druh_id');
             $table->integer('typ_id');
             $table->integer('kategoria_id');
-            $table->integer('anonym_id')->nullable();
-            $table->integer('registrovany_pouzivatel_id')->nullable();
+            $table->integer('pouzivatel_id')->nullable();
             $table->string('nazov');
             $table->longText('popis');
-            $table->string('adresa');
+            $table->string('mesto');
+            $table->string('heslo',191)->nullable();
+            $table->integer('kraj_id');
             $table->integer('cena')->nullable();
             $table->integer('vymera_domu')->nullable();
             $table->integer('vymera_pozemku')->nullable();

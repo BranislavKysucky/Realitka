@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAnonymTable extends Migration
+class CreateKrajeTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateAnonymTable extends Migration
      */
     public function up()
     {
-        Schema::create('anonym', function (Blueprint $table) {
+        Schema::create('kraje', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('telefon');
-            $table->string('heslo');
+            $table->string('nazov');
+            $table->integer('value');
         });
     }
 
@@ -27,6 +27,6 @@ class CreateAnonymTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('anonym');
+        Schema::dropIfExists('kraje');
     }
 }
