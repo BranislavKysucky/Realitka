@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Auth;
 
 use App\Pouzivatel;
 use App\Realitna_kancelaria;
-use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -50,7 +49,8 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            //'email' => 'required|string|email|max:255|unique:pouzivatelia',
+            'meno' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:pouzivatelia',
             'password' => 'required|string|min:6|confirmed',
         ]);
     }
@@ -59,10 +59,11 @@ class RegisterController extends Controller
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data
-     * @return \App\User
+     * @return \App\Pouzivatel
      */
     protected function create(array $data)
     {
+
         $realitka = new Realitna_kancelaria;
         $realitka-> kraj_id= $data['kraj'];
         $realitka->nazov = $data['nazov'];
@@ -77,6 +78,7 @@ class RegisterController extends Controller
         $realitka->updated_at = today();
         $realitka->save();
 
+
         return Pouzivatel::create([
             'kraj_id'=>$data['kraj_pouzivatel'],
             'realitna_kancelaria_id'=>$realitka->id,
@@ -84,9 +86,13 @@ class RegisterController extends Controller
             'mesto'=>$data['mesto_pouzivatel'],
             'PSC'=>$data['psc_pouzivatel'],
             'telefon'=>$data['telefon_pouzivatel'],
-            'email' => $data['email_pouzivatel'],
+            'email' => $data['email'],
             'heslo' => bcrypt($data['password']),
-            'rola'=>1
+            'rola'=>1,
+            'meno' => $data['meno'],
+            'priezvisko' => $data['priezvisko'],
+            'password' => bcrypt($data['password'])
+
         ]);
     }
 }

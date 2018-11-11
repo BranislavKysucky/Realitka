@@ -21,12 +21,15 @@ class CreatePouzivateliaTable extends Migration
             $table->string('mesto');
             $table->integer('PSC');
             $table->string('telefon');
-            $table->string('email')->unique();
-            $table->string('heslo');
             $table->integer('rola');
+            $table->string('meno');
+            $table->string('priezvisko');
+            $table->string('email')->unique();
+            $table->string('password');
             $table->rememberToken();
             $table->timestamps();
         });
+
     }
 
     /**

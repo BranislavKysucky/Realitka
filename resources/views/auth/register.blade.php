@@ -7,7 +7,9 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Registrácia realitnej kancelárie</div>
 
+
                     <div class="panel-body">
+
                         <form class="form-horizontal" method="POST" action="{{ route('register') }}">
                             {{ csrf_field() }}
 
@@ -54,18 +56,13 @@
                                     src="http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places&region=sk"></script>
                             <script type="text/javascript">
                                 function initialize() {
-
                                     var options = {
                                         types: ['(regions)'],
                                         componentRestrictions: {country: "sk"}
                                     };
-
                                     var input = document.getElementById('mesto');
                                     var autocomplete = new google.maps.places.Autocomplete(input, options);
-
-
                                 }
-
                                 google.maps.event.addDomListener(window, 'load', initialize);
                             </script>
                             <div class="form-group{{ $errors->has('mesto') ? ' has-error' : '' }}">
@@ -187,153 +184,170 @@
                                     @endif
                                 </div>
                             </div>
-                            <div class="panel panel-default">
-                                <div class="panel-heading">Osobné údaje</div>
-                                <div class="panel-body">
+                            <!-- ################################################################################################################# -->
+                            <hr/>
+                            Osobné údaje
+                            <div class="form-group{{ $errors->has('meno') ? ' has-error' : '' }}">
+                                <label for="meno" class="col-md-4 control-label">Meno</label>
 
-                                    <div class="form-group{{ $errors->has('kraj_pouzivatel') ? ' has-error' : '' }}">
-                                        <label for="kraj_pouzivatel" class="col-md-4 control-label">Kraj</label>
+                                <div class="col-md-6">
+                                    <input id="meno" type="text" class="form-control" name="meno" value="{{ old('meno') }}" required autofocus>
 
-                                        <div class="col-md-6">
-                                            <select id="kraj_pouzivatel" class="form-control" name="kraj_pouzivatel">
-                                                <option value="1">Bratislavský kraj</option>
-                                                <option value="2">Trnavský kraj</option>
-                                                <option value="3">Trenčiansky kraj</option>
-                                                <option value="4">Nitriansky kraj</option>
-                                                <option value="5">Žilinský kraj</option>
-                                                <option value="6">Banskobystrický kraj</option>
-                                                <option value="7">Prešovský kraj</option>
-                                                <option value="8">Košický kraj</option>
-                                            </select>
-
-                                            @if ($errors->has('kraj_pouzivatel'))
-                                                <span class="help-block">
-                                        <strong>{{ $errors->first('kraj_pouzivatel') }}</strong>
+                                    @if ($errors->has('meno'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('meno') }}</strong>
                                     </span>
-                                            @endif
-                                        </div>
-                                    </div>
-
-
-                                    <script type="text/javascript"
-                                            src="http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places&region=sk"></script>
-                                    <script type="text/javascript">
-                                        function initialize() {
-
-                                            var options = {
-                                                types: ['(regions)'],
-                                                componentRestrictions: {country: "sk"}
-                                            };
-
-                                            var input = document.getElementById('mesto_pouzivatel');
-                                            var autocomplete = new google.maps.places.Autocomplete(input, options);
-
-
-                                        }
-
-                                        google.maps.event.addDomListener(window, 'load', initialize);
-                                    </script>
-                                    <div class="form-group{{ $errors->has('mesto_pouzivatel') ? ' has-error' : '' }}">
-                                        <label for="mesto_pouzivatel" class="col-md-4 control-label">Mesto</label>
-
-                                        <div class="col-md-6">
-                                            <input id="mesto_pouzivatel" type="text" class="form-control"
-                                                   name="mesto_pouzivatel"
-                                                   value="{{ old('mesto_pouzivatel') }}" required autofocus>
-
-                                            @if ($errors->has('mesto_pouzivatel'))
-                                                <span class="help-block">
-                                        <strong>{{ $errors->first('mesto_pouzivatel') }}</strong>
-                                    </span>
-                                            @endif
-                                        </div>
-                                    </div>
-                                    <div class="form-group{{ $errors->has('ulica_pouzivatel') ? ' has-error' : '' }}">
-                                        <label for="ulica_pouzivatel" class="col-md-4 control-label">Ulica a popisné číslo</label>
-
-                                        <div class="col-md-6">
-                                            <input id="ulica_pouzivatel" type="text" class="form-control" name="ulica_pouzivatel"
-                                                   value="{{ old('ulica_pouzivatel') }}" required autofocus>
-
-                                            @if ($errors->has('ulica_pouzivatel'))
-                                                <span class="help-block">
-                                        <strong>{{ $errors->first('ulica_pouzivatel') }}</strong>
-                                    </span>
-                                            @endif
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group{{ $errors->has('psc_pouzivatel') ? ' has-error' : '' }}">
-                                        <label for="psc_pouzivatel" class="col-md-4 control-label">PSČ</label>
-
-                                        <div class="col-md-6">
-                                            <input id="psc_pouzivatel" type="number" min="0" class="form-control"
-                                                   name="psc_pouzivatel"
-                                                   value="{{ old('psc') }}" required autofocus>
-
-                                            @if ($errors->has('psc_pouzivatel'))
-                                                <span class="help-block">
-                                        <strong>{{ $errors->first('psc_pouzivatel') }}</strong>
-                                    </span>
-                                            @endif
-                                        </div>
-                                    </div>
-                                    <div class="form-group{{ $errors->has('telefon_pouzivatel') ? ' has-error' : '' }}">
-                                        <label for="telefon_pouzivatel" class="col-md-4 control-label">Telefón</label>
-
-                                        <div class="col-md-6">
-                                            <input id="telefon_pouzivatel" type="text" class="form-control"
-                                                   name="telefon_pouzivatel"
-                                                   value="{{ old('telefon_pouzivatel') }}" required autofocus>
-
-                                            @if ($errors->has('telefon_pouzivatel'))
-                                                <span class="help-block">
-                                        <strong>{{ $errors->first('telefon_pouzivatel') }}</strong>
-                                    </span>
-                                            @endif
-                                        </div>
-                                    </div>
-                                    <div class="form-group{{ $errors->has('email_pouzivatel') ? ' has-error' : '' }}">
-                                        <label for="email_pouzivatel" class="col-md-4 control-label">E-Mail</label>
-
-                                        <div class="col-md-6">
-                                            <input id="email_pouzivatel" type="email" class="form-control"
-                                                   name="email_pouzivatel"
-                                                   value="{{ old('email_pouzivatel') }}" required>
-
-                                            @if ($errors->has('email_pouzivatel'))
-                                                <span class="help-block">
-                                        <strong>{{ $errors->first('email_pouzivatel') }}</strong>
-                                    </span>
-                                            @endif
-                                        </div>
-                                    </div>
-                                    <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                                        <label for="password" class="col-md-4 control-label">Heslo</label>
-
-                                        <div class="col-md-6">
-                                            <input id="password" type="password" class="form-control" name="password"
-                                                   required>
-
-                                            @if ($errors->has('password'))
-                                                <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                            @endif
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="password-confirm" class="col-md-4 control-label">Potvrdenie
-                                            hesla</label>
-
-                                        <div class="col-md-6">
-                                            <input id="password-confirm" type="password" class="form-control"
-                                                   name="password_confirmation" required>
-                                        </div>
-                                    </div>
+                                    @endif
                                 </div>
                             </div>
+                            <div class="form-group{{ $errors->has('priezvisko') ? ' has-error' : '' }}">
+                                <label for="priezvisko" class="col-md-4 control-label">Priezvisko</label>
+
+                                <div class="col-md-6">
+                                    <input id="priezvisko" type="text" class="form-control" name="priezvisko" value="{{ old('priezvisko') }}" required autofocus>
+
+                                    @if ($errors->has('priezvisko'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('priezvisko') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group{{ $errors->has('kraj_pouzivatel') ? ' has-error' : '' }}">
+                                <label for="kraj_pouzivatel" class="col-md-4 control-label">Kraj</label>
+
+                                <div class="col-md-6">
+                                    <select id="kraj_pouzivatel" class="form-control" name="kraj_pouzivatel">
+                                        <option value="1">Bratislavský kraj</option>
+                                        <option value="2">Trnavský kraj</option>
+                                        <option value="3">Trenčiansky kraj</option>
+                                        <option value="4">Nitriansky kraj</option>
+                                        <option value="5">Žilinský kraj</option>
+                                        <option value="6">Banskobystrický kraj</option>
+                                        <option value="7">Prešovský kraj</option>
+                                        <option value="8">Košický kraj</option>
+                                    </select>
+
+                                    @if ($errors->has('kraj_pouzivatel'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('kraj_pouzivatel') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
+
+                            <script type="text/javascript"
+                                    src="http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places&region=sk"></script>
+                            <script type="text/javascript">
+                                function initialize() {
+                                    var options = {
+                                        types: ['(regions)'],
+                                        componentRestrictions: {country: "sk"}
+                                    };
+                                    var input = document.getElementById('mesto_pouzivatel');
+                                    var autocomplete = new google.maps.places.Autocomplete(input, options);
+                                }
+                                google.maps.event.addDomListener(window, 'load', initialize);
+                            </script>
+                            <div class="form-group{{ $errors->has('mesto_pouzivatel') ? ' has-error' : '' }}">
+                                <label for="mesto_pouzivatel" class="col-md-4 control-label">Mesto</label>
+
+                                <div class="col-md-6">
+                                    <input id="mesto_pouzivatel" type="text" class="form-control"
+                                           name="mesto_pouzivatel"
+                                           value="{{ old('mesto_pouzivatel') }}" required autofocus>
+
+                                    @if ($errors->has('mesto_pouzivatel'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('mesto_pouzivatel') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="form-group{{ $errors->has('ulica_pouzivatel') ? ' has-error' : '' }}">
+                                <label for="ulica_pouzivatel" class="col-md-4 control-label">Ulica a popisné číslo</label>
+
+                                <div class="col-md-6">
+                                    <input id="ulica_pouzivatel" type="text" class="form-control" name="ulica_pouzivatel"
+                                           value="{{ old('ulica_pouzivatel') }}" required autofocus>
+
+                                    @if ($errors->has('ulica_pouzivatel'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('ulica_pouzivatel') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group{{ $errors->has('psc_pouzivatel') ? ' has-error' : '' }}">
+                                <label for="psc_pouzivatel" class="col-md-4 control-label">PSČ</label>
+
+                                <div class="col-md-6">
+                                    <input id="psc_pouzivatel" type="number" min="0" class="form-control"
+                                           name="psc_pouzivatel"
+                                           value="{{ old('psc') }}" required autofocus>
+
+                                    @if ($errors->has('psc_pouzivatel'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('psc_pouzivatel') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="form-group{{ $errors->has('telefon_pouzivatel') ? ' has-error' : '' }}">
+                                <label for="telefon_pouzivatel" class="col-md-4 control-label">Telefón</label>
+
+                                <div class="col-md-6">
+                                    <input id="telefon_pouzivatel" type="text" class="form-control"
+                                           name="telefon_pouzivatel"
+                                           value="{{ old('telefon_pouzivatel') }}" required autofocus>
+
+                                    @if ($errors->has('telefon_pouzivatel'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('telefon_pouzivatel') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                                <label for="email" class="col-md-4 control-label">E-Mail</label>
+
+                                <div class="col-md-6">
+                                    <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
+
+                                    @if ($errors->has('email'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('email') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                                <label for="password" class="col-md-4 control-label">Heslo</label>
+
+                                <div class="col-md-6">
+                                    <input id="password" type="password" class="form-control" name="password" required>
+
+                                    @if ($errors->has('password'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('password') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="password-confirm" class="col-md-4 control-label">Potvrdiť Heslo</label>
+
+                                <div class="col-md-6">
+                                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                                </div>
+                            </div>
+
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
                                     <button type="submit" class="btn btn-primary">

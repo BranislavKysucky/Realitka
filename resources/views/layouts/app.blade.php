@@ -1,11 +1,11 @@
-
 <!DOCTYPE html>
 <html lang="sk">
 <head>
     <title>Realitky</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="description" content="Aktuálna ponuka nehnuteľností zo Slovenska. Nehnuteľnosti na predaj, prenájom, dražby, byty, rodinné domy a pozemky.">
+    <meta name="description"
+          content="Aktuálna ponuka nehnuteľností zo Slovenska. Nehnuteľnosti na predaj, prenájom, dražby, byty, rodinné domy a pozemky.">
     <meta name="keywords" content="realitky, byty, domy, nehnuteľnosti ">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -33,24 +33,19 @@
                     <li><a href="{{ route('login') }}">Prihlásiť sa</a></li>
                     <li><a href="{{ route('register') }}">Registrovať sa</a></li>
                 @else
-                    <li><a href="">blabla</a></li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" v-pre>
-                            {{ Auth::user()->email }} <span class="caret"></span>
+                    <li><a href="#">{{ Auth::user()->email }}</a></li>
+                    <li><a href="#">Vstup do rozhrania realitky</a></li>
+                    <li>
+                        <a href="{{ route('logout') }}"
+                           onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                            Odhlásiť
                         </a>
 
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            {{ csrf_field() }}
+                        </form>
 
-
-                                <a href="{{ route('logout') }}"
-                                   onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                    Logout
-                                </a>
-
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                    {{ csrf_field() }}
-                                </form>
-                            
 
                     </li>
                 @endguest
