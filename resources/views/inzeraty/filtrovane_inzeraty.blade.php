@@ -142,21 +142,32 @@
 
     </div>
 
-    <!-- toto divko je len na ukazku
-        Sem to hod Samson :D ok
+    <!-- Kliknutie na inzerat je zatial zakomentovane lebo to padalo na registrovanom uzivatelovi,
+        ale bez reg. uzivatela to slapalo v pohode bez problemov to hadzalo na detail inzeratu.
     ....-->
     @foreach($inzeraty as $inzerat)
     <div class="col-md-9 col-lg-9 col-sm-9 pull-right">
-
+    {{--<a href="{{url('inzeraty/detail/'.$inzerat->id)}}">--}}
         <div class="well well-lg">
-            <h2>PREDAJ - {{$inzerat->popis}} </h2><br>
-            <p><b>{{$inzerat->adresa}}</b></p><br>
+            <h2>PREDAJ - {{$inzerat->popis}}</h2>
             <h3>Názov: {{$inzerat->nazov}}</h3>
-            <p><b>{{$inzerat->uzitkova_plocha}}</b></p><br>
-            <p><b>Cena - {{$inzerat->cena}}</b></p><br>
-            <p>Pocet zobrazeni - {{$inzerat->adresa}}</p>
+            <p><b>Uzitkova plocha:</b> {{$inzerat->uzitkova_plocha}} m² </p>
+            <p><b>Typ nehnutelnosti:</b> {{$inzerat->typ->nazov}}</p>
+            <p><b>Stav:</b> {{$inzerat->stav->nazov}}</p>
+            <p><b>Kategoria:</b> {{$inzerat->kategoria->nazov}}</p>
+            <p><b>Mesto:</b> {{$inzerat->mesto}}</p>
+            <p><b>Kraj:</b> {{$inzerat->kraj->nazov}}</p>
+            <p><b>Druh -</b> {{$inzerat->druh->nazov}}</p>
+            <p><b>Cena - </b>{{$inzerat->cena}}  €</p>
+            <p><b>Pocet zobrazeni -</b> {{$inzerat->pocet_zobrazeni}}</p>
+
+
+
+           {{-- <p>{{$inzerat->fotografia}}</p>--}}
+
             <!-- <p><a class="btn btn-lg btn-success" href="#" role="button">Get started today</a></p> -->
         </div>
+    {{--</a>--}}
     </div>
     @endforeach
 

@@ -121,8 +121,9 @@ class InzeratyController extends Controller
             return view('inzeraty.filtrovane_inzeraty',['inzeraty' => $inzeraty]);
         }
         else {
-            $inzeraty = Inzerat::all();
-            return view('inzeraty.filtrovane_inzeraty', ['inzeraty' => $inzeraty]);
+            $inzeraty = Inzerat::with('druh', 'kategoria', 'stav', 'typ', 'kraj')->get();
+            $fotografie = Fotografia::all();
+            return view('inzeraty.filtrovane_inzeraty', ['inzeraty' => $inzeraty , 'fotografie' => $fotografie]);
         }
     }
     /**
