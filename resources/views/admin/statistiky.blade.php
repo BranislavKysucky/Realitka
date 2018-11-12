@@ -1,0 +1,1 @@
+<p> Zobrazenie nejakych statistik...</p>
