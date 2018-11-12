@@ -5,7 +5,7 @@
 
 
 
-    <div class="col-sm-3 col-md-3 col-lg-3 pull-left">
+    <div class="col-sm-6 col-md-6 col-lg-6 pull-left">
 
         <div class="well well-sm ">
             <div align="center">

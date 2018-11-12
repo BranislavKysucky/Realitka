@@ -2,16 +2,18 @@
 
 @section('content')
 
+
     <div class="col-sm-3 col-md-3 col-lg-3 pull-left">
 
-        <div class="well well-sm ">
+        <div>
             <div align="center">
                 <h4>VYHĽADÁVANIE</h4>
             </div>
             <form action="{{route('inzeraty.index')}}" method="get">
                 {{csrf_field()}}
 
-                <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"></script>
+                <script type="text/javascript"
+                        src="http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"></script>
                 <script type="text/javascript">
                     function initialize() {
 
@@ -25,12 +27,12 @@
 
 
                     }
+
                     google.maps.event.addDomListener(window, 'load', initialize);
                 </script>
 
                 <label for="lokalita">Lokalita</label>
                 <input id="lokalita" class="form-control" placeholder="Zadajte lokalitu" name="lokalita"/>
-
 
 
                 <div class="form-group">
@@ -52,7 +54,7 @@
                     </select>
 
                     <label for="druh">Druh</label>
-                    <select  class="form-control" id="druh" name="druh">
+                    <select class="form-control" id="druh" name="druh">
                         <option value="1">Všetko</option>
                         <optgroup label="BYTY">
                             <option value="101">Garsónka</option>
@@ -79,7 +81,8 @@
                             <option value="301">Kancelárie, administratívne priestory</option>
                             <option value="302">Obchodné priestory</option>
                             <option value="303">Reštauračné priestory</option>
-                            <option value="304">Športové priestory</option><
+                            <option value="304">Športové priestory</option>
+                            <
                             <option value="305">Iné komerčné priestory</option>
                             <option value="306">Priestor pre výrobu</option>
                             <option value="307">Priestor pre sklad</option>
@@ -118,15 +121,15 @@
                     </select>
                     <label for="cena">Cena(€)</label>
                     <div class="input-group" id="cena">
-                        <input  placeholder="od" class="form-control" type="number" min="0" name="cena_od"/>
+                        <input placeholder="od" class="form-control" type="number" min="0" name="cena_od"/>
                         <span class="input-group-addon"></span>
-                        <input  placeholder="do" class="form-control" type="number" min="0" name="cena_do"/>
+                        <input placeholder="do" class="form-control" type="number" min="0" name="cena_do"/>
                     </div>
                     <label for="vymera">Výmera (m<sup>2</sup>)</label>
                     <div class="input-group" id="vymera">
-                        <input  placeholder="od" class="form-control" type="number" min="0" name="vymera_od"/>
+                        <input placeholder="od" class="form-control" type="number" min="0" name="vymera_od"/>
                         <span class="input-group-addon"></span>
-                        <input  placeholder="do" class="form-control" type="number" min="0" name="vymera_do"/>
+                        <input placeholder="do" class="form-control" type="number" min="0" name="vymera_do"/>
                     </div>
 
                 </div>
@@ -146,29 +149,31 @@
         ale bez reg. uzivatela to slapalo v pohode bez problemov to hadzalo na detail inzeratu.
     ....-->
     @foreach($inzeraty as $inzerat)
-    <div class="col-md-9 col-lg-9 col-sm-9 pull-right">
-    {{--<a href="{{url('inzeraty/detail/'.$inzerat->id)}}">--}}
-        <div class="well well-lg">
-            <h2>PREDAJ - {{$inzerat->popis}}</h2>
-            <h3>Názov: {{$inzerat->nazov}}</h3>
-            <p><b>Uzitkova plocha:</b> {{$inzerat->uzitkova_plocha}} m² </p>
-            <p><b>Typ nehnutelnosti:</b> {{$inzerat->typ->nazov}}</p>
-            <p><b>Stav:</b> {{$inzerat->stav->nazov}}</p>
-            <p><b>Kategoria:</b> {{$inzerat->kategoria->nazov}}</p>
-            <p><b>Mesto:</b> {{$inzerat->mesto}}</p>
-            <p><b>Kraj:</b> {{$inzerat->kraj->nazov}}</p>
-            <p><b>Druh -</b> {{$inzerat->druh->nazov}}</p>
-            <p><b>Cena - </b>{{$inzerat->cena}}  €</p>
-            <p><b>Pocet zobrazeni -</b> {{$inzerat->pocet_zobrazeni}}</p>
+        <div class="col-md-9 col-lg-9 col-sm-9 pull-right">
+            {{--<a href="{{url('inzeraty/detail/'.$inzerat->id)}}">--}}
+            <div class="well well-lg">
+                <h2>PREDAJ - {{$inzerat->popis}}</h2>
+                <h3>Názov: {{$inzerat->nazov}}</h3>
+                <p><b>Uzitkova plocha:</b> {{$inzerat->uzitkova_plocha}} m² </p>
+                <p><b>Typ nehnutelnosti:</b> {{$inzerat->typ->nazov}}</p>
+                <p><b>Stav:</b> {{$inzerat->stav->nazov}}</p>
+                <p><b>Kategoria:</b> {{$inzerat->kategoria->nazov}}</p>
+                <p><b>Mesto:</b> {{$inzerat->mesto}}</p>
+                <p><b>Kraj:</b> {{$inzerat->kraj->nazov}}</p>
+                <p><b>Druh -</b> {{$inzerat->druh->nazov}}</p>
+                <p><b>Cena - </b>{{$inzerat->cena}} €</p>
+                <p><b>Pocet zobrazeni -</b> {{$inzerat->pocet_zobrazeni}}</p>
 
-
-
-           {{-- <p>{{$inzerat->fotografia}}</p>--}}
+                   
+            {{-- <p>{{$inzerat->fotografia}}</p>--}}
 
             <!-- <p><a class="btn btn-lg btn-success" href="#" role="button">Get started today</a></p> -->
+            </div>
+            {{--</a>--}}
         </div>
-    {{--</a>--}}
-    </div>
+
+
+
     @endforeach
 
 @endsection

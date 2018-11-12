@@ -86,7 +86,7 @@
     <nav id="mainav" class="hoc clear">
         <!-- ################################################################################################ -->
         <ul class="clear">
-            <li class="active"><a href="/">Domov</a></li>
+            <li><a href="/">Domov</a></li>
             <li><a href="">Realitné kancelárie</a></li>
             <li><a href="/moje_inzeraty">Moje inzeráty</a></li>
             <li><a href="{{ route('inzeraty.create') }}">Pridať inzerat</a></li>
@@ -115,10 +115,11 @@
 
 <br>
 <br>
+<section class="hoc container clear">
+    @yield('content')
+</section>
+</div>
 
-@yield('content')
-
-</body>
 
 <footer>
     <div id="copyright" class="hoc clear">
