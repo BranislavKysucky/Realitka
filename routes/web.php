@@ -24,3 +24,9 @@ Route::get('moje_inzeraty',function (){
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('inzeraty/detail/{id}' , 'InzeratyController@show');
+
+
+Route::get('/admin', function () {
+    return view('admin/index');
+});
+
