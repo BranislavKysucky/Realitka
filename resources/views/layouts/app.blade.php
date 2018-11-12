@@ -28,13 +28,13 @@
         <!-- ################################################################################################ -->
         <div class="fl_left">
             <ul class="nospace">
-                <li><a href="/"><i class="fas fa-home fa-lg"></i></a></li>
+                <li><a href="/"><i class="fas fa-user fa-lg"></i></a></li>
                 @guest
                     <li><a href="{{ route('login') }}">Prihlásiť sa</a></li>
                     <li><a href="{{ route('register') }}">Registrovať sa</a></li>
                 @else
-                    <li><a href="#">{{ Auth::user()->email }}</a></li>
-                    <li><a href="#">Vstup do rozhrania realitky</a></li>
+                    <li>{{ Auth::user()->email }}</li>
+                    <li><a href="admin">Spravovať</a></li>
                     <li>
                         <a href="{{ route('logout') }}"
                            onclick="event.preventDefault();
@@ -113,12 +113,10 @@
 </main>
 
 
-<br>
-<br>
 <section class="hoc container clear">
     @yield('content')
 </section>
-</div>
+</body>
 
 
 <footer>

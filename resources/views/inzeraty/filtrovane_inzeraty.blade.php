@@ -145,6 +145,28 @@
 
     </div>
 
+
+    <!-- toto je len na ukažku-->
+    <div class="col-md-9 col-lg-9 col-sm-9 pull-right">
+
+        <div class="col-md-4 col-lg-4 col-sm-4 image-container">
+            <img src="images/demo/348x261.png" style="height:90%;width: 90%;margin-left:-15px;"/>
+        </div>
+        <div class="excerpt">
+            <h6 class="heading">toto je ukážka</h6>
+            <ul class="nospace meta">
+                <li><i class="fas fa-home"></i> Nitra, Rodinný dom</li>
+                <li><i class="fas fa-euro-sign"></i> 80 000 </li>
+            </ul>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut...
+            </p>
+
+        </div>
+        <hr/>
+    </div>
+
     <!-- Kliknutie na inzerat je zatial zakomentovane lebo to padalo na registrovanom uzivatelovi,
         ale bez reg. uzivatela to slapalo v pohode bez problemov to hadzalo na detail inzeratu.
     ....-->
@@ -164,14 +186,13 @@
                 <p><b>Cena - </b>{{$inzerat->cena}} €</p>
                 <p><b>Pocet zobrazeni -</b> {{$inzerat->pocet_zobrazeni}}</p>
 
-                   
+
             {{-- <p>{{$inzerat->fotografia}}</p>--}}
 
             <!-- <p><a class="btn btn-lg btn-success" href="#" role="button">Get started today</a></p> -->
             </div>
             {{--</a>--}}
         </div>
-
 
 
     @endforeach
