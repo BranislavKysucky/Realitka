@@ -74,8 +74,8 @@
                                 <strong>Výmera domu: </strong> {{$inzerat->vymera_domu}} km2<br />
                                 <strong>Užitková plocha: </strong> {{$inzerat->uzitkova_plocha}} km2<br />
                                 <strong>Cena dohodou: </strong> {{$inzerat->cena_dohodou}}<br />
-                                <strong>Telefón : </strong> {{$registrovany_pouzivatel->telefon}}<br />
-                                <strong>E-mail: </strong> {{$registrovany_pouzivatel->email}}<br />
+                                <strong>Telefón : </strong> {{$pouzivatel->telefon}}<br />
+                                <strong>E-mail: </strong> {{$pouzivatel->email}}<br />
 
                             <div class="elementor elementor-773">
                                 <div class="elementor-inner">

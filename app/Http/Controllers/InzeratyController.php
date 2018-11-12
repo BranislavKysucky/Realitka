@@ -238,7 +238,7 @@ class InzeratyController extends Controller
         $druh = $inzerat->druh()->first();
         $stav = $inzerat->stav()->first();
         $typ = $inzerat->typ()->first();
-        $registrovany_pouzivatel = $inzerat->registrovany_pouzivatel()->first();
+        $pouzivatel = $inzerat->pouzivatel()->first();
 
         return view('inzeraty.zobrazit_detail')
             ->with(compact('inzerat'))
@@ -246,7 +246,7 @@ class InzeratyController extends Controller
             ->with(compact('druh'))
             ->with(compact('stav'))
             ->with(compact('typ'))
-            ->with(compact('registrovany_pouzivatel'));
+            ->with(compact('pouzivatel'));
     }
 
     /**
