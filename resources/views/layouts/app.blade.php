@@ -9,12 +9,54 @@
     <meta name="keywords" content="realitky, byty, domy, nehnuteľnosti ">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" href="{{ URL::asset('images/favicon.ico') }}">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ URL::asset('layout/styles/layout.css') }}">
+    <style>
+        .pac-icon {
+            width: 0;
+            background-image: none;
+        }
+        .pac-container:after {
+            /* Disclaimer: not needed to show 'powered by Google' if also a Google Map is shown */
+
+            background-image: none !important;
+            height: 0px;
+        }
+        .remove:hover {
+            cursor: pointer;
+        }
+        .inputFile {
+            width: 0.1px;
+            height: 0.1px;
+            opacity: 0;
+            overflow: hidden;
+            position: absolute;
+            z-index: -1;
+        }
+
+        label[for=fileInput] {
+            border: 2px solid black;
+            background-color: transparent;
+            color: black;
+            /*padding: 7px 14px;*/
+            text-align: center;
+            font-size: 10px;
+            cursor: pointer;
+            border-color: #4CAF50;
+            color: green;
+        }
+
+        label[for=fileInput]:hover {
+            background-color: #4CAF50;
+            color: white;
+        }
+    </style>
 </head>
 <!-- #################################################################### -->
 

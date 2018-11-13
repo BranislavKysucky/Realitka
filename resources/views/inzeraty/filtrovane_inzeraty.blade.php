@@ -9,26 +9,45 @@
             <div align="center">
                 <h4>VYHĽADÁVANIE</h4>
             </div>
+
             <form action="{{route('inzeraty.index')}}" method="get">
                 {{csrf_field()}}
 
-                <script type="text/javascript"
-                        src="http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"></script>
+                <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
                 <script type="text/javascript">
-                    function initialize() {
+                    $(document).ready(function () {
+                        function initialize() {
+                            var options = {
+                                types: ['(regions)'],
+                                componentRestrictions: {country: "sk"}
+                            };
+                            var input = document.getElementById('lokalita');
+                            var autocomplete = new google.maps.places.Autocomplete(input, options);
+                            var IsplaceChanged = '';
 
-                        var options = {
-                            types: ['(regions)'],
-                            componentRestrictions: {country: "sk"}
-                        };
+                            google.maps.event.addListener(autocomplete, 'place_changed', function() {
+                                var place = autocomplete.getPlace();
+                                IsplaceChanged = true;
+                            });
 
-                        var input = document.getElementById('lokalita');
-                        var autocomplete = new google.maps.places.Autocomplete(input, options);
+                            $("#lokalita").keydown(function () {
+                                IsplaceChange = false;
+                            });
 
 
-                    }
+                            $( "form" ).submit(function( event ) {
+                                if(IsplaceChanged == true){
+                                    return;
+                                }else{
+                                    alert("Vyberte jednu z ponúkaných lokalit");
+                                    event.preventDefault();
+                                }
+                            });
 
-                    google.maps.event.addDomListener(window, 'load', initialize);
+                        }
+
+                        google.maps.event.addDomListener(window, 'load', initialize);
+                    });
                 </script>
 
                 <label for="lokalita">Lokalita</label>
