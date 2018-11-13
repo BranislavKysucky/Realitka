@@ -28,7 +28,7 @@
         <!-- ################################################################################################ -->
         <div class="fl_left">
             <ul class="nospace">
-                <li><a href="/"><i class="fas fa-user fa-lg"></i></a></li>
+                <li><i class="fas fa-user fa-lg"></i></li>
                 @guest
                     <li><a href="{{ route('login') }}">Prihlásiť sa</a></li>
                     <li><a href="{{ route('register') }}">Registrovať sa</a></li>

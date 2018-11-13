@@ -116,8 +116,11 @@ class InzeratyController extends Controller
 
         //zobrazenie inzeratov podla telefonneho cisla
         if($request->has('telefon')){
-            $anonym_id=DB::table('anonym')->where('telefon',$request->input('telefon'))->value('id');
-            $inzeraty=DB::table('inzeraty')->where('anonym_id',$anonym_id)->get();
+            $pouzivatel_id=DB::table('pouzivatelia')->where('telefon',$request->input('telefon'))->value('id');
+            $inzeraty=DB::table('inzeraty')->where('pouzivatel_id',$pouzivatel_id)->get();
+            foreach ($inzeraty as $inzerat){
+                $inzerat->obrazok=DB::table('fotografie')->where('inzerat_id',$inzerat->id)->value('url');
+            }
             return view('inzeraty.filtrovane_inzeraty',['inzeraty' => $inzeraty]);
         }
         else {

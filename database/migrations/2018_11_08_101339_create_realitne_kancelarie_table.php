@@ -27,6 +27,8 @@ class CreateRealitneKancelarieTable extends Migration
             $table->string('DIC');
             $table->string('url_logo')->nullable();
             $table->timestamps();
+
+            $table->foreign('kraj_id')->references('id')->on('kraje');
         });
     }
 
