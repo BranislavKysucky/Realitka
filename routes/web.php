@@ -27,19 +27,22 @@ Route::get('inzeraty/detail/{id}' , 'InzeratyController@show');
 
 
 // stranky pre administracne rozhranie
+//tu budú všetky routy, ktore maju byť dostupné len ak je používateľ prihlásený
+Route::middleware(['auth'])->group(function () {
 
-Route::get('/admin', function () {
-    return view('admin/index');
-});
+    Route::get('/admin', function () {
+        return view('admin/index');
+    });
 
-Route::get('/admin/statistiky', function () {
-    return view('admin/statistiky');
-});
+    Route::get('/admin/statistiky', function () {
+        return view('admin/statistiky');
+    });
 
-Route::get('/admin/edit_inzeratov', function () {
-    return view('admin/edit_inzeratov');
-});
+    Route::get('/admin/edit_inzeratov', function () {
+        return view('admin/edit_inzeratov');
+    });
 
-Route::get('/admin/edit_pouzivatelov', function () {
-    return view('admin/edit_pouzivatelov');
+    Route::get('/admin/edit_pouzivatelov', function () {
+        return view('admin/edit_pouzivatelov');
+    });
 });
