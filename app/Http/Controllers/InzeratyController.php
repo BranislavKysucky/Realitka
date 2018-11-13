@@ -160,7 +160,6 @@ class InzeratyController extends Controller
             'popis' => 'required',
             'lokalita' => 'required',
             'kraj_id' => 'required',
-            'adresa' => 'required',
             'cena' => 'required',
             'druh' => 'required',
             'typ' => 'required',
@@ -191,7 +190,6 @@ class InzeratyController extends Controller
             $inzerat->kraj_id = $request->get('kraj_id');
             $inzerat->nazov = $request->get('nazov');
             $inzerat->popis = $request->get('popis');
-          //  $inzerat->adresa = $request->get('adresa');   // neni v table
             $inzerat->cena = $request->get('cena');
 
 

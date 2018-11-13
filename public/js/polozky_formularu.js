@@ -51,7 +51,7 @@
 
 
         $("#typ").change(function() {                                               // Typy
-            console.log($('#typ :selected').attr('id'));
+
             if ($('#typ :selected').attr('id') == "Kúpa" || $('#typ :selected').attr('id') == "Výmena" || $('#typ :selected').attr('id') == "Dražba") {
 
                 $("#cena_dohodou").hide();
