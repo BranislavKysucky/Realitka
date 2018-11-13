@@ -22,20 +22,33 @@
                 <label for="popis">Popis</label>
                 <input required id="popis" class="form-control" placeholder="Zadajte popis" name="popis"/>
 
-                <label for="lokalita">Adresa</label>
+
+                <label id = "typ_label" for="typ">Kraj</label>
+                <select id="kraj_id" class="form-control" name="kraj_id">
+
+
+                        <option id=1 value=1>Bratislavský kraj</option>
+                        <option id=2 value=2>Trnavský kraj</option>
+                        <option id=3 value=3>Trenčiansky kraj</option>
+                        <option id=4 value=4>Nitriansky kraj</option>
+                        <option id=5 value=5>Žilinský kraj</option>
+                        <option id=6 value=6>Banskobystrický kraj</option>
+                        <option id=7 value=7>Prešovský kraj</option>
+                        <option id=8 value=8>Košický kraj</option>
+
+                </select>
+
+
+
+                <label for="lokalita">Lokalita</label>
+                <input id="lokalita" class="form-control" placeholder="Zadajte lokalitu" name="lokalita"/>
+
+                <label for="adresa">Adresa</label>
                 <input required id="adresa" class="form-control" placeholder="Zadajte adresu" name="adresa"/>
 
 
                 <div class="form-group">
-                    <label for="kategoria">Kategória</label>
-                    <select id="kategoria" class="form-control" name="kategoria">
-                        @foreach($kategorie as $kategoria)
 
-                            <option value={{$kategoria->id}}>{{$kategoria->nazov}}</option>
-
-                        @endforeach
-
-                    </select>
 
                     <label id = "typ_label" for="typ">Typ</label>
                     <select id="typ" class="form-control" name="typ">
@@ -118,7 +131,7 @@
 
 
                 <div id="wrapper">
-                        <input type="file" id="fileInput" class="inputFile" name="fileInput" accept=".jpg, .jpeg, .png" multiple><br>
+                        <input type="file" id="fileInput" class="inputFile" name="images" accept=".jpg, .jpeg, .png" multiple><br>
                         <label for="fileInput">Vyber obrázok</label>
 
                         <div id="container">
@@ -214,7 +227,9 @@
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
     <script src='{{ URL::asset('js/polozky_formularu.js') }}'></script>
+    <script src='{{ URL::asset('js/lokalita.js') }}'></script>
 
 
 @endsection

@@ -158,13 +158,15 @@ class InzeratyController extends Controller
 
             'nazov' => 'required',
             'popis' => 'required',
+            'lokalita' => 'required',
+            'kraj_id' => 'required',
             'adresa' => 'required',
             'cena' => 'required',
             'druh' => 'required',
             'typ' => 'required',
             'images' => 'required',                   // je potreba mat povinny image ??
-            'images.*' => 'image|mimes:jpeg,jpg,png', // zatial validacia iba pre typy v buducnosti mozno aj velkost/mnozstvo
-            'kategoria' => 'required'
+            'images.*' => 'image|mimes:jpeg,jpg,png' // zatial validacia iba pre typy v buducnosti mozno aj velkost/mnozstvo
+
     ]);
 
 
@@ -177,19 +179,22 @@ class InzeratyController extends Controller
             $inzerat->stav_id = $request->get('stavy');
             $inzerat->druh_id = $request->get('druh');
             $inzerat->typ_id = $request->get('typ');
-            $inzerat->kategoria_id = $request->get('kategoria');
+           // $inzerat->kategoria_id = $request->get('kategoria');   //zakomentovane zatial pokym nebude prihlasovanie
 
-            // zatial iba natvrdo dane, musia byt vsetky 3 lebo su not null :D
-
-            $inzerat->anonym_id = 1;
-            $inzerat->registrovany_pouzivatel_id = 1;
-            $inzerat->pocet_zobrazeni = 112;
+            // zatial iba natvrdo dane
+            $inzerat->kategoria_id = 1;
+            $inzerat->pouzivatel_id = 1;
 
 
+
+            $inzerat->mesto = $request->get('lokalita');
+            $inzerat->kraj_id = $request->get('kraj_id');
             $inzerat->nazov = $request->get('nazov');
             $inzerat->popis = $request->get('popis');
-            $inzerat->adresa = $request->get('adresa');
+          //  $inzerat->adresa = $request->get('adresa');   // neni v table
             $inzerat->cena = $request->get('cena');
+
+
             $inzerat->vymera_domu = $request->get('vymera_domu');
             $inzerat->vymera_pozemku = $request->get('vymera_pozemku');
             $inzerat->uzitkova_plocha = $request->get('uzitkova_plocha');
