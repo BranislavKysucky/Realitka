@@ -14,8 +14,6 @@
                 {{csrf_field()}}
 
 
-
-
                 <label for="lokalita">Lokalita</label>
                 <input id="lokalita" class="form-control" placeholder="Zadajte lokalitu" name="lokalita"/>
 
@@ -131,56 +129,42 @@
     </div>
 
 
-    <!-- toto je len na ukažku-->
-    <div class="col-md-9 col-lg-9 col-sm-9 pull-right">
+    <!--tu sa s tymto pohraj samo-->
+    @foreach($inzeraty as $inzerat)
+        <div class="col-md-9 col-lg-9 col-sm-9 pull-right">
 
-        <div class="col-md-4 col-lg-4 col-sm-4 image-container">
-            <img src="images/demo/348x261.png" style="height:90%;width: 90%;margin-left:-15px;"/>
-        </div>
-        <div class="excerpt">
-            <h6 class="heading">toto je ukážka</h6>
-            <ul class="nospace meta">
-                <li><i class="fas fa-home"></i> Nitra, Rodinný dom</li>
-                <li><i class="fas fa-euro-sign"></i> 80 000 </li>
-            </ul>
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut...
-            </p>
+            <div class="col-md-4 col-lg-4 col-sm-4 image-container">
+                <img src="{{$inzerat->obrazok}}" style="height:90%;width: 90%;margin-left:-15px;"/>
+            </div>
+            <div class="excerpt">
+                <h6 class="heading">{{$inzerat->nazov}}</h6>
+                <ul class="nospace meta">
+                    <li><i class="fas fa-home"></i> Nitra, Rodinný dom</li>
+                    <li><i class="fas fa-euro-sign"></i> 80 000</li>
+                </ul>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
+                    ut...
+                </p>
 
+            </div>
+            <hr/>
         </div>
-        <hr/>
-    </div>
+    @endforeach
+
 
     <!-- Kliknutie na inzerat je zatial zakomentovane lebo to padalo na registrovanom uzivatelovi,
         ale bez reg. uzivatela to slapalo v pohode bez problemov to hadzalo na detail inzeratu.
     ....-->
-    @foreach($inzeraty as $inzerat)
-        <div class="col-md-9 col-lg-9 col-sm-9 pull-right">
-            {{--<a href="{{url('inzeraty/detail/'.$inzerat->id)}}">--}}
-            <div class="well well-lg">
-                <h2>PREDAJ - {{$inzerat->popis}}</h2>
-                <h3>Názov: {{$inzerat->nazov}}</h3>
-                <p><b>Uzitkova plocha:</b> {{$inzerat->uzitkova_plocha}} m² </p>
-                <p><b>Typ nehnutelnosti:</b> {{$inzerat->typ->nazov}}</p>
-                <p><b>Stav:</b> {{$inzerat->stav->nazov}}</p>
-                <p><b>Kategoria:</b> {{$inzerat->kategoria->nazov}}</p>
-                <p><b>Mesto:</b> {{$inzerat->mesto}}</p>
-                <p><b>Kraj:</b> {{$inzerat->kraj->nazov}}</p>
-                <p><b>Druh -</b> {{$inzerat->druh->nazov}}</p>
-                <p><b>Cena - </b>{{$inzerat->cena}} €</p>
-                <p><b>Pocet zobrazeni -</b> {{$inzerat->pocet_zobrazeni}}</p>
+    <!-- <p><a class="btn btn-lg btn-success" href="#" role="button">Get started today</a></p> -->
 
 
-            {{-- <p>{{$inzerat->fotografia}}</p>--}}
-
-            <!-- <p><a class="btn btn-lg btn-success" href="#" role="button">Get started today</a></p> -->
-            </div>
-            {{--</a>--}}
-        </div>
 
 
-    @endforeach
+
+
+
     <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
     <script src='{{ URL::asset('js/lokalita.js') }}'></script>
 

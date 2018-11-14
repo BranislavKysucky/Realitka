@@ -10,6 +10,7 @@ use App\Druh;
 use App\Stav;
 use App\Pouzivatel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rules\In;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -21,6 +22,32 @@ class InzeratyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function mojeInzeraty()
+    {
+        echo 'user';
+        /*
+        $inzeraty = DB::table('inzeraty')->where('pouzivatel_id', Auth::user()->id)->get();
+        foreach ($inzeraty as $inzerat) {
+            $inzerat->obrazok = DB::table('fotografie')->where('inzerat_id', $inzerat->id)->value('url');
+        }
+        return view('inzeraty.moje_inzeraty_vysledok', ['inzeraty' => $inzeraty]);*/
+    }
+
+    public function mojeInzeratyNeregistrovany(Request $request)
+    {/*
+        if ($request->has('tel')) {
+            $pouzivatel_id = DB::table('pouzivatelia')->where('telefon', $request->input('tel'))->value('id');
+            $inzeraty = DB::table('inzeraty')->where('pouzivatel_id', $pouzivatel_id)->get();
+            foreach ($inzeraty as $inzerat) {
+                $inzerat->obrazok = DB::table('fotografie')->where('inzerat_id', $inzerat->id)->value('url');
+            }
+            return view('inzeraty.moje_inzeraty_vysledok',['inzeraty' => $inzeraty]);
+        }*/
+
+        echo 'anonym'.$request->get('tel');
+
+    }
+
     public function index(Request $request, Inzerat $inzeraty)
     {
         /*predpokladam ze toto je len predpriprava, lebo index metoda by mala primarne zobrazit vsetky inzeraty.
@@ -115,20 +142,24 @@ class InzeratyController extends Controller
         return view('inzeraty.filtrovane_inzeraty', compact('inzeraty'));*/
 
         //zobrazenie inzeratov podla telefonneho cisla
-        if($request->has('telefon')){
-            $pouzivatel_id=DB::table('pouzivatelia')->where('telefon',$request->input('telefon'))->value('id');
-            $inzeraty=DB::table('inzeraty')->where('pouzivatel_id',$pouzivatel_id)->get();
-            foreach ($inzeraty as $inzerat){
-                $inzerat->obrazok=DB::table('fotografie')->where('inzerat_id',$inzerat->id)->value('url');
+        /*if ($request->has('telefon')) {
+            $pouzivatel_id = DB::table('pouzivatelia')->where('telefon', $request->input('telefon'))->value('id');
+            $inzeraty = DB::table('inzeraty')->where('pouzivatel_id', $pouzivatel_id)->get();
+            foreach ($inzeraty as $inzerat) {
+                $inzerat->obrazok = DB::table('fotografie')->where('inzerat_id', $inzerat->id)->value('url');
             }
-            return view('inzeraty.filtrovane_inzeraty',['inzeraty' => $inzeraty]);
-        }
-        else {
+            return view('inzeraty.filtrovane_inzeraty', ['inzeraty' => $inzeraty]);
+        } else {*/
             $inzeraty = Inzerat::with('druh', 'kategoria', 'stav', 'typ', 'kraj')->get();
-            $fotografie = Fotografia::all();
-            return view('inzeraty.filtrovane_inzeraty', ['inzeraty' => $inzeraty , 'fotografie' => $fotografie]);
-        }
+            //$fotografie = Fotografia::all();
+            foreach ($inzeraty as $inzerat) {
+                $inzerat->obrazok = DB::table('fotografie')->where('inzerat_id', $inzerat->id)->value('url');
+                //$inzerat->obrazok=$obrazok->id;
+            }
+            return view('inzeraty.filtrovane_inzeraty', ['inzeraty' => $inzeraty]);
+       // }
     }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -142,13 +173,13 @@ class InzeratyController extends Controller
         $druhy = Druh::all();
         $druhy_nazov = Druh::select('nazov')->groupBy('nazov')->get();
         $stavy = Stav::all();
-        return view('inzeraty.vytvorit_inzerat',['kategorie'=>$kategorie,'typy'=>$typy,'druhy'=>$druhy,'stavy'=>$stavy,'druhy_nazov'=>$druhy_nazov]);
+        return view('inzeraty.vytvorit_inzerat', ['kategorie' => $kategorie, 'typy' => $typy, 'druhy' => $druhy, 'stavy' => $stavy, 'druhy_nazov' => $druhy_nazov]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)         // metoda pre ulozenie inzeratu + fotiek
@@ -163,14 +194,14 @@ class InzeratyController extends Controller
             'cena' => 'required',
             'druh' => 'required',
             'typ' => 'required',
+            'heslo' => 'required',
             'images' => 'required',                   // je potreba mat povinny image ??
             'images.*' => 'image|mimes:jpeg,jpg,png' // zatial validacia iba pre typy v buducnosti mozno aj velkost/mnozstvo
 
-    ]);
+        ]);
 
 
         if ($request->hasFile('images')) {  // pre istotu este raz overenie
-
 
 
             // vytvorenie inzeratu
@@ -178,12 +209,11 @@ class InzeratyController extends Controller
             $inzerat->stav_id = $request->get('stavy');
             $inzerat->druh_id = $request->get('druh');
             $inzerat->typ_id = $request->get('typ');
-           // $inzerat->kategoria_id = $request->get('kategoria');   //zakomentovane zatial pokym nebude prihlasovanie
+            // $inzerat->kategoria_id = $request->get('kategoria');   //zakomentovane zatial pokym nebude prihlasovanie
 
             // zatial iba natvrdo dane
             $inzerat->kategoria_id = 1;
             $inzerat->pouzivatel_id = 1;
-
 
 
             $inzerat->mesto = $request->get('lokalita');
@@ -191,6 +221,7 @@ class InzeratyController extends Controller
             $inzerat->nazov = $request->get('nazov');
             $inzerat->popis = $request->get('popis');
             $inzerat->cena = $request->get('cena');
+            $inzerat->heslo = $request->get('heslo');
 
 
             $inzerat->vymera_domu = $request->get('vymera_domu');
@@ -208,31 +239,31 @@ class InzeratyController extends Controller
             $inzerat->save();
 
 
-            foreach($request->file('images') as $image) {
+            foreach ($request->file('images') as $image) {
 
-            //ulozenie image, do db ide iba url teda path resp.  /public/images/ + image name
+                //ulozenie image, do db ide iba url teda path resp.  /public/images/ + image name
 
-            $file_name = $image->hashName();
-            $input['imagename'] = time() . $image->getClientOriginalName() . '.' . $image->getClientOriginalExtension();
-            $path = public_path('/images');
-            $image->move($path, $input['imagename']);
+                //$file_name = $image->hashName();
+                $input['imagename'] = time() . $image->getClientOriginalName();
+                $path = public_path('/images');
+                $image->move($path, $input['imagename']);
 
-            // vytvorenie fotografie zatial iba jeden obrazok
-            $fotografia = new Fotografia;
-            $fotografia->inzerat_id = $inzerat->id;
-            $fotografia->url = "/public/images/" . $file_name;
-            $fotografia->save();
+                // vytvorenie fotografie zatial iba jeden obrazok
+                $fotografia = new Fotografia;
+                $fotografia->inzerat_id = $inzerat->id;
+                $fotografia->url = "/images/" . $input['imagename'];
+                $fotografia->save();
             }
 
 
         }
-        return view('inzeraty.hotovo');
+        return back()->with('success', 'Inzerát bol úspešne pridaný');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Inzerat  $inzerat
+     * @param  \App\Inzerat $inzerat
      * @return \Illuminate\Http\Response
      */
     public function show(Inzerat $inzerat, $id)
@@ -258,7 +289,7 @@ class InzeratyController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Inzerat  $inzerat
+     * @param  \App\Inzerat $inzerat
      * @return \Illuminate\Http\Response
      */
     public function edit(Inzerat $inzerat)
@@ -269,8 +300,8 @@ class InzeratyController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Inzerat  $inzerat
+     * @param  \Illuminate\Http\Request $request
+     * @param  \App\Inzerat $inzerat
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Inzerat $inzerat)
@@ -281,7 +312,7 @@ class InzeratyController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Inzerat  $inzerat
+     * @param  \App\Inzerat $inzerat
      * @return \Illuminate\Http\Response
      */
     public function destroy(Inzerat $inzerat)

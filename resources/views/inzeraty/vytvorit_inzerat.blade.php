@@ -4,7 +4,7 @@
 
 
 
-
+    @include('popup.pridany')
     <div class="col-sm-6 col-md-6 col-lg-6 pull-left">
 
         <div class="well well-sm ">
@@ -15,7 +15,6 @@
                 {{csrf_field()}}
 
 
-
                 <label for="nazov">Nazov</label>
                 <input required id="nazov" class="form-control" placeholder="Zadajte nazov" name="nazov"/>
 
@@ -23,21 +22,20 @@
                 <input required id="popis" class="form-control" placeholder="Zadajte popis" name="popis"/>
 
 
-                <label id = "kraj_label" for="kraj">Kraj</label>
+                <label id="kraj_label" for="kraj">Kraj</label>
                 <select id="kraj_id" class="form-control" name="kraj_id">
 
 
-                        <option id=1 value=1>Bratislavský kraj</option>
-                        <option id=2 value=2>Trnavský kraj</option>
-                        <option id=3 value=3>Trenčiansky kraj</option>
-                        <option id=4 value=4>Nitriansky kraj</option>
-                        <option id=5 value=5>Žilinský kraj</option>
-                        <option id=6 value=6>Banskobystrický kraj</option>
-                        <option id=7 value=7>Prešovský kraj</option>
-                        <option id=8 value=8>Košický kraj</option>
+                    <option id=1 value=1>Bratislavský kraj</option>
+                    <option id=2 value=2>Trnavský kraj</option>
+                    <option id=3 value=3>Trenčiansky kraj</option>
+                    <option id=4 value=4>Nitriansky kraj</option>
+                    <option id=5 value=5>Žilinský kraj</option>
+                    <option id=6 value=6>Banskobystrický kraj</option>
+                    <option id=7 value=7>Prešovský kraj</option>
+                    <option id=8 value=8>Košický kraj</option>
 
                 </select>
-
 
 
                 <label for="lokalita">Lokalita</label>
@@ -50,7 +48,7 @@
                 <div class="form-group">
 
 
-                    <label id = "typ_label" for="typ">Typ</label>
+                    <label id="typ_label" for="typ">Typ</label>
                     <select id="typ" class="form-control" name="typ">
                         @foreach($typy as $typ)
 
@@ -60,26 +58,22 @@
                     </select>
 
 
-
-
-
-
                     <label for="druh">Druh</label>
-                    <select  class="form-control" id="druh" name="druh">
+                    <select class="form-control" id="druh" name="druh">
                         @foreach($druhy_nazov as $druh_nazov)
                             <optgroup label={{$druh_nazov->nazov}} id={{$druh_nazov->nazov}}>
 
 
-                            @foreach($druhy as $druh)
+                                @foreach($druhy as $druh)
 
 
 
                                     @if(($druh_nazov->nazov == $druh->nazov) && (substr($druh->podnazov,0, 7) != "Všetky" ))
-                                    <option value={{$druh->id}}>{{$druh->podnazov}}</option>
+                                        <option value={{$druh->id}}>{{$druh->podnazov}}</option>
                                     @endif
 
 
-                            @endforeach
+                                @endforeach
 
                             </optgroup>
 
@@ -91,75 +85,80 @@
 
                         @foreach($stavy as $stav)
                             @if(substr($stav->nazov,0, 7) != "Všetky" )
-                            <option value={{$stav->id}}>{{$stav->nazov}}</option>
+                                <option value={{$stav->id}}>{{$stav->nazov}}</option>
                             @endif
                         @endforeach
 
                     </select>
 
 
-
-
                     <div class="input-group" id="cena" name="cena">
                         <label for="cena">Cena(€)</label>
-                        <input  required placeholder="cena" class="form-control" type="number" min="0" id="cena" value="" oninput="hideCena_dohodou();" name="cena"/>
+                        <input required placeholder="cena" class="form-control" type="number" min="0" id="cena" value=""
+                               oninput="hideCena_dohodou();" name="cena"/>
 
                     </div>
 
 
+                    <div id="cena_dohodou">
 
-                    <div  id="cena_dohodou">
-
-                    <label for="cena_dohodou">Cena dohodou </label>
-                    <label class="radio-inline"><input value = true onchange="hideCena();" name = "cena_dohodou" id = "cena_dohodou" type="radio"  name="optradio" >Ano</label>
-                    <label class="radio-inline"><input value = false onchange="hideCena();" name = "cena_dohodou" id = "cena_dohodou" type="radio"  name="optradio"checked>Nie</label>
-                    <br>
+                        <label for="cena_dohodou">Cena dohodou </label>
+                        <label class="radio-inline"><input value=true onchange="hideCena();" name="cena_dohodou"
+                                                           id="cena_dohodou" type="radio" name="optradio">Ano</label>
+                        <label class="radio-inline"><input value=false onchange="hideCena();" name="cena_dohodou"
+                                                           id="cena_dohodou" type="radio" name="optradio"
+                                                           checked>Nie</label>
+                        <br>
                     </div>
 
                     <div class="input-group" id="vymera_domu">
                         <label for="vymera_domu">Výmera domu(m<sup>2</sup>)</label>
-                        <input required placeholder="vymera domu" class="form-control" type="number" min="0" name="vymera_domu"/>
+                        <input required placeholder="vymera domu" class="form-control" type="number" min="0"
+                               name="vymera_domu"/>
 
                     </div>
 
 
-
                     <div class="input-group" id="vymera_pozemku">
                         <label for="vymera_pozemku">Výmera pozemku(m<sup>2</sup>)</label>
-                        <input required placeholder="vymera pozemku" class="form-control" type="number" min="0" name="vymera_pozemku"/>
+                        <input required placeholder="vymera pozemku" class="form-control" type="number" min="0"
+                               name="vymera_pozemku"/>
 
                     </div>
 
 
                     <div class="input-group" id="uzitkova_plocha">
                         <label for="uzitkova_plocha">Uzitkova plocha(m<sup>2</sup>)</label>
-                        <input required placeholder="uzitkova plocha" class="form-control" type="number" min="0" name="uzitkova_plocha"/>
+                        <input required placeholder="uzitkova plocha" class="form-control" type="number" min="0"
+                               name="uzitkova_plocha"/>
 
                     </div>
 
 
                 </div>
 
+                <div class="input-group">
+                    <label for="heslo">Heslo (slúži k editácii/zmazaniu inzerátu)</label>
+                    <input required id="heslo" type="password" class="form-control" placeholder="Zadajte heslo"
+                           name="heslo" onmouseover="this.type='text'" onmouseout="this.type='password'"/>
+                </div>
 
                 <div id="wrapper">
-                        <input type="file" id="fileInput" class="inputFile" name="images" accept=".jpg, .jpeg, .png" multiple><br>
-                        <label for="fileInput">Vyber obrázok</label>
+                    <input type="file" id="fileInput" class="inputFile" name="images[]" accept=".jpg, .jpeg, .png"
+                           multiple><br>
+                    <label for="fileInput">Vyber obrázok</label>
 
-                        <div id="container">
-                            <div class="element" id="div_1"></div>
-                        </div>
-
-
+                    <div id="container">
+                        <div class="element" id="div_1"></div>
+                    </div>
 
 
                 </div>
 
 
-
-
                 <div class="form-group">
 
-                    <input type="submit" class="btn btn-danger form-control"  value="Pridat" name="submit">
+                    <input type="submit" class="btn btn-danger form-control" value="Pridat" name="submit">
 
                     <input type="hidden" value="{{ csrf_token() }}" name="_token">
                 </div>
@@ -177,6 +176,7 @@
     <script src='{{ URL::asset('js/lokalita.js') }}'></script>
     <script src='{{ URL::asset('js/preview.js') }}'></script>
     <script src='{{ URL::asset('js/cena.js') }}'></script>
+    <script src='{{ URL::asset('js/zatvor_popup.js') }}'></script>
 
 
 @endsection

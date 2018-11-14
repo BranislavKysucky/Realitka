@@ -17,18 +17,21 @@ Auth::routes();
 
 Route::resource('inzeraty', 'InzeratyController');
 
-Route::get('moje_inzeraty',function (){
-  return view('inzeraty/moje_inzeraty');
+Route::get('moje_inzeraty', function () {
+    return view('inzeraty/moje_inzeraty_dotaz');
 });
+//Route::get('moje_inzeraty/{tel}', 'InzeratyController@mojeInzeratyNeregistrovany');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('inzeraty/detail/{id}' , 'InzeratyController@show');
+Route::get('inzeraty/detail/{id}', 'InzeratyController@show');
 
 
 // stranky pre administracne rozhranie
 //tu budú všetky routy, ktore maju byť dostupné len ak je používateľ prihlásený
 Route::middleware(['auth'])->group(function () {
+
+    Route::get('moje_r_inzeraty', 'InzeratyController@mojeInzeraty');
 
     Route::get('/admin', function () {
         return view('admin/index');

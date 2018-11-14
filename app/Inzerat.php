@@ -8,30 +8,38 @@ class Inzerat extends Model
 {
     protected $table = 'inzeraty';
 
-    public function fotografie(){
+    public function fotografie()
+    {
         return $this->hasMany(Fotografia::class);
     }
 
-    public function pouzivatel(){
+    public function pouzivatel()
+    {
         return $this->belongsTo(Pouzivatel::class);
     }
 
-    public function druh(){
+    public function druh()
+    {
         return $this->belongsTo(Druh::class);
     }
 
-    public function kategoria(){
+    public function kategoria()
+    {
         return $this->belongsTo(Kategoria::class);
     }
 
-    public function stav(){
+    public function stav()
+    {
         return $this->belongsTo(Stav::class);
     }
 
-    public function typ(){
+    public function typ()
+    {
         return $this->belongsTo(Typ::class);
     }
-    public function kraj(){
+
+    public function kraj()
+    {
         return $this->belongsTo(Kraj::class);
     }
 }
