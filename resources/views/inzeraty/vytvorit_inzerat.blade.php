@@ -74,7 +74,7 @@
 
 
 
-                                    @if($druh_nazov->nazov == $druh->nazov)
+                                    @if(($druh_nazov->nazov == $druh->nazov) && (substr($druh->podnazov,0, 7) != "Všetky" ))
                                     <option value={{$druh->id}}>{{$druh->podnazov}}</option>
                                     @endif
 
@@ -90,9 +90,9 @@
                     <select id="stavy" class="form-control" name="stavy">
 
                         @foreach($stavy as $stav)
-
+                            @if(substr($stav->nazov,0, 7) != "Všetky" )
                             <option value={{$stav->id}}>{{$stav->nazov}}</option>
-
+                            @endif
                         @endforeach
 
                     </select>
