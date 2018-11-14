@@ -97,11 +97,12 @@
 
                     </select>
 
-                    <label for="cena">Cena(€)</label>
+
 
 
                     <div class="input-group" id="cena" name="cena">
-                        <input  required placeholder="cena" class="form-control" type="number" min="0" id="cena"  name="cena"/>
+                        <label for="cena">Cena(€)</label>
+                        <input  required placeholder="cena" class="form-control" type="number" min="0" id="cena" value="" oninput="hideCena_dohodou();" name="cena"/>
 
                     </div>
 
@@ -110,8 +111,8 @@
                     <div  id="cena_dohodou">
 
                     <label for="cena_dohodou">Cena dohodou </label>
-                    <label class="radio-inline"><input value = true name = "cena_dohodou" id = "cena_dohodou" type="radio"  name="optradio" checked>Ano</label>
-                    <label class="radio-inline"><input value = false name = "cena_dohodou" id = "cena_dohodou" type="radio"  name="optradio">Nie</label>
+                    <label class="radio-inline"><input value = true onchange="hideCena();" name = "cena_dohodou" id = "cena_dohodou" type="radio"  name="optradio" >Ano</label>
+                    <label class="radio-inline"><input value = false onchange="hideCena();" name = "cena_dohodou" id = "cena_dohodou" type="radio"  name="optradio"checked>Nie</label>
                     <br>
                     </div>
 
@@ -175,6 +176,7 @@
     <script src='{{ URL::asset('js/polozky_formularu.js') }}'></script>
     <script src='{{ URL::asset('js/lokalita.js') }}'></script>
     <script src='{{ URL::asset('js/preview.js') }}'></script>
+    <script src='{{ URL::asset('js/cena.js') }}'></script>
 
 
 @endsection
