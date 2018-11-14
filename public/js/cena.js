@@ -12,6 +12,7 @@ function hideCena_dohodou() {
         $('input:radio[name=cena_dohodou]')[1].checked = true;
         $("#cena_dohodou").hide();
 
+
     }
 
 }
@@ -22,7 +23,7 @@ function hideCena_dohodou() {
 function hideCena() {
 
     if ($('input:radio[name=cena_dohodou]')[0].checked == true) {
-
+        $.trim( $('input#cena').val(""));
         $("#cena").hide();
     } else {
 
