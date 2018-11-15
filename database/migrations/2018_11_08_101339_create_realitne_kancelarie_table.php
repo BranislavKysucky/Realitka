@@ -15,7 +15,7 @@ class CreateRealitneKancelarieTable extends Migration
     {
         Schema::create('realitne_kancelarie', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('kraj_id');
+            $table->integer('kraj_id')->nullable();
             $table->string('nazov');
             $table->string('ulica_cislo');
             $table->string('mesto');

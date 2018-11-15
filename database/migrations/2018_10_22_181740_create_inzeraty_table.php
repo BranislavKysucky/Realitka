@@ -15,16 +15,16 @@ class CreateInzeratyTable extends Migration
     {
         Schema::create('inzeraty', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('stav_id');
-            $table->integer('druh_id');
-            $table->integer('typ_id');
-            $table->integer('kategoria_id');
+            $table->integer('stav_id')->nullable();
+            $table->integer('druh_id')->nullable();
+            $table->integer('typ_id')->nullable();
+            $table->integer('kategoria_id')->nullable();
             $table->integer('pouzivatel_id')->nullable();
             $table->string('nazov');
             $table->longText('popis');
             $table->string('mesto');
             $table->string('heslo',191)->nullable();
-            $table->integer('kraj_id');
+            $table->integer('kraj_id')->nullable();
             $table->integer('cena')->nullable();
             $table->integer('vymera_domu')->nullable();
             $table->integer('vymera_pozemku')->nullable();

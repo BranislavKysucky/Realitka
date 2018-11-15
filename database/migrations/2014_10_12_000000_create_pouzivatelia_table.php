@@ -15,8 +15,8 @@ class CreatePouzivateliaTable extends Migration
     {
         Schema::create('pouzivatelia', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('kraj_id');
-            $table->integer('realitna_kancelaria_id');
+            $table->integer('kraj_id')->nullable();
+            $table->integer('realitna_kancelaria_id')->nullable();
             $table->string('ulica_cislo');
             $table->string('mesto');
             $table->integer('PSC');
