@@ -20,7 +20,6 @@ Route::resource('inzeraty', 'InzeratyController');
 Route::get('moje_inzeraty', function () {
     return view('inzeraty/moje_inzeraty_dotaz');
 });
-//Route::get('moje_inzeraty/{tel}', 'InzeratyController@mojeInzeratyNeregistrovany');
 
 Route::get('/home', 'HomeController@index')->name('home');
 

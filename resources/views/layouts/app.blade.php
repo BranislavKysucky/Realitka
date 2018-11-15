@@ -134,11 +134,13 @@
         <ul class="clear">
             <li><a href="/">Domov</a></li>
             <li><a href="">Realitné kancelárie</a></li>
+            <li>
             @if(Auth::check())
-                <li><a href="moje_r_inzeraty">Moje inzeráty</a></li>
+                <a href="moje_r_inzeraty">Moje inzeráty</a>
             @else
-                <li><a href="moje_inzeraty">Moje inzeráty</a></li>
+                <a href="moje_inzeraty">Moje inzeráty</a>
             @endif
+            </li>
             <li><a href="{{ route('inzeraty.create') }}">Pridať inzerat</a></li>
             <li><a href="#">Kontakt</a></li>
         </ul>

@@ -24,28 +24,15 @@ class InzeratyController extends Controller
      */
     public function mojeInzeraty()
     {
-        echo 'user';
-        /*
-        $inzeraty = DB::table('inzeraty')->where('pouzivatel_id', Auth::user()->id)->get();
-        foreach ($inzeraty as $inzerat) {
-            $inzerat->obrazok = DB::table('fotografie')->where('inzerat_id', $inzerat->id)->value('url');
-        }
-        return view('inzeraty.moje_inzeraty_vysledok', ['inzeraty' => $inzeraty]);*/
-    }
 
-    public function mojeInzeratyNeregistrovany(Request $request)
-    {/*
-        if ($request->has('tel')) {
-            $pouzivatel_id = DB::table('pouzivatelia')->where('telefon', $request->input('tel'))->value('id');
-            $inzeraty = DB::table('inzeraty')->where('pouzivatel_id', $pouzivatel_id)->get();
+        if (Auth::check()) {
+            $inzeraty = DB::table('inzeraty')->where('pouzivatel_id', Auth::user()->id)->get();
             foreach ($inzeraty as $inzerat) {
                 $inzerat->obrazok = DB::table('fotografie')->where('inzerat_id', $inzerat->id)->value('url');
             }
-            return view('inzeraty.moje_inzeraty_vysledok',['inzeraty' => $inzeraty]);
-        }*/
-
-        echo 'anonym'.$request->get('tel');
-
+            return view('inzeraty.moje_inzeraty_vysledok', ['inzeraty' => $inzeraty]);
+        }
+        return view('auth.login');
     }
 
     public function index(Request $request, Inzerat $inzeraty)
@@ -142,14 +129,16 @@ class InzeratyController extends Controller
         return view('inzeraty.filtrovane_inzeraty', compact('inzeraty'));*/
 
         //zobrazenie inzeratov podla telefonneho cisla
-        /*if ($request->has('telefon')) {
+        if ($request->has('telefon')) {
             $pouzivatel_id = DB::table('pouzivatelia')->where('telefon', $request->input('telefon'))->value('id');
             $inzeraty = DB::table('inzeraty')->where('pouzivatel_id', $pouzivatel_id)->get();
             foreach ($inzeraty as $inzerat) {
                 $inzerat->obrazok = DB::table('fotografie')->where('inzerat_id', $inzerat->id)->value('url');
             }
-            return view('inzeraty.filtrovane_inzeraty', ['inzeraty' => $inzeraty]);
-        } else {*/
+            return view('inzeraty.moje_inzeraty_vysledok', ['inzeraty' => $inzeraty]);
+
+        } else {
+
             $inzeraty = Inzerat::with('druh', 'kategoria', 'stav', 'typ', 'kraj')->get();
             //$fotografie = Fotografia::all();
             foreach ($inzeraty as $inzerat) {
@@ -157,7 +146,7 @@ class InzeratyController extends Controller
                 //$inzerat->obrazok=$obrazok->id;
             }
             return view('inzeraty.filtrovane_inzeraty', ['inzeraty' => $inzeraty]);
-       // }
+        }
     }
 
     /**
