@@ -10,6 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+use App\Http\Middleware\Admin;
 
 Route::get('/', 'InzeratyController@index');
 
@@ -28,23 +29,30 @@ Route::get('inzeraty/detail/{id}', 'InzeratyController@show');
 
 // stranky pre administracne rozhranie
 //tu budú všetky routy, ktore maju byť dostupné len ak je používateľ prihlásený
+
 Route::middleware(['auth'])->group(function () {
+    //routy pre admina
+    Route::group(['middleware' => '\App\Http\Middleware\Admin'],function (){
+        Route::get('/admin', function () {
+            return view('admin/index');
+        });
+
+        Route::get('/admin/statistiky', function () {
+            return view('admin/statistiky');
+        });
+
+        Route::get('/admin/edit_inzeratov', function () {
+            return view('admin/edit_inzeratov');
+        });
+
+        Route::get('/admin/edit_pouzivatelov', function () {
+            return view('admin/edit_pouzivatelov');
+        });
+    });
+    //routy pre majitela realitky
+    Route::group(['middleware' => 'App\Http\Middleware\Realitka'],function (){
+
+    });
 
     Route::get('moje_r_inzeraty', 'InzeratyController@mojeInzeraty');
-
-    Route::get('/admin', function () {
-        return view('admin/index');
-    });
-
-    Route::get('/admin/statistiky', function () {
-        return view('admin/statistiky');
-    });
-
-    Route::get('/admin/edit_inzeratov', function () {
-        return view('admin/edit_inzeratov');
-    });
-
-    Route::get('/admin/edit_pouzivatelov', function () {
-        return view('admin/edit_pouzivatelov');
-    });
 });
