@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Fotografia;
 use App\Inzerat;
 use App\Kategoria;
+use App\Kontakt;
 use App\Typ;
 use App\Druh;
 use App\Stav;
@@ -307,5 +308,27 @@ class InzeratyController extends Controller
     public function destroy(Inzerat $inzerat)
     {
         //
+    }
+
+    public function kontakt(){
+        return view('inzeraty.kontakt');
+    }
+
+    public function odoslatMail(Request $request){
+        $this->validate($request,[
+            'predmet'=>'required',
+            'emailReply'=>'required',
+            'sprava'=>'required'
+        ]);
+
+        $kontakt = new Kontakt;
+        $kontakt->predmet = $request->get('predmet');
+        $kontakt->email = $request->get('emailReply');
+        $kontakt->sprava = $request->get('sprava');
+
+        $kontakt->save();
+        return back()->with('success', 'Sprava bolo odoslana');
+       /* return view('inzeraty.filtrovane_inzeraty');*/
+
     }
 }
