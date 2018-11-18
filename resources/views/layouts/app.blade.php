@@ -142,7 +142,7 @@
             @endif
             </li>
             <li><a href="{{ route('inzeraty.create') }}">Pridať inzerat</a></li>
-            <li><a href="#">Kontakt</a></li>
+            <li><a href="kontakt">Kontakt</a></li>
         </ul>
         <!-- ################################################################################################ -->
     </nav>

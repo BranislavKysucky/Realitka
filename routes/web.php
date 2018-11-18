@@ -27,6 +27,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('inzeraty/detail/{id}', 'InzeratyController@show');
 
+Route::get('kontakt', 'InzeratyController@kontakt');
+Route::post('odoslatMail', ['as'=>'inzeraty.odoslatMail','uses'=>'InzeratyController@odoslatMail']);
+
 
 // stranky pre administracne rozhranie
 //tu budú všetky routy, ktore maju byť dostupné len ak je používateľ prihlásený

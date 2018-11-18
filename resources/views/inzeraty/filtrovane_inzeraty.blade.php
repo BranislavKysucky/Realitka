@@ -129,8 +129,9 @@
     </div>
 
 
-    <!--tu sa s tymto pohraj samo-->
+
     @foreach($inzeraty as $inzerat)
+        <a style="color: black" href="/inzeraty/detail/{{$inzerat->id}}">
         <div class="col-md-9 col-lg-9 col-sm-9 pull-right">
 
             <div class="col-md-4 col-lg-4 col-sm-4 image-container">
@@ -139,24 +140,25 @@
             <div class="excerpt">
                 <h6 class="heading">{{$inzerat->nazov}}</h6>
                 <ul class="nospace meta">
-                    <li><i class="fas fa-home"></i> Nitra, Rodinný dom</li>
-                    <li><i class="fas fa-euro-sign"></i> 80 000</li>
+                    <li><i class="fas fa-home"></i> {{$inzerat->kraj->nazov}}, {{$inzerat->mesto}}, {{$inzerat->kategoria->nazov}} {{$inzerat->druh->nazov}} </li>
+                    <li><i class="fas fa-building"></i> {{$inzerat->stav->nazov}}, {{$inzerat->vymera_domu}}m² </li>
+                    <li><i class="fas fa-hand-paper"></i> {{$inzerat->typ->nazov}} </li>
+                    <li><i class="fas fa-euro-sign"></i> <span style="color: limegreen">{{$inzerat->cena}}</span></li>
                 </ul>
                 <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
-                    ut...
+                    {{$inzerat->popis}}
                 </p>
+                <p class="pull-right" >Pocet zobrazeni: {{$inzerat->pocet_zobrazeni}}x</p>
+
 
             </div>
             <hr/>
         </div>
+        </a>
     @endforeach
 
 
-    <!-- Kliknutie na inzerat je zatial zakomentovane lebo to padalo na registrovanom uzivatelovi,
-        ale bez reg. uzivatela to slapalo v pohode bez problemov to hadzalo na detail inzeratu.
-    ....-->
+
     <!-- <p><a class="btn btn-lg btn-success" href="#" role="button">Get started today</a></p> -->
 
 
