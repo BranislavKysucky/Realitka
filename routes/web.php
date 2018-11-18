@@ -10,6 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 use App\Http\Middleware\Admin;
 
 Route::get('/', 'InzeratyController@index');
@@ -32,8 +33,8 @@ Route::get('inzeraty/detail/{id}', 'InzeratyController@show');
 
 Route::middleware(['auth'])->group(function () {
     //routy pre admina
-    Route::group(['middleware' => '\App\Http\Middleware\Admin'],function (){
-        Route::get('/admin', function () {
+    Route::group(['middleware' => '\App\Http\Middleware\Admin'], function () {
+        /*Route::get('/admin', function () {
             return view('admin/index');
         });
 
@@ -47,11 +48,16 @@ Route::middleware(['auth'])->group(function () {
 
         Route::get('/admin/edit_pouzivatelov', function () {
             return view('admin/edit_pouzivatelov');
-        });
+        });*/
+        Route::resource('inzeraty_a', 'AdminInzeratyController');
+        Route::resource('pouzivatelia_a', 'AdminPouzivateliaController');
+        Route::resource('realitky_a', 'AdminRealitkyController');
+
     });
     //routy pre majitela realitky
-    Route::group(['middleware' => 'App\Http\Middleware\Realitka'],function (){
-
+    Route::group(['middleware' => 'App\Http\Middleware\Realitka'], function () {
+        Route::resource('inzeraty_r', 'RealitkaInzeratyController');
+        Route::resource('makleri_r', 'RealitkaMakleriController');
     });
 
     Route::get('moje_r_inzeraty', 'InzeratyController@mojeInzeraty');

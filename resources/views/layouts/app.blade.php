@@ -80,7 +80,7 @@
                     <li><a href="{{ route('register') }}">Registrovať sa</a></li>
                 @else
                     <li>{{ Auth::user()->email }}</li>
-                    <li><a href="admin">Spravovať</a></li>
+                    <li><a href="inzeraty_a">Spravovať</a></li>
                     <li>
                         <a href="{{ route('logout') }}"
                            onclick="event.preventDefault();
