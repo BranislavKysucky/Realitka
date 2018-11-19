@@ -208,9 +208,9 @@ class InzeratyController extends Controller
 
             $inzerat->mesto = $request->get('lokalita');
             $inzerat->kraj_id = $request->get('kraj_id');
+            $inzerat->ulica = $request->get('ulica');
             $inzerat->nazov = $request->get('nazov');
             $inzerat->popis = $request->get('popis');
-            $inzerat->cena = $request->get('cena');
             $inzerat->heslo = $request->get('heslo');
 
 
@@ -223,6 +223,7 @@ class InzeratyController extends Controller
                 $inzerat->cena_dohodou = 1;
             } else {
                 $inzerat->cena_dohodou = 0;
+                $inzerat->cena = $request->get('cena');
             }
 
             $inzerat->updated_at = today();

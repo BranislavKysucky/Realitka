@@ -9,7 +9,8 @@
     <meta name="keywords" content="realitky, byty, domy, nehnuteľnosti ">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBKbOWvQXpTd91SRCe6-OcXm_mabUisRI8&callback=initMap&libraries=places"
+            type="text/javascript"></script>
     <script type="text/javascript"
             src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
 

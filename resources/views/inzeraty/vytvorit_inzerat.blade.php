@@ -5,13 +5,16 @@
 
 
     @include('popup.pridany')
-    <div class="col-sm-6 col-md-6 col-lg-6 pull-left">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="panel panel-default">
 
-        <div class="well well-sm ">
+                    <div class="panel-body">
             <div align="center">
                 <h4>Pridanie inzeratu</h4>
             </div>
-            <form action="{{route('inzeraty.store')}}" method="post" enctype="multipart/form-data">
+            <form class="form-horizontal" action="{{route('inzeraty.store')}}" method="post" enctype="multipart/form-data">
                 {{csrf_field()}}
 
 
@@ -19,7 +22,10 @@
                 <input required id="nazov" class="form-control" placeholder="Zadajte nazov" name="nazov"/>
 
                 <label for="popis">Popis</label>
-                <input required id="popis" class="form-control" placeholder="Zadajte popis" name="popis"/>
+                <textarea required id="popis" class="form-control" placeholder="Zadajte popis" name="popis" rows="4" cols="50"></textarea>
+
+
+
 
 
                 <label id="kraj_label" for="kraj">Kraj</label>
@@ -41,11 +47,11 @@
                 <label for="lokalita">Lokalita</label>
                 <input id="lokalita" class="form-control" placeholder="Zadajte lokalitu" name="lokalita"/>
 
-                <label for="adresa">Adresa</label>
-                <input required id="adresa" class="form-control" placeholder="Zadajte adresu" name="adresa"/>
+                <label for="ulica">Ulica</label>
+                <input required id="ulica" class="form-control" placeholder="Zadajte ulicu" name="ulica"/>
 
 
-                <div class="form-group">
+
 
 
                     <label id="typ_label" for="typ">Typ</label>
@@ -92,7 +98,7 @@
                     </select>
 
 
-                    <div class="input-group" id="cena" name="cena">
+                    <div id="cena" name="cena">
                         <label for="cena">Cena(€)</label>
                         <input required placeholder="cena" class="form-control" type="number" min="0" id="cena" value=""
                                oninput="hideCena_dohodou();" name="cena"/>
@@ -100,7 +106,7 @@
                     </div>
 
 
-                    <div id="cena_dohodou">
+                    <div id="cena_dohodou" align="center">
 
                         <label for="cena_dohodou">Cena dohodou </label>
                         <label class="radio-inline"><input value=true onchange="hideCena();" name="cena_dohodou"
@@ -111,7 +117,7 @@
                         <br>
                     </div>
 
-                    <div class="input-group" id="vymera_domu">
+                    <div id="vymera_domu">
                         <label for="vymera_domu">Výmera domu(m<sup>2</sup>)</label>
                         <input required placeholder="vymera domu" class="form-control" type="number" min="0"
                                name="vymera_domu"/>
@@ -119,7 +125,7 @@
                     </div>
 
 
-                    <div class="input-group" id="vymera_pozemku">
+                    <div id="vymera_pozemku">
                         <label for="vymera_pozemku">Výmera pozemku(m<sup>2</sup>)</label>
                         <input required placeholder="vymera pozemku" class="form-control" type="number" min="0"
                                name="vymera_pozemku"/>
@@ -127,7 +133,7 @@
                     </div>
 
 
-                    <div class="input-group" id="uzitkova_plocha">
+                    <div id="uzitkova_plocha">
                         <label for="uzitkova_plocha">Uzitkova plocha(m<sup>2</sup>)</label>
                         <input required placeholder="uzitkova plocha" class="form-control" type="number" min="0"
                                name="uzitkova_plocha"/>
@@ -135,13 +141,14 @@
                     </div>
 
 
-                </div>
 
-                <div class="input-group">
+
+
+
                     <label for="heslo">Heslo (slúži k editácii/zmazaniu inzerátu)</label>
                     <input required id="heslo" type="password" class="form-control" placeholder="Zadajte heslo"
                            name="heslo" onmouseover="this.type='text'" onmouseout="this.type='password'"/>
-                </div>
+
 
                 <div id="wrapper">
                     <input type="file" id="fileInput" class="inputFile" name="images[]" accept=".jpg, .jpeg, .png"
@@ -167,8 +174,12 @@
 
 
         </div>
+                </div>
+                        </div>
 
-    </div>
+
+                                              </div>
+
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
@@ -178,5 +189,5 @@
     <script src='{{ URL::asset('js/cena.js') }}'></script>
     <script src='{{ URL::asset('js/zatvor_popup.js') }}'></script>
 
-
+    </div>
 @endsection
