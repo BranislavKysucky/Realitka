@@ -9,6 +9,7 @@ use App\Kontakt;
 use App\Typ;
 use App\Druh;
 use App\Stav;
+use App\Kraj;
 use App\Pouzivatel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -265,6 +266,7 @@ class InzeratyController extends Controller
         $druh = $inzerat->druh()->first();
         $stav = $inzerat->stav()->first();
         $typ = $inzerat->typ()->first();
+        $kraj = $inzerat->kraj()->first();
         $pouzivatel = $inzerat->pouzivatel()->first();
 
         return view('inzeraty.zobrazit_detail')
@@ -273,6 +275,7 @@ class InzeratyController extends Controller
             ->with(compact('druh'))
             ->with(compact('stav'))
             ->with(compact('typ'))
+            ->with(compact('kraj'))
             ->with(compact('pouzivatel'));
     }
 
