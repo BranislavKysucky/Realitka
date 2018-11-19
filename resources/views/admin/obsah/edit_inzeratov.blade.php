@@ -1,1 +1,0 @@
-<p> Stranka pre spravovanie inzeratov...</p>

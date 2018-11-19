@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Administrátorske rozhranie</title>
+    <title>Spravovanie</title>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link rel="stylesheet" href="css/admin/bootstrap.min.css"/>
-    <link rel="stylesheet" href="css/admin/bootstrap-responsive.min.css"/>
-    <link rel="stylesheet" href="css/admin/matrix-style.css"/>
-    <link rel="stylesheet" href="css/admin/matrix-media.css"/>
-    <link href="font-awesome/css/font-awesome.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="{{ URL::asset('css/admin/bootstrap.min.css')}}"/>
+    <link rel="stylesheet" href="{{ URL::asset('css/admin/bootstrap-responsive.min.css')}}"/>
+    <link rel="stylesheet" href="{{ URL::asset('css/admin/matrix-style.css')}}"/>
+    <link rel="stylesheet" href="{{ URL::asset('css/admin/matrix-media.css')}}"/>
+    <link href="{{ URL::asset('font-awesome/css/font-awesome.css')}}" rel="stylesheet"/>
     <link rel="icon" href="{{ URL::asset('images/favicon.ico') }}">
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>
 </head>
@@ -59,13 +59,37 @@
 <!--sidebar-menu-->
 <div id="sidebar"><a href="#" class="visible-phone"><i class="icon icon-home"></i> Admin rozhranie</a>
     <ul>
-        <li class="active"><a href="admin"><i class="icon icon-home"></i> <span>Domov</span></a></li>
-        <li><a href="admin/edit_inzeratov"><i class="icon icon-inbox"></i> <span>Spravovanie inzerátov</span></a></li>
-        <li><a href="admin/edit_pouzivatelov"><i class="icon icon-inbox"></i> <span>Spravovanie používateľov</span></a>
-        </li>
-        <li><a href="admin/statistiky"><i class="icon icon-signal"></i> <span>Zobraziť štatistiky</span></a></li>
+        @if(Auth::user()->rola==1)
+            <li class="active">
+                <a href=""><i class="icon icon-home"></i> <span>Domov</span></a>
+            </li>
+            <li>
+                <a href=""><i class="icon icon-inbox"></i> <span>Inzeráty</span></a>
+            </li>
+            <li>
+                <a href=""><i class="icon icon-inbox"></i> <span>Používatelia</span></a>
+            </li>
+            <li>
+                <a href=""><i class="icon icon-inbox"></i> <span>Realitné kancelárie</span></a>
+            </li>
+            <li>
+                <a href=""><i class="icon icon-signal"></i> <span>Štatistiky</span></a>
+            </li>
+        @elseif(Auth::user()->rola==2)
+            <li class="active">
+                <a href=""><i class="icon icon-home"></i> <span>Domov</span></a>
+            </li>
+            <li>
+                <a href=""><i class="icon icon-list-alt"></i> <span>Inzeráty</span></a>
+            </li>
+            <li>
+                <a href=""><i class="icon icon-list-alt"></i> <span>Makléri</span></a>
+            </li>
+            <li>
+                <a href=""><i class="icon icon-list-alt"></i> <span>Štatistiky</span></a>
+            </li>
 
-
+        @endif
     </ul>
 </div>
 <!--sidebar-menu-->
