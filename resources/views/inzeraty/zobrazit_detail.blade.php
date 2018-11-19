@@ -13,7 +13,6 @@
 
 
     <!-- ################################################################################################ -->
-
     <body class="wordpress ltr sk sk-sk parent-theme y2018 m11 d01 h12 thursday logged-out wp-custom-logo singular singular-product singular-product-2614 product-template-default woocommerce woocommerce-page woocommerce-no-js elementor-default" dir="ltr" itemscope="itemscope" itemtype="http://schema.org/WebPage">
 
     <div class="hgrid main-content-grid">
@@ -54,7 +53,8 @@
 
 
                         <div class="product_meta">
-                            <br>  <span class="posted_in">Tento inzerát bol zobrazený: <font color="green">{{$inzerat->pocet_zobrazeni}}-krát</font> </span>
+                           <p> Pridal:{{$pouzivatel->meno}}
+                            <br>  <span class="posted_in">Tento inzerát bol zobrazený: <font color="green">{{$inzerat->pocet_zobrazeni}}-krát</font> </span> </p>
                         </div>
                     </div>
 
@@ -69,7 +69,8 @@
                             <h2>Popis</h2>
 
                             <p> {{$inzerat->popis}}</p>
-                            <p><strong> Adresa: </strong>	{{$inzerat->adresa}}<br />
+                            <p><strong> Mesto: </strong>{{$inzerat->mesto}}<br />
+                                <strong>Kraj: </strong> {{$kraj->nazov}}<br />
                                 <strong>Výmera pozemku: </strong> {{$inzerat->vymera_pozemku}} km2<br />
                                 <strong>Výmera domu: </strong> {{$inzerat->vymera_domu}} km2<br />
                                 <strong>Užitková plocha: </strong> {{$inzerat->uzitkova_plocha}} km2<br />
@@ -110,6 +111,7 @@
         </main>
     </div>
     </div>
+
     </body>
 
     </body>
