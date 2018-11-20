@@ -1,57 +1,34 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
-use App\Http\Middleware\Admin;
-
+//prve co sa zobrazi po prichode na stranku
 Route::get('/', 'InzeratyController@index');
 
+//tu su routy pre hlavny nav bar( zobrazenie kontaktu, realitnych kancelari a zobrazenie formu pre zadanie telefonneho
+// cisla, pomocou ktoreho si neregistrovany pouzivatel bude zobrazovat svoje inzeraty )
+Route::get('kontakt', 'MainNavController@getKontakt');
+Route::get('realitne_kancelarie', 'MainNavController@getRealitky');
+Route::get('moje_inzeraty', 'MainNavController@getMojeInzeraty');
+
+//routy pre pracu s autentifikaciou, napr. odhlasenie
 Auth::routes();
 
+//routy pre pracu s inzeratmi. Patri sem: zobrazenie vsetkych inzeratov, zobrazenie detailu, vytvorenie, update,
+// odstranenie a zmazanie inzeratu, takze nevytvarat ziadne duplikaty!
 Route::resource('inzeraty', 'InzeratyController');
 
-Route::get('moje_inzeraty', function () {
-    return view('inzeraty/moje_inzeraty_dotaz');
-});
-
+//homecontroller je pre login a registrovanie(nic sem nepchajte zatial :D)
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('inzeraty/detail/{id}', 'InzeratyController@show');
 
-Route::get('kontakt', 'InzeratyController@kontakt');
-Route::post('odoslatMail', ['as'=>'inzeraty.odoslatMail','uses'=>'InzeratyController@odoslatMail']);
-
+//Route::post('odoslatMail', ['as'=>'inzeraty.odoslatMail','uses'=>'InzeratyController@odoslatMail']);
 
 // stranky pre administracne rozhranie
 //tu budú všetky routy, ktore maju byť dostupné len ak je používateľ prihlásený
-
 Route::middleware(['auth'])->group(function () {
     //routy pre admina
     Route::group(['middleware' => '\App\Http\Middleware\Admin'], function () {
-        /*Route::get('/admin', function () {
-            return view('admin/index');
-        });
 
-        Route::get('/admin/statistiky', function () {
-            return view('admin/statistiky');
-        });
-
-        Route::get('/admin/edit_inzeratov', function () {
-            return view('admin/edit_inzeratov');
-        });
-
-        Route::get('/admin/edit_pouzivatelov', function () {
-            return view('admin/edit_pouzivatelov');
-        });*/
         Route::resource('inzeraty_a', 'AdminInzeratyController');
         Route::resource('pouzivatelia_a', 'AdminPouzivateliaController');
         Route::resource('realitky_a', 'AdminRealitkyController');
@@ -63,5 +40,7 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('makleri_r', 'RealitkaMakleriController');
     });
 
-    Route::get('moje_r_inzeraty', 'InzeratyController@mojeInzeraty');
+    //routy pre prihlaseneho pouzivatela. Majitel realitky, makler ale aj admin moze mat inzeraty...
+    //takze ak je ktokolvek prihlaseny, tak po kliknuti na tlacidlo Moje Inzeraty sa mu zobrazia len jeho inzeraty
+    Route::resource('moje_inzeraty_p', 'PrihlasenyInzeratyController');
 });

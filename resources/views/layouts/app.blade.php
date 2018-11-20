@@ -137,16 +137,16 @@
         <!-- ################################################################################################ -->
         <ul class="clear">
             <li><a href="/">Domov</a></li>
-            <li><a href="">Realitné kancelárie</a></li>
+            <li><a href="/realitne_kancelarie">Realitné kancelárie</a></li>
             <li>
             @if(Auth::check())
-                <a href="moje_r_inzeraty">Moje inzeráty</a>
+                <a href="{{route('moje_inzeraty_p.index')}}">Moje inzeráty</a>
             @else
-                <a href="moje_inzeraty">Moje inzeráty</a>
+                <a href="/moje_inzeraty">Moje inzeráty</a>
             @endif
             </li>
             <li><a href="{{ route('inzeraty.create') }}">Pridať inzerat</a></li>
-            <li><a href="kontakt">Kontakt</a></li>
+            <li><a href="/kontakt">Kontakt</a></li>
         </ul>
         <!-- ################################################################################################ -->
     </nav>

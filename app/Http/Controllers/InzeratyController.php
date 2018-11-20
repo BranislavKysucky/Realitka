@@ -24,18 +24,6 @@ class InzeratyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function mojeInzeraty()
-    {
-
-        if (Auth::check()) {
-            $inzeraty = DB::table('inzeraty')->where('pouzivatel_id', Auth::user()->id)->get();
-            foreach ($inzeraty as $inzerat) {
-                $inzerat->obrazok = DB::table('fotografie')->where('inzerat_id', $inzerat->id)->value('url');
-            }
-            return view('inzeraty.moje_inzeraty_vysledok', ['inzeraty' => $inzeraty]);
-        }
-        return view('auth.login');
-    }
 
     public function index(Request $request, Inzerat $inzeraty)
     {

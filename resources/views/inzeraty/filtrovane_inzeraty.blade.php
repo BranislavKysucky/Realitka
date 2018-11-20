@@ -131,7 +131,7 @@
 
 
     @foreach($inzeraty as $inzerat)
-        <a style="color: black" href="/inzeraty/detail/{{$inzerat->id}}">
+        <a style="color: black" href="/inzeraty/{{$inzerat->id}}">
         <div class="col-md-9 col-lg-9 col-sm-9 pull-right">
 
             <div class="col-md-4 col-lg-4 col-sm-4 image-container">

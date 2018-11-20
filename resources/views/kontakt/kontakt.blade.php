@@ -1,7 +1,8 @@
 @extends('layouts.app')
 @section('content')
 
-    <form action="{{route('inzeraty.odoslatMail')}}" method="post" enctype="multipart/form-data">
+    <!-- zatial to dame bez akcie, neskor bude fungovat normalne odosielanie mailov-->
+    <form action="" method="post" enctype="multipart/form-data">
 
         <label for="emailReply">Vasa emailova adresa</label>
         <input type="email" required id="emailReply" class="form-control" placeholder="123@email.sk" name="emailReply">
