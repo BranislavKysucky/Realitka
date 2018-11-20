@@ -33,13 +33,14 @@ class CreateInzeratyTable extends Migration
             $table->boolean('cena_dohodou')->nullable();
             $table->integer('pocet_zobrazeni')->default('1');
             $table->timestamps();
-
+/*
             $table->foreign('stav_id')->references('id')->on('stavy');
             $table->foreign('druh_id')->references('id')->on('druhy');
             $table->foreign('typ_id')->references('id')->on('typy');
             $table->foreign('kategoria_id')->references('id')->on('kategorie');
             $table->foreign('pouzivatel_id')->references('id')->on('pouzivatelia');
             $table->foreign('kraj_id')->references('id')->on('kraje');
+*/
         });
     }
 

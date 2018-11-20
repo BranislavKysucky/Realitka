@@ -28,9 +28,10 @@ class CreatePouzivateliaTable extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
-
+/*
             $table->foreign('kraj_id')->references('id')->on('kraje');
             $table->foreign('realitna_kancelaria_id')->references('id')->on('realitne_kancelarie');
+*/
         });
 
     }
