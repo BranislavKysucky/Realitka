@@ -8,6 +8,7 @@ use App\Kategoria;
 use App\Kontakt;
 use App\Typ;
 use App\Druh;
+use App\Fotografie;
 use App\Stav;
 use App\Kraj;
 use App\Pouzivatel;
@@ -257,6 +258,7 @@ class InzeratyController extends Controller
         $typ = $inzerat->typ()->first();
         $kraj = $inzerat->kraj()->first();
         $pouzivatel = $inzerat->pouzivatel()->first();
+        $fotografie = $inzerat->fotografie()->first();
 
         return view('inzeraty.zobrazit_detail')
             ->with(compact('inzerat'))
@@ -265,6 +267,7 @@ class InzeratyController extends Controller
             ->with(compact('stav'))
             ->with(compact('typ'))
             ->with(compact('kraj'))
+            ->with(compact('fotografie'))
             ->with(compact('pouzivatel'));
     }
 

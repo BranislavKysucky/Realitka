@@ -22,19 +22,36 @@
                 <div class="woocommerce-notices-wrapper"></div><div id="product-2614" class="entry author-augustinova has-excerpt post-2614 product type-product status-publish has-post-thumbnail product_cat-uncategorized product_cat-domy first outofstock taxable shipping-taxable purchasable product-type-simple">
                     <div class="images">
 
+                        {{--@foreach ($fotografie->all() as $error )--}}
+                            {{--<section class="slider wpis-slider-for"><div class="zoom"><img src="{{$error->url}}" alt="" /><img src="{{$error->url}}" alt="" /></div>--}}
+                                {{--@endforeach--}}
+
+
 
                         <section class="slider wpis-slider-for">
-                            <div class="zoom"><img src="https://enertexreality.sk/wp-content/uploads/2018/09/DSCN2028.jpg" alt="" /><img src="https://enertexreality.sk/wp-content/uploads/2018/09/DSCN2028.jpg" alt="" /></div>
+                            <div class="zoom"><img src="{{$fotografie->url}}" alt="" /><img src="{{$fotografie->url}}" alt="" /></div>
+                            <div class="zoom"><img src="{{$fotografie->url}}" alt="" /><img src="{{$fotografie->url}}" alt="" /></div>
+                            <div class="zoom"><img src="{{$fotografie->url}}" alt="" /><img src="{{$fotografie->url}}" alt="" /></div>
+                            <div class="zoom"><img src="{{$fotografie->url}}" alt="" /><img src="{{$fotografie->url}}" alt="" /></div>
 
-                            <div class="zoom"><img src="https://enertexreality.sk/wp-content/uploads/2018/09/DSCN2006.jpg" alt="" /><img src="https://enertexreality.sk/wp-content/uploads/2018/09/DSCN2006-600x450.jpg" alt="" /></div>
-                            <div class="zoom"><img src="https://enertexreality.sk/wp-content/uploads/2018/09/DSCN2013.jpg" alt="" /><img src="https://enertexreality.sk/wp-content/uploads/2018/09/DSCN2013-600x450.jpg" alt="" /></div>
-                            <div class="zoom"><img src="https://enertexreality.sk/wp-content/uploads/2018/09/DSCN2013.jpg" alt="" /><img src="https://enertexreality.sk/wp-content/uploads/2018/09/DSCN2013-600x450.jpg" alt="" /></div>
+
+                            {{--<div class="zoom"><img src="https://enertexreality.sk/wp-content/uploads/2018/09/DSCN2028.jpg" alt="" /><img src="https://enertexreality.sk/wp-content/uploads/2018/09/DSCN2028.jpg" alt="" /></div>--}}
+                            {{--<div class="zoom"><img src="https://enertexreality.sk/wp-content/uploads/2018/09/DSCN2006.jpg" alt="" /><img src="https://enertexreality.sk/wp-content/uploads/2018/09/DSCN2006-600x450.jpg" alt="" /></div>--}}
+                            {{--<div class="zoom"><img src="https://enertexreality.sk/wp-content/uploads/2018/09/DSCN2013.jpg" alt="" /><img src="https://enertexreality.sk/wp-content/uploads/2018/09/DSCN2013-600x450.jpg" alt="" /></div>--}}
+                            {{--<div class="zoom"><img src="https://enertexreality.sk/wp-content/uploads/2018/09/DSCN2013.jpg" alt="" /><img src="https://enertexreality.sk/wp-content/uploads/2018/09/DSCN2013-600x450.jpg" alt="" /></div>--}}
                         </section>
                         <section id="wpis-gallery" class="slider wpis-slider-nav">
-                            <li title=""><img class="attachment-shop_thumbnail size-shop_thumbnail" src="https://enertexreality.sk/wp-content/uploads/2018/09/DSCN2028-100x100.jpg" sizes="(max-width: 100px) 100vw, 100px" srcset="https://enertexreality.sk/wp-content/uploads/2018/09/DSCN2028-100x100.jpg 100w, https://enertexreality.sk/wp-content/uploads/2018/09/DSCN2028-150x150.jpg 150w" alt="" width="100" height="100" /></li>
-                            <li title=""><img class="attachment-shop_thumbnail size-shop_thumbnail" src="https://enertexreality.sk/wp-content/uploads/2018/09/DSCN2006-100x100.jpg" sizes="(max-width: 100px) 100vw, 100px" srcset="https://enertexreality.sk/wp-content/uploads/2018/09/DSCN2006-100x100.jpg 100w, https://enertexreality.sk/wp-content/uploads/2018/09/DSCN2006-150x150.jpg 150w" alt="" width="100" height="100" /></li>
-                            <li title=""><img class="attachment-shop_thumbnail size-shop_thumbnail" src="https://enertexreality.sk/wp-content/uploads/2018/09/DSCN2013-100x100.jpg" sizes="(max-width: 100px) 100vw, 100px" srcset="https://enertexreality.sk/wp-content/uploads/2018/09/DSCN2013-100x100.jpg 100w, https://enertexreality.sk/wp-content/uploads/2018/09/DSCN2013-150x150.jpg 150w" alt="" width="100" height="100" /></li>
-                            <li title=""><img class="attachment-shop_thumbnail size-shop_thumbnail" src="https://enertexreality.sk/wp-content/uploads/2018/09/DSCN2013-100x100.jpg" sizes="(max-width: 100px) 100vw, 100px" srcset="https://enertexreality.sk/wp-content/uploads/2018/09/DSCN2013-100x100.jpg 100w, https://enertexreality.sk/wp-content/uploads/2018/09/DSCN2013-150x150.jpg 150w" alt="" width="100" height="100" /></li>
+
+                            <li title=""><img class="attachment-shop_thumbnail size-shop_thumbnail" src="{{$fotografie->url}}" sizes="(max-width: 100px) 100vw, 100px" srcset="{{$fotografie->url}} 100w, {{$fotografie->url}} 150w" alt="" width="100" height="100" /></li>
+                            <li title=""><img class="attachment-shop_thumbnail size-shop_thumbnail" src="{{$fotografie->url}}" sizes="(max-width: 100px) 100vw, 100px" srcset="{{$fotografie->url}} 100w, {{$fotografie->url}} 150w" alt="" width="100" height="100" /></li>
+                            <li title=""><img class="attachment-shop_thumbnail size-shop_thumbnail" src="{{$fotografie->url}}" sizes="(max-width: 100px) 100vw, 100px" srcset="{{$fotografie->url}} 100w, {{$fotografie->url}} 150w" alt="" width="100" height="100" /></li>
+                            <li title=""><img class="attachment-shop_thumbnail size-shop_thumbnail" src="{{$fotografie->url}}" sizes="(max-width: 100px) 100vw, 100px" srcset="{{$fotografie->url}} 100w, {{$fotografie->url}} 150w" alt="" width="100" height="100" /></li>
+
+
+                            {{--<li title=""><img class="attachment-shop_thumbnail size-shop_thumbnail" src="https://enertexreality.sk/wp-content/uploads/2018/09/DSCN2028-100x100.jpg" sizes="(max-width: 100px) 100vw, 100px" srcset="https://enertexreality.sk/wp-content/uploads/2018/09/DSCN2028-100x100.jpg 100w, https://enertexreality.sk/wp-content/uploads/2018/09/DSCN2028-150x150.jpg 150w" alt="" width="100" height="100" /></li>--}}
+                            {{--<li title=""><img class="attachment-shop_thumbnail size-shop_thumbnail" src="https://enertexreality.sk/wp-content/uploads/2018/09/DSCN2006-100x100.jpg" sizes="(max-width: 100px) 100vw, 100px" srcset="https://enertexreality.sk/wp-content/uploads/2018/09/DSCN2006-100x100.jpg 100w, https://enertexreality.sk/wp-content/uploads/2018/09/DSCN2006-150x150.jpg 150w" alt="" width="100" height="100" /></li>--}}
+                            {{--<li title=""><img class="attachment-shop_thumbnail size-shop_thumbnail" src="https://enertexreality.sk/wp-content/uploads/2018/09/DSCN2013-100x100.jpg" sizes="(max-width: 100px) 100vw, 100px" srcset="https://enertexreality.sk/wp-content/uploads/2018/09/DSCN2013-100x100.jpg 100w, https://enertexreality.sk/wp-content/uploads/2018/09/DSCN2013-150x150.jpg 150w" alt="" width="100" height="100" /></li>--}}
+                            {{--<li title=""><img class="attachment-shop_thumbnail size-shop_thumbnail" src="https://enertexreality.sk/wp-content/uploads/2018/09/DSCN2013-100x100.jpg" sizes="(max-width: 100px) 100vw, 100px" srcset="https://enertexreality.sk/wp-content/uploads/2018/09/DSCN2013-100x100.jpg 100w, https://enertexreality.sk/wp-content/uploads/2018/09/DSCN2013-150x150.jpg 150w" alt="" width="100" height="100" /></li>--}}
                         </section>
 
                         <!-- ################################################################################################ -->
@@ -120,6 +137,7 @@
     <!-- JAVASCRIPTS -->
 
     <script src="../layout/scripts/jquery.backtotop.js"></script>
+
 
     </html>
 
