@@ -19,6 +19,7 @@
         <main id="content" class="content  hgrid-span-9 no-sidebar layout-none " role="main" itemprop="mainContentOfPage">
             <div id="content-wrap">
 
+
                 <div class="woocommerce-notices-wrapper"></div><div id="product-2614" class="entry author-augustinova has-excerpt post-2614 product type-product status-publish has-post-thumbnail product_cat-uncategorized product_cat-domy first outofstock taxable shipping-taxable purchasable product-type-simple">
                     <div class="images">
 
@@ -58,6 +59,7 @@
                         <!-- ################################################################################################ -->
 
                     </div>
+
                     <div class="summary entry-summary">
                         <h1 class=" loop-title" itemprop="headline">{{$inzerat->nazov}}</h1>
                         <p class="price"> <span  class="woocommerce-Price-amount amount">Cena: {{ $inzerat->cena }}&nbsp;<span class="woocommerce-Price-currencySymbol">&euro;</span></span></p>
@@ -75,11 +77,19 @@
                         </div>
                     </div>
 
+
                     <div class="woocommerce-tabs wc-tabs-wrapper">
                         <ul class="tabs wc-tabs" role="tablist">
                             <li class="description_tab" id="tab-title-description" role="tab" aria-controls="tab-description">
-                                <a href="#tab-description">Podrobnosti</a>
+                                <a href="#tab-description">Zobraziť podrobnosti</a>
                             </li>
+                            <li class="description_tab" id="tab-title-description" role="tab" aria-controls="tab-description">
+                                <a href="#">Upraviť inzerát</a>
+                            </li>
+                            <li class="description_tab" id="tab-title-description" role="tab" aria-controls="tab-description">
+                                <a href="#">Zmazať inzerát</a>
+                            </li>
+
                         </ul>
                         <div class="woocommerce-Tabs-panel woocommerce-Tabs-panel--description panel entry-content wc-tab" id="tab-description" role="tabpanel" aria-labelledby="tab-title-description">
 
