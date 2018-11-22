@@ -279,6 +279,7 @@ class InzeratyController extends Controller
      */
     public function edit(Inzerat $inzerat)
     {
+        return view('inzeraty.zobrazit_detail', compact('inzeraty'));
 
     }
 
@@ -291,7 +292,11 @@ class InzeratyController extends Controller
      */
     public function update(Request $request, Inzerat $inzerat)
     {
-        //
+//       $inzerat = Inzerat::findOrFail($inzerat);
+//       return view('inzeraty.zobrazit_detail', compact('inzeraty'));
+
+        $inzerat->update($request->all());
+        return redirect()->route('inzeraty.zobrazit_detail')->with('message','item has been updated successfully');
     }
 
     /**
@@ -300,9 +305,15 @@ class InzeratyController extends Controller
      * @param  \App\Inzerat $inzerat
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Inzerat $inzerat)
+    public function destroy(Inzerat $inzerat, $id)
     {
-        //
+
+        $inzerat = Inzerat::findOrFail($inzerat);
+        $inzerat->delete();
+        return redirect('inzeraty.zobrazit_detail')->with('zmazane');
+
+
+
     }
 
     public function kontakt(){
