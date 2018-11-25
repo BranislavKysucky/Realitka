@@ -83,7 +83,15 @@
                     <li><a href="{{ route('register') }}">Registrovať sa</a></li>
                 @else
                     <li>{{ Auth::user()->email }}</li>
-                    <li><a href="inzeraty_a">Spravovať</a></li>
+
+                    @if(Auth::user()->rola==1)
+                        <li><a href="inzeraty_a">Spravovať</a></li>
+                    @elseif(Auth::user()->rola==2)
+                        <li><a href="inzeraty_r">Spravovať</a></li>
+                    @endif
+
+
+
                     <li>
                         <a href="{{ route('logout') }}"
                            onclick="event.preventDefault();
