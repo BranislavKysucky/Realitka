@@ -6,6 +6,7 @@ use App\Fotografia;
 use App\Inzerat;
 use App\Kategoria;
 use App\Kontakt;
+use App\Mail\CustomerMail;
 use App\Typ;
 use App\Druh;
 use App\Fotografie;
@@ -324,17 +325,19 @@ class InzeratyController extends Controller
         $this->validate($request,[
             'predmet'=>'required',
             'emailReply'=>'required',
+            'meno'=>'required',
             'sprava'=>'required'
         ]);
+        $to_name = $request->get('meno');
+        $to_mailAddress = $request->get('emailReply');
+        $sprava = [$request->get('sprava')];
 
-        $kontakt = new Kontakt;
-        $kontakt->predmet = $request->get('predmet');
-        $kontakt->email = $request->get('emailReply');
-        $kontakt->sprava = $request->get('sprava');
-
-        $kontakt->save();
+       /* \Mail::send('kontakt.mailCustomer', $sprava, function ($message) use ($to_name, $to_mailAddress, $request){
+        $message->to($to_name, $to_mailAddress)
+                ->subject($request->get('predmet'));
+        $message->from($request->get('emailReply'),'Zakaznik');
+    });*/
+        \Mail::to("sparkpostRealitka@centrum.sk")->send(new CustomerMail());
         return back()->with('success', 'Sprava bolo odoslana');
-       /* return view('inzeraty.filtrovane_inzeraty');*/
-
     }
 }

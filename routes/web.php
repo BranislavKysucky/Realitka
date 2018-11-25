@@ -10,6 +10,7 @@ Route::get('kontakt', 'MainNavController@getKontakt');
 Route::get('realitne_kancelarie', 'MainNavController@getRealitky');
 Route::get('moje_inzeraty', 'MainNavController@getMojeInzeraty');
 
+
 //routy pre pracu s autentifikaciou, napr. odhlasenie
 Auth::routes();
 
@@ -21,7 +22,7 @@ Route::resource('inzeraty', 'InzeratyController');
 Route::get('/home', 'HomeController@index')->name('home');
 
 
-//Route::post('odoslatMail', ['as'=>'inzeraty.odoslatMail','uses'=>'InzeratyController@odoslatMail']);
+Route::post('odoslatMail', ['as'=>'inzeraty.odoslatMail','uses'=>'InzeratyController@odoslatMail']);
 
 // stranky pre administracne rozhranie
 //tu budú všetky routy, ktore maju byť dostupné len ak je používateľ prihlásený
