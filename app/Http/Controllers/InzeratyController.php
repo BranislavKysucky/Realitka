@@ -275,7 +275,9 @@ class InzeratyController extends Controller
         $typ = $inzerat->typ()->first();
         $kraj = $inzerat->kraj()->first();
         $pouzivatel = $inzerat->pouzivatel()->first();
-        $fotografie = $inzerat->fotografie()->first();
+       // $fotografie = $inzerat->fotografie()->first();
+
+        $fotografie = DB::table('fotografie')->where('inzerat_id', $id)->get();
 
         return view('inzeraty.zobrazit_detail')
             ->with(compact('inzerat'))
