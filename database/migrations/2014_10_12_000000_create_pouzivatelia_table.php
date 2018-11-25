@@ -17,15 +17,17 @@ class CreatePouzivateliaTable extends Migration
             $table->increments('id');
             $table->integer('kraj_id')->nullable();
             $table->integer('realitna_kancelaria_id')->nullable();
-            $table->string('ulica_cislo');
-            $table->string('mesto');
-            $table->integer('PSC');
-            $table->string('telefon');
-            $table->integer('rola')->default('2');
-            $table->string('meno');
-            $table->string('priezvisko');
+            $table->string('ulica_cislo')->nullable();
+            $table->string('mesto')->nullable();
+            $table->integer('PSC')->nullable();
+            $table->string('telefon')->nullable();
+            $table->integer('rola')->default(2);
+            $table->string('meno')->nullable();
+            $table->string('priezvisko')->nullable();
             $table->string('email')->unique();
-            $table->string('password');
+            $table->string('email_token')->nullable();
+            $table->boolean('status')->default(0);
+            $table->string('password')->nullable();
             $table->rememberToken();
             $table->timestamps();
 /*

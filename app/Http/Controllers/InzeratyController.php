@@ -6,7 +6,6 @@ use App\Fotografia;
 use App\Inzerat;
 use App\Kategoria;
 use App\Kontakt;
-use App\Mail\CustomerMail;
 use App\Typ;
 use App\Druh;
 use App\Fotografie;
@@ -16,6 +15,7 @@ use App\Pouzivatel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Validation\Rules\In;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
@@ -181,21 +181,37 @@ class InzeratyController extends Controller
 
         ]);
 
-
         if ($request->hasFile('images')) {  // pre istotu este raz overenie
-
 
             // vytvorenie inzeratu
             $inzerat = new Inzerat;
+
+            if (Auth::check()) {
+                if (Auth::user()->rola == 1) { //je to admin
+                    $inzerat->kategoria_id = 3; //sukromna inzercia
+                } else {
+                    $inzerat->kategoria_id = 2; //je to bud majitel realitky alebo makler
+                }
+                $inzerat->pouzivatel_id = Auth::user()->id;
+            } else {
+                $inzerat->kategoria_id = 3;
+                //skontroluje ci zadany email je ten na ktory bol zaslany overovaci kluc
+                $pouzivatel = DB::table('pouzivatelia')->where('email', $request->input('email'))->first();
+                if ($pouzivatel == null) {
+                    return back()->with('error', 'Email nebol overený');
+                } else {
+                    $inzerat->pouzivatel_id = $pouzivatel->id;
+                }
+                //porovna kluc z db a ten co bol zadany pri vytvarani ineratu
+                if(strcmp($request->input('kluc'),$pouzivatel->email_token)!=0){
+                    return back()->with('error', 'Nesprávny overovací kľúč');
+                }
+            }
+
             $inzerat->stav_id = $request->get('stavy');
             $inzerat->druh_id = $request->get('druh');
             $inzerat->typ_id = $request->get('typ');
             // $inzerat->kategoria_id = $request->get('kategoria');   //zakomentovane zatial pokym nebude prihlasovanie
-
-            // zatial iba natvrdo dane
-            $inzerat->kategoria_id = 1;
-            $inzerat->pouzivatel_id = 1;
-
 
             $inzerat->mesto = $request->get('lokalita');
             $inzerat->kraj_id = $request->get('kraj_id');
@@ -237,9 +253,9 @@ class InzeratyController extends Controller
                 $fotografia->save();
             }
 
+            return back()->with('success', 'Inzerát bol úspešne pridaný');
 
         }
-        return back()->with('success', 'Inzerát bol úspešne pridaný');
     }
 
     /**
@@ -297,7 +313,7 @@ class InzeratyController extends Controller
 //       return view('inzeraty.zobrazit_detail', compact('inzeraty'));
 
         $inzerat->update($request->all());
-        return redirect()->route('inzeraty.zobrazit_detail')->with('message','item has been updated successfully');
+        return redirect()->route('inzeraty.zobrazit_detail')->with('message', 'item has been updated successfully');
     }
 
     /**
@@ -314,30 +330,29 @@ class InzeratyController extends Controller
         return redirect('inzeraty.zobrazit_detail')->with('zmazane');
 
 
-
     }
 
-    public function kontakt(){
+    public function kontakt()
+    {
         return view('inzeraty.kontakt');
     }
 
-    public function odoslatMail(Request $request){
-        $this->validate($request,[
-            'predmet'=>'required',
-            'emailReply'=>'required',
-            'meno'=>'required',
-            'sprava'=>'required'
+    public function odoslatMail(Request $request)
+    {
+        $this->validate($request, [
+            'predmet' => 'required',
+            'emailReply' => 'required',
+            'sprava' => 'required'
         ]);
-        $to_name = $request->get('meno');
-        $to_mailAddress = $request->get('emailReply');
-        $sprava = [$request->get('sprava')];
 
-       /* \Mail::send('kontakt.mailCustomer', $sprava, function ($message) use ($to_name, $to_mailAddress, $request){
-        $message->to($to_name, $to_mailAddress)
-                ->subject($request->get('predmet'));
-        $message->from($request->get('emailReply'),'Zakaznik');
-    });*/
-        \Mail::to("sparkpostRealitka@centrum.sk")->send(new CustomerMail());
+        $kontakt = new Kontakt;
+        $kontakt->predmet = $request->get('predmet');
+        $kontakt->email = $request->get('emailReply');
+        $kontakt->sprava = $request->get('sprava');
+
+        $kontakt->save();
         return back()->with('success', 'Sprava bolo odoslana');
+        /* return view('inzeraty.filtrovane_inzeraty');*/
+
     }
 }

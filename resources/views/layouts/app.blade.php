@@ -138,13 +138,19 @@
             <li><a href="/">Domov</a></li>
             <li><a href="/realitne_kancelarie">Realitné kancelárie</a></li>
             <li>
-            @if(Auth::check())
-                <a href="{{route('moje_inzeraty_p.index')}}">Moje inzeráty</a>
-            @else
-                <a href="/moje_inzeraty">Moje inzeráty</a>
-            @endif
+                @if(Auth::check())
+                    <a href="{{route('moje_inzeraty_p.index')}}">Moje inzeráty</a>
+                @else
+                    <a href="/moje_inzeraty">Moje inzeráty</a>
+                @endif
             </li>
-            <li><a href="{{ route('inzeraty.create') }}">Pridať inzerat</a></li>
+            @guest
+                <li><a href="/overit_email">Pridať inzerat</a></li>
+            @else
+                <li><a href="{{ route('inzeraty.create') }}">Pridať inzerat</a></li>
+            @endguest
+
+
             <li><a href="/kontakt">Kontakt</a></li>
         </ul>
         <!-- ################################################################################################ -->

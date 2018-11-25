@@ -31,7 +31,7 @@ class CreateInzeratyTable extends Migration
             $table->integer('vymera_pozemku')->nullable();
             $table->integer('uzitkova_plocha')->nullable();
             $table->boolean('cena_dohodou')->nullable();
-            $table->integer('pocet_zobrazeni')->default('1');
+            $table->integer('pocet_zobrazeni')->default(1);
             $table->timestamps();
 /*
             $table->foreign('stav_id')->references('id')->on('stavy');

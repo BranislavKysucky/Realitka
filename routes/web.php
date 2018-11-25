@@ -9,6 +9,8 @@ Route::get('/', 'InzeratyController@index');
 Route::get('kontakt', 'MainNavController@getKontakt');
 Route::get('realitne_kancelarie', 'MainNavController@getRealitky');
 Route::get('moje_inzeraty', 'MainNavController@getMojeInzeraty');
+Route::get('overit_email','MainNavController@overitEmail');
+Route::post('overit_email','MainNavController@overitEmailpost');
 
 
 //routy pre pracu s autentifikaciou, napr. odhlasenie
