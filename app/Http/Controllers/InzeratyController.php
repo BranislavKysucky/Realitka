@@ -296,11 +296,26 @@ class InzeratyController extends Controller
      * @param  \App\Inzerat $inzerat
      * @return \Illuminate\Http\Response
      */
-    public function edit(Inzerat $inzerat)
+    public function edit(Inzerat $inzerat, $id)
     {
-        return view('inzeraty.zobrazit_detail', compact('inzeraty'));
+        $inzerat=Inzerat::find($id);
+        $kategorie=Inzerat::find($id);
+        $kraje=Inzerat::find($id);
+        $druhy=Inzerat::find($id);
+        $typ=Inzerat::find($id);
+        $stav=Inzerat::find($id);
+        return view('inzeraty.upravit_inzeraty')
+            ->with(compact('inzerat'))
+            ->with(compact('kategorie'))
+            ->with(compact('typ'))
+            ->with(compact('stav'))
+            ->with(compact('kraje'))
+            ->with(compact('druhy'))
+            ;
 
     }
+
+
 
     /**
      * Update the specified resource in storage.
@@ -309,14 +324,27 @@ class InzeratyController extends Controller
      * @param  \App\Inzerat $inzerat
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Inzerat $inzerat)
+    public function update(Request $request, Inzerat $inzerat, $id)
     {
 //       $inzerat = Inzerat::findOrFail($inzerat);
 //       return view('inzeraty.zobrazit_detail', compact('inzeraty'));
 
-        $inzerat->update($request->all());
-        return redirect()->route('inzeraty.zobrazit_detail')->with('message', 'item has been updated successfully');
+//        $inzerat->update($request->all());
+//        return redirect()->route('inzeraty.zobrazit_detail')->with('message', 'item has been updated successfully');
+
+        $inzerat=Inzerat::where('id',$id)->update([
+            'nazov'=>$request->input('nazov'),
+
+        ]);
+        if($inzerat){
+            $inzerat=Inzerat::all();
+            return view('inzeraty.upravit_inzeraty',['inzeraty'=>$inzerat]);
+        }
     }
+
+
+
+
 
     /**
      * Remove the specified resource from storage.
@@ -327,11 +355,8 @@ class InzeratyController extends Controller
     public function destroy(Inzerat $inzerat, $id)
     {
 
-        $inzerat = Inzerat::findOrFail($inzerat);
-        $inzerat->delete();
-        return redirect('inzeraty.zobrazit_detail')->with('zmazane');
-
-
+        Inzerat::find($id)->delete();
+        return redirect('/inzeraty')->with('zmazane');
     }
 
     public function kontakt()
