@@ -16,9 +16,14 @@ class CustomerMail extends Mailable
      *
      * @return void
      */
-    public function __construct()
+    public $sprava;
+    public$meno;
+    public$emailReply;
+    public function __construct(String $sprava, String $meno, String $emailReply)
     {
-        //
+        $this->sprava=$sprava;
+        $this->meno=$meno;
+        $this->emailReply=$emailReply;
     }
 
     /**
@@ -28,6 +33,6 @@ class CustomerMail extends Mailable
      */
     public function build()
     {
-        return $this->markdown('kontakt.mailCustomer');
+        return $this->view('email.kontakt_email_token');
     }
 }

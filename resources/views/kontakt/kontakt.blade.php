@@ -1,23 +1,45 @@
 @extends('layouts.app')
 @section('content')
 
+    @if(session()->has('success'))
+        <div class="alert alert-success">
+            {{session()->get('success')}}
+        </div>
+    @endif
 
 <div class="col-md-9 col-lg-9 col-sm-9">
-<div  class="summary entry-summary">
     <h3>Team</h3>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Bill_Gates_June_2015.jpg/230px-Bill_Gates_June_2015.jpg"><br>
-    <p>Ing. Bill Gates</p>
-</div>
+    <div class="inline">
+        <div>
+            <div><img style="width: 200px; height: 200px" src="http://oldengineering.co.uk/wp-content/uploads/2015/11/generic-headshot.png"><br>
+                <p>Meno Priezvisko</p>
+            </div>
+            <div><img style="width: 200px; height: 200px" src="http://oldengineering.co.uk/wp-content/uploads/2015/11/generic-headshot.png"><br>
+                <p>Meno Priezvisko</p>
+            </div>
+        </div>
+        <div>
+            <div><img style="width: 200px; height: 200px" src="http://oldengineering.co.uk/wp-content/uploads/2015/11/generic-headshot.png"><br>
+                <p>Meno Priezvisko</p>
+            </div>
+            <div><img style="width: 200px; height: 200px" src="http://oldengineering.co.uk/wp-content/uploads/2015/11/generic-headshot.png"><br>
+                <p>Meno Priezvisko</p>
+            </div>
+        </div>
 
-    <ul>
 
-        <li><i class="fas fa-mobile"></i> +421 222 333 555</li>
-        <li><i class="fas fa-print"></i> KSU@KSU.sk</li>
-    </ul>
+    </div>
 
-<div style="border: #2a2a2a solid 1px">
+
+
+
+
+
+<div class="panel panel-info">
     <h3 style="margin-top: 10px;margin-left: 10px">Kontaktna adresa</h3>
     <ul>
+        <li><i class="fas fa-mobile"></i> +421 222 333 555</li>
+        <li><i class="fas fa-print"></i> KSU@KSU.sk</li>
         <li>KSU s.r.o</li>
         <li>Nitrianska 1/100</li>
         <li>94901 Nitra</li><br>
@@ -25,36 +47,30 @@
         <li><b>IC DPH:</b> SK1585</li>
         <li><b>DIC:</b> 848484</li>
     </ul>
-
-</div>
-
-
-
 </div>
 
 
 
 
-<div class="col-md-9 col-lg-9 col-sm-9" style="border: black solid 1px;margin-top: 30px">
-<h3 style="margin-top: 10px">Kontaktujte nas !</h3>
+<div class="panel panel-info">
+<h3 style="margin-top: 10px;margin-left: 10px">Kontaktujte nas !</h3>
     <!-- zatial to dame bez akcie, neskor bude fungovat normalne odosielanie mailov-->
-    <form action="{{route('inzeraty.odoslatMail')}}" method="post" enctype="multipart/form-data">
+    <form style="margin-left: 10px;margin-right: 10px" action="customerEmailPost" method="post" enctype="multipart/form-data">
 
-        <label for="emailReply">Vasa emailova adresa</label>
-        <input type="email" required id="emailReply" class="form-control" placeholder="123@email.sk" name="emailReply">
-        <label for="predmet">Predmet spravy</label>
-        <input type="text" required id="predmet" class="form-control" placeholder="Predmet emailu" name="predmet">
-        <label for="predmet">Meno odosielatela</label>
+        <label for="emailReply">Vasa emailova adresa pre kontaktovanie:</label>
+        <input type="email" required id="emailReply" class="form-control" placeholder="123abc@email.sk" name="emailReply">
+        <label for="meno">Meno odosielatela:</label>
         <input type="text" required id="meno" class="form-control" placeholder="Vase meno" name="meno">
         <label for="sprava">Sprava: </label>
-        <input type="text" required id="sprava" class="form-control" placeholder="Vasa sprava" name="sprava"><br>
+        <textarea class="form-control" required id="sprava" name="sprava" rows="8" cols="100" placeholder="Vasa sprava..."></textarea>
 
 
-        <input style="margin-bottom: 10px" type="submit" class="btn btn-success form-control" value="Odoslat spravu" name="submit">
+        <input style="margin-bottom: 10px;margin-top: 10px" type="submit" class="btn btn-success form-control" value="Odoslat spravu" name="submit">
 
         <input type="hidden" value="{{ csrf_token() }}" name="_token">
     </form>
 
+</div>
 </div>
 
 @endsection

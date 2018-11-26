@@ -24,7 +24,7 @@ Route::resource('inzeraty', 'InzeratyController');
 Route::get('/home', 'HomeController@index')->name('home');
 
 
-Route::post('odoslatMail', ['as'=>'inzeraty.odoslatMail','uses'=>'InzeratyController@odoslatMail']);
+Route::post('customerEmailPost', 'MainNavController@customerEmailPost');
 
 // stranky pre administracne rozhranie
 //tu budú všetky routy, ktore maju byť dostupné len ak je používateľ prihlásený
