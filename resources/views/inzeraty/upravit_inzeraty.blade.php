@@ -12,9 +12,9 @@
 
                     <div class="panel-body">
                         <div align="center">
-                            <p>DELETE uz funguje, update skoro tiez, len po potvrdeni nevracia uvodnu stranku ale error,
-                            funkciu tu splni, updatne db, ale musim ten return napravit, zatial neviem preco to blbne.... A takisto nie su dobre este spravene selectory ked si vyberam
-                            napr. kategoriu z inej tabulky, malo by nacitat vsetky nahrate udaje, a pouzivatel si len vyberie z moznosti danu polozku.</p>
+                            <p>DELETE uz funguje, UPDATE ciastocne tiez, zatial to funguje na udajoch z tabulky inzerat, pri cudzcih
+                             tabulkach to este musim dokoncit, aby sa dali menit  hodnoty pomocou selectov...
+                            Tiez zatial neviem preco pri tabulkach kraj,druh,stav,kategoria dava vo vo view - value rovnake nazvy, pritom su definovane ine.</p>
                             <h4>Úprava inzerátu</h4>
                         </div>
                         <form  method="post" class="form-horizontal" action="{{route('inzeraty.update',[$inzerat->id])}}" >
@@ -27,7 +27,7 @@
                             <input  id="nazov" class="form-control" placeholder="Zadajte názov" name="nazov"  value="{{$inzerat->nazov}}"/>
 
                             <label for="popis">Popis</label>
-                            <textarea  class="form-control" placeholder="Zadajte popis" name="popis" rows="4" cols="50">{{$inzerat->nazov}}</textarea>
+                            <textarea  class="form-control" placeholder="Zadajte popis" name="popis" rows="4" cols="50">{{$inzerat->popis}}</textarea>
 
                             <label for="mesto">Mesto</label>
                             <input id="mesto" class="form-control" placeholder="Zadajte mesto" name="mesto" value="{{$inzerat->mesto}}"/>
@@ -41,7 +41,7 @@
                             </select>
 
                             <label id="kraj_label" for="kraj">Kraj</label>
-                            <select id="kraj_id" class="form-control" name="kraj_id">
+                            <select id="kraj_id" class="form-control" name="kraje_nazov">
                                 <option id=0 value=1>{{$kraje->nazov}}</option>
                                 <option id=1 value=1>Bratislavský kraj</option>
                                 <option id=2 value=2>Trnavský kraj</option>
@@ -54,22 +54,27 @@
                             </select>
 
                             <label id="druh_label" for="druh">Druh</label>
-                            <select id="druh_id" class="form-control" name="druh_id">
+                            <select id="druh_id" class="form-control" name="druh">
                                 <option id=0 value=1>{{$druhy->nazov}}</option>
                                 <option id=1 value=1>vyber1</option>
                                 <option id=2 value=2>vyber2</option>
                             </select>
 
 
-                            <label id="druh_label" for="druh">Stav</label>
-                            <select id="druh_id" class="form-control" name="druh_id">
+                            <label id="stav_label" for="stav">Stav</label>
+                            <select id="stav_id" class="form-control" name="stav">
                                 <option id=0 value=1>{{$stav->nazov}}</option>
                                 <option id=1 value=1>vyber1</option>
                                 <option id=2 value=2>vyber2</option>
                             </select>
 
+
+
                             <label for="cena">Cena</label>
                             <input id="cena" class="form-control" placeholder="cena"  type="number"  name="cena" value="{{$inzerat->cena}}" />
+
+                            <label for="cena_dohodou">Cena dohodou</label>
+                            <input id="cena_dohodou" class="form-control" placeholder="Zadajte cenu dohodou" type="number"  name="cena_dohodou" value="{{$inzerat->cena_dohodou}}"/>
 
                             <label for="vymera_domu">Výmera domu</label>
                             <input class="form-control" placeholder=" Zadajte vymeru domu"  type="number" name="vymera_domu" value="{{$inzerat->vymera_domu}}"/>
@@ -80,8 +85,12 @@
                             <label for="uzitkova_plocha">Úžitková plocha</label>
                             <input id="uzitkova_plocha" class="form-control" placeholder="Zadajte uzitkovu plochu" type="number" name="uzitkova_plocha" value="{{$inzerat->uzitkova_plocha}}"/>
 
-                            <label for="cena_dohodou">Cena dohodou</label>
-                            <input id="cena_dohodou" class="form-control" placeholder="Zadajte cenu dohodou" type="number"  name="cena_dohodou" value="{{$inzerat->cena_dohodou}}"/>
+                            <label for="uzitkova_plocha">Úžitková plocha</label>
+                            <input id="uzitkova_plocha" class="form-control" placeholder="Zadajte uzitkovu plochu" type="number" name="uzitkova_plocha" value="{{$inzerat->uzitkova_plocha}}"/>
+
+                            <label for="telefon">Kontakt </label>
+                            <input id="telefon" class="form-control" placeholder="Zadajte telefonne číslo"  name="telefon" value="{{$pouzivatelia->telefon}}"/>
+
 
                             <br>
                             <input type="submit" class="btn btn-danger form-control" value="Uložiť zmeny" name="submit">

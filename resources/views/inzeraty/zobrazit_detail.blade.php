@@ -61,7 +61,7 @@
                     </div>
 
                     <div class="summary entry-summary">
-                        <h1 class=" loop-title" itemprop="headline">{{$inzerat->nazov}}</h1>
+                        <h1 class=" loop-title" itemprop="headline">{{$inzerat->nazov}} </h1>
                         <p class="price"> <span  class="woocommerce-Price-amount amount">Cena: {{ $inzerat->cena }}&nbsp;<span class="woocommerce-Price-currencySymbol">&euro;</span></span></p>
                         <div class="woocommerce-product-details__short-description">
                             <p> Druh: {{$druh->nazov}}<br />
@@ -94,6 +94,7 @@
 
                             <p> {{$inzerat->popis}}</p>
                             <p><strong> Mesto: </strong>{{$inzerat->mesto}}<br />
+                                <strong>Ulica: </strong> {{$inzerat->ulica}}<br />
                                 <strong>Kraj: </strong> {{$kraj->nazov}}<br />
                                 <strong>Výmera pozemku: </strong> {{$inzerat->vymera_pozemku}} km2<br />
                                 <strong>Výmera domu: </strong> {{$inzerat->vymera_domu}} km2<br />

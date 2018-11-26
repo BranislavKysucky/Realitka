@@ -275,8 +275,6 @@ class InzeratyController extends Controller
         $typ = $inzerat->typ()->first();
         $kraj = $inzerat->kraj()->first();
         $pouzivatel = $inzerat->pouzivatel()->first();
-       // $fotografie = $inzerat->fotografie()->first();
-
         $fotografie = DB::table('fotografie')->where('inzerat_id', $id)->get();
 
         return view('inzeraty.zobrazit_detail')
@@ -304,6 +302,7 @@ class InzeratyController extends Controller
         $druhy=Inzerat::find($id);
         $typ=Inzerat::find($id);
         $stav=Inzerat::find($id);
+        $pouzivatelia=Inzerat::find($id);
         return view('inzeraty.upravit_inzeraty')
             ->with(compact('inzerat'))
             ->with(compact('kategorie'))
@@ -311,7 +310,7 @@ class InzeratyController extends Controller
             ->with(compact('stav'))
             ->with(compact('kraje'))
             ->with(compact('druhy'))
-            ;
+            ->with(compact('pouzivatelia'));
 
     }
 
@@ -326,20 +325,35 @@ class InzeratyController extends Controller
      */
     public function update(Request $request, Inzerat $inzerat, $id)
     {
-//       $inzerat = Inzerat::findOrFail($inzerat);
-//       return view('inzeraty.zobrazit_detail', compact('inzeraty'));
 
-//        $inzerat->update($request->all());
-//        return redirect()->route('inzeraty.zobrazit_detail')->with('message', 'item has been updated successfully');
+        $inzerat = Inzerat::find($id);
+        $kraje = Inzerat::find($id);
+        $pouzivatel = Inzerat::find($id);
+        $druhy = Inzerat::find($id);
+        $stav = Inzerat::find($id);
+        $typ = Inzerat::find($id);
+        $kategorie = Inzerat::find($id);
 
-        $inzerat=Inzerat::where('id',$id)->update([
-            'nazov'=>$request->input('nazov'),
+        $inzerat->nazov=request('nazov');
+        $inzerat->popis=request('popis');
+        $inzerat->mesto=request('mesto');
+        $inzerat->ulica=request('ulica');
+        $inzerat->cena=request('cena');
+        $inzerat->vymera_domu=request('vymera_domu');
+        $inzerat->vymera_pozemku=request('vymera_pozemku');
+        $inzerat->uzitkova_plocha=request('uzitkova_plocha');
+        $inzerat->cena_dohodou=request('cena_dohodou');
+        $kraje->nazov=request('nazov');
+        $pouzivatel->telefon=request('telefon');
+        $druhy->nazov=request('nazov');
+        $stav->nazov=request('nazov');
+        $typ->nazov=request('nazov');
+        $kategorie->nazov=request('nazov');
+        $inzerat->save();
 
-        ]);
-        if($inzerat){
-            $inzerat=Inzerat::all();
-            return view('inzeraty.upravit_inzeraty',['inzeraty'=>$inzerat]);
-        }
+
+        return redirect()->to('inzeraty/'.$id);
+
     }
 
 
