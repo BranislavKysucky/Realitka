@@ -84,10 +84,7 @@
                                 <a href="#tab-description">Zobraziť podrobnosti</a>
                             </li>
                             <li class="description_tab" id="tab-title-description" role="tab" aria-controls="tab-description">
-                                <a href="#">Upraviť inzerát</a>
-                            </li>
-                            <li class="description_tab" id="tab-title-description" role="tab" aria-controls="tab-description">
-                                <a href="#">Zmazať inzerát</a>
+                                <a href="/inzeraty/{{$inzerat->id}}/edit">Spravovať inzerát</a>
                             </li>
 
                         </ul>
