@@ -13,6 +13,11 @@ class Inzerat extends Model
         return $this->hasMany(Fotografia::class);
     }
 
+    public function obec()
+    {
+        return $this->belongsTo(Obec::class);
+    }
+
     public function pouzivatel()
     {
         return $this->belongsTo(Pouzivatel::class);

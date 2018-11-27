@@ -13,12 +13,27 @@
             <form action="{{route('inzeraty.index')}}" method="get">
                 {{csrf_field()}}
 
-
-                <label for="lokalita">Lokalita</label>
-                <input id="lokalita" class="form-control" placeholder="Zadajte lokalitu" name="lokalita"/>
-
+                <label for="lokalita">Obec/Mesto</label>
+                <input list="obce" id="lokalita" class="form-control" placeholder="Zadajte lokalitu" name="lokalita" autocomplete="off"/>
+                <datalist id="obce">
+                @foreach($obce as $obec)
+                    <option href="#" id="{{$obec->obec}}">{{$obec->obec}}, okres {{$obec->okres_id}}</option>
+                @endforeach
+                </datalist>
 
                 <div class="form-group">
+                    {{--<label for="kraj">Kraj</label>--}}
+                    {{--<select id="kraj" class="form-control" name="kraj">--}}
+                        {{--<option value="1">Bratislavský</option>--}}
+                        {{--<option value="2">Trnavský</option>--}}
+                        {{--<option value="3">Trenčiansky</option>--}}
+                        {{--<option value="3">Nitriansky</option>--}}
+                        {{--<option value="3">Žilinský</option>--}}
+                        {{--<option value="3">Banskobystrický</option>--}}
+                        {{--<option value="3">Prešovský</option>--}}
+                        {{--<option value="3">Košický</option>--}}
+                    {{--</select>--}}
+
                     <label for="kategoria">Kategória</label>
                     <select id="kategoria" class="form-control" name="kategoria">
                         <option value="1">Všetky nehnuteľnosti</option>
@@ -169,6 +184,4 @@
 
     <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
     <script src='{{ URL::asset('js/lokalita.js') }}'></script>
-
-
 @endsection

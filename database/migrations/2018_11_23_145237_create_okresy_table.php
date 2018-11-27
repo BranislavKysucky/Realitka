@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateKrajeTable extends Migration
+class CreateOkresyTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class CreateKrajeTable extends Migration
      */
     public function up()
     {
-        Schema::create('kraje', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('nazov');
-            $table->integer('value');
+        Schema::create('okresy', function (Blueprint $table) {
+            $table->string('id');
+            $table->string('kraj_id');
         });
     }
 
@@ -27,6 +26,6 @@ class CreateKrajeTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('kraje');
+        Schema::dropIfExists('okresy');
     }
 }
