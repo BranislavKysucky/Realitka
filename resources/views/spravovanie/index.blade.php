@@ -80,7 +80,7 @@
                 <a href=""><i class="icon icon-home"></i> <span>Domov</span></a>
             </li>
             <li>
-                <a href=""><i class="icon icon-list-alt"></i> <span>Inzeráty</span></a>
+                <a href="{{route('inzeraty_r.index')}}"><i class="icon icon-list-alt"></i> <span>Inzeráty</span></a>
             </li>
             <li>
                 <a href=""><i class="icon icon-list-alt"></i> <span>Makléri</span></a>

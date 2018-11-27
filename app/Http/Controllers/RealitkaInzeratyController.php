@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+
+
 
 class RealitkaInzeratyController extends Controller
 {
@@ -13,7 +17,20 @@ class RealitkaInzeratyController extends Controller
      */
     public function index()
     {
-        return view('spravovanie.realitka.inzeraty.index');
+        $realitka_id = \Auth::user()->realitna_kancelaria_id;
+
+        $inzeraty = DB::table('inzeraty')
+            ->join('pouzivatelia', 'inzeraty.pouzivatel_id', '=', 'pouzivatelia.id' )
+            ->join('realitne_kancelarie', 'pouzivatelia.realitna_kancelaria_id', '=', 'realitne_kancelarie.id')
+            ->select('inzeraty.*')
+            ->where('pouzivatelia.realitna_kancelaria_id', '=', $realitka_id )
+            ->get();
+
+
+
+
+        return view('spravovanie.realitka.inzeraty.index', ['inzeraty' => $inzeraty]);
+
     }
 
     /**

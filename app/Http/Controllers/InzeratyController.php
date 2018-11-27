@@ -175,7 +175,7 @@ class InzeratyController extends Controller
             'cena' => 'required',
             'druh' => 'required',
             'typ' => 'required',
-            'heslo' => 'required',
+
             'images' => 'required',                   // je potreba mat povinny image ??
             'images.*' => 'image|mimes:jpeg,jpg,png' // zatial validacia iba pre typy v buducnosti mozno aj velkost/mnozstvo
 
