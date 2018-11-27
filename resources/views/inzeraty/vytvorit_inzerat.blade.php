@@ -97,7 +97,7 @@
 
                             <div id="cena" name="cena">
                                 <label for="cena">Cena(€)</label>
-                                <input required placeholder="cena" class="form-control" type="number" min="0" id="cena"
+                                <input  placeholder="cena" class="form-control" type="number" min="0" id="cena"
                                        value=""
                                        oninput="hideCena_dohodou();" name="cena"/>
 
@@ -109,11 +109,11 @@
                                 <label for="cena_dohodou">Cena dohodou </label>
                                 <label class="radio-inline"><input value=true onchange="hideCena();" name="cena_dohodou"
                                                                    id="cena_dohodou" type="radio"
-                                                                   name="optradio">Ano</label>
+                                                                   name="optradio" checked>Ano</label>
                                 <label class="radio-inline"><input value=false onchange="hideCena();"
                                                                    name="cena_dohodou"
                                                                    id="cena_dohodou" type="radio" name="optradio"
-                                                                   checked>Nie</label>
+                                                                   >Nie</label>
                                 <br>
                             </div>
 
@@ -192,7 +192,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
         <script src='{{ URL::asset('js/polozky_formularu.js') }}'></script>
-        <script src='{{ URL::asset('js/lokalita.js') }}'></script>
+
         <script src='{{ URL::asset('js/preview.js') }}'></script>
         <script src='{{ URL::asset('js/cena.js') }}'></script>
         <script src='{{ URL::asset('js/zatvor_popup.js') }}'></script>

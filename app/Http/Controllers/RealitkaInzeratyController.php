@@ -22,7 +22,7 @@ class RealitkaInzeratyController extends Controller
         $inzeraty = DB::table('inzeraty')
             ->join('pouzivatelia', 'inzeraty.pouzivatel_id', '=', 'pouzivatelia.id' )
             ->join('realitne_kancelarie', 'pouzivatelia.realitna_kancelaria_id', '=', 'realitne_kancelarie.id')
-            ->select('inzeraty.*')
+            ->select('inzeraty.*', 'pouzivatelia.meno AS meno', 'pouzivatelia.priezvisko AS priezvisko', 'pouzivatelia.email AS email', 'pouzivatelia.telefon AS telefon')
             ->where('pouzivatelia.realitna_kancelaria_id', '=', $realitka_id )
             ->get();
 

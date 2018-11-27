@@ -172,7 +172,7 @@ class InzeratyController extends Controller
             'popis' => 'required',
             'lokalita' => 'required',
             'kraj_id' => 'required',
-            'cena' => 'required',
+
             'druh' => 'required',
             'typ' => 'required',
 
@@ -226,7 +226,7 @@ class InzeratyController extends Controller
             $inzerat->uzitkova_plocha = $request->get('uzitkova_plocha');
 
             $cena_dohodou = $request->get('cena_dohodou');              // prichadza z radiobuttonu ako true or false
-            if ($cena_dohodou == true) {
+            if ($cena_dohodou == false) {
                 $inzerat->cena_dohodou = 1;
             } else {
                 $inzerat->cena_dohodou = 0;

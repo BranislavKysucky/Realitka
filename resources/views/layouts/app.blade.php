@@ -10,8 +10,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"></script>
-    <!-- doplnit api key, zmazany kvoli bezpecnosti -->
+    <!--    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"></script> -->
+        <!-- doplnit api key, zmazany kvoli bezpecnosti -->
 
     <script type="text/javascript"
             src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
@@ -85,9 +85,9 @@
                     <li>{{ Auth::user()->email }}</li>
 
                     @if(Auth::user()->rola==1)
-                        <li><a href="inzeraty_a">Spravovať</a></li>
+                        <li><a href="{{route('inzeraty_a.index')}}">Spravovať</a></li>
                     @elseif(Auth::user()->rola==2)
-                        <li><a href="inzeraty_r">Spravovať</a></li>
+                        <li><a href="{{route('inzeraty_r.index')}}">Spravovať</a></li>
                     @endif
 
 
