@@ -12,8 +12,7 @@ use App\Typ;
 use App\Druh;
 use App\Fotografie;
 use App\Stav;
-use App\Kraj;
-use App\Pouzivatel;
+use App\Pouzivatelia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -304,8 +303,8 @@ class InzeratyController extends Controller
         $druh = $inzerat->druh()->first();
         $stav = $inzerat->stav()->first();
         $typ = $inzerat->typ()->first();
-        $kraj = $inzerat->kraj()->first();
         $pouzivatel = $inzerat->pouzivatel()->first();
+        $obec = $inzerat->obec()->first();
         $fotografie = DB::table('fotografie')->where('inzerat_id', $id)->get();
 
         return view('inzeraty.zobrazit_detail')
@@ -314,7 +313,7 @@ class InzeratyController extends Controller
             ->with(compact('druh'))
             ->with(compact('stav'))
             ->with(compact('typ'))
-            ->with(compact('kraj'))
+            ->with(compact('obec'))
             ->with(compact('fotografie'))
             ->with(compact('pouzivatel'));
     }
@@ -329,17 +328,17 @@ class InzeratyController extends Controller
     {
         $inzerat=Inzerat::find($id);
         $kategorie=Inzerat::find($id);
-        $kraje=Inzerat::find($id);
         $druhy=Inzerat::find($id);
         $typ=Inzerat::find($id);
         $stav=Inzerat::find($id);
+        $obec=Inzerat::find($id);
         $pouzivatelia=Inzerat::find($id);
         return view('inzeraty.upravit_inzeraty')
             ->with(compact('inzerat'))
             ->with(compact('kategorie'))
             ->with(compact('typ'))
             ->with(compact('stav'))
-            ->with(compact('kraje'))
+            ->with(compact('obec'))
             ->with(compact('druhy'))
             ->with(compact('pouzivatelia'));
 
@@ -358,8 +357,7 @@ class InzeratyController extends Controller
     {
 
         $inzerat = Inzerat::find($id);
-        $kraje = Inzerat::find($id);
-        $pouzivatel = Inzerat::find($id);
+        $pouzivatelia = Inzerat::find($id);
         $druhy = Inzerat::find($id);
         $stav = Inzerat::find($id);
         $typ = Inzerat::find($id);
@@ -374,8 +372,7 @@ class InzeratyController extends Controller
         $inzerat->vymera_pozemku=request('vymera_pozemku');
         $inzerat->uzitkova_plocha=request('uzitkova_plocha');
         $inzerat->cena_dohodou=request('cena_dohodou');
-        $kraje->nazov=request('nazov');
-        $pouzivatel->telefon=request('telefon');
+        $pouzivatelia->telefon=request('telefon');
         $druhy->nazov=request('nazov');
         $stav->nazov=request('nazov');
         $typ->nazov=request('nazov');

@@ -40,9 +40,9 @@
                                 <option id=0 value=1>{{$kategorie->nazov}}</option>
                             </select>
 
-                            <label id="kraj_label" for="kraj">Kraj</label>
+                            <label id="obec" for="obec">Obec</label>
                             <select id="kraj_id" class="form-control" name="kraje_nazov">
-                                <option id=0 value=1>{{$kraje->nazov}}</option>
+                                <option id=0 value=1>{{$obec->nazov}}</option>
                                 <option id=1 value=1>Bratislavský kraj</option>
                                 <option id=2 value=2>Trnavský kraj</option>
                                 <option id=3 value=3>Trenčiansky kraj</option>
