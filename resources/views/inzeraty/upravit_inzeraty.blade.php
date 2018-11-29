@@ -12,9 +12,7 @@
 
                     <div class="panel-body">
                         <div align="center">
-                            <p>DELETE uz funguje, UPDATE ciastocne tiez, zatial to funguje na udajoch z tabulky inzerat, pri cudzcih
-                             tabulkach to este musim dokoncit, aby sa dali menit  hodnoty pomocou selectov...
-                            Tiez zatial neviem preco pri tabulkach kraj,druh,stav,kategoria dava vo vo view - value rovnake nazvy, pritom su definovane ine.</p>
+                            <p>UPDATE nefunguje na cudzich tabulkach zatial. Asi zly dotaz v kontrolery.</p>
                             <h4>Úprava inzerátu</h4>
                         </div>
                         <form  method="post" class="form-horizontal" action="{{route('inzeraty.update',[$inzerat->id])}}" >
@@ -37,37 +35,61 @@
 
                             <label id="kategoria_label" for="kraj">Kategória</label>
                             <select id="kategoria_id" class="form-control" name="kategoria_id">
-                                <option id=0 value=1>{{$kategorie->nazov}}</option>
+                                <option id=0 value=1>{{$kategoria->nazov}}</option>
+
+
+                                    <option id=1 value=1> @foreach($kategorie as $kategoria)
+                                        @if(substr($kategoria->nazov,0, 7) != "Všetky" )
+                                            <option value={{$kategoria->id}}>{{$kategoria->nazov}}</option>
+                                        @endif
+                                    @endforeach
+
+                                </select>
+
+
+
+
+
                             </select>
 
-                            <label id="kraj_label" for="kraj">Kraj</label>
+                            <label id="obec" for="obec">Obec</label>
                             <select id="kraj_id" class="form-control" name="kraje_nazov">
-                                <option id=0 value=1>{{$kraje->nazov}}</option>
-                                <option id=1 value=1>Bratislavský kraj</option>
-                                <option id=2 value=2>Trnavský kraj</option>
-                                <option id=3 value=3>Trenčiansky kraj</option>
-                                <option id=4 value=4>Nitriansky kraj</option>
-                                <option id=5 value=5>Žilinský kraj</option>
-                                <option id=6 value=6>Banskobystrický kraj</option>
-                                <option id=7 value=7>Prešovský kraj</option>
-                                <option id=8 value=8>Košický kraj</option>
+                                <option id=0 value=1>{{$obec->obec}}</option>
+                            </select>
+
+
+                            <label id="stavy_label" for="stavy">Stav</label>
+                            <select id="stavy" class="form-control" name="stavy">
+                                <option id=0 value=1>{{$stav->nazov}}</option>
+                                <option id=1 value=1> @foreach($stavy as $stav)
+                                    @if(substr($stav->nazov,0, 7) != "Všetky" )
+                                        <option value={{$stav->id}}>{{$stav->nazov}}</option>
+                                    @endif
+                                @endforeach
+
                             </select>
 
                             <label id="druh_label" for="druh">Druh</label>
-                            <select id="druh_id" class="form-control" name="druh">
-                                <option id=0 value=1>{{$druhy->nazov}}</option>
-                                <option id=1 value=1>vyber1</option>
-                                <option id=2 value=2>vyber2</option>
+                            <select class="form-control" id="druh" name="druh">
+                                <option id=0 value=1>{{$druh->nazov}}</option>
+                                <option id=1 value=1> @foreach($druhy_nazov as $druh_nazov)
+                                    <optgroup label={{$druh_nazov->nazov}} id={{$druh_nazov->nazov}}>
+                                        @foreach($druhy as $druh)
+                                            @if(($druh_nazov->nazov == $druh->nazov) && (substr($druh->podnazov,0, 7) != "Všetky" ))
+                                                <option value={{$druh->id}}>{{$druh->podnazov}}</option>
+                                            @endif
+                                        @endforeach
+                                    </optgroup>
+                                @endforeach
                             </select>
 
-
-                            <label id="stav_label" for="stav">Stav</label>
-                            <select id="stav_id" class="form-control" name="stav">
-                                <option id=0 value=1>{{$stav->nazov}}</option>
-                                <option id=1 value=1>vyber1</option>
-                                <option id=2 value=2>vyber2</option>
+                            <label id="typ_label" for="typ">Typy</label>
+                            <select id="typ" class="form-control" name="typ">
+                                <option id=0 value=1>{{$typ->nazov}}</option>
+                                <option id=1 value=1> @foreach($typy as $typ)
+                                    <option id={{$typ->nazov}} value={{$typ->id}}>{{$typ->nazov}} </option>
+                                @endforeach
                             </select>
-
 
 
                             <label for="cena">Cena</label>
@@ -89,7 +111,7 @@
                             <input id="uzitkova_plocha" class="form-control" placeholder="Zadajte uzitkovu plochu" type="number" name="uzitkova_plocha" value="{{$inzerat->uzitkova_plocha}}"/>
 
                             <label for="telefon">Kontakt </label>
-                            <input id="telefon" class="form-control" placeholder="Zadajte telefonne číslo"  name="telefon" value="{{$pouzivatelia->telefon}}"/>
+                            <input id="telefon" class="form-control" placeholder="Zadajte telefonne číslo"  name="telefon" value="{{$pouzivatel->telefon}}"/>
 
 
                             <br>

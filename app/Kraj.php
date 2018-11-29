@@ -7,8 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class Kraj extends Model
 {
     protected $table = 'kraje';
+    public $incrementing = false;
 
-    public function inzeraty(){
-        return $this->hasMany(Inzerat::class);
+    public function okresy()
+    {
+        return $this->hasMany(Okres::class);
     }
+
 }

@@ -22,6 +22,20 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ URL::asset('layout/styles/layout.css') }}">
     <style>
+        .alphabet
+        {
+        text-align: center
+        }
+
+        #kraje ul
+        {
+            list-style-type: none;
+        }
+
+        li.sub {
+            padding: 7px 0;
+        }
+
         .pac-icon {
             width: 0;
             background-image: none;
