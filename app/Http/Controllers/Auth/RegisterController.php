@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Pouzivatel;
+use App\Obec;
 use App\Realitna_kancelaria;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\DB;
 
 class RegisterController extends Controller
 {
@@ -40,6 +42,14 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
+    public function showRegistrationForm()
+    {
+        $obce = Obec::all();
+        return view('auth.register', compact('obce'));
+    }
+
+
+
     /**
      * Get a validator for an incoming registration request.
      *
@@ -64,35 +74,105 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
 
-        $realitka = new Realitna_kancelaria;
-        $realitka-> kraj_id= $data['kraj'];
-        $realitka->nazov = $data['nazov'];
-        $realitka->ulica_cislo = $data['ulica'];
-        $realitka->mesto = $data['mesto'];
-        $realitka->PSC = $data['psc'];
-        $realitka->kontaktna_osoba = $data['kontaktna_osoba'];
-        $realitka->telefon = $data['telefon'];
-        $realitka->email = $data['email_realitka'];
-        $realitka->ICO = $data['ico'];
-        $realitka->DIC = $data['dic'];
-        $realitka->updated_at = today();
-        $realitka->save();
+
+        if ($data['obec_realitka'] != $data['obec_pouzivatel']) {
 
 
-        return Pouzivatel::create([
-            'kraj_id'=>$data['kraj_pouzivatel'],
-            'realitna_kancelaria_id'=>$realitka->id,
-            'ulica_cislo'=>$data['ulica_pouzivatel'],
-            'mesto'=>$data['mesto_pouzivatel'],
-            'PSC'=>$data['psc_pouzivatel'],
-            'telefon'=>$data['telefon_pouzivatel'],
-            'email' => $data['email'],
-            'heslo' => bcrypt($data['password']),
-            //'rola'=>2,
-            'meno' => $data['meno'],
-            'priezvisko' => $data['priezvisko'],
-            'password' => bcrypt($data['password'])
+            $realitka = new Realitna_kancelaria;
+            $obec_nazov=$data['obec_realitka'];
+            $semicolonPos = strpos($obec_nazov, ',');
+            $obec= substr($obec_nazov,0, $semicolonPos) ;
+            $obec_id = DB::table('obce')
+                ->select('id')
+                ->where('obec',$obec) -> first();
 
-        ]);
+
+            $realitka->obec_id=$obec_id->id;
+
+
+
+            $realitka->nazov = $data['nazov'];
+            $realitka->ulica_cislo = $data['ulica'];
+            $realitka->PSC = $data['psc'];
+            $realitka->kontaktna_osoba = $data['kontaktna_osoba'];
+            $realitka->telefon = $data['telefon'];
+            $realitka->email = $data['email_realitka'];
+            $realitka->ICO = $data['ico'];
+            $realitka->DIC = $data['dic'];
+            $realitka->updated_at = today();
+            $realitka->save();
+
+            $obec_nazov=$data['obec_pouzivatel'];
+            $semicolonPos = strpos($obec_nazov, ',');
+            $obec= substr($obec_nazov,0, $semicolonPos) ;
+            $obec_id = DB::table('obce')
+                ->select('id')
+                ->where('obec',$obec) -> first();
+
+
+            $obec_pouzivatel_id=$obec_id->id;
+
+
+
+
+            return Pouzivatel::create([
+                'obec_id'=>$obec_pouzivatel_id,
+                'realitna_kancelaria_id'=>$realitka->id,
+                'ulica_cislo'=>$data['ulica_pouzivatel'],
+                'PSC'=>$data['psc_pouzivatel'],
+                'telefon'=>$data['telefon_pouzivatel'],
+                'email' => $data['email'],
+                'heslo' => bcrypt($data['password']),
+                //'rola'=>2,
+                'meno' => $data['meno'],
+                'priezvisko' => $data['priezvisko'],
+                'password' => bcrypt($data['password'])
+
+            ]);
+
+
+        } else {
+
+
+            $realitka = new Realitna_kancelaria;
+            $obec_nazov = $data['obec_realitka'];
+            $semicolonPos = strpos($obec_nazov, ',');
+            $obec = substr($obec_nazov, 0, $semicolonPos);
+            $obec_id = DB::table('obce')
+                ->select('id')
+                ->where('obec', $obec)->first();
+
+
+            $realitka->obec_id = $obec_id->id;
+
+
+            $realitka->nazov = $data['nazov'];
+            $realitka->ulica_cislo = $data['ulica'];
+            $realitka->PSC = $data['psc'];
+            $realitka->kontaktna_osoba = $data['kontaktna_osoba'];
+            $realitka->telefon = $data['telefon'];
+            $realitka->email = $data['email_realitka'];
+            $realitka->ICO = $data['ico'];
+            $realitka->DIC = $data['dic'];
+            $realitka->updated_at = today();
+            $realitka->save();
+
+
+            return Pouzivatel::create([
+                'obec_id' => $obec_id->id,
+                'realitna_kancelaria_id' => $realitka->id,
+                'ulica_cislo' => $data['ulica_pouzivatel'],
+                'PSC' => $data['psc_pouzivatel'],
+                'telefon' => $data['telefon_pouzivatel'],
+                'email' => $data['email'],
+                'heslo' => bcrypt($data['password']),
+                //'rola'=>2,
+                'meno' => $data['meno'],
+                'priezvisko' => $data['priezvisko'],
+                'password' => bcrypt($data['password'])
+
+            ]);
+
+        }
     }
 }

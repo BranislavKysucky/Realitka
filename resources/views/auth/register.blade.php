@@ -28,57 +28,20 @@
                                 </div>
                             </div>
 
-                            <div class="form-group{{ $errors->has('kraj') ? ' has-error' : '' }}">
-                                <label for="kraj" class="col-md-4 control-label">Kraj</label>
+                            <div class="form-group">
+                                <label for="lokalita" class="col-md-4 control-label">Obec/Mesto</label>
 
                                 <div class="col-md-6">
-                                    <select id="kraj" class="form-control" name="kraj">
-                                        <option value="1">Bratislavský kraj</option>
-                                        <option value="2">Trnavský kraj</option>
-                                        <option value="3">Trenčiansky kraj</option>
-                                        <option value="4">Nitriansky kraj</option>
-                                        <option value="5">Žilinský kraj</option>
-                                        <option value="6">Banskobystrický kraj</option>
-                                        <option value="7">Prešovský kraj</option>
-                                        <option value="8">Košický kraj</option>
-                                    </select>
+                                    <input list="obce" id="obec_realitka" class="form-control" placeholder="Zadajte lokalitu" name="obec_realitka" autocomplete="off"/>
+                                        <datalist id="obce">
+                                            @foreach($obce as $obec)
+                                                    <option href="#" id="{{$obec->obec}}">{{$obec->obec}}, okres {{$obec->okres_id}}</option>
+                                            @endforeach
+                                        </datalist>
 
-                                    @if ($errors->has('kraj'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('kraj') }}</strong>
-                                    </span>
-                                    @endif
                                 </div>
                             </div>
 
-
-                            <script type="text/javascript"
-                                    src="http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places&region=sk"></script>
-                            <script type="text/javascript">
-                                function initialize() {
-                                    var options = {
-                                        types: ['(regions)'],
-                                        componentRestrictions: {country: "sk"}
-                                    };
-                                    var input = document.getElementById('mesto');
-                                    var autocomplete = new google.maps.places.Autocomplete(input, options);
-                                }
-                                google.maps.event.addDomListener(window, 'load', initialize);
-                            </script>
-                            <div class="form-group{{ $errors->has('mesto') ? ' has-error' : '' }}">
-                                <label for="mesto" class="col-md-4 control-label">Mesto</label>
-
-                                <div class="col-md-6">
-                                    <input id="mesto" type="text" class="form-control" name="mesto"
-                                           value="{{ old('mesto') }}" required autofocus>
-
-                                    @if ($errors->has('mesto'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('mesto') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
 
                             <div class="form-group{{ $errors->has('ulica') ? ' has-error' : '' }}">
                                 <label for="ulica" class="col-md-4 control-label">Ulica a popisné číslo</label>
@@ -214,58 +177,27 @@
                                 </div>
                             </div>
 
-                            <div class="form-group{{ $errors->has('kraj_pouzivatel') ? ' has-error' : '' }}">
-                                <label for="kraj_pouzivatel" class="col-md-4 control-label">Kraj</label>
+                            <div class="form-group">
+                                <label for="lokalita" class="col-md-4 control-label">Obec/Mesto</label>
 
                                 <div class="col-md-6">
-                                    <select id="kraj_pouzivatel" class="form-control" name="kraj_pouzivatel">
-                                        <option value="1">Bratislavský kraj</option>
-                                        <option value="2">Trnavský kraj</option>
-                                        <option value="3">Trenčiansky kraj</option>
-                                        <option value="4">Nitriansky kraj</option>
-                                        <option value="5">Žilinský kraj</option>
-                                        <option value="6">Banskobystrický kraj</option>
-                                        <option value="7">Prešovský kraj</option>
-                                        <option value="8">Košický kraj</option>
-                                    </select>
+                                    <input list="obce" id="obec_pouzivatel" class="form-control" placeholder="Zadajte lokalitu" name="obec_pouzivatel" autocomplete="off"/>
+                                    <datalist id="obce">
+                                        @foreach($obce as $obec)
+                                            <option href="#" id="{{$obec->obec}}">{{$obec->obec}}, okres {{$obec->okres_id}}</option>
+                                        @endforeach
+                                    </datalist>
 
-                                    @if ($errors->has('kraj_pouzivatel'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('kraj_pouzivatel') }}</strong>
-                                    </span>
-                                    @endif
                                 </div>
                             </div>
 
 
-                            <script type="text/javascript"
-                                    src="http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places&region=sk"></script>
-                            <script type="text/javascript">
-                                function initialize() {
-                                    var options = {
-                                        types: ['(regions)'],
-                                        componentRestrictions: {country: "sk"}
-                                    };
-                                    var input = document.getElementById('mesto_pouzivatel');
-                                    var autocomplete = new google.maps.places.Autocomplete(input, options);
-                                }
-                                google.maps.event.addDomListener(window, 'load', initialize);
-                            </script>
-                            <div class="form-group{{ $errors->has('mesto_pouzivatel') ? ' has-error' : '' }}">
-                                <label for="mesto_pouzivatel" class="col-md-4 control-label">Mesto</label>
 
-                                <div class="col-md-6">
-                                    <input id="mesto_pouzivatel" type="text" class="form-control"
-                                           name="mesto_pouzivatel"
-                                           value="{{ old('mesto_pouzivatel') }}" required autofocus>
 
-                                    @if ($errors->has('mesto_pouzivatel'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('mesto_pouzivatel') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
+
+
+
+
                             <div class="form-group{{ $errors->has('ulica_pouzivatel') ? ' has-error' : '' }}">
                                 <label for="ulica_pouzivatel" class="col-md-4 control-label">Ulica a popisné číslo</label>
 

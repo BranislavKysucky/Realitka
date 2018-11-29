@@ -16,10 +16,9 @@ class Pouzivatel extends Authenticatable
      */
     protected $table='pouzivatelia';
     protected $fillable = [
-        'kraj_id',
+        'obec_id',
         'realitna_kancelaria_id',
         'ulica_cislo',
-        'mesto',
         'PSC',
         'telefon',
         'rola',

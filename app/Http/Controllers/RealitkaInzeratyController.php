@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use App\Inzerat;
 
 
 
@@ -62,7 +63,29 @@ class RealitkaInzeratyController extends Controller
      */
     public function show($id)
     {
-        return view('spravovanie.realitka.inzeraty.detail');
+
+        $inzerat = Inzerat::findOrFail($id);
+        $kategoria = $inzerat->kategoria()->first();
+        $druh = $inzerat->druh()->first();
+        $stav = $inzerat->stav()->first();
+        $typ = $inzerat->typ()->first();
+        $kraj = $inzerat->kraj()->first();
+        $pouzivatel = $inzerat->pouzivatel()->first();
+        $fotografie = DB::table('fotografie')->where('inzerat_id', $id)->get();
+
+        return view('spravovanie.realitka.inzeraty.detail')
+            ->with(compact('inzerat'))
+            ->with(compact('kategoria'))
+            ->with(compact('druh'))
+            ->with(compact('stav'))
+            ->with(compact('typ'))
+            ->with(compact('kraj'))
+            ->with(compact('fotografie'))
+            ->with(compact('pouzivatel'));
+
+
+
+
     }
 
     /**
@@ -73,7 +96,24 @@ class RealitkaInzeratyController extends Controller
      */
     public function edit($id)
     {
-        return view('spravovanie.realitka.inzeraty.upravit');
+        $inzerat = Inzerat::findOrFail($id);
+        $kategoria = $inzerat->kategoria()->first();
+        $druh = $inzerat->druh()->first();
+        $stav = $inzerat->stav()->first();
+        $typ = $inzerat->typ()->first();
+        $kraj = $inzerat->kraj()->first();
+        $pouzivatel = $inzerat->pouzivatel()->first();
+        $fotografie = DB::table('fotografie')->where('inzerat_id', $id)->get();
+
+        return view('spravovanie.realitka.inzeraty.upravit')
+            ->with(compact('inzerat'))
+            ->with(compact('kategoria'))
+            ->with(compact('druh'))
+            ->with(compact('stav'))
+            ->with(compact('typ'))
+            ->with(compact('kraj'))
+            ->with(compact('fotografie'))
+            ->with(compact('pouzivatel'));
     }
 
     /**
@@ -96,6 +136,10 @@ class RealitkaInzeratyController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Inzerat::find($id)->delete();
+
+        return redirect()->action('RealitkaInzeratyController@index');
+
+
     }
 }
