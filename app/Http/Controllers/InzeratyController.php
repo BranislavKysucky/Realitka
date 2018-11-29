@@ -326,21 +326,42 @@ class InzeratyController extends Controller
      */
     public function edit(Inzerat $inzerat, $id)
     {
+        //vypis aktualneho zaznamu
         $inzerat=Inzerat::find($id);
-        $kategorie=Inzerat::find($id);
-        $druhy=Inzerat::find($id);
-        $typ=Inzerat::find($id);
-        $stav=Inzerat::find($id);
-        $obec=Inzerat::find($id);
-        $pouzivatelia=Inzerat::find($id);
+        $kategoria = $inzerat->kategoria()->first();
+        $druh = $inzerat->druh()->first();
+        $stav = $inzerat->stav()->first();
+        $typ = $inzerat->typ()->first();
+        $pouzivatel = $inzerat->pouzivatel()->first();
+        $obec = $inzerat->obec()->first();
+
+// vypis vsetkych zaznamov, toto je urcene pre selecty, aby sa dali zobrazit vsetky polozky, nie len pre konkretne id..
+        $kategorie = Kategoria::all();
+        $typy = Typ::all();
+        $druhy = Druh::all();
+        $druhy_nazov = Druh::select('nazov')->groupBy('nazov')->get();
+        $stavy = Stav::all();
+        $obce = Stav::all();
+
+
+        $pouzivatel = $inzerat->pouzivatel()->first();
         return view('inzeraty.upravit_inzeraty')
             ->with(compact('inzerat'))
-            ->with(compact('kategorie'))
+            ->with(compact('kategoria'))
             ->with(compact('typ'))
             ->with(compact('stav'))
             ->with(compact('obec'))
+            ->with(compact('druh'))
+            ->with(compact('pouzivatel'))
+
+            // pre selecty
             ->with(compact('druhy'))
-            ->with(compact('pouzivatelia'));
+            ->with(compact('druhy_nazov'))
+            ->with(compact('typy'))
+            ->with(compact('stavy'))
+            ->with(compact('kategorie'))
+            ->with(compact('obce'))
+            ;
 
     }
 
@@ -357,11 +378,13 @@ class InzeratyController extends Controller
     {
 
         $inzerat = Inzerat::find($id);
-        $pouzivatelia = Inzerat::find($id);
-        $druhy = Inzerat::find($id);
+        $pouzivatel = Inzerat::find($id);
+        $druh = Inzerat::find($id);
         $stav = Inzerat::find($id);
         $typ = Inzerat::find($id);
         $kategorie = Inzerat::find($id);
+
+
 
         $inzerat->nazov=request('nazov');
         $inzerat->popis=request('popis');
@@ -372,13 +395,12 @@ class InzeratyController extends Controller
         $inzerat->vymera_pozemku=request('vymera_pozemku');
         $inzerat->uzitkova_plocha=request('uzitkova_plocha');
         $inzerat->cena_dohodou=request('cena_dohodou');
-        $pouzivatelia->telefon=request('telefon');
-        $druhy->nazov=request('nazov');
+        $pouzivatel->telefon=request('telefon');
+        $druh->nazov=request('nazov');
         $stav->nazov=request('nazov');
         $typ->nazov=request('nazov');
         $kategorie->nazov=request('nazov');
         $inzerat->save();
-
 
         return redirect()->to('inzeraty/'.$id);
 
