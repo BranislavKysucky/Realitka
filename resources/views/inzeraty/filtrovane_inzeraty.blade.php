@@ -155,7 +155,7 @@
             <div class="excerpt">
                 <h6 class="heading">{{$inzerat->nazov}}</h6>
                 <ul class="nospace meta">
-                    <li><i class="fas fa-home"></i> {{$inzerat->kraj->nazov}}, {{$inzerat->mesto}}, {{$inzerat->kategoria->nazov}} {{$inzerat->druh->nazov}} </li>
+                    <li><i class="fas fa-home"></i>  {{$inzerat->kategoria->nazov}} {{$inzerat->druh->nazov}} </li>
                     <li><i class="fas fa-building"></i> {{$inzerat->stav->nazov}}, {{$inzerat->vymera_domu}}m² </li>
                     <li><i class="fas fa-hand-paper"></i> {{$inzerat->typ->nazov}} </li>
                     <li><i class="fas fa-euro-sign"></i> <span style="color: limegreen">{{$inzerat->cena}}</span></li>

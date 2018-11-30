@@ -28,24 +28,16 @@
                                       rows="4" cols="50"></textarea>
 
 
-                            <label id="kraj_label" for="kraj">Kraj</label>
-                            <select id="kraj_id" class="form-control" name="kraj_id">
 
 
-                                <option id=1 value=1>Bratislavský kraj</option>
-                                <option id=2 value=2>Trnavský kraj</option>
-                                <option id=3 value=3>Trenčiansky kraj</option>
-                                <option id=4 value=4>Nitriansky kraj</option>
-                                <option id=5 value=5>Žilinský kraj</option>
-                                <option id=6 value=6>Banskobystrický kraj</option>
-                                <option id=7 value=7>Prešovský kraj</option>
-                                <option id=8 value=8>Košický kraj</option>
 
-                            </select>
-
-
-                            <label for="lokalita">Lokalita</label>
-                            <input id="lokalita" class="form-control" placeholder="Zadajte lokalitu" name="lokalita"/>
+                            <label for="lokalita">Obec/Mesto</label>
+                            <input list="obce" id="lokalita" class="form-control" placeholder="Zadajte lokalitu" name="lokalita" autocomplete="off"/>
+                            <datalist id="obce">
+                                @foreach($obce as $obec)
+                                    <option href="#" id="{{$obec->obec}}">{{$obec->obec}}, okres {{$obec->okres_id}}</option>
+                                @endforeach
+                            </datalist>
 
                             <label for="ulica">Ulica</label>
                             <input required id="ulica" class="form-control" placeholder="Zadajte ulicu" name="ulica"/>
@@ -192,7 +184,6 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
         <script src='{{ URL::asset('js/polozky_formularu.js') }}'></script>
-
         <script src='{{ URL::asset('js/preview.js') }}'></script>
         <script src='{{ URL::asset('js/cena.js') }}'></script>
         <script src='{{ URL::asset('js/zatvor_popup.js') }}'></script>

@@ -184,7 +184,8 @@ class InzeratyController extends Controller
         $druhy = Druh::all();
         $druhy_nazov = Druh::select('nazov')->groupBy('nazov')->get();
         $stavy = Stav::all();
-        return view('inzeraty.vytvorit_inzerat', ['kategorie' => $kategorie, 'typy' => $typy, 'druhy' => $druhy, 'stavy' => $stavy, 'druhy_nazov' => $druhy_nazov]);
+        $obce = Obec::all();
+        return view('inzeraty.vytvorit_inzerat', ['kategorie' => $kategorie, 'typy' => $typy, 'druhy' => $druhy, 'stavy' => $stavy, 'druhy_nazov' => $druhy_nazov, 'obce' => $obce]);
     }
 
     /**
@@ -201,11 +202,8 @@ class InzeratyController extends Controller
             'nazov' => 'required',
             'popis' => 'required',
             'lokalita' => 'required',
-            'kraj_id' => 'required',
-
             'druh' => 'required',
             'typ' => 'required',
-
             'images' => 'required',                   // je potreba mat povinny image ??
             'images.*' => 'image|mimes:jpeg,jpg,png' // zatial validacia iba pre typy v buducnosti mozno aj velkost/mnozstvo
 
@@ -243,8 +241,18 @@ class InzeratyController extends Controller
             $inzerat->typ_id = $request->get('typ');
             // $inzerat->kategoria_id = $request->get('kategoria');   //zakomentovane zatial pokym nebude prihlasovanie
 
-            $inzerat->mesto = $request->get('lokalita');
-            $inzerat->kraj_id = $request->get('kraj_id');
+
+
+            $obec_nazov = $request->get('lokalita');
+            $semicolonPos = strpos($obec_nazov, ',');
+            $obec = substr($obec_nazov, 0, $semicolonPos);
+            $obec_id = DB::table('obce')
+                ->select('id')
+                ->where('obec', $obec)->first();
+            $inzerat->obec_id = $obec_id->id;
+
+
+
             $inzerat->ulica = $request->get('ulica');
             $inzerat->nazov = $request->get('nazov');
             $inzerat->popis = $request->get('popis');
@@ -256,11 +264,13 @@ class InzeratyController extends Controller
             $inzerat->uzitkova_plocha = $request->get('uzitkova_plocha');
 
             $cena_dohodou = $request->get('cena_dohodou');              // prichadza z radiobuttonu ako true or false
-            if ($cena_dohodou == false) {
+            if ($cena_dohodou == "true" & $request->get('cena') == "") {
                 $inzerat->cena_dohodou = 1;
-            } else {
+            } else if($cena_dohodou == "false" & $request->get('cena') != "") {
                 $inzerat->cena_dohodou = 0;
                 $inzerat->cena = $request->get('cena');
+            } else {
+                return back()->with('error', 'Prosíme Vás zadajte cenu alebo nastavte položku CENA DOHODOU na áno');
             }
 
             $inzerat->updated_at = today();
