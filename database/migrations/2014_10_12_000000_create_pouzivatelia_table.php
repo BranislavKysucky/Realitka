@@ -18,7 +18,6 @@ class CreatePouzivateliaTable extends Migration
             $table->integer('obec_id')->nullable();
             $table->integer('realitna_kancelaria_id')->nullable();
             $table->string('ulica_cislo')->nullable();
-            $table->string('mesto')->nullable();
             $table->integer('PSC')->nullable();
             $table->string('telefon')->nullable();
             $table->integer('rola')->default(2);

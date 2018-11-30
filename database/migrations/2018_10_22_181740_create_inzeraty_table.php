@@ -23,7 +23,6 @@ class CreateInzeratyTable extends Migration
             $table->integer('obec_id')->nullable();
             $table->string('nazov');
             $table->longText('popis');
-            $table->string('mesto');
             $table->string('ulica')->nullable();
             $table->string('heslo',191)->nullable();
             $table->integer('cena')->nullable();

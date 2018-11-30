@@ -18,7 +18,6 @@ class CreateRealitneKancelarieTable extends Migration
             $table->integer('obec_id')->nullable();
             $table->string('nazov');
             $table->string('ulica_cislo');
-            $table->string('mesto')->nullable();
             $table->integer('PSC');
             $table->string('kontaktna_osoba');
             $table->string('telefon');
