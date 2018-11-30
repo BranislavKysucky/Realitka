@@ -8,6 +8,7 @@
         $("#vymera_pozemku").hide().find(':input').attr('required', false);
         $("#uzitkova_plocha").show().find(':input').attr('required', true);
 
+
         $("#druh").change(function() {
 
             if ($('#druh :selected').parent().attr('id') == "Byty")   // Byty

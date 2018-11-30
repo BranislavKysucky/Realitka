@@ -55,7 +55,7 @@
 
                 </th>
                 <td>{{ $inzerat->nazov}}</td>
-                <td>{{ $inzerat->mesto}}</td>
+                <td>{{ $inzerat->obec}}</td>
 
                 @if ($inzerat->cena == null)
                     <td>Dohodou</td>

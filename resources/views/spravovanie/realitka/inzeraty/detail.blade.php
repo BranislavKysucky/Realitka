@@ -212,14 +212,10 @@
                             </span></h4>
 
 
+
                         <h5>
 
-                            Kraj : {{$kraj->nazov}}
-
-                        </h5>
-                        <h5>
-
-                            Mesto : {{$inzerat->mesto}}
+                            Mesto/Obec : {{$inzerat->obec->obec}}
 
                         </h5>
 

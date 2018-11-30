@@ -209,53 +209,159 @@
 
 
 
-                        <h4 class="price">
 
-                            <label for="cena"><strong>Cena</strong></label>
-                            <input id="cena" class="form-control" placeholder="cena"  type="number"  name="cena" value="{{$inzerat->cena}}" />
+                        <div id="cena" name="cena">
+                            <label for="cena">Cena(€)</label>
+                            <input  placeholder="cena" class="form-control" type="number" min="0" id="cena"
+                                    value="{{$inzerat->cena}}"
+                                    oninput="hideCena_dohodou();" name="cena"/>
 
-                            <label for="cena_dohodou"><strong>Cena dohodou</strong></label>
-                            <input id="cena_dohodou" class="form-control" placeholder="Zadajte cenu dohodou" type="number"  name="cena_dohodou" value="{{$inzerat->cena_dohodou}}"/>
+                        </div>
 
-                        </h4>
+
+                        <br>
+
+                        @if ($inzerat->cena_dohodou == 1)
+                            <div id="cena_dohodou" >
+
+                                <label for="cena_dohodou">Cena dohodou </label>
+                                <label class="radio-inline"><input value=true onchange="hideCena();" name="cena_dohodou"
+                                                                   id="cena_dohodou" type="radio"
+                                                                   name="optradio" checked>Ano</label>
+                                <label class="radio-inline"><input value=false onchange="hideCena();"
+                                                                   name="cena_dohodou"
+                                                                   id="cena_dohodou" type="radio" name="optradio"
+                                    >Nie</label>
+                                <br>
+                            </div>
+                        @else
+                            <div id="cena_dohodou" >
+
+                                <label for="cena_dohodou">Cena dohodou </label>
+                                <label class="radio-inline"><input value=true onchange="hideCena();" name="cena_dohodou"
+                                                                   id="cena_dohodou" type="radio"
+                                                                   name="optradio" >Ano</label>
+                                <label class="radio-inline"><input value=false onchange="hideCena();"
+                                                                   name="cena_dohodou"
+                                                                   id="cena_dohodou" type="radio" name="optradio" checked
+                                    >Nie</label>
+                                <br>
+                            </div>
+
+
+
+
+
+
+                        @endif
+
+
 
 
                         <h5>
 
-                            Kraj : {{$kraj->nazov}}
+                            <label for="lokalita"><strong>Obec/Mesto</strong></label>
+                            <input list="obce" id="lokalita" class="form-control" placeholder="Zadajte lokalitu" name="lokalita" value="{{$inzerat->obec->obec}}" autocomplete="off"/>
+                            <datalist id="obce">
+                                @foreach($obce as $obec)
+                                    <option href="#" id="{{$obec->obec}}">{{$obec->obec}}, okres {{$obec->okres_id}}</option>
+                                @endforeach
+                            </datalist>
 
-                        </h5>
-                        <h5>
-
-                            Mesto : {{$inzerat->mesto}}
-
-                        </h5>
-
-
-                        <h5>
-
-                            Ulica : {{$inzerat->ulica}}
 
 
                         </h5>
+
 
                         <h5>
 
-                            Kategoria : {{$kategoria->nazov}}
+                            <label for="ulica"><strong>Ulica :</strong></label>
+                            <input required id="ulica" class="form-control" value="{{$inzerat->ulica}}" placeholder="Zadajte ulicu" name="ulica"/>
+
+
+
+
+                        </h5>
+
+
+
+                        <h5>
+
+
+
+
+                            <label for="druh">Druh :</label>
+                            <select class="form-control" id="druh" name="druh" >
+                                @foreach($druhy_nazov as $druh_nazov)
+                                    <optgroup label={{$druh_nazov->nazov}} id={{$druh_nazov->nazov}}>
+
+
+                                        @foreach($druhy as $druh1)
+
+
+
+                                            @if(($druh_nazov->nazov == $druh1->nazov) && (substr($druh1->podnazov,0, 7) != "Všetky" ))
+
+                                                @if ($druh->podnazov == $druh1->podnazov)
+                                                    <option selected="selected" value={{$druh->id}}>{{$druh->podnazov}}</option>
+                                                @else
+                                                    <option value={{$druh1->id}}>{{$druh1->podnazov}}</option>
+                                                @endif
+
+
+
+                                            @endif
+
+
+                                        @endforeach
+
+                                    </optgroup>
+
+                                @endforeach
+                            </select>
 
                         </h5>
 
                         <h5>
 
-                            Druh : {{$druh->nazov}}
+                            <label id="typ_label" for="typ">Typ :</label>
+                            <select id="typ" class="form-control" name="typ">
+                                @foreach($typy as $typ1)
+
+                                    @if ($typ1->nazov == $typ->nazov)
+                                        <option selected="selected" id={{$typ->nazov}} value={{$typ->id}}>{{$typ->nazov}}</option>
+                                    @else
+                                        <option id={{$typ1->nazov}} value={{$typ1->id}}>{{$typ1->nazov}}</option>
+                                    @endif
+                                @endforeach
+                            </select>
 
                         </h5>
 
                         <h5>
 
-                            Typ : {{$typ->nazov}}
+                            <label id="stavy_label" for="stavy">Stav :</label>
+                            <select id="stavy" class="form-control" name="stavy">
+
+                                @foreach($stavy as $stav1)
+                                    @if(substr($stav1->nazov,0, 7) != "Všetky" )
+
+                                        @if ($stav1->nazov == $stav->nazov)
+                                            <option selected="selected" value={{$stav->id}}>{{$stav->nazov}}</option>
+                                        @else
+                                            <option value={{$stav1->id}}>{{$stav1->nazov}}</option>
+                                        @endif
+
+
+                                    @endif
+                                @endforeach
+
+                            </select>
+
 
                         </h5>
+
+
 
                         <h5 >
 
@@ -285,33 +391,55 @@
                 </div>
 
 
-                <h3>Popis:</h3>
-                <p class="product-description">{{$inzerat->popis}}</p>
 
-                @if ($inzerat->vymera_domu != null)
-                    <h5 class="colors">
-                        Vymera domu : {{$inzerat->vymera_domu}}
-                    </h5>
-                @endif
 
-                @if ($inzerat->vymera_pozemku != null)
-                    <h5 class="colors">
-                        Vymera pozemku : {{$inzerat->vymera_pozemku}}
-                    </h5>
-                @endif
 
-                @if ($inzerat->uzitkova_plocha != null)
-                    <h5 class="colors">
-                        Uzitkova plocha : {{$inzerat->uzitkova_plocha}}
-                    </h5>
-                @endif
+
+                <label for="popis">Popis</label>
+                <textarea required id="popis" class="form-control" placeholder="Zadajte popis" name="popis"
+                          rows="4" cols="50">{{$inzerat->popis}}</textarea>
+
+
+                <div id="vymera_domu">
+                    <label for="vymera_domu">Výmera domu(m<sup>2</sup>)</label>
+                    <input required placeholder="vymera domu" class="form-control" value="{{$inzerat->vymera_domu}}" type="number" min="0"
+                           name="vymera_domu"/>
+
+                </div>
+
+
+                <div id="vymera_pozemku">
+                    <label for="vymera_pozemku">Výmera pozemku(m<sup>2</sup>)</label>
+                    <input required placeholder="vymera pozemku" class="form-control" value="{{$inzerat->vymera_pozemku}}" type="number" min="0"
+                           name="vymera_pozemku"/>
+
+                </div>
+
+
+                <div id="uzitkova_plocha">
+                    <label for="uzitkova_plocha">Uzitkova plocha(m<sup>2</sup>)</label>
+                    <input required placeholder="uzitkova plocha" class="form-control"  value="{{$inzerat->uzitkova_plocha}}" type="number" min="0"
+                           name="uzitkova_plocha"/>
+
+                </div>
 
 
             </div>
+
+            <br><br>
+
+            <div>
+
+                <input type="submit" class="btn btn-danger form-control" value="Aktualizovať" name="submit">
+
+                <input type="hidden" value="{{ csrf_token() }}" name="_token">
+            </div>
         </div>
+
     </div>
 
 
+        @include('errors')
     </form>
 
 
@@ -323,3 +451,7 @@
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src='{{ URL::asset('js/polozky_formularu_realitka.js') }}'></script>
+<script src='{{ URL::asset('js/cena.js') }}'></script>

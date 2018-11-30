@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Inzerat;
+use App\Obec;
+use App\Druh;
+use App\Typ;
+use App\Stav;
 
 
 
@@ -23,7 +27,8 @@ class RealitkaInzeratyController extends Controller
         $inzeraty = DB::table('inzeraty')
             ->join('pouzivatelia', 'inzeraty.pouzivatel_id', '=', 'pouzivatelia.id' )
             ->join('realitne_kancelarie', 'pouzivatelia.realitna_kancelaria_id', '=', 'realitne_kancelarie.id')
-            ->select('inzeraty.*', 'pouzivatelia.meno AS meno', 'pouzivatelia.priezvisko AS priezvisko', 'pouzivatelia.email AS email', 'pouzivatelia.telefon AS telefon')
+            ->join('obce', 'inzeraty.obec_id', '=', 'obce.id' )
+            ->select('inzeraty.*', 'pouzivatelia.meno AS meno', 'pouzivatelia.priezvisko AS priezvisko', 'pouzivatelia.email AS email', 'pouzivatelia.telefon AS telefon', 'obce.obec AS obec')
             ->where('pouzivatelia.realitna_kancelaria_id', '=', $realitka_id )
             ->get();
 
@@ -69,7 +74,8 @@ class RealitkaInzeratyController extends Controller
         $druh = $inzerat->druh()->first();
         $stav = $inzerat->stav()->first();
         $typ = $inzerat->typ()->first();
-        $kraj = $inzerat->kraj()->first();
+        $obec = $inzerat->obec()->first();
+        //$kraj = $inzerat->kraj()->first();
         $pouzivatel = $inzerat->pouzivatel()->first();
         $fotografie = DB::table('fotografie')->where('inzerat_id', $id)->get();
 
@@ -79,7 +85,8 @@ class RealitkaInzeratyController extends Controller
             ->with(compact('druh'))
             ->with(compact('stav'))
             ->with(compact('typ'))
-            ->with(compact('kraj'))
+            ->with(compact('obec'))
+            //->with(compact('kraj'))
             ->with(compact('fotografie'))
             ->with(compact('pouzivatel'));
 
@@ -104,14 +111,23 @@ class RealitkaInzeratyController extends Controller
         $kraj = $inzerat->kraj()->first();
         $pouzivatel = $inzerat->pouzivatel()->first();
         $fotografie = DB::table('fotografie')->where('inzerat_id', $id)->get();
-
+        $obce = Obec::all();
+        $druhy = Druh::all();
+        $druhy_nazov = Druh::select('nazov')->groupBy('nazov')->get();
+        $typy = Typ::all();
+        $stavy = Stav::all();
         return view('spravovanie.realitka.inzeraty.upravit')
             ->with(compact('inzerat'))
             ->with(compact('kategoria'))
             ->with(compact('druh'))
+            ->with(compact('druhy'))
+            ->with(compact('druhy_nazov'))
             ->with(compact('stav'))
+            ->with(compact('stavy'))
             ->with(compact('typ'))
+            ->with(compact('typy'))
             ->with(compact('kraj'))
+            ->with(compact('obce'))
             ->with(compact('fotografie'))
             ->with(compact('pouzivatel'));
     }

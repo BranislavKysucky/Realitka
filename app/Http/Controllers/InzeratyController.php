@@ -179,13 +179,12 @@ class InzeratyController extends Controller
 
     public function create()   // otvorenie viewu pre vytvorenie inzeratu + dynamicke data z db
     {
-        $kategorie = Kategoria::all();
         $typy = Typ::all();
         $druhy = Druh::all();
         $druhy_nazov = Druh::select('nazov')->groupBy('nazov')->get();
         $stavy = Stav::all();
         $obce = Obec::all();
-        return view('inzeraty.vytvorit_inzerat', ['kategorie' => $kategorie, 'typy' => $typy, 'druhy' => $druhy, 'stavy' => $stavy, 'druhy_nazov' => $druhy_nazov, 'obce' => $obce]);
+        return view('inzeraty.vytvorit_inzerat', ['typy' => $typy, 'druhy' => $druhy, 'stavy' => $stavy, 'druhy_nazov' => $druhy_nazov, 'obce' => $obce]);
     }
 
     /**
