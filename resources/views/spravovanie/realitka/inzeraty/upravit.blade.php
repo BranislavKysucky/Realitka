@@ -13,16 +13,7 @@
 
         img {
             max-width: 100%; }
-        .buttonik {
-            position: fixed; /* or position: absolute; */
-            bottom: 0;
-            right: 0;
-            padding: 10px;
 
-
-
-
-        }
         .preview {
             display: -webkit-box;
             display: -webkit-flex;
@@ -92,11 +83,7 @@
             -ms-flex-direction: column;
             flex-direction: column; }
 
-        .colors {
-            -webkit-box-flex: 1;
-            -webkit-flex-grow: 1;
-            -ms-flex-positive: 1;
-            flex-grow: 1; }
+
 
         .product-title, .price, .sizes, .colors {
             text-transform: UPPERCASE;
@@ -132,7 +119,9 @@
 
         /*# sourceMappingURL=style.css.map */
 
-
+        textarea {
+            resize: none;
+        }
 
 
 
@@ -140,21 +129,6 @@
 
     <!-- CSS TU JE NA PRIAMO ZATIAL ABY SA LAHKO UPRAVOVALO POTOM HO PREMIESTNIM EXTERNE -->
 
-    <div class="buttonik">
-
-        <form action="{{action('RealitkaInzeratyController@destroy', $inzerat->id)}}" method="post">
-            {{csrf_field()}}
-            <input name="_method" type="hidden" value="DELETE">
-            <button  class="btn btn-danger" type="submit">Odstranit  <span heigth="14px" class="glyphicon glyphicon-trash"></span> </button>
-        </form>
-
-        <form action="{{action('RealitkaInzeratyController@show', $inzerat->id)}}" method="get">
-            {{csrf_field()}}
-            <input name="_method" type="hidden" value="SHOW">
-            <button class="btn btn-danger" type="submit">Nahlad <span class="glyphicon glyphicon-eye-open"></span></button>
-        </form>
-
-    </div>
 
 
 
@@ -204,7 +178,7 @@
 
                     <div class="details col-md-6">
 
-                        <h3 class="product-title"><label for="nazov"><strong>Nazov</strong></label><input required id="nazov" class="form-control" placeholder="Zadajte nazov" value="{{$inzerat->nazov}}" name="nazov"/></h3>
+                        <h3 class="product-title"><label for="nazov"><strong>Názov</strong></label><input required id="nazov" class="form-control" placeholder="Zadajte nazov" value="{{$inzerat->nazov}}" name="nazov"/></h3>
 
 
 
@@ -212,7 +186,7 @@
 
 
                         <div id="cena" name="cena">
-                            <label for="cena">Cena(€)</label>
+                            <label for="cena"><strong>Cena (€) </strong></label>
                             <input  placeholder="cena" class="form-control" type="number" min="0" id="cena"
                                     value="{{$inzerat->cena}}"
                                     oninput="hideCena_dohodou();" name="cena"/>
@@ -225,7 +199,7 @@
                         @if ($inzerat->cena_dohodou == 1)
                             <div id="cena_dohodou" >
 
-                                <label for="cena_dohodou">Cena dohodou </label>
+                                <label for="cena_dohodou"><strong>Cena dohodou</strong> </label>
                                 <label class="radio-inline"><input value=true onchange="hideCena();" name="cena_dohodou"
                                                                    id="cena_dohodou" type="radio"
                                                                    name="optradio" checked>Ano</label>
@@ -238,7 +212,7 @@
                         @else
                             <div id="cena_dohodou" >
 
-                                <label for="cena_dohodou">Cena dohodou </label>
+                                <label for="cena_dohodou"><strong>Cena dohodou </strong> </label>
                                 <label class="radio-inline"><input value=true onchange="hideCena();" name="cena_dohodou"
                                                                    id="cena_dohodou" type="radio"
                                                                    name="optradio" >Ano</label>
@@ -293,7 +267,7 @@
 
 
 
-                            <label for="druh">Druh :</label>
+                            <label for="druh"><strong>Druh : </strong></label>
                             <select class="form-control" id="druh" name="druh" >
                                 @foreach($druhy_nazov as $druh_nazov)
                                     <optgroup label={{$druh_nazov->nazov}} id={{$druh_nazov->nazov}}>
@@ -327,7 +301,7 @@
 
                         <h5>
 
-                            <label id="typ_label" for="typ">Typ :</label>
+                            <label id="typ_label" for="typ"><strong>Typ : </strong></label>
                             <select id="typ" class="form-control" name="typ">
                                 @foreach($typy as $typ1)
 
@@ -343,7 +317,7 @@
 
 
 @if ($stav!=null)
-                            <h5>        <label id="stavy_label" for="stavy">Stav :</label>
+                            <h5>        <label id="stavy_label" for="stavy"><strong>Stav :</strong></label>
                                 <select id="stavy" class="form-control" name="stavy">
 
                                     @foreach($stavy as $stav1)
@@ -373,7 +347,7 @@
                             
 
                         @if (count($makleri) != 0)
-                                <label id="makleri_label" for="makleri">Makleri :</label>
+                                <label id="makleri_label" for="makleri"><strong>Makléri : </strong></label>
                                 <select id="makleri" class="form-control" name="makleri">
 
                                     @foreach($makleri as $makler)
@@ -391,7 +365,7 @@
                                 </select>
 
                         @else
-                                <label id="makleri_label" for="makleri">Vytvoril :</label>
+                                <label id="makleri_label" for="makleri"><strong>Vytvoril : </strong></label>
                                 <select id="makleri" class="form-control" name="makleri">
 
 
@@ -430,7 +404,7 @@
 
 
 
-                <label for="popis">Popis</label>
+                <label for="popis"><strong>Popis </strong></label>
                 <textarea required id="popis" class="form-control" placeholder="Zadajte popis" name="popis"
                           rows="4" cols="50">{{$inzerat->popis}}</textarea>
 
@@ -452,7 +426,7 @@
 
 
                 <div id="uzitkova_plocha">
-                    <label for="uzitkova_plocha">Uzitkova plocha(m<sup>2</sup>)</label>
+                    <label for="uzitkova_plocha">Úžitková plocha(m<sup>2</sup>)</label>
                     <input required placeholder="uzitkova plocha" class="form-control"  value="{{$inzerat->uzitkova_plocha}}" type="number" min="0"
                            name="uzitkova_plocha"/>
 
@@ -465,18 +439,32 @@
 
             <div>
 
-                <input type="submit" class="btn btn-danger form-control" value="Aktualizovať" name="submit">
+
+
+
 
 
             </div>
         </div>
 
+
     </div>
 
-
+        <button  class="btn btn-info form-control" type="submit">Aktualizovať  <span heigth="14px"  name="submit" class="glyphicon glyphicon-edit"></span> </button>
         @include('errors')
     </form>
 
+    <form action="{{action('RealitkaInzeratyController@destroy', $inzerat->id)}}" method="post">
+        {{csrf_field()}}
+        <input name="_method" type="hidden" value="DELETE">
+        <button  onclick="return confirm('Prosím potvrdťe zmazanie');" class="btn btn-info form-control" type="submit">Odstrániť  <span heigth="14px" class="glyphicon glyphicon-trash"></span> </button>
+    </form>
+
+    <form action="{{action('RealitkaInzeratyController@show', $inzerat->id)}}" method="get">
+        {{csrf_field()}}
+        <input name="_method" type="hidden" value="SHOW">
+        <button class="btn btn-info form-control" type="submit">Náhľad <span class="glyphicon glyphicon-eye-open"></span></button>
+    </form>
 
 
 

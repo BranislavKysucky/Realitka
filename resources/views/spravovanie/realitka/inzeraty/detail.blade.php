@@ -13,16 +13,7 @@
 
     img {
         max-width: 100%; }
-    .buttonik {
-        position: fixed; /* or position: absolute; */
-        bottom: 0;
-        right: 0;
-        padding: 10px;
 
-
-
-
-    }
     .preview {
         display: -webkit-box;
         display: -webkit-flex;
@@ -140,21 +131,7 @@
 
     <!-- CSS TU JE NA PRIAMO ZATIAL ABY SA LAHKO UPRAVOVALO POTOM HO PREMIESTNIM EXTERNE -->
 
-<div class="buttonik">
 
-    <form action="{{action('RealitkaInzeratyController@destroy', $inzerat->id)}}" method="post">
-        {{csrf_field()}}
-        <input name="_method" type="hidden" value="DELETE">
-        <button  class="btn btn-danger" type="submit">Odstranit  <span heigth="14px" class="glyphicon glyphicon-trash"></span> </button>
-    </form>
-
-    <form action="{{action('RealitkaInzeratyController@edit', $inzerat->id)}}" method="get">
-        {{csrf_field()}}
-        <input name="_method" type="hidden" value="EDIT">
-        <button class="btn btn-danger" type="submit">Upravit  <span class="glyphicon glyphicon-edit"></span></button>
-    </form>
-
-</div>
 
 
 
@@ -229,7 +206,7 @@
 
                         <h5>
 
-                            Kategoria : {{$kategoria->nazov}}
+                            Kategória : {{$kategoria->nazov}}
 
                         </h5>
 
@@ -247,7 +224,7 @@
 
                         <h5 >
 
-                            Makler : {{$pouzivatel->meno." ".$pouzivatel->priezvisko}}
+                            Maklér : {{$pouzivatel->meno." ".$pouzivatel->priezvisko}}
 
                         </h5>
 
@@ -278,19 +255,19 @@
 
                 @if ($inzerat->vymera_domu != null)
                     <h5 class="colors">
-                        Vymera domu : {{$inzerat->vymera_domu}}
+                        Výmera domu : {{$inzerat->vymera_domu}}
                     </h5>
                 @endif
 
                 @if ($inzerat->vymera_pozemku != null)
                     <h5 class="colors">
-                        Vymera pozemku : {{$inzerat->vymera_pozemku}}
+                        Výmera pozemku : {{$inzerat->vymera_pozemku}}
                     </h5>
                 @endif
 
                 @if ($inzerat->uzitkova_plocha != null)
                     <h5 class="colors">
-                        Uzitkova plocha : {{$inzerat->uzitkova_plocha}}
+                        Úžitková plocha : {{$inzerat->uzitkova_plocha}}
                     </h5>
                 @endif
 
@@ -299,6 +276,20 @@
         </div>
     </div>
 
+
+
+
+        <form action="{{action('RealitkaInzeratyController@destroy', $inzerat->id)}}" method="post">
+            {{csrf_field()}}
+            <input name="_method" type="hidden" value="DELETE">
+            <button  class="btn btn-info form-control" type="submit">Odstranit  <span heigth="14px" class="glyphicon glyphicon-trash"></span> </button>
+        </form>
+
+        <form action="{{action('RealitkaInzeratyController@edit', $inzerat->id)}}" method="get">
+            {{csrf_field()}}
+            <input name="_method" type="hidden" value="EDIT">
+            <button class="btn btn-info form-control" type="submit">Upravit  <span class="glyphicon glyphicon-edit"></span></button>
+        </form>
 
 
 

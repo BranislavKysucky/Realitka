@@ -13,18 +13,19 @@ $(document).ready(function()
 
 
     if($('input[name=vymera_pozemku]').val() == "") {
-        console.log($('input[name=vymera_pozemku]').val() + "pozemek");
+        $('input[name=vymera_pozemku]').val("0");
         $("#vymera_pozemku").hide().find(':input').attr('required', false);
     }
 
 
     if($('input[name=uzitkova_plocha]').val() == "") {
-        console.log($('input[name=uzitkova_plocha]').val() + "plocha");
+        $('input[name=uzitkova_plocha]').val("0");
         $("#uzitkova_plocha").hide().find(':input').attr('required', true);
     }
 
     if($('input[name=vymera_domu]').val() == "") {
-        console.log($('input[name=vymera_domu]').val() + "dom");
+        $('input[name=vymera_domu]').val("0");
+
         $("#vymera_domu").hide().find(':input').attr('required', true);
     }
 
@@ -33,10 +34,10 @@ $(document).ready(function()
 
         if ($('#druh :selected').parent().attr('id') == "Byty")   // Byty
         {
-            $('input[name=vymera_domu]').val("");
+            $('input[name=vymera_domu]').val("0");
             $("#vymera_domu").hide().find(':input').attr('required', false);
 
-            $('input[name=vymera_pozemku]').val("");
+            $('input[name=vymera_pozemku]').val("0");
             $("#vymera_pozemku").hide().find(':input').attr('required', false);
 
             $("#uzitkova_plocha").show().find(':input').attr('required', true);
@@ -48,7 +49,7 @@ $(document).ready(function()
             $("#vymera_domu").show().find(':input').attr('required', true);
             $("#vymera_pozemku").show().find(':input').attr('required', true);
 
-            $('input[name=uzitkova_plocha]').val("");
+            $('input[name=uzitkova_plocha]').val("0");
             $("#uzitkova_plocha").hide().find(':input').attr('required', false);
 
             $("#stavy").show();
@@ -58,10 +59,10 @@ $(document).ready(function()
         else if ($('#druh :selected').parent().attr('id') == "Priestory")  // Priestory
         {
 
-            $('input[name=vymera_domu]').val("");
+            $('input[name=vymera_domu]').val("0");
             $("#vymera_domu").hide().find(':input').attr('required', false);
 
-            $('input[name=vymera_pozemku]').val("");
+            $('input[name=vymera_pozemku]').val("0");
             $("#vymera_pozemku").hide().find(':input').attr('required', false);
 
 
@@ -73,13 +74,13 @@ $(document).ready(function()
 
         else if ($('#druh :selected').parent().attr('id') == "Pozemky")         // Pozemky
         {
-            $('input[name=vymera_domu]').val("");
+            $('input[name=vymera_domu]').val("0");
             $("#vymera_domu").hide().find(':input').attr('required', false);
 
 
             $("#vymera_pozemku").show().find(':input').attr('required', true);
 
-            $('input[name=uzitkova_plocha]').val("");
+            $('input[name=uzitkova_plocha]').val("0");
             $("#uzitkova_plocha").hide().find(':input').attr('required', false);
 
             $("#stavy").val(null);
