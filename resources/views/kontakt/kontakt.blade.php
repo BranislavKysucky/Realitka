@@ -8,8 +8,8 @@
     @endif
 
 <div class="col-md-9 col-lg-9 col-sm-9">
-    <h3>Team</h3>
-    <div class="inline">
+    <h3 align="center">Team</h3>
+    <div align="center" class="inline">
         <div>
             <div><img style="width: 200px; height: 200px" src="http://oldengineering.co.uk/wp-content/uploads/2015/11/generic-headshot.png"><br>
                 <p>Meno Priezvisko</p>
@@ -35,7 +35,7 @@
 
 
 
-<div class="panel panel-info">
+<div style="background-color: #f5f5f5"  class="panel">
     <h3 style="margin-top: 10px;margin-left: 10px">Kontaktna adresa</h3>
     <ul>
         <li><i class="fas fa-mobile"></i> +421 222 333 555</li>
@@ -52,7 +52,7 @@
 
 
 
-<div class="panel panel-info">
+<div align="center" style="background-color: #f5f5f5" class="panel">
 <h3 style="margin-top: 10px;margin-left: 10px">Kontaktujte nas !</h3>
     <!-- zatial to dame bez akcie, neskor bude fungovat normalne odosielanie mailov-->
     <form style="margin-left: 10px;margin-right: 10px" action="customerEmailPost" method="post" enctype="multipart/form-data">
@@ -65,7 +65,7 @@
         <textarea class="form-control" required id="sprava" name="sprava" rows="8" cols="100" placeholder="Vasa sprava..."></textarea>
 
 
-        <input style="margin-bottom: 10px;margin-top: 10px" type="submit" class="btn btn-success form-control" value="Odoslat spravu" name="submit">
+        <input style="margin-bottom: 10px;margin-top: 10px" type="submit" class="btn btn-outline-success form-control" value="Odoslat spravu" name="submit">
 
         <input type="hidden" value="{{ csrf_token() }}" name="_token">
     </form>
