@@ -245,6 +245,7 @@ class InzeratyController extends Controller
             $obec_nazov = $request->get('lokalita');
             $semicolonPos = strpos($obec_nazov, ',');
             $obec = substr($obec_nazov, 0, $semicolonPos);
+
             $obec_id = DB::table('obce')
                 ->select('id')
                 ->where('obec', $obec)->first();

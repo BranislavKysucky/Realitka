@@ -151,7 +151,7 @@
         <form action="{{action('RealitkaInzeratyController@show', $inzerat->id)}}" method="get">
             {{csrf_field()}}
             <input name="_method" type="hidden" value="SHOW">
-            <button class="btn btn-danger" type="submit">Zobrazit <span class="glyphicon glyphicon-eye-open"></span></button>
+            <button class="btn btn-danger" type="submit">Nahlad <span class="glyphicon glyphicon-eye-open"></span></button>
         </form>
 
     </div>
@@ -161,12 +161,13 @@
     <form class="form-horizontal" action="{{action('RealitkaInzeratyController@update', $inzerat->id)}}" method="post"
           enctype="multipart/form-data">
         {{csrf_field()}}
-        <input name="_method" type="hidden" value="PATCH">
+        {{method_field('PUT')}}
 
 
 
 
-    <div class="container">
+
+        <div class="container">
         <div class="card">
             <div class="container-fliud">
                 <div class="wrapper row">

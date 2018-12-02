@@ -167,9 +167,10 @@ class RealitkaInzeratyController extends Controller
         $obec = substr($obec_nazov, 0, $semicolonPos);
         $obecOkres = substr($obec_nazov, $semicolonPos+1, strlen($obec_nazov)+1);
         $obecOkres = str_replace("okres","",$obecOkres);
-        $obecOkres = substr($obecOkres, 1, strlen($obec_nazov)+1);
+        $obecOkres = substr($obecOkres, 2, strlen($obec_nazov)+1);
+
+
         $obec_id = DB::table('obce')
-            ->select('id')
             ->where('obec', '=',$obec)
             ->where('okres_id','=', $obecOkres)
             ->value('id');
@@ -186,6 +187,10 @@ class RealitkaInzeratyController extends Controller
         $inzerat->ulica=request('ulica');
         $inzerat->druh_id=request('druh');
         $inzerat->typ_id=request('typ');
+        $inzerat->popis=request('popis');
+        $inzerat->vymera_domu=request('vymera_domu');
+        $inzerat->vymera_pozemku=request('vymera_pozemku');
+        $inzerat->uzitkova_plocha=request('uzitkova_plocha');
 
 
         $inzerat->stav_id=request('stavy');
@@ -195,7 +200,7 @@ class RealitkaInzeratyController extends Controller
         $inzerat->pouzivatel_id=request('makleri');
         $inzerat->save();
 
-        return redirect()->action('RealitkaInzeratyController@index');
+       return redirect()->action('RealitkaInzeratyController@index');
     }
 
     /**
