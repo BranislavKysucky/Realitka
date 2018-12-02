@@ -33,14 +33,14 @@
                     <form action="{{action('RealitkaInzeratyController@show', $inzerat->id)}}" method="get">
                         {{csrf_field()}}
                         <input name="_method" type="hidden" value="SHOW">
-                        <button class="btn btn-danger" type="submit"><span class="glyphicon glyphicon-eye-open"></span></button>
+                        <button class="btn btn-info" type="submit"><span class="glyphicon glyphicon-eye-open"></span></button>
                     </form>
 
 
                     <form action="{{action('RealitkaInzeratyController@edit', $inzerat->id)}}" method="get">
                         {{csrf_field()}}
                         <input name="_method" type="hidden" value="EDIT">
-                        <button class="btn btn-danger" type="submit"><span class="glyphicon glyphicon-edit"></span></button>
+                        <button class="btn btn-info" type="submit"><span class="glyphicon glyphicon-edit"></span></button>
                     </form>
 
 
@@ -48,7 +48,7 @@
                     <form action="{{action('RealitkaInzeratyController@destroy', $inzerat->id)}}" method="post">
                         {{csrf_field()}}
                         <input name="_method" type="hidden" value="DELETE">
-                        <button class="btn btn-danger" type="submit"><span class="glyphicon glyphicon-trash"></span></button>
+                        <button class="btn btn-info" onclick="return confirm('Prosím potvrdťe zmazanie');" type="submit"><span class="glyphicon glyphicon-trash"></span></button>
                      </form>
 
 
