@@ -33,8 +33,12 @@ $(document).ready(function()
 
         if ($('#druh :selected').parent().attr('id') == "Byty")   // Byty
         {
+            $('input[name=vymera_domu]').val("");
             $("#vymera_domu").hide().find(':input').attr('required', false);
+
+            $('input[name=vymera_pozemku]').val("");
             $("#vymera_pozemku").hide().find(':input').attr('required', false);
+
             $("#uzitkova_plocha").show().find(':input').attr('required', true);
             $("#stavy").show();
             $("#stavy_label").show();
@@ -43,15 +47,24 @@ $(document).ready(function()
         {
             $("#vymera_domu").show().find(':input').attr('required', true);
             $("#vymera_pozemku").show().find(':input').attr('required', true);
+
+            $('input[name=uzitkova_plocha]').val("");
             $("#uzitkova_plocha").hide().find(':input').attr('required', false);
+
             $("#stavy").show();
             $("#stavy_label").show();
 
         }
         else if ($('#druh :selected').parent().attr('id') == "Priestory")  // Priestory
         {
+
+            $('input[name=vymera_domu]').val("");
             $("#vymera_domu").hide().find(':input').attr('required', false);
+
+            $('input[name=vymera_pozemku]').val("");
             $("#vymera_pozemku").hide().find(':input').attr('required', false);
+
+
             $("#uzitkova_plocha").show().find(':input').attr('required', true);
             $("#stavy").show();
             $("#stavy_label").show();
@@ -60,9 +73,16 @@ $(document).ready(function()
 
         else if ($('#druh :selected').parent().attr('id') == "Pozemky")         // Pozemky
         {
+            $('input[name=vymera_domu]').val("");
             $("#vymera_domu").hide().find(':input').attr('required', false);
+
+
             $("#vymera_pozemku").show().find(':input').attr('required', true);
+
+            $('input[name=uzitkova_plocha]').val("");
             $("#uzitkova_plocha").hide().find(':input').attr('required', false);
+
+            $("#stavy").val(null);
             $("#stavy").hide();
             $("#stavy_label").hide();
 
@@ -75,6 +95,7 @@ $(document).ready(function()
 
         if ($('#typ :selected').attr('id') == "Kúpa" || $('#typ :selected').attr('id') == "Výmena" || $('#typ :selected').attr('id') == "Dražba") {
 
+            $("#cena_dohodou").val(null);
             $("#cena_dohodou").hide();
 
         } else {

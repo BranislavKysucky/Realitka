@@ -10,6 +10,8 @@ use App\Obec;
 use App\Druh;
 use App\Typ;
 use App\Stav;
+use Log;
+
 
 
 
@@ -116,6 +118,8 @@ class RealitkaInzeratyController extends Controller
         $druhy_nazov = Druh::select('nazov')->groupBy('nazov')->get();
         $typy = Typ::all();
         $stavy = Stav::all();
+        $makleri = DB::table('pouzivatelia')->where('rola', 3)->get();
+
         return view('spravovanie.realitka.inzeraty.upravit')
             ->with(compact('inzerat'))
             ->with(compact('kategoria'))
@@ -129,6 +133,7 @@ class RealitkaInzeratyController extends Controller
             ->with(compact('kraj'))
             ->with(compact('obce'))
             ->with(compact('fotografie'))
+            ->with(compact('makleri'))
             ->with(compact('pouzivatel'));
     }
 
@@ -141,7 +146,56 @@ class RealitkaInzeratyController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $inzerat = Inzerat::findOrFail($id);
+
+        $inzerat->nazov=request('nazov');
+        $cena_dohodou = $request->get('cena_dohodou');              // prichadza z radiobuttonu ako true or false
+        if ($cena_dohodou == "true" & $request->get('cena') == "") {
+            $inzerat->cena_dohodou = 1;
+        } else if($cena_dohodou == "false" & $request->get('cena') != "") {
+            $inzerat->cena_dohodou = 0;
+            $inzerat->cena = $request->get('cena');
+        } else {
+            return back()->with('error', 'Prosíme Vás zadajte cenu alebo nastavte položku CENA DOHODOU na áno');
+        }
+
+
+
+
+        $obec_nazov = $request->get('lokalita');
+        $semicolonPos = strpos($obec_nazov, ',');
+        $obec = substr($obec_nazov, 0, $semicolonPos);
+        $obecOkres = substr($obec_nazov, $semicolonPos+1, strlen($obec_nazov)+1);
+        $obecOkres = str_replace("okres","",$obecOkres);
+        $obecOkres = substr($obecOkres, 1, strlen($obec_nazov)+1);
+        $obec_id = DB::table('obce')
+            ->select('id')
+            ->where('obec', '=',$obec)
+            ->where('okres_id','=', $obecOkres)
+            ->value('id');
+
+
+
+        $inzerat->obec_id = $obec_id;
+
+
+
+
+
+
+        $inzerat->ulica=request('ulica');
+        $inzerat->druh_id=request('druh');
+        $inzerat->typ_id=request('typ');
+
+
+        $inzerat->stav_id=request('stavy');
+
+
+        $inzerat->nazov=request('nazov');
+        $inzerat->pouzivatel_id=request('makleri');
+        $inzerat->save();
+
+        return redirect()->action('RealitkaInzeratyController@index');
     }
 
     /**

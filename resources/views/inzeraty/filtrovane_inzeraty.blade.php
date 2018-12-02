@@ -156,9 +156,27 @@
                 <h6 class="heading">{{$inzerat->nazov}}</h6>
                 <ul class="nospace meta">
                     <li><i class="fas fa-home"></i>  {{$inzerat->kategoria->nazov}} {{$inzerat->druh->nazov}} </li>
-                    <li><i class="fas fa-building"></i> {{$inzerat->stav->nazov}}, {{$inzerat->vymera_domu}}m² </li>
+
+
+
+
+                    @if ($inzerat->stav != null)
+                        <li><i class="fas fa-building"></i> {{$inzerat->stav->nazov}}, {{$inzerat->vymera_domu}}m² </li>
+                    @else
+                        <li><i class="fas fa-building"></i> {{$inzerat->vymera_domu}}m² </li>
+                    @endif
+
+
+
                     <li><i class="fas fa-hand-paper"></i> {{$inzerat->typ->nazov}} </li>
-                    <li><i class="fas fa-euro-sign"></i> <span style="color: limegreen">{{$inzerat->cena}}</span></li>
+
+                    @if ($inzerat->cena == null)
+                        <li><i class="fas fa-euro-sign"></i> <span style="color: limegreen">Dohodou</span></li>
+                    @else
+                        <li><i class="fas fa-euro-sign"></i> <span style="color: limegreen">{{$inzerat->cena}}</span></li>
+                    @endif
+
+
                 </ul>
                 <p>
                     {{$inzerat->popis}}

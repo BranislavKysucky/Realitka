@@ -161,7 +161,7 @@
     <form class="form-horizontal" action="{{action('RealitkaInzeratyController@update', $inzerat->id)}}" method="post"
           enctype="multipart/form-data">
         {{csrf_field()}}
-
+        <input name="_method" type="hidden" value="PATCH">
 
 
 
@@ -261,10 +261,12 @@
                         <h5>
 
                             <label for="lokalita"><strong>Obec/Mesto</strong></label>
-                            <input list="obce" id="lokalita" class="form-control" placeholder="Zadajte lokalitu" name="lokalita" value="{{$inzerat->obec->obec}}" autocomplete="off"/>
+                            <input list="obce" id="lokalita" class="form-control" placeholder="Zadajte lokalitu" name="lokalita" value="{{$inzerat->obec->obec.", okres ".$inzerat->obec->okres_id}}" autocomplete="off"/>
+
                             <datalist id="obce">
                                 @foreach($obce as $obec)
                                     <option href="#" id="{{$obec->obec}}">{{$obec->obec}}, okres {{$obec->okres_id}}</option>
+
                                 @endforeach
                             </datalist>
 
@@ -338,34 +340,66 @@
 
                         </h5>
 
-                        <h5>
 
-                            <label id="stavy_label" for="stavy">Stav :</label>
-                            <select id="stavy" class="form-control" name="stavy">
+@if ($stav!=null)
+                            <h5>        <label id="stavy_label" for="stavy">Stav :</label>
+                                <select id="stavy" class="form-control" name="stavy">
 
-                                @foreach($stavy as $stav1)
-                                    @if(substr($stav1->nazov,0, 7) != "Všetky" )
+                                    @foreach($stavy as $stav1)
+                                        @if(substr($stav1->nazov,0, 7) != "Všetky" )
 
-                                        @if ($stav1->nazov == $stav->nazov)
-                                            <option selected="selected" value={{$stav->id}}>{{$stav->nazov}}</option>
-                                        @else
-                                            <option value={{$stav1->id}}>{{$stav1->nazov}}</option>
+                                            @if ($stav1->nazov == $stav->nazov)
+                                                <option selected="selected" value={{$stav->id}}>{{$stav->nazov}}</option>
+                                            @else
+                                                <option value={{$stav1->id}}>{{$stav1->nazov}}</option>
+                                            @endif
+
+
                                         @endif
+                                    @endforeach
 
-
-                                    @endif
-                                @endforeach
-
-                            </select>
+                                </select>
 
 
                         </h5>
+@endif
+
 
 
 
                         <h5 >
 
-                            Makler : {{$pouzivatel->meno." ".$pouzivatel->priezvisko}}
+                            
+
+                        @if (count($makleri) != 0)
+                                <label id="makleri_label" for="makleri">Makleri :</label>
+                                <select id="makleri" class="form-control" name="makleri">
+
+                                    @foreach($makleri as $makler)
+
+
+                                        @if ($makler->email == $pouzivatel->email)
+                                            <option selected="selected" value={{$pouzivatel->id}}>{{$pouzivatel->email}}</option>
+                                        @else
+                                            <option value={{$makler->id}}>{{$makler->email}}</option>
+                                        @endif
+
+                                    @endforeach
+
+
+                                </select>
+
+                        @else
+                                <label id="makleri_label" for="makleri">Vytvoril :</label>
+                                <select id="makleri" class="form-control" name="makleri">
+
+
+                                <option selected="selected" value={{$pouzivatel->id}}>{{$pouzivatel->email}}</option>
+                                </select>
+
+                        @endif
+
+
 
                         </h5>
 
@@ -432,7 +466,7 @@
 
                 <input type="submit" class="btn btn-danger form-control" value="Aktualizovať" name="submit">
 
-                <input type="hidden" value="{{ csrf_token() }}" name="_token">
+
             </div>
         </div>
 
