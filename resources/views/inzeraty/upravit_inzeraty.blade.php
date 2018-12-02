@@ -12,7 +12,6 @@
 
                     <div class="panel-body">
                         <div align="center">
-                            <p>UPDATE nefunguje na cudzich tabulkach zatial. Asi zly dotaz v kontrolery.</p>
                             <h4>Úprava inzerátu</h4>
                         </div>
                         <form  method="post" class="form-horizontal" action="{{route('inzeraty.update',[$inzerat->id])}}" >
@@ -35,7 +34,7 @@
 
                             <label id="kategoria_label" for="kraj">Kategória</label>
                             <select id="kategoria_id" class="form-control" name="kategoria_id">
-                                <option id=0 value=1>{{$kategoria->nazov}}</option>
+                                <option id=0 value=0>{{$kategoria->nazov}}</option>
 
 
                                     <option id=1 value=1> @foreach($kategorie as $kategoria)

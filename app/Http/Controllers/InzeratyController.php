@@ -389,12 +389,17 @@ class InzeratyController extends Controller
 
         $inzerat = Inzerat::find($id);
         $pouzivatel = Inzerat::find($id);
-        $druh = Inzerat::find($id);
-        $stav = Inzerat::find($id);
-        $typ = Inzerat::find($id);
-        $kategorie = Inzerat::find($id);
+       // $druh = Inzerat::find($id);
+       // $stav = Inzerat::find($id);
+      //  $typ = Inzerat::find($id);
+       $kategorie = Inzerat::find($id);
 
+        $inzerat->druh_id=request('druh');
+        $inzerat->typ_id=request('typ');
+        $inzerat->stav_id=request('stavy');
 
+      //  $inzerat->kategoria_id=request('kategorie');
+      //  $inzerat->pouzivatel_id=request('pouzivatel');
 
         $inzerat->nazov=request('nazov');
         $inzerat->popis=request('popis');
@@ -406,9 +411,9 @@ class InzeratyController extends Controller
         $inzerat->uzitkova_plocha=request('uzitkova_plocha');
         $inzerat->cena_dohodou=request('cena_dohodou');
         $pouzivatel->telefon=request('telefon');
-        $druh->nazov=request('nazov');
-        $stav->nazov=request('nazov');
-        $typ->nazov=request('nazov');
+       // $druh->nazov=request('nazov');
+       // $stav->nazov=request('nazov');
+       // $typ->nazov=request('nazov');
         $kategorie->nazov=request('nazov');
         $inzerat->save();
 
