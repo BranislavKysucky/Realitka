@@ -12,7 +12,9 @@ class Inzerat extends Model
     {
         return $this->hasMany(Fotografia::class);
     }
-
+    public function jednaFotografia(){
+        return $this->hasMany(Fotografia::class)->oldest();
+    }
     public function obec()
     {
         return $this->belongsTo(Obec::class);

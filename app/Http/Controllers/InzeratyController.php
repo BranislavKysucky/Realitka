@@ -147,7 +147,9 @@ class InzeratyController extends Controller
         }else{
             $inzeraty = Inzerat::all();
         }
-
+        foreach ($inzeraty as $inzerat) {
+            $inzerat->obrazok = $inzerat->jednaFotografia()->value('url');
+        }
         return view('inzeraty.filtrovane_inzeraty', ['obce' => $obce, 'inzeraty' => $inzeraty]);
 
         //zobrazenie inzeratov podla telefonneho cisla
@@ -315,6 +317,8 @@ class InzeratyController extends Controller
         $typ = $inzerat->typ()->first();
         $pouzivatel = $inzerat->pouzivatel()->first();
         $obec = $inzerat->obec()->first();
+        $fotografie = DB::table('fotografie')->where('inzerat_id', $id)->get();
+
         $fotografie = DB::table('fotografie')->where('inzerat_id', $id)->get();
 
         return view('inzeraty.zobrazit_detail')

@@ -11,7 +11,7 @@ Route::get('realitne_kancelarie', 'MainNavController@getRealitky');
 Route::get('moje_inzeraty', 'MainNavController@getMojeInzeraty');
 Route::get('overit_email','MainNavController@overitEmail');
 Route::post('overit_email','MainNavController@overitEmailpost');
-
+Route::post('customerEmailPost', 'MainNavController@customerEmailPost');
 
 //routy pre pracu s autentifikaciou, napr. odhlasenie
 Auth::routes();
@@ -22,9 +22,6 @@ Route::resource('inzeraty', 'InzeratyController');
 
 //homecontroller je pre login a registrovanie(nic sem nepchajte zatial :D)
 Route::get('/home', 'HomeController@index')->name('home');
-
-
-Route::post('customerEmailPost', 'MainNavController@customerEmailPost');
 
 // stranky pre administracne rozhranie
 //tu budú všetky routy, ktore maju byť dostupné len ak je používateľ prihlásený
