@@ -279,18 +279,18 @@
 
 
 
-        <form action="{{action('RealitkaInzeratyController@destroy', $inzerat->id)}}" method="post">
-            {{csrf_field()}}
-            <input name="_method" type="hidden" value="DELETE">
-            <button  onclick="return confirm('Prosím potvrdťe zmazanie');" class="btn btn-info form-control" type="submit">Odstranit  <span heigth="14px" class="glyphicon glyphicon-trash"></span> </button>
-        </form>
+
 
         <form action="{{action('RealitkaInzeratyController@edit', $inzerat->id)}}" method="get">
             {{csrf_field()}}
             <input name="_method" type="hidden" value="EDIT">
             <button class="btn btn-info form-control" type="submit">Upravit  <span class="glyphicon glyphicon-edit"></span></button>
         </form>
-
+    <form action="{{action('RealitkaInzeratyController@destroy', $inzerat->id)}}" method="post">
+        {{csrf_field()}}
+        <input name="_method" type="hidden" value="DELETE">
+        <button  onclick="return confirm('Prosím potvrdťe zmazanie');" class="btn btn-info form-control" type="submit">Odstranit  <span heigth="14px" class="glyphicon glyphicon-trash"></span> </button>
+    </form>
 
 
 

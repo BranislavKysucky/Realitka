@@ -41,6 +41,11 @@ class RealitkaInzeratyController extends Controller
 
     }
 
+
+
+
+
+
     /**
      * Show the form for creating a new resource.
      *
@@ -59,10 +64,7 @@ class RealitkaInzeratyController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
-    }
+
 
     /**
      * Display the specified resource.
@@ -150,10 +152,11 @@ class RealitkaInzeratyController extends Controller
     {
         $inzerat = Inzerat::findOrFail($id);
 
-        $inzerat->nazov=request('nazov');
+        $inzerat->nazov=$request->get('nazov');
         $cena_dohodou = $request->get('cena_dohodou');              // prichadza z radiobuttonu ako true or false
         if ($cena_dohodou == "true" & $request->get('cena') == "") {
             $inzerat->cena_dohodou = 1;
+            $inzerat->cena = null;
         } else if($cena_dohodou == "false" & $request->get('cena') != "") {
             $inzerat->cena_dohodou = 0;
             $inzerat->cena = $request->get('cena');
@@ -186,23 +189,24 @@ class RealitkaInzeratyController extends Controller
 
 
 
-        $inzerat->ulica=request('ulica');
-        $inzerat->druh_id=request('druh');
-        $inzerat->typ_id=request('typ');
-        $inzerat->popis=request('popis');
-        $inzerat->vymera_domu=request('vymera_domu');
-        $inzerat->vymera_pozemku=request('vymera_pozemku');
-        $inzerat->uzitkova_plocha=request('uzitkova_plocha');
+        $inzerat->ulica=$request->get('ulica');
+        $inzerat->druh_id=$request->get('druh');
+        $inzerat->typ_id=$request->get('typ');
+        $inzerat->popis=$request->get('popis');
+        $inzerat->vymera_domu=$request->get('vymera_domu');
+        $inzerat->vymera_pozemku=$request->get('vymera_pozemku');
+        $inzerat->uzitkova_plocha=$request->get('uzitkova_plocha');
 
 
-        $inzerat->stav_id=request('stavy');
+        $inzerat->stav_id=$request->get('stavy');
 
 
-        $inzerat->nazov=request('nazov');
-        $inzerat->pouzivatel_id=request('makleri');
+        $inzerat->nazov=$request->get('nazov');
+        $inzerat->pouzivatel_id=$request->get('makleri');
         $inzerat->save();
 
-       return redirect()->action('RealitkaInzeratyController@index');
+     //  return redirect()->action('RealitkaInzeratyController@index');
+        return redirect()->action('RealitkaInzeratyController@show', $inzerat->id);
     }
 
     /**

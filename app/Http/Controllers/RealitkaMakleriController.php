@@ -32,7 +32,25 @@ class RealitkaMakleriController extends Controller
 
         return view('spravovanie.realitka.makleri.index', ['makleri' => $makleri]);
     }
+    public function indexPouzivatel(Request $request, $id)
+    {
+        $realitka_id = \Auth::user()->realitna_kancelaria_id;
 
+        $inzeraty = DB::table('inzeraty')
+            ->join('pouzivatelia', 'inzeraty.pouzivatel_id', '=', 'pouzivatelia.id' )
+            ->join('realitne_kancelarie', 'pouzivatelia.realitna_kancelaria_id', '=', 'realitne_kancelarie.id')
+            ->join('obce', 'inzeraty.obec_id', '=', 'obce.id' )
+            ->select('inzeraty.*', 'pouzivatelia.meno AS meno', 'pouzivatelia.priezvisko AS priezvisko', 'pouzivatelia.email AS email', 'pouzivatelia.telefon AS telefon', 'obce.obec AS obec')
+            ->where('pouzivatelia.realitna_kancelaria_id', '=', $realitka_id )
+            ->where('pouzivatelia.id', '=', $id )
+            ->get();
+
+
+
+
+        return view('spravovanie.realitka.makleri.indexPouzivatel', ['inzeraty' => $inzeraty]);
+
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -94,7 +112,13 @@ class RealitkaMakleriController extends Controller
      */
     public function show($id)
     {
-        return view('spravovanie.realitka.makleri.detail');
+
+        $pouzivatel = Pouzivatel::findOrFail($id);
+        $obce = Obec::all();
+
+        return view('spravovanie.realitka.makleri.detail')->with(compact('pouzivatel'))
+            ->with(compact('obce'));
+
     }
 
     /**
@@ -105,7 +129,13 @@ class RealitkaMakleriController extends Controller
      */
     public function edit($id)
     {
-        return view('spravovanie.realitka.makleri.upravit');
+
+
+
+        $pouzivatel = Pouzivatel::findOrFail($id);
+        $obce = Obec::all();
+        return view('spravovanie.realitka.makleri.upravit')->with(compact('pouzivatel'))
+            ->with(compact('obce'));
     }
 
     /**
@@ -118,6 +148,37 @@ class RealitkaMakleriController extends Controller
     public function update(Request $request, $id)
     {
 
+        $pouzivatel = Pouzivatel::findOrFail($id);
+        $obec_nazov = $request->get('lokalita');
+        $semicolonPos = strpos($obec_nazov, ',');
+        $obec = substr($obec_nazov, 0, $semicolonPos);
+        $obecOkres = substr($obec_nazov, $semicolonPos+1, strlen($obec_nazov)+1);
+        $obecOkres = str_replace("okres","",$obecOkres);
+        $obecOkres = substr($obecOkres, 2, strlen($obec_nazov)+1);
+
+
+        $obec_id = DB::table('obce')
+            ->where('obec', '=',$obec)
+            ->where('okres_id','=', $obecOkres)
+            ->value('id');
+
+        $pouzivatel->obec_id = $obec_id;
+        $pouzivatel->meno=$request->get('meno');
+        $pouzivatel->priezvisko=$request->get('priezvisko');
+        $pouzivatel->email=$request->get('email');
+        $pouzivatel->ulica_cislo=$request->get('ulica_pouzivatel');
+        $pouzivatel->PSC=$request->get('psc_pouzivatel');
+        $pouzivatel->telefon=$request->get('telefon_pouzivatel');
+        $pouzivatel->save();
+
+
+
+
+
+
+
+
+        return redirect()->action('RealitkaMakleriController@show', $pouzivatel->id);
     }
 
     /**

@@ -126,7 +126,7 @@
                                 <label for="password" class="col-md-4 control-label"><strong>Heslo</strong></label>
 
                                 <div class="col-md-6">
-                                    <input id="password" type="password" class="form-control" name="password" required>
+                                    <input id="password" onmouseover="this.type='text'" onmouseout="this.type='password'" type="password" class="form-control" name="password" required>
 
                                     @if ($errors->has('password'))
                                         <span class="help-block">
@@ -140,13 +140,13 @@
                                 <label for="password-confirm" class="col-md-4 control-label"><strong>Potvrdiť Heslo</strong></label>
 
                                 <div class="col-md-6">
-                                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                                    <input id="password-confirm" onmouseover="this.type='text'" onmouseout="this.type='password'" type="password" class="form-control" name="password_confirmation" required>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
-                                    <button type="submit" class="btn btn-primary">
+                                    <button type="submit" class="btn btn-info form-control">
                                         Registrovať
                                     </button>
                                 </div>
@@ -157,7 +157,7 @@
                 </div>
             </div>
         </div>
-    </div>
+
     </form>
 
 

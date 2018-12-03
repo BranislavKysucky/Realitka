@@ -187,7 +187,7 @@
 
                         <div id="cena" name="cena">
                             <label for="cena"><strong>Cena (€) </strong></label>
-                            <input  placeholder="cena" class="form-control" type="number" min="0" id="cena"
+                            <input placeholder="cena" class="form-control" type="number" min="0" id="cena"
                                     value="{{$inzerat->cena}}"
                                     oninput="hideCena_dohodou();" name="cena"/>
 

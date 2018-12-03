@@ -81,6 +81,7 @@
             </li>
             <li>
                 <a href="{{route('inzeraty_r.index')}}"><i class="icon icon-list-alt"></i> <span>Inzeráty</span></a>
+                <a href="{{route('inzeraty.create')}}"><i class="glyphicon glyphicon-plus"></i> <span>Pridať inzerát</span></a>
             </li>
             <li>
                 <a href="{{route('makleri_r.index')}}"><i class="icon icon-list-alt"></i> <span>Makléri</span></a>

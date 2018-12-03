@@ -50,4 +50,8 @@ class Pouzivatel extends Authenticatable
     {
         return $this->belongsTo(Kraj::class);
     }
+    public function obec()
+    {
+        return $this->belongsTo(Obec::class);
+    }
 }
