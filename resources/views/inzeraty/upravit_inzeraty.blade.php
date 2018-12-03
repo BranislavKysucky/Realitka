@@ -34,10 +34,10 @@
 
                             <label id="kategoria_label" for="kraj">Kategória</label>
                             <select id="kategoria_id" class="form-control" name="kategoria_id">
-                                <option id=0 value=0>{{$kategoria->nazov}}</option>
+                                <option  value={{$kategoria->id}}>{{$kategoria->nazov}}</option>
 
 
-                                    <option id=1 value=1> @foreach($kategorie as $kategoria)
+                                    <option> @foreach($kategorie as $kategoria)
                                         @if(substr($kategoria->nazov,0, 7) != "Všetky" )
                                             <option value={{$kategoria->id}}>{{$kategoria->nazov}}</option>
                                         @endif
@@ -47,20 +47,22 @@
 
 
 
+                            <label for="lokalita"><strong>Obec/Mesto</strong></label>
+                            <input list="obce" id="lokalita" class="form-control" placeholder="Zadajte lokalitu" name="lokalita" value="{{$inzerat->obec->obec.", okres ".$inzerat->obec->okres_id}}" autocomplete="off"/>
 
+                            <datalist id="obce">
+                                @foreach($obce as $obec)
+                                    <option href="#" id="{{$obec->obec}}">{{$obec->obec}}, okres {{$obec->okres_id}}</option>
 
-                            </select>
+                                @endforeach
+                            </datalist>
 
-                            <label id="obec" for="obec">Obec</label>
-                            <select id="kraj_id" class="form-control" name="kraje_nazov">
-                                <option id=0 value=1>{{$obec->obec}}</option>
-                            </select>
 
 
                             <label id="stavy_label" for="stavy">Stav</label>
                             <select id="stavy" class="form-control" name="stavy">
-                                <option id=0 value=1>{{$stav->nazov}}</option>
-                                <option id=1 value=1> @foreach($stavy as $stav)
+                                <option id=0 value={{$stav->id}}>{{$stav->nazov}}</option>
+                                <option> @foreach($stavy as $stav)
                                     @if(substr($stav->nazov,0, 7) != "Všetky" )
                                         <option value={{$stav->id}}>{{$stav->nazov}}</option>
                                     @endif
@@ -84,8 +86,8 @@
 
                             <label id="typ_label" for="typ">Typy</label>
                             <select id="typ" class="form-control" name="typ">
-                                <option id=0 value=1>{{$typ->nazov}}</option>
-                                <option id=1 value=1> @foreach($typy as $typ)
+                                <option id=0 value={{$typ->id}}>{{$typ->nazov}}</option>
+                                <option> @foreach($typy as $typ)
                                     <option id={{$typ->nazov}} value={{$typ->id}}>{{$typ->nazov}} </option>
                                 @endforeach
                             </select>
@@ -94,9 +96,39 @@
                             <label for="cena">Cena</label>
                             <input id="cena" class="form-control" placeholder="cena"  type="number"  name="cena" value="{{$inzerat->cena}}" />
 
-                            <label for="cena_dohodou">Cena dohodou</label>
-                            <input id="cena_dohodou" class="form-control" placeholder="Zadajte cenu dohodou" type="number"  name="cena_dohodou" value="{{$inzerat->cena_dohodou}}"/>
+                            @if ($inzerat->cena_dohodou == 1)
+                                <div id="cena_dohodou" >
 
+                                    <label for="cena_dohodou"><strong>Cena dohodou</strong> </label>
+                                    <label class="radio-inline"><input value=true onchange="hideCena();" name="cena_dohodou"
+                                                                       id="cena_dohodou" type="radio"
+                                                                       name="optradio" checked>Ano</label>
+                                    <label class="radio-inline"><input value=false onchange="hideCena();"
+                                                                       name="cena_dohodou"
+                                                                       id="cena_dohodou" type="radio" name="optradio"
+                                        >Nie</label>
+                                    <br>
+                                </div>
+                            @else
+                                <div id="cena_dohodou" >
+
+                                    <label for="cena_dohodou"><strong>Cena dohodou </strong> </label>
+                                    <label class="radio-inline"><input value=true onchange="hideCena();" name="cena_dohodou"
+                                                                       id="cena_dohodou" type="radio"
+                                                                       name="optradio" >Ano</label>
+                                    <label class="radio-inline"><input value=false onchange="hideCena();"
+                                                                       name="cena_dohodou"
+                                                                       id="cena_dohodou" type="radio" name="optradio" checked
+                                        >Nie</label>
+                                    <br>
+                                </div>
+
+
+
+
+
+
+                            @endif
                             <label for="vymera_domu">Výmera domu</label>
                             <input class="form-control" placeholder=" Zadajte vymeru domu"  type="number" name="vymera_domu" value="{{$inzerat->vymera_domu}}"/>
 
@@ -109,7 +141,7 @@
                             <label for="uzitkova_plocha">Úžitková plocha</label>
                             <input id="uzitkova_plocha" class="form-control" placeholder="Zadajte uzitkovu plochu" type="number" name="uzitkova_plocha" value="{{$inzerat->uzitkova_plocha}}"/>
 
-                            <label for="telefon">Kontakt </label>
+                            <label for="telefon">Kontakt / tel. číslo</label>
                             <input id="telefon" class="form-control" placeholder="Zadajte telefonne číslo"  name="telefon" value="{{$pouzivatel->telefon}}"/>
 
 

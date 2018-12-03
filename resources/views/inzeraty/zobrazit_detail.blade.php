@@ -62,7 +62,8 @@
 
                     <div class="summary entry-summary">
                         <h1 class=" loop-title" itemprop="headline">{{$inzerat->nazov}} </h1>
-                        <p class="price"> <span  class="woocommerce-Price-amount amount">Cena: {{ $inzerat->cena }}&nbsp;<span class="woocommerce-Price-currencySymbol">&euro;</span></span></p>
+                        @if ($inzerat->cena_dohodou == 0)   <p class="price"> <span  class="woocommerce-Price-amount amount">Cena: {{ $inzerat->cena }}&nbsp;<span class="woocommerce-Price-currencySymbol">&euro;</span></span></p>
+                   @else      <p class="price">   <label for="cena_dohodou"> <strong>Cenu je možné dohodnúť dohodou </strong> </label> @endif </p>
                         <div class="woocommerce-product-details__short-description">
                             <p> Stav: {{$stav->nazov}}<br />
                                 Druh:{{$druh->nazov}} <br />
@@ -93,13 +94,13 @@
                             <h2>Popis</h2>
 
                             <p> {{$inzerat->popis}}</p>
+                            @if ($inzerat->cena_dohodou == 1)   <label for="cena_dohodou"><strong>Cenu je možné dohodnúť dohodou </strong> </label> @endif
                             <p><strong> Mesto: </strong>{{$inzerat->mesto}}<br />
-                                <strong>Obec: </strong> {{$obec->obec}}<br />
+                                <strong>Obec: </strong> {{$obec->obec}}, okres {{$obec->okres_id}}<br />
                                 <strong>Ulica: </strong> {{$inzerat->ulica}}<br />
                                 <strong>Výmera pozemku: </strong> {{$inzerat->vymera_pozemku}} km2<br />
                                 <strong>Výmera domu: </strong> {{$inzerat->vymera_domu}} km2<br />
                                 <strong>Užitková plocha: </strong> {{$inzerat->uzitkova_plocha}} km2<br />
-                                <strong>Cena dohodou: </strong> {{$inzerat->cena_dohodou}}<br />
                                 <strong>Telefón : </strong> {{$pouzivatel->telefon}}<br />
                                 <strong>E-mail: </strong> {{$pouzivatel->email}}<br />
 

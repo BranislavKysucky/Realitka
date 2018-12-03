@@ -7,6 +7,7 @@ use App\Inzerat;
 use App\Kategoria;
 use App\Kontakt;
 use App\Obec;
+use App\Pouzivatel;
 use App\Realitna_kancelaria;
 use App\Typ;
 use App\Druh;
@@ -354,7 +355,7 @@ class InzeratyController extends Controller
         $druhy = Druh::all();
         $druhy_nazov = Druh::select('nazov')->groupBy('nazov')->get();
         $stavy = Stav::all();
-        $obce = Stav::all();
+        $obce = Obec::all();
 
 
         $pouzivatel = $inzerat->pouzivatel()->first();
@@ -391,12 +392,42 @@ class InzeratyController extends Controller
     {
 
         $inzerat = Inzerat::find($id);
-        $pouzivatel = Inzerat::find($id);
-        $inzerat->kategoria_id=request('kategoria_id');
+     //   $pouzivatel = Inzerat::find($id);
+       // $inzerat->kategoria_id=request('kategoria_id');
         $inzerat->druh_id=request('druh');
         $inzerat->typ_id=request('typ');
         $inzerat->stav_id=request('stavy');
+        $inzerat->kategoria_id=request('kategoria_id');
+        $inzerat->obec_id=request('obec_id');
 
+
+
+        $pouzivatel = Pouzivatel::find($id);
+        $pouzivatel->telefon=request('telefon');
+
+        $cena_dohodou = $request->get('cena_dohodou');
+        if ($cena_dohodou == "true" & $request->get('cena') == "") {
+            $inzerat->cena_dohodou = 1;
+        } else if($cena_dohodou == "false" & $request->get('cena') != "") {
+            $inzerat->cena_dohodou = 0;
+            $inzerat->cena = $request->get('cena');
+        } else {
+            return back()->with('error', 'Prosím zmažte aktuálnu cenu ak chcete aby bola cena nastavená ako cena dohodou');
+        }
+
+        $obec_nazov = $request->get('lokalita');
+        $semicolonPos = strpos($obec_nazov, ',');
+        $obec = substr($obec_nazov, 0, $semicolonPos);
+        $obecOkres = substr($obec_nazov, $semicolonPos+1, strlen($obec_nazov)+1);
+        $obecOkres = str_replace("okres","",$obecOkres);
+        $obecOkres = substr($obecOkres, 2, strlen($obec_nazov)+1);
+
+
+        $obec_id = DB::table('obce')
+            ->where('obec', '=',$obec)
+            ->where('okres_id','=', $obecOkres)
+            ->value('id');
+        $inzerat->obec_id = $obec_id;
 
         $inzerat->nazov=request('nazov');
         $inzerat->popis=request('popis');
@@ -406,10 +437,10 @@ class InzeratyController extends Controller
         $inzerat->vymera_domu=request('vymera_domu');
         $inzerat->vymera_pozemku=request('vymera_pozemku');
         $inzerat->uzitkova_plocha=request('uzitkova_plocha');
-        $inzerat->cena_dohodou=request('cena_dohodou');
         $pouzivatel->telefon=request('telefon');
 
         $inzerat->save();
+        $pouzivatel->save();
 
         return redirect()->to('inzeraty/'.$id);
 
