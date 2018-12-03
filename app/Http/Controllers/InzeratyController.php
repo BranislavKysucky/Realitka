@@ -129,13 +129,13 @@ class InzeratyController extends Controller
                             $druh_do = $druh;
                         }
 
-            $inzeraty = Inzerat::select(DB::raw('inzeraty.*, kategorie.nazov as kategoria, druhy.nazov as druh, druhy.podnazov as podnazov, typy.nazov as typ, stavy.nazov as stav, fotografie.url as url'))
-                ->join('kategorie', 'kategoria_id', '=', 'kategorie.id')
-                ->join('typy', 'typ_id', '=', 'typy.id')
-                ->join('druhy', 'druh_id', '=', 'druhy.id')
-                ->join('stavy', 'stav_id', '=', 'stavy.id')
-                ->join('fotografie', 'inzerat_id', '=', 'inzeraty.id')
-                ->join('obce', 'obec_id', '=', 'obce.id')
+            $inzeraty = Inzerat::select(DB::raw('inzeraty.*'))
+//                ->join('kategorie', 'kategoria_id', '=', 'kategorie.id')
+//                ->join('typy', 'typ_id', '=', 'typy.id')
+//                ->join('druhy', 'druh_id', '=', 'druhy.id')
+//                ->join('stavy', 'stav_id', '=', 'stavy.id')
+//                ->join('fotografie', 'inzerat_id', '=', 'inzeraty.id')
+//                ->join('obce', 'obec_id', '=', 'obce.id')
                 ->where('obce.obec', $request->input('lokalita'))
                 ->where('typy.value', $request->input('typ'))
                 ->whereBetween('kategorie.value', array($kategoria_od, $kategoria_do))
@@ -145,6 +145,9 @@ class InzeratyController extends Controller
                 ->whereBetween('vymera_domu', array($vymera_od, $vymera_do))
                 ->getQuery()
                 ->get();
+        }else if($request->input('email')){
+            $pouzivatel_id = DB::table('pouzivatelia')->where('email', $request->input('email'))->value('id');
+            $inzeraty = Inzerat::select(DB::raw('inzeraty.*'))->where('pouzivatel_id', $pouzivatel_id)->get();
         }else{
             $inzeraty = Inzerat::all();
         }
@@ -155,7 +158,7 @@ class InzeratyController extends Controller
 
         //zobrazenie inzeratov podla telefonneho cisla
 //        if ($request->has('telefon')) {
-//            $pouzivatel_id = DB::table('pouzivatelia')->where('telefon', $request->input('telefon'))->value('id');
+//            $pouzivatel_id = DB::table('pouzivatelia')->where('email', $request->input('email'))->value('id');
 //            $inzeraty = DB::table('inzeraty')->where('pouzivatel_id', $pouzivatel_id)->get();
 //            foreach ($inzeraty as $inzerat) {
 //                $inzerat->obrazok = DB::table('fotografie')->where('inzerat_id', $inzerat->id)->value('url');
