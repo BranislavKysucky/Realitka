@@ -5,7 +5,7 @@
         <h1>Moje inzeráty</h1>
         <form action="{{route('inzeraty.index')}}" method="get">
             {{csrf_field()}}
-                <input id="telefon" class="form-control" placeholder="Zadajte telefónne číslo" name="telefon" type="number" min="0"/>
+                <input id="email" class="form-control" placeholder="Zadajte email" name="email"/>
                 <br>
                 <input type="submit" class="form-control"  value="Vyhľadať" name="submit">
                 <input type="hidden" value="{{ csrf_token() }}" name="_token">
