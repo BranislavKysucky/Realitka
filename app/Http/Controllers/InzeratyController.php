@@ -319,7 +319,6 @@ class InzeratyController extends Controller
         $obec = $inzerat->obec()->first();
         $fotografie = DB::table('fotografie')->where('inzerat_id', $id)->get();
 
-        $fotografie = DB::table('fotografie')->where('inzerat_id', $id)->get();
 
         return view('inzeraty.zobrazit_detail')
             ->with(compact('inzerat'))
