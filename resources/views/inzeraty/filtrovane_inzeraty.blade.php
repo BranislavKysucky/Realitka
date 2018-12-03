@@ -144,51 +144,51 @@
     </div>
 
 
-
     @foreach($inzeraty as $inzerat)
         <a style="color: black" href="/inzeraty/{{$inzerat->id}}">
-        <div class="col-md-9 col-lg-9 col-sm-9 pull-right">
+            <div class="col-md-9 col-lg-9 col-sm-9 pull-right">
 
-            <div class="col-md-4 col-lg-4 col-sm-4 image-container">
-                <img src="{{$inzerat->obrazok}}" style="height:90%;width: 90%;margin-left:-15px;"/>
+                <div class="col-md-4 col-lg-4 col-sm-4 image-container">
+                    <img src="{{$inzerat->obrazok}}" style="height:90%;width: 90%;margin-left:-15px;"/>
+                </div>
+                <div class="excerpt">
+                    <h6 class="heading">{{$inzerat->nazov}}</h6>
+                    <ul class="nospace meta">
+                        <li><i class="fas fa-home"></i>  {{$inzerat->kategoria->nazov}}, {{$inzerat->druh->nazov}} </li>
+
+
+
+
+                        @if ($inzerat->stav != null)
+                            <li><i class="fas fa-building"></i> {{$inzerat->stav->nazov}}, {{$inzerat->vymera_domu}}m² </li>
+                        @else
+                            <li><i class="fas fa-building"></i> {{$inzerat->vymera_domu}}m² </li>
+                        @endif
+
+
+
+                        <li><i class="fas fa-hand-paper"></i> {{$inzerat->typ->nazov}} </li>
+
+                        @if ($inzerat->cena == null)
+                            <li><i class="fas fa-euro-sign"></i> <span style="color: limegreen">Dohodou</span></li>
+                        @else
+                            <li><i class="fas fa-euro-sign"></i> <span style="color: limegreen">{{$inzerat->cena}}</span></li>
+                        @endif
+
+
+                    </ul>
+                    <p>
+                        {{$inzerat->popis}}
+                    </p>
+                    <p class="pull-right" >Pocet zobrazeni: {{$inzerat->pocet_zobrazeni}}x</p>
+
+
+                </div>
+                <hr/>
             </div>
-            <div class="excerpt">
-                <h6 class="heading">{{$inzerat->nazov}}</h6>
-                <ul class="nospace meta">
-                    <li><i class="fas fa-home"></i>  {{$inzerat->kategoria->nazov}}, {{$inzerat->druh->nazov}} </li>
-
-
-
-
-                    @if ($inzerat->stav != null)
-                        <li><i class="fas fa-building"></i> {{$inzerat->stav->nazov}}, {{$inzerat->vymera_domu}}m² </li>
-                    @else
-                        <li><i class="fas fa-building"></i> {{$inzerat->vymera_domu}}m² </li>
-                    @endif
-
-
-
-                    <li><i class="fas fa-hand-paper"></i> {{$inzerat->typ->nazov}} </li>
-
-                    @if ($inzerat->cena == null)
-                        <li><i class="fas fa-euro-sign"></i> <span style="color: limegreen">Dohodou</span></li>
-                    @else
-                        <li><i class="fas fa-euro-sign"></i> <span style="color: limegreen">{{$inzerat->cena}}</span></li>
-                    @endif
-
-
-                </ul>
-                <p>
-                    {{$inzerat->popis}}
-                </p>
-                <p class="pull-right" >Pocet zobrazeni: {{$inzerat->pocet_zobrazeni}}x</p>
-
-
-            </div>
-            <hr/>
-        </div>
         </a>
     @endforeach
+
 
 
 
