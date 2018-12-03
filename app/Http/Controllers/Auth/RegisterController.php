@@ -122,7 +122,6 @@ class RegisterController extends Controller
                 'PSC'=>$data['psc_pouzivatel'],
                 'telefon'=>$data['telefon_pouzivatel'],
                 'email' => $data['email'],
-                'heslo' => bcrypt($data['password']),
                 //'rola'=>2,
                 'meno' => $data['meno'],
                 'priezvisko' => $data['priezvisko'],

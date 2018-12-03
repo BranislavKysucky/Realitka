@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Pouzivatel;
+use App\Obec;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class RealitkaMakleriController extends Controller
 {
@@ -13,7 +17,20 @@ class RealitkaMakleriController extends Controller
      */
     public function index()
     {
-        return view('spravovanie.realitka.makleri.index');
+        $realitka_id = \Auth::user()->realitna_kancelaria_id;
+        $makleri = DB::table('pouzivatelia')
+            ->join('obce', 'pouzivatelia.obec_id', '=', 'obce.id' )
+            ->select('pouzivatelia.id AS id','pouzivatelia.meno AS meno', 'pouzivatelia.priezvisko AS priezvisko', 'pouzivatelia.email AS email', 'pouzivatelia.telefon AS telefon', 'obce.obec AS obec','pouzivatelia.ulica_cislo AS adresa')
+            ->where('pouzivatelia.realitna_kancelaria_id', '=', $realitka_id )
+           // ->where('pouzivatelia.rola', '=', 3 )
+            ->get();
+
+
+
+
+
+
+        return view('spravovanie.realitka.makleri.index', ['makleri' => $makleri]);
     }
 
     /**
@@ -23,7 +40,9 @@ class RealitkaMakleriController extends Controller
      */
     public function create()
     {
-        return view('spravovanie.realitka.makleri.vytvorit');
+
+        $obce = Obec::all();
+        return view('spravovanie.realitka.makleri.vytvorit')->with(compact('obce'));
     }
 
     /**
@@ -34,7 +53,37 @@ class RealitkaMakleriController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $obec_nazov = $request->get('obec_pouzivatel');
+        $semicolonPos = strpos($obec_nazov, ',');
+        $obec = substr($obec_nazov, 0, $semicolonPos);
+
+        $obec_id = DB::table('obce')
+            ->select('id')
+            ->where('obec', $obec)->first();
+
+
+
+        Pouzivatel::create([
+            'obec_id'=>$obec_id->id,
+            'realitna_kancelaria_id'=>\Auth::user()->realitna_kancelaria_id,
+            'ulica_cislo'=>$request['ulica_pouzivatel'],
+            'PSC'=>$request['psc_pouzivatel'],
+            'telefon'=>$request['telefon_pouzivatel'],
+            'email' => $request['email'],
+            'rola'=>3,
+            'meno' => $request['meno'],
+            'priezvisko' => $request['priezvisko'],
+            'password' => bcrypt($request['password'])
+
+        ]);
+
+
+
+
+
+
+        return redirect()->action('RealitkaMakleriController@index');
     }
 
     /**
@@ -68,7 +117,7 @@ class RealitkaMakleriController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
     }
 
     /**
@@ -79,6 +128,8 @@ class RealitkaMakleriController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Pouzivatel::find($id)->delete();
+
+        return redirect()->action('RealitkaMakleriController@index');
     }
 }

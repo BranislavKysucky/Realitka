@@ -48,6 +48,8 @@ class RealitkaInzeratyController extends Controller
      */
     public function create()
     {
+
+
         return view('spravovanie.realitka.inzeraty.vytvorit');
     }
 
