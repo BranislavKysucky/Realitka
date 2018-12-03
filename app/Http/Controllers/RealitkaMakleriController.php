@@ -22,7 +22,7 @@ class RealitkaMakleriController extends Controller
             ->join('obce', 'pouzivatelia.obec_id', '=', 'obce.id' )
             ->select('pouzivatelia.id AS id','pouzivatelia.meno AS meno', 'pouzivatelia.priezvisko AS priezvisko', 'pouzivatelia.email AS email', 'pouzivatelia.telefon AS telefon', 'obce.obec AS obec','pouzivatelia.ulica_cislo AS adresa')
             ->where('pouzivatelia.realitna_kancelaria_id', '=', $realitka_id )
-           // ->where('pouzivatelia.rola', '=', 3 )
+            ->where('pouzivatelia.rola', '=', 3 )
             ->get();
 
 
