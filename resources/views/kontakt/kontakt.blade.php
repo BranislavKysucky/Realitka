@@ -7,29 +7,16 @@
         </div>
     @endif
 
-<div class="col-md-9 col-lg-9 col-sm-9">
-    <h3 align="center">Team</h3>
-    <div align="center" class="inline">
-        <div>
-            <div><img style="width: 200px; height: 200px" src="http://oldengineering.co.uk/wp-content/uploads/2015/11/generic-headshot.png"><br>
-                <p>Meno Priezvisko</p>
-            </div>
-            <div><img style="width: 200px; height: 200px" src="http://oldengineering.co.uk/wp-content/uploads/2015/11/generic-headshot.png"><br>
-                <p>Meno Priezvisko</p>
-            </div>
-        </div>
-        <div>
-            <div><img style="width: 200px; height: 200px" src="http://oldengineering.co.uk/wp-content/uploads/2015/11/generic-headshot.png"><br>
-                <p>Meno Priezvisko</p>
-            </div>
-            <div><img style="width: 200px; height: 200px" src="http://oldengineering.co.uk/wp-content/uploads/2015/11/generic-headshot.png"><br>
-                <p>Meno Priezvisko</p>
-            </div>
-        </div>
+<div class="panel">
+    <h3 align="center">Kontaktná osoba</h3>
 
+<div align="center">
+            <img style="width: 200px; height: 200px" src="http://oldengineering.co.uk/wp-content/uploads/2015/11/generic-headshot.png"><br>
+                <p>Meno Priezvisko</p>
 
-    </div>
+</div>
 
+</div>
 
 
 
@@ -54,7 +41,7 @@
 
 <div align="center" style="background-color: #f5f5f5" class="panel">
 <h3 style="margin-top: 10px;margin-left: 10px">Kontaktujte nas !</h3>
-    <!-- zatial to dame bez akcie, neskor bude fungovat normalne odosielanie mailov-->
+
     <form style="margin-left: 10px;margin-right: 10px" action="customerEmailPost" method="post" enctype="multipart/form-data">
 
         <label for="emailReply">Vasa emailova adresa pre kontaktovanie:</label>
@@ -71,6 +58,6 @@
     </form>
 
 </div>
-</div>
+
 
 @endsection
