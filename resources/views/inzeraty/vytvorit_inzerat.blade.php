@@ -13,15 +13,15 @@
 
                     <div class="panel-body">
                         <div align="center">
-                            <h4>Pridanie inzeratu</h4>
+                            <h2> Pridanie inzerátu </h2>
                         </div>
                         <form class="form-horizontal" action="{{route('inzeraty.store')}}" method="post"
                               enctype="multipart/form-data">
                             {{csrf_field()}}
 
 
-                            <label for="nazov">Nazov</label>
-                            <input required id="nazov" class="form-control" placeholder="Zadajte nazov" name="nazov"/>
+                            <label for="nazov">Názov</label>
+                            <input required id="nazov" class="form-control" placeholder="Zadajte názov" name="nazov"/>
 
                             <label for="popis">Popis</label>
                             <textarea required id="popis" class="form-control" placeholder="Zadajte popis" name="popis"
@@ -126,8 +126,8 @@
 
 
                             <div id="uzitkova_plocha">
-                                <label for="uzitkova_plocha">Uzitkova plocha(m<sup>2</sup>)</label>
-                                <input required placeholder="uzitkova plocha" class="form-control" type="number" min="0"
+                                <label for="uzitkova_plocha">Úžitková plocha(m<sup>2</sup>)</label>
+                                <input required placeholder="úžitková plocha" class="form-control" type="number" min="0"
                                        name="uzitkova_plocha"/>
 
                             </div>
@@ -153,7 +153,7 @@
                                 <input type="file" id="fileInput" class="inputFile" name="images[]"
                                        accept=".jpg, .jpeg, .png"
                                        multiple><br>
-                                <label for="fileInput">Vyber obrázok</label>
+                                <label for="fileInput">Vložiť obrázok</label>
 
                                 <div id="container">
                                     <div class="element" id="div_1"></div>
@@ -165,7 +165,7 @@
 
                             <div>
 
-                                <input type="submit" class="btn btn-danger form-control" value="Pridat" name="submit">
+                                <input type="submit" class="btn btn-danger form-control" value="Pridať" name="submit">
 
                                 <input type="hidden" value="{{ csrf_token() }}" name="_token">
                             </div>

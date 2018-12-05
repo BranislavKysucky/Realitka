@@ -9,12 +9,13 @@
         <thead>
         <tr>
             <th scope="col">Možnosti</th>
-            <th scope="col">Nazov</th>
+            <th scope="col">Názov</th>
+            <th scope="col">Typ</th>
             <th scope="col">Mesto</th>
             <th scope="col">Cena</th>
-            <th scope="col">Meno a priezvisko maklera</th>
-            <th scope="col">Email maklera</th>
-            <th scope="col">Telefon maklera</th>
+            <th scope="col">Meno a priezvisko makléra</th>
+            <th scope="col">Email makléra</th>
+            <th scope="col">Mobilné číslo makléra</th>
         </tr>
         </thead>
         <tbody>
@@ -55,7 +56,8 @@
 
                 </th>
                 <td>{{ $inzerat->nazov}}</td>
-                <td>{{ $inzerat->obec}}</td>
+                <td>{{ $inzerat->typ->nazov}}</td>
+                <td>{{ $inzerat->obec->obec.', '.$inzerat->obec->okres_id}}</td>
 
                 @if ($inzerat->cena == null)
                     <td>Dohodou</td>
@@ -63,9 +65,9 @@
                     <td>{{ $inzerat->cena}}</td>
                 @endif
 
-                <td>{{ $inzerat->meno." ".$inzerat->priezvisko}}</td>
-                <td>{{ $inzerat->email}}</td>
-                <td>{{ $inzerat->telefon}}</td>
+                <td>{{ $inzerat->pouzivatel->meno." ".$inzerat->pouzivatel->priezvisko}}</td>
+                <td>{{ $inzerat->pouzivatel->email}}</td>
+                <td>{{ $inzerat->pouzivatel->telefon}}</td>
             </tr>
 
         @endforeach

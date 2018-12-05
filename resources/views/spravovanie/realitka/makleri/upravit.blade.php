@@ -141,7 +141,7 @@
                 <form action="{{action('RealitkaMakleriController@show', $pouzivatel->id)}}" >
                     {{csrf_field()}}
                     {{method_field('GET')}}
-                    <button class="btn btn-info form-control" type="submit">Nadhľad <span class="glyphicon glyphicon-eye-open"></span></button>
+                    <button class="btn btn-info form-control" type="submit">Náhľad <span class="glyphicon glyphicon-eye-open"></span></button>
                 </form>
                 <br>
                 <form action="{{action('RealitkaMakleriController@destroy', $pouzivatel->id)}}" method="post">

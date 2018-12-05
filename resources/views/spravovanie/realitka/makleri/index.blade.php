@@ -10,9 +10,9 @@
         <tr>
 
             <th scope="col">Možnosti</th>
-            <th scope="col">Meno a priezvisko maklera</th>
-            <th scope="col">Email maklera</th>
-            <th scope="col">Telefon maklera</th>
+            <th scope="col">Meno a priezvisko makléra</th>
+            <th scope="col">Email makléra</th>
+            <th scope="col">Telefon makléra</th>
             <th scope="col">Bydlisko</th>
             <th scope="col">Adresa</th>
 

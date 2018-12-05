@@ -153,13 +153,13 @@
 
 
 
-                                <div class="tab-pane active" id="pic-1"><img src="{{$fotografie->first()->url}}" /></div>
+                                <div class="tab-pane active" id="pic-1"><img src="{{$inzerat->fotografie->first()->url}}" /></div>
 
 
 
                         </div>
                         <ul class="preview-thumbnail nav nav-tabs">
-                            @foreach ($fotografie->all() as $fotka )
+                            @foreach ($inzerat->fotografie as $fotka )
                                 <li><a data-target="#pic-2" data-toggle="tab"><img src="{{$fotka->url}}" /></a></li>
                             @endforeach
 
@@ -192,7 +192,7 @@
 
                         <h5>
 
-                            Mesto/Obec : {{$inzerat->obec->obec}}
+                            Mesto/Obec : {{$inzerat->obec->obec.', '.$inzerat->obec->okres_id}}
 
                         </h5>
 
@@ -204,27 +204,23 @@
 
                         </h5>
 
+
+
                         <h5>
 
-                            Kategória : {{$kategoria->nazov}}
+                            Druh : {{$inzerat->druh->podnazov}}
 
                         </h5>
 
                         <h5>
 
-                            Druh : {{$druh->nazov}}
-
-                        </h5>
-
-                        <h5>
-
-                            Typ : {{$typ->nazov}}
+                            Typ : {{$inzerat->typ->nazov}}
 
                         </h5>
 
                         <h5 >
 
-                            Maklér : {{$pouzivatel->meno." ".$pouzivatel->priezvisko}}
+                            Maklér : {{$inzerat->pouzivatel->meno." ".$inzerat->pouzivatel->priezvisko}}
 
                         </h5>
 

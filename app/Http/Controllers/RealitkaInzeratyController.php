@@ -24,17 +24,8 @@ class RealitkaInzeratyController extends Controller
      */
     public function index()
     {
-        $realitka_id = \Auth::user()->realitna_kancelaria_id;
 
-        $inzeraty = DB::table('inzeraty')
-            ->join('pouzivatelia', 'inzeraty.pouzivatel_id', '=', 'pouzivatelia.id' )
-            ->join('realitne_kancelarie', 'pouzivatelia.realitna_kancelaria_id', '=', 'realitne_kancelarie.id')
-            ->join('obce', 'inzeraty.obec_id', '=', 'obce.id' )
-            ->select('inzeraty.*', 'pouzivatelia.meno AS meno', 'pouzivatelia.priezvisko AS priezvisko', 'pouzivatelia.email AS email', 'pouzivatelia.telefon AS telefon', 'obce.obec AS obec')
-            ->where('pouzivatelia.realitna_kancelaria_id', '=', $realitka_id )
-            ->get();
-
-
+        $inzeraty = Inzerat::all();
 
 
         return view('spravovanie.realitka.inzeraty.index', ['inzeraty' => $inzeraty]);
@@ -76,25 +67,11 @@ class RealitkaInzeratyController extends Controller
     {
 
         $inzerat = Inzerat::findOrFail($id);
-        $kategoria = $inzerat->kategoria()->first();
-        $druh = $inzerat->druh()->first();
-        $stav = $inzerat->stav()->first();
-        $typ = $inzerat->typ()->first();
-        $obec = $inzerat->obec()->first();
-        //$kraj = $inzerat->kraj()->first();
-        $pouzivatel = $inzerat->pouzivatel()->first();
-        $fotografie = DB::table('fotografie')->where('inzerat_id', $id)->get();
+
+
 
         return view('spravovanie.realitka.inzeraty.detail')
-            ->with(compact('inzerat'))
-            ->with(compact('kategoria'))
-            ->with(compact('druh'))
-            ->with(compact('stav'))
-            ->with(compact('typ'))
-            ->with(compact('obec'))
-            //->with(compact('kraj'))
-            ->with(compact('fotografie'))
-            ->with(compact('pouzivatel'));
+            ->with(compact('inzerat'));
 
 
 
@@ -110,13 +87,7 @@ class RealitkaInzeratyController extends Controller
     public function edit($id)
     {
         $inzerat = Inzerat::findOrFail($id);
-        $kategoria = $inzerat->kategoria()->first();
-        $druh = $inzerat->druh()->first();
-        $stav = $inzerat->stav()->first();
-        $typ = $inzerat->typ()->first();
-        $kraj = $inzerat->kraj()->first();
-        $pouzivatel = $inzerat->pouzivatel()->first();
-        $fotografie = DB::table('fotografie')->where('inzerat_id', $id)->get();
+
         $obce = Obec::all();
         $druhy = Druh::all();
         $druhy_nazov = Druh::select('nazov')->groupBy('nazov')->get();
@@ -126,19 +97,18 @@ class RealitkaInzeratyController extends Controller
 
         return view('spravovanie.realitka.inzeraty.upravit')
             ->with(compact('inzerat'))
-            ->with(compact('kategoria'))
-            ->with(compact('druh'))
+
             ->with(compact('druhy'))
             ->with(compact('druhy_nazov'))
-            ->with(compact('stav'))
+
             ->with(compact('stavy'))
-            ->with(compact('typ'))
+
             ->with(compact('typy'))
-            ->with(compact('kraj'))
+
             ->with(compact('obce'))
-            ->with(compact('fotografie'))
-            ->with(compact('makleri'))
-            ->with(compact('pouzivatel'));
+
+            ->with(compact('makleri'));
+
     }
 
     /**

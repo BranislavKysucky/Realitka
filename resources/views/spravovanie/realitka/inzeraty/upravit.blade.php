@@ -154,13 +154,13 @@
 
 
 
-                            <div class="tab-pane active" id="pic-1"><img src="{{$fotografie->first()->url}}" /></div>
+                            <div class="tab-pane active" id="pic-1"><img src="{{$inzerat->fotografie->first()->url}}" /></div>
 
 
 
                         </div>
                         <ul class="preview-thumbnail nav nav-tabs">
-                            @foreach ($fotografie->all() as $fotka )
+                            @foreach ($inzerat->fotografie->all() as $fotka )
                                 <li><a data-target="#pic-2" data-toggle="tab"><img src="{{$fotka->url}}" /></a></li>
                             @endforeach
 
@@ -279,8 +279,8 @@
 
                                             @if(($druh_nazov->nazov == $druh1->nazov) && (substr($druh1->podnazov,0, 7) != "Všetky" ))
 
-                                                @if ($druh->podnazov == $druh1->podnazov)
-                                                    <option selected="selected" value={{$druh->id}}>{{$druh->podnazov}}</option>
+                                                @if ($inzerat->druh->podnazov == $druh1->podnazov)
+                                                    <option selected="selected" value={{$inzerat->druh->id}}>{{$inzerat->druh->podnazov}}</option>
                                                 @else
                                                     <option value={{$druh1->id}}>{{$druh1->podnazov}}</option>
                                                 @endif
@@ -305,8 +305,8 @@
                             <select id="typ" class="form-control" name="typ">
                                 @foreach($typy as $typ1)
 
-                                    @if ($typ1->nazov == $typ->nazov)
-                                        <option selected="selected" id={{$typ->nazov}} value={{$typ->id}}>{{$typ->nazov}}</option>
+                                    @if ($typ1->nazov == $inzerat->typ->nazov)
+                                        <option selected="selected" id={{$inzerat->typ->nazov}} value={{$inzerat->typ->id}}>{{$inzerat->typ->nazov}}</option>
                                     @else
                                         <option id={{$typ1->nazov}} value={{$typ1->id}}>{{$typ1->nazov}}</option>
                                     @endif
@@ -316,15 +316,15 @@
                         </h5>
 
 
-@if ($stav!=null)
+@if ($inzerat->stav!=null)
                             <h5>        <label id="stavy_label" for="stavy"><strong>Stav :</strong></label>
                                 <select id="stavy" class="form-control" name="stavy">
 
                                     @foreach($stavy as $stav1)
                                         @if(substr($stav1->nazov,0, 7) != "Všetky" )
 
-                                            @if ($stav1->nazov == $stav->nazov)
-                                                <option selected="selected" value={{$stav->id}}>{{$stav->nazov}}</option>
+                                            @if ($stav1->nazov == $inzerat->stav->nazov)
+                                                <option selected="selected" value={{$inzerat->stav->id}}>{{$inzerat->stav->nazov}}</option>
                                             @else
                                                 <option value={{$stav1->id}}>{{$stav1->nazov}}</option>
                                             @endif
@@ -353,8 +353,8 @@
                                     @foreach($makleri as $makler)
 
 
-                                        @if ($makler->email == $pouzivatel->email)
-                                            <option selected="selected" value={{$pouzivatel->id}}>{{$pouzivatel->email}}</option>
+                                        @if ($makler->email == $inzerat->pouzivatel->email)
+                                            <option selected="selected" value={{$inzerat->pouzivatel->id}}>{{$inzerat->pouzivatel->email}}</option>
                                         @else
                                             <option value={{$makler->id}}>{{$makler->email}}</option>
                                         @endif
@@ -369,7 +369,7 @@
                                 <select id="makleri" class="form-control" name="makleri">
 
 
-                                <option selected="selected" value={{$pouzivatel->id}}>{{$pouzivatel->email}}</option>
+                                <option selected="selected" value={{$inzerat->pouzivatel->id}}>{{$inzerat->pouzivatel->email}}</option>
                                 </select>
 
                         @endif
