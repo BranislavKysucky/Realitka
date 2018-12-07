@@ -15,10 +15,17 @@ class CreateKontaktTable extends Migration
     {
         Schema::create('kontakt', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('predmet');
+            $table->string('meno');
+            $table->string('priezvisko');
+            $table->string('telefon');
             $table->string('email');
-            $table->string('sprava');
-            $table->timestamps();
+            $table->string('nazovSpolocnosti');
+            $table->string('ulica');
+            $table->string('mesto');
+            $table->string('psc');
+            $table->string('ico');
+            $table->string('ic_dph');
+            $table->string('dic');
         });
     }
 

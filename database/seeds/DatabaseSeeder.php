@@ -13,6 +13,8 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(RealitneKancelarieTableSeeder::class);
         $this->call(PouzivateliaTableSeeder::class);
+        $this->call(InzeratyTableSeeder::class);
+
 
 
     }

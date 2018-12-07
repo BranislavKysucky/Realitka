@@ -12,7 +12,7 @@
 
 <div align="center">
             <img style="width: 200px; height: 200px" src="http://oldengineering.co.uk/wp-content/uploads/2015/11/generic-headshot.png"><br>
-                <p>Meno Priezvisko</p>
+                <p>{{$kontakt->meno}} {{$kontakt->priezvisko}}</p>
 
 </div>
 
@@ -25,14 +25,14 @@
 <div style="background-color: #f5f5f5"  class="panel">
     <h3 style="margin-top: 10px;margin-left: 10px">Kontaktna adresa</h3>
     <ul>
-        <li><i class="fas fa-mobile"></i> +421 222 333 555</li>
-        <li><i class="fas fa-print"></i> KSU@KSU.sk</li>
-        <li>KSU s.r.o</li>
-        <li>Nitrianska 1/100</li>
-        <li>94901 Nitra</li><br>
-        <li><b>ICO:</b> 48484</li>
-        <li><b>IC DPH:</b> SK1585</li>
-        <li><b>DIC:</b> 848484</li>
+        <li><i class="fas fa-mobile"></i> +{{$kontakt->telefon}}</li>
+        <li><i class="fas fa-print"></i> {{$kontakt->email}}</li>
+        <li>{{$kontakt->nazovSpolocnosti}}</li>
+        <li>{{$kontakt->ulica}}</li>
+        <li>{{$kontakt->psc}} {{$kontakt->mesto}}</li><br>
+        <li><b>ICO:</b> {{$kontakt->ico}}</li>
+        <li><b>IC DPH:</b> {{$kontakt->ic_dph}}</li>
+        <li><b>DIC:</b> {{$kontakt->dic}}</li>
     </ul>
 </div>
 

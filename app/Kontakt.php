@@ -8,5 +8,6 @@ class Kontakt extends Model
 {
     public $table = 'kontakt';
 
-    public $fillable = ['predmet', 'email', 'sprava'];
+    public $fillable = ['meno','priezvisko','telefon', 'email', 'nazovSpolocnosti', 'ulica', 'mesto', 'psc', 'ico', 'ic_dph', 'dic'];
+
 }

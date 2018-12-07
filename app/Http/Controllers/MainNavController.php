@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Kontakt;
 use App\Mail\OverMail;
 use App\Mail\CustomerMail;
 use App\Pouzivatel;
@@ -107,7 +108,8 @@ class MainNavController extends Controller
 
     public function getKontakt()
     {
-        return view('kontakt.kontakt');
+        $kontakt = Kontakt::get()->first();
+        return view('kontakt.kontakt', ['kontakt' => $kontakt]);
     }
     public function getMojeInzeraty()
     {
