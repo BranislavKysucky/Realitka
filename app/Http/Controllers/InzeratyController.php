@@ -152,7 +152,11 @@ class InzeratyController extends Controller
             $inzeraty = Inzerat::all();
         }
         foreach ($inzeraty as $inzerat) {
+            if($inzerat->jednaFotografia()->value('url') == null){
+                $inzerat->obrazok = 'images/demo/348x261.png';
+            }else{
             $inzerat->obrazok = $inzerat->jednaFotografia()->value('url');
+            }
         }
         return view('inzeraty.filtrovane_inzeraty', ['obce' => $obce, 'inzeraty' => $inzeraty]);
 

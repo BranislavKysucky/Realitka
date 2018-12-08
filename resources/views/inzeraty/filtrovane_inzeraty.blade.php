@@ -149,7 +149,7 @@
             <div class="col-md-9 col-lg-9 col-sm-9 pull-right">
 
                 <div class="col-md-4 col-lg-4 col-sm-4 image-container">
-                    <img src="{{$inzerat->obrazok}}" style="height:90%;width: 90%;margin-left:-15px;"/>
+                    <img src="{{$inzerat->obrazok}}" style="height:90%;width: 90%;margin-left:-15px;min-height: 150px"/>
                 </div>
                 <div class="excerpt">
                     <h6 class="heading">{{$inzerat->nazov}}</h6>
