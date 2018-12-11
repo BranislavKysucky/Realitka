@@ -153,9 +153,9 @@
                     <img src="{{$inzerat->obrazok}}" style="height:90%;width: 90%;margin-left:-15px;min-height: 150px"/>
                 </div>
                 <div class="excerpt">
-                    <h6 class="heading">{{$inzerat->nazov}}</h6>
+                    <h4 class="heading" style="font-family: Calibri">{{$inzerat->nazov}}</h4>
                     <ul class="nospace meta">
-                        <li><i class="fas fa-home"></i> {{$inzerat->kategoria->nazov}}, {{$inzerat->druh->nazov}} </li>
+                        <li><i class="fas fa-home"></i> {{--{{$inzerat->kategoria->nazov}},--}} {{$inzerat->druh->podnazov}} </li>
 
 
                         @if($inzerat->crawler!=true)
@@ -180,7 +180,7 @@
 
 
                     </ul>
-                    <p>
+                    <p style="color:#585858">
                         {{substr($inzerat->popis,0,300)}}...
                     </p>
                     <p class="pull-right">Pocet zobrazeni: {{$inzerat->pocet_zobrazeni}}x</p>
