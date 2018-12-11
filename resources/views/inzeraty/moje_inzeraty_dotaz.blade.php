@@ -9,7 +9,6 @@
                 <br>
                 <input type="submit" class="form-control"  value="Vyhľadať" name="submit">
                 <input type="hidden" value="{{ csrf_token() }}" name="_token">
-
         </form>
     </div>
 

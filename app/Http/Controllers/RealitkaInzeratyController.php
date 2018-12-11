@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Fotografia;
+use function Couchbase\defaultDecoder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -11,8 +13,7 @@ use App\Druh;
 use App\Typ;
 use App\Stav;
 use Log;
-
-
+use PhpParser\Node\Expr\Cast\Object_;
 
 
 class RealitkaInzeratyController extends Controller
@@ -120,6 +121,31 @@ class RealitkaInzeratyController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if($request->file('images')) {
+            foreach ($request->file('images') as $image) {
+                //ulozenie image, do db ide iba url teda path resp.  /public/images/ + image name
+
+                //$file_name = $image->hashName();
+//            if(Fotografia::where('inzerat_id', $id)->count()) {
+                $input['imagename'] = time() . $image->getClientOriginalName();
+                $path = public_path('/images');
+                $image->move($path, $input['imagename']);
+
+                // vytvorenie fotografie zatial iba jeden obrazok
+                $fotografia = new Fotografia;
+                $fotografia->inzerat_id = $id;
+                $fotografia->url = "/images/" . $input['imagename'];
+                $fotografia->save();
+//            }
+            }
+        }
+
+        $comingIDs = json_decode($request->get('ids'));
+
+        $rows = DB::table('fotografie')->whereIn('id', $comingIDs);
+        $rows->delete();
+
+
         $inzerat = Inzerat::findOrFail($id);
 
         $inzerat->nazov=$request->get('nazov');
