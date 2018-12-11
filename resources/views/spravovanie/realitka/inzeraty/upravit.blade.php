@@ -270,7 +270,7 @@
                             <label for="druh"><strong>Druh : </strong></label>
                             <select class="form-control" id="druh" name="druh" >
                                 @foreach($druhy_nazov as $druh_nazov)
-                                    <optgroup label={{$druh_nazov->nazov}} id={{$druh_nazov->nazov}}>
+                                    <optgroup  label={{$druh_nazov->nazov}} id={{$druh_nazov->nazov}}>
 
 
                                         @foreach($druhy as $druh1)
@@ -316,7 +316,7 @@
                         </h5>
 
 
-@if ($inzerat->stav!=null)
+                        @if ($inzerat->stav!=null)
                             <h5>        <label id="stavy_label" for="stavy"><strong>Stav :</strong></label>
                                 <select id="stavy" class="form-control" name="stavy">
 
@@ -337,7 +337,30 @@
 
 
                         </h5>
-@endif
+
+
+                        @else
+
+                            <h5>        <label id="stavy_label" for="stavy"><strong>Stav :</strong></label>
+
+                                <select id="stavy" class="form-control" name="stavy">
+
+                                    @foreach($stavy as $stav1)
+                                        @if(substr($stav1->nazov,0, 7) != "Všetky" )
+
+                                                <option value={{$stav1->id}}>{{$stav1->nazov}}</option>
+                                        @endif
+                                    @endforeach
+
+                                </select>
+
+                            </h5>
+
+                            <script> $("#stavy").val(null);
+                                $("#stavy").hide();
+                                $("#stavy_label").hide();</script>
+
+                        @endif
 
 
 
@@ -409,28 +432,73 @@
                           rows="4" cols="50">{{$inzerat->popis}}</textarea>
 
 
-                <div id="vymera_domu">
-                    <label for="vymera_domu">Výmera domu(m<sup>2</sup>)</label>
-                    <input required placeholder="vymera domu" class="form-control" value="{{$inzerat->vymera_domu}}" type="number" min="0"
-                           name="vymera_domu"/>
+                @if ($inzerat->vymera_domu!=null)
+                    <div id="vymera_domu">
+                        <label for="vymera_domu">Výmera domu(m<sup>2</sup>)</label>
+                        <input required placeholder="vymera domu" class="form-control" value="{{$inzerat->vymera_domu}}" type="number" min="0"
+                               name="vymera_domu"/>
 
-                </div>
+                    </div>
+                @else
+
+                    <div id="vymera_domu">
+                        <label for="vymera_domu">Výmera domu(m<sup>2</sup>)</label>
+                        <input required placeholder="vymera domu" class="form-control" value="{{$inzerat->vymera_domu}}" type="number" min="0"
+                               name="vymera_domu"/>
+
+                    </div>
 
 
-                <div id="vymera_pozemku">
-                    <label for="vymera_pozemku">Výmera pozemku(m<sup>2</sup>)</label>
-                    <input required placeholder="vymera pozemku" class="form-control" value="{{$inzerat->vymera_pozemku}}" type="number" min="0"
-                           name="vymera_pozemku"/>
-
-                </div>
+                    <script> $("#vymera_domu").hide().find(':input').attr('required', false);</script>
+                @endif
+                
 
 
-                <div id="uzitkova_plocha">
-                    <label for="uzitkova_plocha">Úžitková plocha(m<sup>2</sup>)</label>
-                    <input required placeholder="uzitkova plocha" class="form-control"  value="{{$inzerat->uzitkova_plocha}}" type="number" min="0"
-                           name="uzitkova_plocha"/>
+                @if ($inzerat->vymera_pozemku!=null)
+                    <div id="vymera_pozemku">
+                        <label for="vymera_pozemku">Výmera pozemku(m<sup>2</sup>)</label>
+                        <input required placeholder="vymera pozemku" class="form-control" value="{{$inzerat->vymera_pozemku}}" type="number" min="0"
+                               name="vymera_pozemku"/>
 
-                </div>
+                    </div>
+
+                @else
+
+                    <div id="vymera_pozemku">
+                        <label for="vymera_pozemku">Výmera pozemku(m<sup>2</sup>)</label>
+                        <input required placeholder="vymera pozemku" class="form-control" value="{{$inzerat->vymera_pozemku}}" type="number" min="0"
+                               name="vymera_pozemku"/>
+
+                    </div>
+                    <script> $("#vymera_pozemku").hide().find(':input').attr('required', false);</script>
+
+                @endif
+
+
+
+
+
+
+                @if ($inzerat->uzitkova_plocha!=null)
+                    <div id="uzitkova_plocha">
+                        <label for="uzitkova_plocha">Úžitková plocha(m<sup>2</sup>)</label>
+                        <input required placeholder="uzitkova plocha" class="form-control"  value="{{$inzerat->uzitkova_plocha}}" type="number" min="0"
+                               name="uzitkova_plocha"/>
+
+                    </div>
+
+                @else
+                    <div id="uzitkova_plocha">
+                        <label for="uzitkova_plocha">Úžitková plocha(m<sup>2</sup>)</label>
+                        <input required placeholder="uzitkova plocha" class="form-control"  value="{{$inzerat->uzitkova_plocha}}" type="number" min="0"
+                               name="uzitkova_plocha"/>
+
+                    </div>
+
+                    <script> $("#uzitkova_plocha").hide().find(':input').attr('required', false);</script>
+
+                @endif
+
 
 
             </div>
@@ -469,12 +537,11 @@
 
 
 @endsection
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src='{{ URL::asset('js/polozky_formularu_realitka.js') }}'></script>
 <script src='{{ URL::asset('js/cena.js') }}'></script>

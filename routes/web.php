@@ -38,6 +38,7 @@ Route::middleware(['auth'])->group(function () {
     Route::group(['middleware' => 'App\Http\Middleware\Realitka'], function () {
         Route::resource('inzeraty_r', 'RealitkaInzeratyController');
         Route::resource('makleri_r', 'RealitkaMakleriController');
+        // definuj route a akciu
     });
 
     //routy pre prihlaseneho pouzivatela. Majitel realitky, makler ale aj admin moze mat inzeraty...

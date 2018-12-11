@@ -1,6 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script src='{{ URL::asset('js/polozky_formularu_realitka.js') }}'></script>
+    <script src='{{ URL::asset('js/cena.js') }}'></script>
 
     @include('popup.pridany')
     @include('popup.error')
@@ -59,16 +62,41 @@
 
 
 
-                            <label id="stavy_label" for="stavy">Stav</label>
-                            <select id="stavy" class="form-control" name="stavy">
-                                <option id=0 value={{$stav->id}}>{{$stav->nazov}}</option>
-                                <option> @foreach($stavy as $stav)
-                                    @if(substr($stav->nazov,0, 7) != "Všetky" )
-                                        <option value={{$stav->id}}>{{$stav->nazov}}</option>
-                                    @endif
-                                @endforeach
 
-                            </select>
+                            @if ($stav != null)
+
+                                <label id="stavy_label" for="stavy">Stav</label>
+                                <select id="stavy" class="form-control" name="stavy">
+                                    <option id=0 value={{$stav->id}}>{{$stav->nazov}}</option>
+                                    <option> @foreach($stavy as $stav)
+                                        @if(substr($stav->nazov,0, 7) != "Všetky" )
+                                            <option value={{$stav->id}}>{{$stav->nazov}}</option>
+                                        @endif
+                                    @endforeach
+
+                                </select>
+
+                            @else
+                                <label id="stavy_label" for="stavy">Stav</label>
+                                <select id="stavy" class="form-control" name="stavy">
+                                    <option> @foreach($stavy as $stav)
+                                        @if(substr($stav->nazov,0, 7) != "Všetky" )
+                                            <option value={{$stav->id}}>{{$stav->nazov}}</option>
+                                        @endif
+                                    @endforeach
+
+                                </select>
+
+                                <script> $("#stavy").val(null);
+                                    $("#stavy").hide();
+                                    $("#stavy_label").hide();</script>
+                            @endif
+
+
+
+
+
+
 
                             <label id="druh_label" for="druh">Druh</label>
                             <select class="form-control" id="druh" name="druh">
@@ -170,6 +198,7 @@
 
                     </div>
     </div>
+
 
 
 @endsection
