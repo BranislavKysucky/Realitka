@@ -90,8 +90,8 @@
                     <section class="slider wpis-slider-for">
                         @foreach ($fotografie as $fotka )
                             <div class="zoom">
-                                <img src="{{$fotka->url}}" alt=""/>
-                                <img src="{{$fotka->url}}" alt=""/>
+                                <img src="{{$fotka->url}}" style="border-radius: 1%" alt=""/>
+                                <img src="{{$fotka->url}}" style="border-radius: 1%" alt=""/>
                             </div>
 
                         @endforeach
@@ -102,7 +102,7 @@
                     </section>
 
                 </div>
-
+                </br>
 
                 <div class="woocommerce-tabs wc-tabs-wrapper">
                     <ul class="tabs wc-tabs" role="tablist">
@@ -124,7 +124,7 @@
 
                     </ul>
                     <div class="woocommerce-Tabs-panel woocommerce-Tabs-panel--description panel entry-content wc-tab"
-                         id="tab-description" role="tabpanel" aria-labelledby="tab-title-description">
+                         id="tab-description" role="tabpanel" aria-labelledby="tab-title-description" style="background: #F8F8F8">
 
                         {{--<h2>Popis</h2>--}}
 

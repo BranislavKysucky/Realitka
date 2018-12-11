@@ -156,27 +156,29 @@ class InzeratyController extends Controller
                 $inzerat->obrazok = $inzerat->jednaFotografia()->value('url');
             }
         }
-        return view('inzeraty.filtrovane_inzeraty', ['obce' => $obce, 'inzeraty' => $inzeraty]);
+        return view('inzeraty.filtrovane_inzeraty', ['obce' => $obce, 'inzeraty' => $inzeraty,'widget'=>$this->widget()]);
 
-        //zobrazenie inzeratov podla telefonneho cisla
-//        if ($request->has('telefon')) {
-//            $pouzivatel_id = DB::table('pouzivatelia')->where('email', $request->input('email'))->value('id');
-//            $inzeraty = DB::table('inzeraty')->where('pouzivatel_id', $pouzivatel_id)->get();
-//            foreach ($inzeraty as $inzerat) {
-//                $inzerat->obrazok = DB::table('fotografie')->where('inzerat_id', $inzerat->id)->value('url');
-//            }
-//            return view('inzeraty.moje_inzeraty_vysledok', ['inzeraty' => $inzeraty]);
-//
-//        } else {
-//            $inzeraty = Inzerat::with('druh', 'kategoria', 'stav', 'typ', 'kraj')->get();
-//
-//            //$fotografie = Fotografia::all();
-//            foreach ($inzeraty as $inzerat) {
-//                $inzerat->obrazok = DB::table('fotografie')->where('inzerat_id', $inzerat->id)->value('url');
-//                //$inzerat->obrazok=$obrazok->id;
-//            }
-//            return view('inzeraty.filtrovane_inzeraty', [ 'obce' => $obce]);
-//        }
+    }
+
+    private function widget(){
+        $inzeraty = Inzerat::whereBetween('druh_id',array(11,16))->orderBy('cena', 'ASC')->limit(3)->get();
+        /*if(empty($inzeraty)){
+            $inzeraty = Inzerat::whereBetween('druh_id',array(11,16))->orderBy('cena', 'ASC')->limit(3)->get();
+        }
+        if(empty($inzeraty)){
+            $inzeraty = Inzerat::whereBetween('druh_id',array(18,28))->orderBy('cena', 'ASC')->limit(3)->get();
+        }
+        if(empty($inzeraty)){
+            $inzeraty = Inzerat::orderBy('cena', 'ASC')->limit(3)->get();
+        }*/
+        foreach ($inzeraty as $inzerat) {
+            if ($inzerat->jednaFotografia()->value('url') == null) {
+                $inzerat->obrazok = 'images/demo/348x261.png';
+            } else {
+                $inzerat->obrazok = $inzerat->jednaFotografia()->value('url');
+            }
+        }
+        return $inzeraty;
     }
 
     /**

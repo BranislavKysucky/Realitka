@@ -142,6 +142,24 @@
 
         </div>
 
+        @if(($widget)->count())
+            <div align="center" style="background:#EEEEEE; border-radius: 2%; font-family: Calibri">
+                </br>
+                <h1 style="color: #FFAF0A"><i class="fas fa-star"></i> <i class="fas fa-star"></i> <i
+                            class="fas fa-star"></i></h1>
+
+                @foreach($widget as $inzerat)
+                    <a style="color: black" href="/inzeraty/{{$inzerat->id}}">
+                        <strong>{{$inzerat->obec->obec}}</strong></br>
+                        <strong>{{$inzerat->cena}} €</strong></br>
+                        <img src="{{$inzerat->obrazok}}"
+                             style="height:70%;width: 70%;border-radius: 4%"/></br></br>
+                    </a>
+                    <hr>
+                @endforeach
+            </div>
+        @endif
+
     </div>
 
 
@@ -150,12 +168,15 @@
             <div class="col-md-9 col-lg-9 col-sm-9 pull-right">
 
                 <div class="col-md-4 col-lg-4 col-sm-4 image-container">
-                    <img src="{{$inzerat->obrazok}}" style="height:90%;width: 90%;margin-left:-15px;min-height: 150px"/>
+                    <img src="{{$inzerat->obrazok}}"
+                         style="height:90%;width: 90%;margin-left:-15px;min-height: 150px;border-radius: 4%"/>
                 </div>
                 <div class="excerpt">
                     <h4 class="heading" style="font-family: Calibri">{{$inzerat->nazov}}</h4>
                     <ul class="nospace meta">
-                        <li><i class="fas fa-home"></i> {{--{{$inzerat->kategoria->nazov}},--}} {{$inzerat->druh->podnazov}} </li>
+                        <li>
+                            <i class="fas fa-home"></i> {{--{{$inzerat->kategoria->nazov}},--}} {{$inzerat->druh->podnazov}}
+                        </li>
 
 
                         @if($inzerat->crawler!=true)
