@@ -14,24 +14,25 @@
                 {{csrf_field()}}
 
                 <label for="lokalita">Obec/Mesto</label>
-                <input list="obce" id="lokalita" class="form-control" placeholder="Zadajte lokalitu" name="lokalita" autocomplete="off"/>
+                <input list="obce" id="lokalita" class="form-control" placeholder="Zadajte lokalitu" name="lokalita"
+                       autocomplete="off"/>
                 <datalist id="obce">
-                @foreach($obce as $obec)
-                    <option href="#" id="{{$obec->obec}}">{{$obec->obec}}, okres {{$obec->okres_id}}</option>
-                @endforeach
+                    @foreach($obce as $obec)
+                        <option href="#" id="{{$obec->obec}}">{{$obec->obec}}, okres {{$obec->okres_id}}</option>
+                    @endforeach
                 </datalist>
 
                 <div class="form-group">
                     {{--<label for="kraj">Kraj</label>--}}
                     {{--<select id="kraj" class="form-control" name="kraj">--}}
-                        {{--<option value="1">Bratislavský</option>--}}
-                        {{--<option value="2">Trnavský</option>--}}
-                        {{--<option value="3">Trenčiansky</option>--}}
-                        {{--<option value="3">Nitriansky</option>--}}
-                        {{--<option value="3">Žilinský</option>--}}
-                        {{--<option value="3">Banskobystrický</option>--}}
-                        {{--<option value="3">Prešovský</option>--}}
-                        {{--<option value="3">Košický</option>--}}
+                    {{--<option value="1">Bratislavský</option>--}}
+                    {{--<option value="2">Trnavský</option>--}}
+                    {{--<option value="3">Trenčiansky</option>--}}
+                    {{--<option value="3">Nitriansky</option>--}}
+                    {{--<option value="3">Žilinský</option>--}}
+                    {{--<option value="3">Banskobystrický</option>--}}
+                    {{--<option value="3">Prešovský</option>--}}
+                    {{--<option value="3">Košický</option>--}}
                     {{--</select>--}}
 
                     <label for="kategoria">Kategória</label>
@@ -152,19 +153,20 @@
                     <img src="{{$inzerat->obrazok}}" style="height:90%;width: 90%;margin-left:-15px;min-height: 150px"/>
                 </div>
                 <div class="excerpt">
-                    <h6 class="heading">{{$inzerat->nazov}}</h6>
+                    <h4 class="heading" style="font-family: Calibri">{{$inzerat->nazov}}</h4>
                     <ul class="nospace meta">
-                        <li><i class="fas fa-home"></i>  {{$inzerat->kategoria->nazov}}, {{$inzerat->druh->nazov}} </li>
+                        <li><i class="fas fa-home"></i> {{--{{$inzerat->kategoria->nazov}},--}} {{$inzerat->druh->podnazov}} </li>
 
 
-
-
-                        @if ($inzerat->stav != null)
-                            <li><i class="fas fa-building"></i> {{$inzerat->stav->nazov}}, {{$inzerat->vymera_domu}}m² </li>
-                        @else
-                            <li><i class="fas fa-building"></i> {{$inzerat->vymera_domu}}m² </li>
+                        @if($inzerat->crawler!=true)
+                            @if ($inzerat->stav != null)
+                                <li><i class="fas fa-building"></i> {{$inzerat->stav->nazov}}, {{$inzerat->vymera_domu}}
+                                    m²
+                                </li>
+                            @else
+                                <li><i class="fas fa-building"></i> {{$inzerat->vymera_domu}}m²</li>
+                            @endif
                         @endif
-
 
 
                         <li><i class="fas fa-hand-paper"></i> {{$inzerat->typ->nazov}} </li>
@@ -172,15 +174,16 @@
                         @if ($inzerat->cena == null)
                             <li><i class="fas fa-euro-sign"></i> <span style="color: limegreen">Dohodou</span></li>
                         @else
-                            <li><i class="fas fa-euro-sign"></i> <span style="color: limegreen">{{$inzerat->cena}}</span></li>
+                            <li><i class="fas fa-euro-sign"></i> <span
+                                        style="color: limegreen">{{$inzerat->cena}}</span></li>
                         @endif
 
 
                     </ul>
-                    <p>
-                        {{$inzerat->popis}}
+                    <p style="color:#585858">
+                        {{substr($inzerat->popis,0,300)}}...
                     </p>
-                    <p class="pull-right" >Pocet zobrazeni: {{$inzerat->pocet_zobrazeni}}x</p>
+                    <p class="pull-right">Pocet zobrazeni: {{$inzerat->pocet_zobrazeni}}x</p>
 
 
                 </div>

@@ -123,7 +123,35 @@
             resize: none;
         }
 
+        .remove:hover {
+            cursor: pointer;
+        }
 
+        .inputFile {
+            width: 0.1px;
+            height: 0.1px;
+            opacity: 0;
+            overflow: hidden;
+            position: absolute;
+            z-index: -1;
+        }
+
+        label[for=fileInput] {
+            border: 2px solid black;
+            background-color: transparent;
+            color: black;
+            /*padding: 7px 14px;*/
+            text-align: center;
+            font-size: 10px;
+            cursor: pointer;
+            border-color: #4CAF50;
+            color: green;
+        }
+
+        label[for=fileInput]:hover {
+            background-color: #4CAF50;
+            color: white;
+        }
 
     </style>
 
@@ -132,7 +160,7 @@
 
 
 
-    <form class="form-horizontal" action="{{action('RealitkaInzeratyController@update', $inzerat->id)}}" method="post"
+    <form id="form" class="form-horizontal" action="{{action('RealitkaInzeratyController@update', $inzerat->id)}}" method="POST"
           enctype="multipart/form-data">
         {{csrf_field()}}
         {{method_field('PUT')}}
@@ -154,14 +182,27 @@
 
 
 
-                            <div class="tab-pane active" id="pic-1"><img src="{{$inzerat->fotografie->first()->url}}" /></div>
+{{--                            <div class="tab-pane active" id="pic-1"><img src="{{$inzerat->fotografie->first()->url}}" /></div>--}}
+
+                            <div id="wrapper">
+                                <input type="file" id="fileInput" class="inputFile" name="images[]"
+                                       accept=".jpg, .jpeg, .png"
+                                       multiple><br>
+                                <label for="fileInput">Vložiť obrázok</label>
+
+                                <div id="containerImages">
+                                    <div class="element" id="div_1"></div>
+                                </div>
+
+
+                            </div>
 
 
 
                         </div>
-                        <ul class="preview-thumbnail nav nav-tabs">
+                        <ul class="preview-thumbnail nav nav-tabs" id="zoznamObrazkov" style="display: none">
                             @foreach ($inzerat->fotografie->all() as $fotka )
-                                <li><a data-target="#pic-2" data-toggle="tab"><img src="{{$fotka->url}}" /></a></li>
+                                <li id="{{$fotka->id}}"><a data-target="#pic-2" data-toggle="tab"><img src="{{$fotka->url}}" /></a></li>
                             @endforeach
 
 
@@ -517,22 +558,21 @@
 
 
     </div>
-
-        <button  class="btn btn-info form-control" type="submit">Aktualizovať  <span heigth="14px"  name="submit" class="glyphicon glyphicon-edit"></span> </button>
+        <button href=""  class="btn btn-info form-control" type="submit">Aktualizovať  <span heigth="14px"  name="submit" class="glyphicon glyphicon-edit"></span> </button>
         @include('errors')
     </form>
 
-    <form action="{{action('RealitkaInzeratyController@destroy', $inzerat->id)}}" method="post">
-        {{csrf_field()}}
-        <input name="_method" type="hidden" value="DELETE">
-        <button  onclick="return confirm('Prosím potvrdťe zmazanie');" class="btn btn-info form-control" type="submit">Odstrániť  <span heigth="14px" class="glyphicon glyphicon-trash"></span> </button>
-    </form>
+    {{--<form action="{{action('RealitkaInzeratyController@destroy', $inzerat->id)}}" method="post">--}}
+        {{--{{csrf_field()}}--}}
+        {{--<input name="_method" type="hidden" value="DELETE">--}}
+        {{--<button  onclick="return confirm('Prosím potvrdťe zmazanie');" class="btn btn-info form-control" type="submit">Odstrániť  <span heigth="14px" class="glyphicon glyphicon-trash"></span> </button>--}}
+    {{--</form>--}}
 
-    <form action="{{action('RealitkaInzeratyController@show', $inzerat->id)}}" method="get">
-        {{csrf_field()}}
-        <input name="_method" type="hidden" value="SHOW">
-        <button class="btn btn-info form-control" type="submit">Náhľad <span class="glyphicon glyphicon-eye-open"></span></button>
-    </form>
+    {{--<form action="{{action('RealitkaInzeratyController@show', $inzerat->id)}}" method="get">--}}
+        {{--{{csrf_field()}}--}}
+        {{--<input name="_method" type="hidden" value="SHOW">--}}
+        {{--<button class="btn btn-info form-control" type="submit">Náhľad <span class="glyphicon glyphicon-eye-open"></span></button>--}}
+    {{--</form>--}}
 
 
 
@@ -545,3 +585,4 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src='{{ URL::asset('js/polozky_formularu_realitka.js') }}'></script>
 <script src='{{ URL::asset('js/cena.js') }}'></script>
+<script src='{{ URL::asset('js/preview2.js') }}'></script>

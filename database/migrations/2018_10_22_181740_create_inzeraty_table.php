@@ -31,6 +31,7 @@ class CreateInzeratyTable extends Migration
             $table->integer('uzitkova_plocha')->nullable();
             $table->boolean('cena_dohodou')->nullable();
             $table->integer('pocet_zobrazeni')->default(1);
+            $table->boolean('crawler')->default(false);
             $table->timestamps();
 /*
             $table->foreign('stav_id')->references('id')->on('stavy');
