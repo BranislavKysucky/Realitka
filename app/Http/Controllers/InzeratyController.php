@@ -150,6 +150,7 @@ class InzeratyController extends Controller
             $inzeraty = Inzerat::all();
         }
         foreach ($inzeraty as $inzerat) {
+            $inzerat->cena=number_format($inzerat->cena,2,","," ");
             if ($inzerat->jednaFotografia()->value('url') == null) {
                 $inzerat->obrazok = 'images/demo/348x261.png';
             } else {
@@ -172,6 +173,7 @@ class InzeratyController extends Controller
             $inzeraty = Inzerat::orderBy('cena', 'ASC')->limit(3)->get();
         }*/
         foreach ($inzeraty as $inzerat) {
+            $inzerat->cena=number_format($inzerat->cena,2,","," ");
             if ($inzerat->jednaFotografia()->value('url') == null) {
                 $inzerat->obrazok = 'images/demo/348x261.png';
             } else {
@@ -317,6 +319,7 @@ class InzeratyController extends Controller
         // detail inzeratu si zobrazite na adrese /inzerat/idInzeratu
 
         $inzerat = Inzerat::findOrFail($id);
+        $inzerat->cena=number_format($inzerat->cena,2,","," ");
         $kategoria = $inzerat->kategoria()->first();
         $druh = $inzerat->druh()->first();
         $stav = $inzerat->stav()->first();
