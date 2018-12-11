@@ -97,10 +97,20 @@
                                 aria-controls="tab-description">
                                 <a href="#tab-description">Zobraziť podrobnosti</a>
                             </li>
-                            <li class="description_tab" id="tab-title-description" role="tab"
-                                aria-controls="tab-description">
-                                <a href="/inzeraty/{{$inzerat->id}}/edit">Spravovať inzerát</a>
-                            </li>
+                            @if(Auth::check())
+                                @if(Auth::user()->id==$inzerat->pouzivatel_id)
+                                    <li class="description_tab" id="tab-title-description" role="tab"
+                                        aria-controls="tab-description">
+                                        <a href="/inzeraty/{{$inzerat->id}}/edit">Spravovať inzerát</a>
+                                    </li>
+                                @endif
+                            @else
+                                <li class="description_tab" id="tab-title-description" role="tab"
+                                    aria-controls="tab-description">
+                                    <a href="/inzeraty/{{$inzerat->id}}/edit">Spravovať inzerát</a>
+                                </li>
+                            @endif
+
 
                         </ul>
                         <div class="woocommerce-Tabs-panel woocommerce-Tabs-panel--description panel entry-content wc-tab"

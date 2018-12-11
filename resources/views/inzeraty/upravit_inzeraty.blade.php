@@ -14,49 +14,54 @@
                         <div align="center">
                             <h4>Úprava inzerátu</h4>
                         </div>
-                        <form  method="post" class="form-horizontal" action="{{route('inzeraty.update',[$inzerat->id])}}" >
-                              {{csrf_field()}}
-                              {{method_field('PUT')}}
-
+                        <form method="post" class="form-horizontal"
+                              action="{{route('inzeraty.update',[$inzerat->id])}}">
+                            {{csrf_field()}}
+                            {{method_field('PUT')}}
 
 
                             <label for="nazov">Nazov</label>
-                            <input  id="nazov" class="form-control" placeholder="Zadajte názov" name="nazov"  value="{{$inzerat->nazov}}"/>
+                            <input id="nazov" class="form-control" placeholder="Zadajte názov" name="nazov"
+                                   value="{{$inzerat->nazov}}"/>
 
                             <label for="popis">Popis</label>
-                            <textarea  class="form-control" placeholder="Zadajte popis" name="popis" rows="4" cols="50">{{$inzerat->popis}}</textarea>
+                            <textarea class="form-control" placeholder="Zadajte popis" name="popis" rows="4"
+                                      cols="50">{{$inzerat->popis}}</textarea>
 
                             <label for="mesto">Mesto</label>
-                            <input id="mesto" class="form-control" placeholder="Zadajte mesto" name="mesto" value="{{$inzerat->mesto}}"/>
+                            <input id="mesto" class="form-control" placeholder="Zadajte mesto" name="mesto"
+                                   value="{{$inzerat->mesto}}"/>
 
                             <label for="ulica">Ulica</label>
-                            <input id="ulica" class="form-control" placeholder="Zadajte ulicu" name="ulica" value="{{$inzerat->ulica}}"/>
+                            <input id="ulica" class="form-control" placeholder="Zadajte ulicu" name="ulica"
+                                   value="{{$inzerat->ulica}}"/>
 
                             <label id="kategoria_label" for="kraj">Kategória</label>
                             <select id="kategoria_id" class="form-control" name="kategoria_id">
-                                <option  value={{$kategoria->id}}>{{$kategoria->nazov}}</option>
+                                <option value={{$kategoria->id}}>{{$kategoria->nazov}}</option>
 
 
-                                    <option> @foreach($kategorie as $kategoria)
-                                        @if(substr($kategoria->nazov,0, 7) != "Všetky" )
-                                            <option value={{$kategoria->id}}>{{$kategoria->nazov}}</option>
-                                        @endif
-                                    @endforeach
+                                <option> @foreach($kategorie as $kategoria)
+                                    @if(substr($kategoria->nazov,0, 7) != "Všetky" )
+                                        <option value={{$kategoria->id}}>{{$kategoria->nazov}}</option>
+                                    @endif
+                                @endforeach
 
-                                </select>
-
+                            </select>
 
 
                             <label for="lokalita"><strong>Obec/Mesto</strong></label>
-                            <input list="obce" id="lokalita" class="form-control" placeholder="Zadajte lokalitu" name="lokalita" value="{{$inzerat->obec->obec.", okres ".$inzerat->obec->okres_id}}" autocomplete="off"/>
+                            <input list="obce" id="lokalita" class="form-control" placeholder="Zadajte lokalitu"
+                                   name="lokalita" value="{{$inzerat->obec->obec.", okres ".$inzerat->obec->okres_id}}"
+                                   autocomplete="off"/>
 
                             <datalist id="obce">
                                 @foreach($obce as $obec)
-                                    <option href="#" id="{{$obec->obec}}">{{$obec->obec}}, okres {{$obec->okres_id}}</option>
+                                    <option href="#" id="{{$obec->obec}}">{{$obec->obec}},
+                                        okres {{$obec->okres_id}}</option>
 
                                 @endforeach
                             </datalist>
-
 
 
                             <label id="stavy_label" for="stavy">Stav</label>
@@ -94,13 +99,15 @@
 
 
                             <label for="cena">Cena</label>
-                            <input id="cena" class="form-control" placeholder="cena"  type="number"  name="cena" value="{{$inzerat->cena}}" />
+                            <input id="cena" class="form-control" placeholder="cena" type="number" name="cena"
+                                   value="{{$inzerat->cena}}"/>
 
                             @if ($inzerat->cena_dohodou == 1)
-                                <div id="cena_dohodou" >
+                                <div id="cena_dohodou">
 
                                     <label for="cena_dohodou"><strong>Cena dohodou</strong> </label>
-                                    <label class="radio-inline"><input value=true onchange="hideCena();" name="cena_dohodou"
+                                    <label class="radio-inline"><input value=true onchange="hideCena();"
+                                                                       name="cena_dohodou"
                                                                        id="cena_dohodou" type="radio"
                                                                        name="optradio" checked>Ano</label>
                                     <label class="radio-inline"><input value=false onchange="hideCena();"
@@ -110,15 +117,17 @@
                                     <br>
                                 </div>
                             @else
-                                <div id="cena_dohodou" >
+                                <div id="cena_dohodou">
 
                                     <label for="cena_dohodou"><strong>Cena dohodou </strong> </label>
-                                    <label class="radio-inline"><input value=true onchange="hideCena();" name="cena_dohodou"
+                                    <label class="radio-inline"><input value=true onchange="hideCena();"
+                                                                       name="cena_dohodou"
                                                                        id="cena_dohodou" type="radio"
-                                                                       name="optradio" >Ano</label>
+                                                                       name="optradio">Ano</label>
                                     <label class="radio-inline"><input value=false onchange="hideCena();"
                                                                        name="cena_dohodou"
-                                                                       id="cena_dohodou" type="radio" name="optradio" checked
+                                                                       id="cena_dohodou" type="radio" name="optradio"
+                                                                       checked
                                         >Nie</label>
                                     <br>
                                 </div>
@@ -130,24 +139,30 @@
 
                             @endif
                             <label for="vymera_domu">Výmera domu</label>
-                            <input class="form-control" placeholder=" Zadajte vymeru domu"  type="number" name="vymera_domu" value="{{$inzerat->vymera_domu}}"/>
+                            <input class="form-control" placeholder=" Zadajte vymeru domu" type="number"
+                                   name="vymera_domu" value="{{$inzerat->vymera_domu}}"/>
 
                             <label for="vymera_pozemku">Výmera pozemku</label>
-                            <input  class="form-control" placeholder=" Zadajte vymeru pozemku" type="number" name="vymera_pozemku" value="{{$inzerat->vymera_pozemku}}"/>
+                            <input class="form-control" placeholder=" Zadajte vymeru pozemku" type="number"
+                                   name="vymera_pozemku" value="{{$inzerat->vymera_pozemku}}"/>
 
                             <label for="uzitkova_plocha">Úžitková plocha</label>
-                            <input id="uzitkova_plocha" class="form-control" placeholder="Zadajte uzitkovu plochu" type="number" name="uzitkova_plocha" value="{{$inzerat->uzitkova_plocha}}"/>
+                            <input id="uzitkova_plocha" class="form-control" placeholder="Zadajte uzitkovu plochu"
+                                   type="number" name="uzitkova_plocha" value="{{$inzerat->uzitkova_plocha}}"/>
 
                             <label for="uzitkova_plocha">Úžitková plocha</label>
-                            <input id="uzitkova_plocha" class="form-control" placeholder="Zadajte uzitkovu plochu" type="number" name="uzitkova_plocha" value="{{$inzerat->uzitkova_plocha}}"/>
+                            <input id="uzitkova_plocha" class="form-control" placeholder="Zadajte uzitkovu plochu"
+                                   type="number" name="uzitkova_plocha" value="{{$inzerat->uzitkova_plocha}}"/>
 
-                            <label for="telefon">Kontakt / tel. číslo</label>
-                            <input id="telefon" class="form-control" placeholder="Zadajte telefonne číslo"  name="telefon" value="{{$pouzivatel->telefon}}"/>
-
+                            @if($pouzivatel!=null)
+                                <label for="telefon">Kontakt / tel. číslo</label>
+                                <input id="telefon" class="form-control" placeholder="Zadajte telefonne číslo"
+                                       name="telefon" value="{{$pouzivatel->telefon}}"/>
+                            @endif
 
                             <br>
                             <input type="submit" class="btn btn-danger form-control" value="Uložiť zmeny" name="submit">
-                              <br>  <br>
+                            <br> <br>
                         </form>
 
 
@@ -168,7 +183,7 @@
             </div>
 
 
-                    </div>
+        </div>
     </div>
 
 

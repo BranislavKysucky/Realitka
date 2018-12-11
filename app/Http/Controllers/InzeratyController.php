@@ -11,9 +11,7 @@ use App\Pouzivatel;
 use App\Realitna_kancelaria;
 use App\Typ;
 use App\Druh;
-use App\Fotografie;
 use App\Stav;
-use App\Pouzivatelia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -37,97 +35,97 @@ class InzeratyController extends Controller
 
         $obce = Obec::all();
 
-        if($request->input('lokalita')){
+        if ($request->input('lokalita')) {
 
-        $this->validate(request(), [
-            'lokalita' => 'required',
-            'cena_od' => 'required',
-            'cena_do' => 'required',
-            'vymera_od' => 'required',
-            'vymera_do' => 'required'
-        ]);
+            $this->validate(request(), [
+                'lokalita' => 'required',
+                'cena_od' => 'required',
+                'cena_do' => 'required',
+                'vymera_od' => 'required',
+                'vymera_do' => 'required'
+            ]);
 
-        $kategoria = $request->input('kategoria');
-        $druh = $request->input('druh');
-        $stav = $request->input('stav');
+            $kategoria = $request->input('kategoria');
+            $druh = $request->input('druh');
+            $stav = $request->input('stav');
 
-        $cena_od = 0;
-        $cena_do = 0;
-        $vymera_od = 0;
-        $vymera_do = 0;
-
-        $kategoria_od = 0;
-        $kategoria_do = 0;
-
-        $druh_od = 0;
-        $druh_do = 0;
-
-        $stav_od = 0;
-        $stav_do = 0;
-
-        if($request->input('cena_od')){
-            $cena_od = $request->input('cena_od');
-        }else{
             $cena_od = 0;
-        }
-
-        if($request->input('cena_do')){
-            $cena_do = $request->input('cena_do');
-        }else{
-            $cena_do = 1000000;
-        }
-
-        if($request->input('vymera_od')){
-            $vymera_od = $request->input('vymera_od');
-        }else{
+            $cena_do = 0;
             $vymera_od = 0;
-        }
+            $vymera_do = 0;
 
-        if($request->input('vymera_do')){
-            $vymera_do = $request->input('vymera_do');
-        }else{
-            $vymera_do = 1000000;
-        }
+            $kategoria_od = 0;
+            $kategoria_do = 0;
 
-        if($kategoria == 1){
-            $kategoria_od = 1;
-            $kategoria_do = 3;
-        }else{
-            $kategoria_od = $kategoria;
-            $kategoria_do = $kategoria;
-        }
+            $druh_od = 0;
+            $druh_do = 0;
 
-        if($stav == 1){
-            $stav_od = 1;
-            $stav_do = 7;
-        }else{
-            $stav_od = $stav;
-            $stav_do = $stav;
-        }
+            $stav_od = 0;
+            $stav_do = 0;
 
-        if($druh = 1){
-            $druh_od = 1;
-            $druh_do = 500;
-        }else
-            if($druh == 110){
-                $druh_od = 101;
-                $druh_do = 109;
-            }else
-                if($druh = 207){
-                    $druh_od = 201;
-                    $druh_do = 206;
-                }else
-                    if($druh == 311){
-                        $druh_od = 301;
-                        $druh_do = 310;
-                    }else
-                        if($druh == 415){
-                            $druh_od = 401;
-                            $druh_do = 414;
-                        }else{
-                            $druh_od = $druh;
-                            $druh_do = $druh;
-                        }
+            if ($request->input('cena_od')) {
+                $cena_od = $request->input('cena_od');
+            } else {
+                $cena_od = 0;
+            }
+
+            if ($request->input('cena_do')) {
+                $cena_do = $request->input('cena_do');
+            } else {
+                $cena_do = 1000000;
+            }
+
+            if ($request->input('vymera_od')) {
+                $vymera_od = $request->input('vymera_od');
+            } else {
+                $vymera_od = 0;
+            }
+
+            if ($request->input('vymera_do')) {
+                $vymera_do = $request->input('vymera_do');
+            } else {
+                $vymera_do = 1000000;
+            }
+
+            if ($kategoria == 1) {
+                $kategoria_od = 1;
+                $kategoria_do = 3;
+            } else {
+                $kategoria_od = $kategoria;
+                $kategoria_do = $kategoria;
+            }
+
+            if ($stav == 1) {
+                $stav_od = 1;
+                $stav_do = 7;
+            } else {
+                $stav_od = $stav;
+                $stav_do = $stav;
+            }
+
+            if ($druh = 1) {
+                $druh_od = 1;
+                $druh_do = 500;
+            } else
+                if ($druh == 110) {
+                    $druh_od = 101;
+                    $druh_do = 109;
+                } else
+                    if ($druh = 207) {
+                        $druh_od = 201;
+                        $druh_do = 206;
+                    } else
+                        if ($druh == 311) {
+                            $druh_od = 301;
+                            $druh_do = 310;
+                        } else
+                            if ($druh == 415) {
+                                $druh_od = 401;
+                                $druh_do = 414;
+                            } else {
+                                $druh_od = $druh;
+                                $druh_do = $druh;
+                            }
 
             $inzeraty = Inzerat::select(DB::raw('inzeraty.*'))
 //                ->join('kategorie', 'kategoria_id', '=', 'kategorie.id')
@@ -145,17 +143,17 @@ class InzeratyController extends Controller
                 ->whereBetween('vymera_domu', array($vymera_od, $vymera_do))
                 ->getQuery()
                 ->get();
-        }else if($request->input('email')){
+        } else if ($request->input('email')) {
             $pouzivatel_id = DB::table('pouzivatelia')->where('email', $request->input('email'))->value('id');
             $inzeraty = Inzerat::select(DB::raw('inzeraty.*'))->where('pouzivatel_id', $pouzivatel_id)->get();
-        }else{
+        } else {
             $inzeraty = Inzerat::all();
         }
         foreach ($inzeraty as $inzerat) {
-            if($inzerat->jednaFotografia()->value('url') == null){
+            if ($inzerat->jednaFotografia()->value('url') == null) {
                 $inzerat->obrazok = 'images/demo/348x261.png';
-            }else{
-            $inzerat->obrazok = $inzerat->jednaFotografia()->value('url');
+            } else {
+                $inzerat->obrazok = $inzerat->jednaFotografia()->value('url');
             }
         }
         return view('inzeraty.filtrovane_inzeraty', ['obce' => $obce, 'inzeraty' => $inzeraty]);
@@ -240,7 +238,7 @@ class InzeratyController extends Controller
                     $inzerat->pouzivatel_id = $pouzivatel->id;
                 }
                 //porovna kluc z db a ten co bol zadany pri vytvarani ineratu
-                if(strcmp($request->input('kluc'),$pouzivatel->email_token)!=0){
+                if (strcmp($request->input('kluc'), $pouzivatel->email_token) != 0) {
                     return back()->with('error', 'Nesprávny overovací kľúč');
                 }
             }
@@ -251,7 +249,6 @@ class InzeratyController extends Controller
             // $inzerat->kategoria_id = $request->get('kategoria');   //zakomentovane zatial pokym nebude prihlasovanie
 
 
-
             $obec_nazov = $request->get('lokalita');
             $semicolonPos = strpos($obec_nazov, ',');
             $obec = substr($obec_nazov, 0, $semicolonPos);
@@ -260,7 +257,6 @@ class InzeratyController extends Controller
                 ->select('id')
                 ->where('obec', $obec)->first();
             $inzerat->obec_id = $obec_id->id;
-
 
 
             $inzerat->ulica = $request->get('ulica');
@@ -276,7 +272,7 @@ class InzeratyController extends Controller
             $cena_dohodou = $request->get('cena_dohodou');              // prichadza z radiobuttonu ako true or false
             if ($cena_dohodou == "true" & $request->get('cena') == "") {
                 $inzerat->cena_dohodou = 1;
-            } else if($cena_dohodou == "false" & $request->get('cena') != "") {
+            } else if ($cena_dohodou == "false" & $request->get('cena') != "") {
                 $inzerat->cena_dohodou = 0;
                 $inzerat->cena = $request->get('cena');
             } else {
@@ -345,48 +341,86 @@ class InzeratyController extends Controller
      * @param  \App\Inzerat $inzerat
      * @return \Illuminate\Http\Response
      */
-    public function edit(Inzerat $inzerat, $id)
+    public function edit(Request $request, $id)
     {
-        //vypis aktualneho zaznamu
-        $inzerat=Inzerat::find($id);
-        $kategoria = $inzerat->kategoria()->first();
-        $druh = $inzerat->druh()->first();
-        $stav = $inzerat->stav()->first();
-        $typ = $inzerat->typ()->first();
-        $pouzivatel = $inzerat->pouzivatel()->first();
-        $obec = $inzerat->obec()->first();
+        if (Auth::check()) {
+            //vypis aktualneho zaznamu
+            $inzerat = Inzerat::find($id);
+            if($inzerat->pouzivatel_id!=Auth::user()->id){
+                return back();
+            }
+            $kategoria = $inzerat->kategoria()->first();
+            $druh = $inzerat->druh()->first();
+            $stav = $inzerat->stav()->first();
+            $typ = $inzerat->typ()->first();
+            $pouzivatel = $inzerat->pouzivatel()->first();
+            $obec = $inzerat->obec()->first();
 
-// vypis vsetkych zaznamov, toto je urcene pre selecty, aby sa dali zobrazit vsetky polozky, nie len pre konkretne id..
-        $kategorie = Kategoria::all();
-        $typy = Typ::all();
-        $druhy = Druh::all();
-        $druhy_nazov = Druh::select('nazov')->groupBy('nazov')->get();
-        $stavy = Stav::all();
-        $obce = Obec::all();
+            // vypis vsetkych zaznamov, toto je urcene pre selecty, aby sa dali zobrazit vsetky polozky, nie len pre konkretne id..
+            $kategorie = Kategoria::all();
+            $typy = Typ::all();
+            $druhy = Druh::all();
+            $druhy_nazov = Druh::select('nazov')->groupBy('nazov')->get();
+            $stavy = Stav::all();
+            $obce = Obec::all();
 
 
-        $pouzivatel = $inzerat->pouzivatel()->first();
-        return view('inzeraty.upravit_inzeraty')
-            ->with(compact('inzerat'))
-            ->with(compact('kategoria'))
-            ->with(compact('typ'))
-            ->with(compact('stav'))
-            ->with(compact('obec'))
-            ->with(compact('druh'))
-            ->with(compact('pouzivatel'))
+            $pouzivatel = $inzerat->pouzivatel()->first();
+            return view('inzeraty.upravit_inzeraty')
+                ->with(compact('inzerat'))
+                ->with(compact('kategoria'))
+                ->with(compact('typ'))
+                ->with(compact('stav'))
+                ->with(compact('obec'))
+                ->with(compact('druh'))
+                ->with(compact('pouzivatel'))
+                // pre selecty
+                ->with(compact('druhy'))
+                ->with(compact('druhy_nazov'))
+                ->with(compact('typy'))
+                ->with(compact('stavy'))
+                ->with(compact('kategorie'))
+                ->with(compact('obce'));
 
-            // pre selecty
-            ->with(compact('druhy'))
-            ->with(compact('druhy_nazov'))
-            ->with(compact('typy'))
-            ->with(compact('stavy'))
-            ->with(compact('kategorie'))
-            ->with(compact('obce'))
-            ;
+        } else {
+            $inzerat = Inzerat::find($id);
+            if ($request->has('heslo')) {
+                if ($inzerat->heslo == $request->get('heslo')) {
+                    $kategoria = $inzerat->kategoria()->first();
+                    $druh = $inzerat->druh()->first();
+                    $stav = $inzerat->stav()->first();
+                    $typ = $inzerat->typ()->first();
+                    $obec = $inzerat->obec()->first();
+
+                    $kategorie = Kategoria::all();
+                    $typy = Typ::all();
+                    $druhy = Druh::all();
+                    $druhy_nazov = Druh::select('nazov')->groupBy('nazov')->get();
+                    $stavy = Stav::all();
+                    $obce = Obec::all();
+
+                    $pouzivatel = $inzerat->pouzivatel()->first();
+                    return view('inzeraty.upravit_inzeraty')
+                        ->with(compact('inzerat'))
+                        ->with(compact('kategoria'))
+                        ->with(compact('typ'))
+                        ->with(compact('stav'))
+                        ->with(compact('obec'))
+                        ->with(compact('druh'))
+                        ->with(compact('pouzivatel'))
+                        ->with(compact('druhy'))
+                        ->with(compact('druhy_nazov'))
+                        ->with(compact('typy'))
+                        ->with(compact('stavy'))
+                        ->with(compact('kategorie'))
+                        ->with(compact('obce'));
+                } else return back();
+
+            } else
+                return view('inzeraty.zadaj_heslo', ['inzerat' => $inzerat]);
+        }
 
     }
-
-
 
     /**
      * Update the specified resource in storage.
@@ -399,23 +433,22 @@ class InzeratyController extends Controller
     {
 
         $inzerat = Inzerat::find($id);
-     //   $pouzivatel = Inzerat::find($id);
-       // $inzerat->kategoria_id=request('kategoria_id');
-        $inzerat->druh_id=request('druh');
-        $inzerat->typ_id=request('typ');
-        $inzerat->stav_id=request('stavy');
-        $inzerat->kategoria_id=request('kategoria_id');
-        $inzerat->obec_id=request('obec_id');
-
+        //   $pouzivatel = Inzerat::find($id);
+        // $inzerat->kategoria_id=request('kategoria_id');
+        $inzerat->druh_id = request('druh');
+        $inzerat->typ_id = request('typ');
+        $inzerat->stav_id = request('stavy');
+        $inzerat->kategoria_id = request('kategoria_id');
+        $inzerat->obec_id = request('obec_id');
 
 
         $pouzivatel = Pouzivatel::find($id);
-        $pouzivatel->telefon=request('telefon');
+        $pouzivatel->telefon = request('telefon');
 
         $cena_dohodou = $request->get('cena_dohodou');
         if ($cena_dohodou == "true" & $request->get('cena') == "") {
             $inzerat->cena_dohodou = 1;
-        } else if($cena_dohodou == "false" & $request->get('cena') != "") {
+        } else if ($cena_dohodou == "false" & $request->get('cena') != "") {
             $inzerat->cena_dohodou = 0;
             $inzerat->cena = $request->get('cena');
         } else {
@@ -425,36 +458,33 @@ class InzeratyController extends Controller
         $obec_nazov = $request->get('lokalita');
         $semicolonPos = strpos($obec_nazov, ',');
         $obec = substr($obec_nazov, 0, $semicolonPos);
-        $obecOkres = substr($obec_nazov, $semicolonPos+1, strlen($obec_nazov)+1);
-        $obecOkres = str_replace("okres","",$obecOkres);
-        $obecOkres = substr($obecOkres, 2, strlen($obec_nazov)+1);
+        $obecOkres = substr($obec_nazov, $semicolonPos + 1, strlen($obec_nazov) + 1);
+        $obecOkres = str_replace("okres", "", $obecOkres);
+        $obecOkres = substr($obecOkres, 2, strlen($obec_nazov) + 1);
 
 
         $obec_id = DB::table('obce')
-            ->where('obec', '=',$obec)
-            ->where('okres_id','=', $obecOkres)
+            ->where('obec', '=', $obec)
+            ->where('okres_id', '=', $obecOkres)
             ->value('id');
         $inzerat->obec_id = $obec_id;
 
-        $inzerat->nazov=request('nazov');
-        $inzerat->popis=request('popis');
-        $inzerat->mesto=request('mesto');
-        $inzerat->ulica=request('ulica');
-        $inzerat->cena=request('cena');
-        $inzerat->vymera_domu=request('vymera_domu');
-        $inzerat->vymera_pozemku=request('vymera_pozemku');
-        $inzerat->uzitkova_plocha=request('uzitkova_plocha');
-        $pouzivatel->telefon=request('telefon');
+        $inzerat->nazov = request('nazov');
+        $inzerat->popis = request('popis');
+        $inzerat->mesto = request('mesto');
+        $inzerat->ulica = request('ulica');
+        $inzerat->cena = request('cena');
+        $inzerat->vymera_domu = request('vymera_domu');
+        $inzerat->vymera_pozemku = request('vymera_pozemku');
+        $inzerat->uzitkova_plocha = request('uzitkova_plocha');
+        $pouzivatel->telefon = request('telefon');
 
         $inzerat->save();
         $pouzivatel->save();
 
-        return redirect()->to('inzeraty/'.$id);
+        return redirect()->to('inzeraty/' . $id);
 
     }
-
-
-
 
 
     /**
