@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Pouzivatel;
 use App\Obec;
+use App\Inzerat;
+use App\Druh;
+use App\Typ;
+use App\Stav;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -32,19 +36,21 @@ class RealitkaMakleriController extends Controller
 
         return view('spravovanie.realitka.makleri.index', ['makleri' => $makleri]);
     }
-    public function indexPouzivatel(Request $request, $id)
+    public function indexPouzivatel($id)
     {
-        $realitka_id = \Auth::user()->realitna_kancelaria_id;
+
+
 
         $inzeraty = DB::table('inzeraty')
             ->join('pouzivatelia', 'inzeraty.pouzivatel_id', '=', 'pouzivatelia.id' )
-            ->join('realitne_kancelarie', 'pouzivatelia.realitna_kancelaria_id', '=', 'realitne_kancelarie.id')
             ->join('obce', 'inzeraty.obec_id', '=', 'obce.id' )
-            ->select('inzeraty.*', 'pouzivatelia.meno AS meno', 'pouzivatelia.priezvisko AS priezvisko', 'pouzivatelia.email AS email', 'pouzivatelia.telefon AS telefon', 'obce.obec AS obec')
-            ->where('pouzivatelia.realitna_kancelaria_id', '=', $realitka_id )
+            ->join('typy', 'inzeraty.typ_id', '=', 'typy.id' )
+            ->select('inzeraty.*', 'pouzivatelia.meno AS meno', 'pouzivatelia.priezvisko AS priezvisko', 'pouzivatelia.email AS email', 'pouzivatelia.telefon AS telefon', 'obce.obec AS obec',
+                'obce.okres_id AS okres',
+                'typy.nazov AS typ')
+            ->where('pouzivatelia.realitna_kancelaria_id', '=', \Auth::user()->realitna_kancelaria_id)
             ->where('pouzivatelia.id', '=', $id )
             ->get();
-
 
 
 
@@ -138,6 +144,11 @@ class RealitkaMakleriController extends Controller
             ->with(compact('obce'));
     }
 
+
+
+
+
+
     /**
      * Update the specified resource in storage.
      *
@@ -180,6 +191,74 @@ class RealitkaMakleriController extends Controller
 
         return redirect()->action('RealitkaMakleriController@show', $pouzivatel->id);
     }
+    public function editMakler($id)
+    {
+        $inzerat = Inzerat::findOrFail($id);
+
+        $obce = Obec::all();
+        $druhy = Druh::all();
+        $druhy_nazov = Druh::select('nazov')->groupBy('nazov')->get();
+        $typy = Typ::all();
+        $stavy = Stav::all();
+
+        $makleri = DB::table('pouzivatelia')->
+        where('realitna_kancelaria_id', \Auth::user()->realitna_kancelaria_id)->
+
+        get();
+
+        return view('spravovanie.realitka.makleri.upravitMakler')
+            ->with(compact('inzerat'))
+
+            ->with(compact('druhy'))
+            ->with(compact('druhy_nazov'))
+
+            ->with(compact('stavy'))
+
+            ->with(compact('typy'))
+
+            ->with(compact('obce'))
+
+            ->with(compact('makleri'));
+
+    }
+
+public function updateMakler(Request $request, $id){
+    $inzerat = Inzerat::findOrFail($id);
+    $idMaklerDelete = $inzerat->pouzivatel_id;
+    $inzerat->pouzivatel_id=$request->get('makleri');
+    $inzerat->save();
+
+    $inzeraty = DB::table('inzeraty')
+        ->where('pouzivatel_id', '=', $idMaklerDelete )
+        ->get();
+    if($inzeraty->isNotEmpty()){
+
+        $inzeraty = DB::table('inzeraty')
+            ->join('pouzivatelia', 'inzeraty.pouzivatel_id', '=', 'pouzivatelia.id' )
+            ->join('obce', 'inzeraty.obec_id', '=', 'obce.id' )
+            ->join('typy', 'inzeraty.typ_id', '=', 'typy.id' )
+            ->select('inzeraty.*', 'pouzivatelia.meno AS meno', 'pouzivatelia.priezvisko AS priezvisko', 'pouzivatelia.email AS email', 'obce.obec AS obec',
+                'obce.okres_id AS okres',
+                'typy.nazov AS typ')
+            ->where('pouzivatelia.realitna_kancelaria_id', '=', \Auth::user()->realitna_kancelaria_id)
+            ->where('pouzivatelia.id', '=', $idMaklerDelete )
+            ->get();
+
+
+
+        return view('spravovanie.realitka.makleri.indexPouzivatelMazanie', ['inzeraty' => $inzeraty]);
+
+    } else {
+        Pouzivatel::find($idMaklerDelete)->delete();
+    }
+
+
+
+    return redirect()->action('RealitkaMakleriController@index');
+
+}
+
+
 
     /**
      * Remove the specified resource from storage.
@@ -189,7 +268,31 @@ class RealitkaMakleriController extends Controller
      */
     public function destroy($id)
     {
-        Pouzivatel::find($id)->delete();
+        $inzeraty = DB::table('inzeraty')
+            ->where('pouzivatel_id', '=', $id )
+            ->get();
+        if($inzeraty -> isNotEmpty()){
+
+            $inzeraty = DB::table('inzeraty')
+                ->join('pouzivatelia', 'inzeraty.pouzivatel_id', '=', 'pouzivatelia.id' )
+                ->join('obce', 'inzeraty.obec_id', '=', 'obce.id' )
+                ->join('typy', 'inzeraty.typ_id', '=', 'typy.id' )
+                ->select('inzeraty.*', 'pouzivatelia.meno AS meno', 'pouzivatelia.priezvisko AS priezvisko', 'pouzivatelia.email AS email', 'obce.obec AS obec',
+                    'obce.okres_id AS okres',
+                    'typy.nazov AS typ')
+                ->where('pouzivatelia.realitna_kancelaria_id', '=', \Auth::user()->realitna_kancelaria_id)
+                ->where('pouzivatelia.id', '=', $id )
+                ->get();
+
+
+
+            return view('spravovanie.realitka.makleri.indexPouzivatelMazanie', ['inzeraty' => $inzeraty]);
+
+        } else {
+            Pouzivatel::find($id)->delete();
+        }
+
+
 
         return redirect()->action('RealitkaMakleriController@index');
     }

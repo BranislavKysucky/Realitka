@@ -54,7 +54,7 @@
                         <div class="form-group">
 
 
-                            <form action="{{action('RealitkaMakleriController@index', $pouzivatel->id)}}" >
+                            <form action="{{action('RealitkaMakleriController@indexPouzivatel', $pouzivatel->id)}}" >
                                 {{csrf_field()}}
                                 {{method_field('GET')}}
                                 <button class="btn btn-info form-control" type="submit">Zobraziť všetky inzeráty tohto použivateľa <span class="glyphicon glyphicon-eye-open"></span></button>

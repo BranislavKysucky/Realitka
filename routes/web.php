@@ -39,6 +39,11 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('inzeraty_r', 'RealitkaInzeratyController');
         Route::resource('makleri_r', 'RealitkaMakleriController');
         // definuj route a akciu
+        Route::get('indexPouzivatel/{id}','RealitkaMakleriController@indexPouzivatel');
+        Route::get('editMakler/{id}','RealitkaMakleriController@editMakler');
+        Route::post('updateMakler/{id}','RealitkaMakleriController@updateMakler');
+
+
     });
 
     //routy pre prihlaseneho pouzivatela. Majitel realitky, makler ale aj admin moze mat inzeraty...

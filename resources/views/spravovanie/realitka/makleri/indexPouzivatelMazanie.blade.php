@@ -3,19 +3,18 @@
 
 
 
-
+<center><h3> Pred zmazaním : {{$inzeraty->first()->meno." ".$inzeraty->first()->priezvisko." - ".$inzeraty->first()->email}}</h3></center>
+<center><h2> je potrebné určiť čo sa má vykonať s jeho inzerátmi.</h2></center>
 
     <table class="table table-bordered">
         <thead>
         <tr>
-            <th scope="col">Možnosti</th>
+            <th scope="col">Editovanie</th>
             <th scope="col">Názov</th>
             <th scope="col">Typ</th>
             <th scope="col">Mesto</th>
             <th scope="col">Cena</th>
-            <th scope="col">Meno a priezvisko makléra</th>
-            <th scope="col">Email makléra</th>
-            <th scope="col">Mobilné číslo makléra</th>
+
         </tr>
         </thead>
         <tbody>
@@ -31,14 +30,10 @@
 
 
 
-                    <form action="{{action('RealitkaInzeratyController@show', $inzerat->id)}}" method="get">
-                        {{csrf_field()}}
-                        <input name="_method" type="hidden" value="SHOW">
-                        <button class="btn btn-info" type="submit"><span class="glyphicon glyphicon-eye-open"></span></button>
-                    </form>
 
 
-                    <form action="{{action('RealitkaInzeratyController@edit', $inzerat->id)}}" method="get">
+
+                    <form action="{{action('RealitkaMakleriController@editMakler', $inzerat->id)}}" method="get">
                         {{csrf_field()}}
                         <input name="_method" type="hidden" value="EDIT">
                         <button class="btn btn-info" type="submit"><span class="glyphicon glyphicon-edit"></span></button>
@@ -46,11 +41,6 @@
 
 
 
-                    <form action="{{action('RealitkaInzeratyController@destroy', $inzerat->id)}}" method="post">
-                        {{csrf_field()}}
-                        <input name="_method" type="hidden" value="DELETE">
-                        <button class="btn btn-info" onclick="return confirm('Prosím potvrdťe zmazanie');" type="submit"><span class="glyphicon glyphicon-trash"></span></button>
-                    </form>
 
 
 
@@ -65,9 +55,7 @@
                     <td>{{ $inzerat->cena}}</td>
                 @endif
 
-                <td>{{ $inzerat->meno." ".$inzerat->priezvisko}}</td>
-                <td>{{ $inzerat->email}}</td>
-                <td>{{ $inzerat->telefon}}</td>
+
             </tr>
 
         @endforeach
