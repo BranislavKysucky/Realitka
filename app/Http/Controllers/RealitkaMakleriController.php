@@ -258,6 +258,41 @@ public function updateMakler(Request $request, $id){
 
 }
 
+    public function removeMakler($id){
+        $inzerat = Inzerat::findOrFail($id);
+        $idMaklerDelete = $inzerat->pouzivatel_id;
+        Inzerat::find($id)->delete();
+
+
+        $inzeraty = DB::table('inzeraty')
+            ->where('pouzivatel_id', '=', $idMaklerDelete )
+            ->get();
+        if($inzeraty->isNotEmpty()){
+
+            $inzeraty = DB::table('inzeraty')
+                ->join('pouzivatelia', 'inzeraty.pouzivatel_id', '=', 'pouzivatelia.id' )
+                ->join('obce', 'inzeraty.obec_id', '=', 'obce.id' )
+                ->join('typy', 'inzeraty.typ_id', '=', 'typy.id' )
+                ->select('inzeraty.*', 'pouzivatelia.meno AS meno', 'pouzivatelia.priezvisko AS priezvisko', 'pouzivatelia.email AS email', 'obce.obec AS obec',
+                    'obce.okres_id AS okres',
+                    'typy.nazov AS typ')
+                ->where('pouzivatelia.realitna_kancelaria_id', '=', \Auth::user()->realitna_kancelaria_id)
+                ->where('pouzivatelia.id', '=', $idMaklerDelete )
+                ->get();
+
+
+
+            return view('spravovanie.realitka.makleri.indexPouzivatelMazanie', ['inzeraty' => $inzeraty]);
+
+        } else {
+            Pouzivatel::find($idMaklerDelete)->delete();
+        }
+
+
+
+        return redirect()->action('RealitkaMakleriController@index');
+
+    }
 
 
     /**

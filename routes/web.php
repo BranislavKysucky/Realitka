@@ -41,6 +41,7 @@ Route::middleware(['auth'])->group(function () {
         // definuj route a akciu
         Route::get('indexPouzivatel/{id}','RealitkaMakleriController@indexPouzivatel');
         Route::get('editMakler/{id}','RealitkaMakleriController@editMakler');
+        Route::get('removeMakler/{id}','RealitkaMakleriController@removeMakler');
         Route::post('updateMakler/{id}','RealitkaMakleriController@updateMakler');
 
 
