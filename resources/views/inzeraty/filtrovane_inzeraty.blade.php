@@ -162,57 +162,68 @@
 
     </div>
 
+    @if($inzeraty)
+        @foreach($inzeraty as $inzerat)
+            <a style="color: black" href="/inzeraty/{{$inzerat->id}}">
+                <div class="col-md-9 col-lg-9 col-sm-9 pull-right">
 
-    @foreach($inzeraty as $inzerat)
-        <a style="color: black" href="/inzeraty/{{$inzerat->id}}">
-            <div class="col-md-9 col-lg-9 col-sm-9 pull-right">
-
-                <div class="col-md-4 col-lg-4 col-sm-4 image-container">
-                    <img src="{{$inzerat->obrazok}}"
-                         style="height:90%;width: 90%;margin-left:-15px;min-height: 150px;border-radius: 4%"/>
-                </div>
-                <div class="excerpt">
-                    <h4 class="heading" style="font-family: Calibri">{{$inzerat->nazov}}</h4>
-                    <ul class="nospace meta">
-                        <li>
-                            <i class="fas fa-home"></i> {{--{{$inzerat->kategoria->nazov}},--}} {{$inzerat->druh->podnazov}}
-                        </li>
+                    <div class="col-md-4 col-lg-4 col-sm-4 image-container">
+                        <img src="{{$inzerat->obrazok}}"
+                             style="height:90%;width: 90%;margin-left:-15px;min-height: 150px;border-radius: 4%"/>
+                    </div>
+                    <div class="excerpt">
+                        <h4 class="heading" style="font-family: Calibri">{{$inzerat->nazov}}</h4>
+                        <ul class="nospace meta">
+                            <li>
+                                <i class="fas fa-home"></i>{{$inzerat->druh->podnazov}}, {{$inzerat->obec->obec}}
+                            </li>
 
 
-                        @if($inzerat->crawler!=true)
-                            @if ($inzerat->stav != null)
-                                <li><i class="fas fa-building"></i> {{$inzerat->stav->nazov}}, {{$inzerat->vymera_domu}}
-                                    m²
+                            @if($inzerat->crawler!=true)
+                                @if ($inzerat->stav != null)
+                                    <li><i class="fas fa-building"></i> {{$inzerat->stav->nazov}}
+                                        , {{$inzerat->vymera_domu}}
+                                        m²
+                                    </li>
+                                @else
+                                    <li><i class="fas fa-building"></i> {{$inzerat->vymera_domu}}m²</li>
+                                @endif
+                            @endif
+
+
+                            <li><i class="fas fa-hand-paper"></i> {{$inzerat->typ->nazov}} </li>
+
+                            @if ($inzerat->cena == null)
+                                <li><i class="fas fa-euro-sign"></i> <span style="color: limegreen">Dohodou</span>
                                 </li>
                             @else
-                                <li><i class="fas fa-building"></i> {{$inzerat->vymera_domu}}m²</li>
+                                <li><i class="fas fa-euro-sign"></i> <span
+                                            style="color: limegreen">{{$inzerat->cena}}</span></li>
                             @endif
-                        @endif
+
+                        </ul>
+                        <p style="color:#585858">
+                            {{substr($inzerat->popis,0,300)}}...
+                        </p>
+                        <p class="pull-right">Pocet zobrazeni: {{$inzerat->pocet_zobrazeni}}x</p>
 
 
-                        <li><i class="fas fa-hand-paper"></i> {{$inzerat->typ->nazov}} </li>
-
-                        @if ($inzerat->cena == null)
-                            <li><i class="fas fa-euro-sign"></i> <span style="color: limegreen">Dohodou</span></li>
-                        @else
-                            <li><i class="fas fa-euro-sign"></i> <span
-                                        style="color: limegreen">{{$inzerat->cena}}</span></li>
-                        @endif
-
-
-                    </ul>
-                    <p style="color:#585858">
-                        {{substr($inzerat->popis,0,300)}}...
-                    </p>
-                    <p class="pull-right">Pocet zobrazeni: {{$inzerat->pocet_zobrazeni}}x</p>
-
-
+                    </div>
+                    <hr/>
                 </div>
-                <hr/>
-            </div>
-        </a>
-    @endforeach
+            </a>
+        @endforeach
+    @else
+        <div class="col-md-9 col-lg-9 col-sm-9 pull-right">
+            <div class="jumbotron">
+                <h1>
+                    <i class="fas fa-frown"></i>
+                </h1>
+                <p>Nenašli sa žiadne inzeráty</p>
 
+            </div>
+        </div>
+    @endif
 
 
 

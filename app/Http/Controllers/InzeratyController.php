@@ -39,10 +39,10 @@ class InzeratyController extends Controller
 
             $this->validate(request(), [
                 'lokalita' => 'required',
-                'cena_od' => 'required',
+                /*'cena_od' => 'required',
                 'cena_do' => 'required',
                 'vymera_od' => 'required',
-                'vymera_do' => 'required'
+                'vymera_do' => 'required'*/
             ]);
 
             $kategoria = $request->input('kategoria');
@@ -145,43 +145,30 @@ class InzeratyController extends Controller
                 ->get();
         } else if ($request->input('email')) {
             $pouzivatel_id = DB::table('pouzivatelia')->where('email', $request->input('email'))->value('id');
-            $inzeraty = Inzerat::select(DB::raw('inzeraty.*'))->where('pouzivatel_id', $pouzivatel_id)->get();
+            if ($pouzivatel_id != null) {
+                $inzeraty = Inzerat::select(DB::raw('inzeraty.*'))->where('pouzivatel_id', $pouzivatel_id)->get();
+            } else {
+                $inzeraty = null;
+            }
+
         } else {
             $inzeraty = Inzerat::all();
         }
-        foreach ($inzeraty as $inzerat) {
-            $inzerat->cena=number_format($inzerat->cena,2,","," ");
-            if ($inzerat->jednaFotografia()->value('url') == null) {
-                $inzerat->obrazok = 'images/demo/348x261.png';
-            } else {
-                $inzerat->obrazok = $inzerat->jednaFotografia()->value('url');
+        if ($inzeraty != null) {
+            foreach ($inzeraty as $inzerat) {
+                $inzerat->cena = number_format($inzerat->cena, 2, ",", " ");
+                if ($inzerat->jednaFotografia()->value('url') == null) {
+                    $inzerat->obrazok = 'images/demo/348x261.png';
+                } else {
+                    $inzerat->obrazok = $inzerat->jednaFotografia()->value('url');
+                }
             }
         }
-        return view('inzeraty.filtrovane_inzeraty', ['obce' => $obce, 'inzeraty' => $inzeraty,'widget'=>$this->widget()]);
+        return view('inzeraty.filtrovane_inzeraty', ['obce' => $obce, 'inzeraty' => $inzeraty, 'widget' => $this->widget()]);
 
     }
 
-    private function widget(){
-        $inzeraty = Inzerat::whereBetween('druh_id',array(11,16))->orderBy('cena', 'ASC')->limit(3)->get();
-        /*if(empty($inzeraty)){
-            $inzeraty = Inzerat::whereBetween('druh_id',array(11,16))->orderBy('cena', 'ASC')->limit(3)->get();
-        }
-        if(empty($inzeraty)){
-            $inzeraty = Inzerat::whereBetween('druh_id',array(18,28))->orderBy('cena', 'ASC')->limit(3)->get();
-        }
-        if(empty($inzeraty)){
-            $inzeraty = Inzerat::orderBy('cena', 'ASC')->limit(3)->get();
-        }*/
-        foreach ($inzeraty as $inzerat) {
-            $inzerat->cena=number_format($inzerat->cena,2,","," ");
-            if ($inzerat->jednaFotografia()->value('url') == null) {
-                $inzerat->obrazok = 'images/demo/348x261.png';
-            } else {
-                $inzerat->obrazok = $inzerat->jednaFotografia()->value('url');
-            }
-        }
-        return $inzeraty;
-    }
+
 
     /**
      * Show the form for creating a new resource.
@@ -319,7 +306,7 @@ class InzeratyController extends Controller
         // detail inzeratu si zobrazite na adrese /inzerat/idInzeratu
 
         $inzerat = Inzerat::findOrFail($id);
-        $inzerat->cena=number_format($inzerat->cena,2,","," ");
+        $inzerat->cena = number_format($inzerat->cena, 2, ",", " ");
         $kategoria = $inzerat->kategoria()->first();
         $druh = $inzerat->druh()->first();
         $stav = $inzerat->stav()->first();
@@ -351,7 +338,7 @@ class InzeratyController extends Controller
         if (Auth::check()) {
             //vypis aktualneho zaznamu
             $inzerat = Inzerat::find($id);
-            if($inzerat->pouzivatel_id!=Auth::user()->id){
+            if ($inzerat->pouzivatel_id != Auth::user()->id) {
                 return back();
             }
             $kategoria = $inzerat->kategoria()->first();

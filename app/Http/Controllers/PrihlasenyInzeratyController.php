@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Obec;
+use App\Inzerat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -15,12 +17,13 @@ class PrihlasenyInzeratyController extends Controller
      */
     public function index()
     {
+        $obce = Obec::all();
         if (Auth::check()) {
-            $inzeraty = DB::table('inzeraty')->where('pouzivatel_id', Auth::user()->id)->get();
+            $inzeraty = Inzerat::where('pouzivatel_id', Auth::user()->id)->get();
             foreach ($inzeraty as $inzerat) {
                 $inzerat->obrazok = DB::table('fotografie')->where('inzerat_id', $inzerat->id)->value('url');
             }
-            return view('inzeraty.moje_inzeraty_vysledok', ['inzeraty' => $inzeraty]);
+            return view('inzeraty.filtrovane_inzeraty', ['inzeraty' => $inzeraty, 'widget' => $this->widget(), 'obce' => $obce]);
         }
     }
 
