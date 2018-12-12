@@ -56,8 +56,8 @@
 
                 </th>
                 <td>{{ $inzerat->nazov}}</td>
-                <td>{{ $inzerat->typ->nazov}}</td>
-                <td>{{ $inzerat->obec->obec.', '.$inzerat->obec->okres_id}}</td>
+                <td>{{ $inzerat->typ}}</td>
+                <td>{{ $inzerat->obec.', '.$inzerat->okres}}</td>
 
                 @if ($inzerat->cena == null)
                     <td>Dohodou</td>
@@ -65,9 +65,9 @@
                     <td>{{ $inzerat->cena}}</td>
                 @endif
 
-                <td>{{ $inzerat->pouzivatel->meno." ".$inzerat->pouzivatel->priezvisko}}</td>
-                <td>{{ $inzerat->pouzivatel->email}}</td>
-                <td>{{ $inzerat->pouzivatel->telefon}}</td>
+                <td>{{ $inzerat->meno." ".$inzerat->priezvisko}}</td>
+                <td>{{ $inzerat->email}}</td>
+                <td>{{ $inzerat->telefon}}</td>
             </tr>
 
         @endforeach

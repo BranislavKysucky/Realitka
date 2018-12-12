@@ -26,7 +26,18 @@ class RealitkaInzeratyController extends Controller
     public function index()
     {
 
-        $inzeraty = Inzerat::all();
+
+        $inzeraty = DB::table('inzeraty')
+            ->join('pouzivatelia', 'inzeraty.pouzivatel_id', '=', 'pouzivatelia.id' )
+            ->join('obce', 'inzeraty.obec_id', '=', 'obce.id' )
+            ->join('typy', 'inzeraty.typ_id', '=', 'typy.id' )
+            ->select('inzeraty.*', 'pouzivatelia.meno AS meno', 'pouzivatelia.priezvisko AS priezvisko', 'pouzivatelia.email AS email', 'pouzivatelia.telefon AS telefon', 'obce.obec AS obec',
+                'obce.okres_id AS okres',
+                'typy.nazov AS typ')
+            ->where('pouzivatelia.realitna_kancelaria_id', '=', \Auth::user()->realitna_kancelaria_id)
+
+            ->get();
+
 
 
         return view('spravovanie.realitka.inzeraty.index', ['inzeraty' => $inzeraty]);
@@ -94,7 +105,11 @@ class RealitkaInzeratyController extends Controller
         $druhy_nazov = Druh::select('nazov')->groupBy('nazov')->get();
         $typy = Typ::all();
         $stavy = Stav::all();
-        $makleri = DB::table('pouzivatelia')->where('rola', 3)->get();
+
+        $makleri = DB::table('pouzivatelia')->
+        where('realitna_kancelaria_id', \Auth::user()->realitna_kancelaria_id)->
+
+        get();
 
         return view('spravovanie.realitka.inzeraty.upravit')
             ->with(compact('inzerat'))
