@@ -7,9 +7,15 @@ $(document).ready(function () {
             return this.value === $("#lokalita").val();
         }).val();
 
+        var ID = $('#obce option').filter(function() {
+            return this.value === $("#lokalita").val();
+        })[0].id;
+
         if(option !== undefined){
             this.value = option.substr(0, option.indexOf(','));
             isPlaceChanged = true;
+
+            $('#ID').val(ID);
         }
     });
 

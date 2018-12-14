@@ -36,56 +36,55 @@ class InzeratyController extends Controller
         $obce = Obec::all();
 
         if ($request->input('lokalita')) {
-
             $this->validate(request(), [
-                'lokalita' => 'required',
-                /*'cena_od' => 'required',
+//                'lokalita' => 'required',
+                'cena_od' => 'required',
                 'cena_do' => 'required',
                 'vymera_od' => 'required',
-                'vymera_do' => 'required'*/
+                'vymera_do' => 'required'
             ]);
 
             $kategoria = $request->input('kategoria');
             $druh = $request->input('druh');
             $stav = $request->input('stav');
 
-            $cena_od = 0;
-            $cena_do = 0;
-            $vymera_od = 0;
-            $vymera_do = 0;
+//            $cena_od = 0;
+//            $cena_do = 0;
+//            $vymera_od = 0;
+//            $vymera_do = 0;
+//
+//            $kategoria_od = 0;
+//            $kategoria_do = 0;
+//
+//            $druh_od = 0;
+//            $druh_do = 0;
+//
+//            $stav_od = 0;
+//            $stav_do = 0;
 
-            $kategoria_od = 0;
-            $kategoria_do = 0;
-
-            $druh_od = 0;
-            $druh_do = 0;
-
-            $stav_od = 0;
-            $stav_do = 0;
-
-            if ($request->input('cena_od')) {
-                $cena_od = $request->input('cena_od');
-            } else {
-                $cena_od = 0;
-            }
-
-            if ($request->input('cena_do')) {
-                $cena_do = $request->input('cena_do');
-            } else {
-                $cena_do = 1000000;
-            }
-
-            if ($request->input('vymera_od')) {
-                $vymera_od = $request->input('vymera_od');
-            } else {
-                $vymera_od = 0;
-            }
-
-            if ($request->input('vymera_do')) {
-                $vymera_do = $request->input('vymera_do');
-            } else {
-                $vymera_do = 1000000;
-            }
+//            if ($request->input('cena_od')) {
+//                $cena_od = $request->input('cena_od');
+//            } else {
+//                $cena_od = 0;
+//            }
+//
+//            if ($request->input('cena_do')) {
+//                $cena_do = $request->input('cena_do');
+//            } else {
+//                $cena_do = 1000000;
+//            }
+//
+//            if ($request->input('vymera_od')) {
+//                $vymera_od = $request->input('vymera_od');
+//            } else {
+//                $vymera_od = 0;
+//            }
+//
+//            if ($request->input('vymera_do')) {
+//                $vymera_do = $request->input('vymera_do');
+//            } else {
+//                $vymera_do = 1000000;
+//            }
 
             if ($kategoria == 1) {
                 $kategoria_od = 1;
@@ -127,20 +126,31 @@ class InzeratyController extends Controller
                                 $druh_do = $druh;
                             }
 
+//            dd($request->get('cena_od'),
+////                $request->get('cena_do'),
+////                $request->get('vymera_od'),
+////                $request->get('vymera_do'),
+////                $request->get('typ'),
+////                $druh_od, $druh_do,
+////                $stav_od, $stav_do,
+////                $kategoria_od, $kategoria_do,
+////                $request->get('obec_id'),
+////                $request->get('lokalita'));
+
             $inzeraty = Inzerat::select(DB::raw('inzeraty.*'))
-//                ->join('kategorie', 'kategoria_id', '=', 'kategorie.id')
-//                ->join('typy', 'typ_id', '=', 'typy.id')
-//                ->join('druhy', 'druh_id', '=', 'druhy.id')
-//                ->join('stavy', 'stav_id', '=', 'stavy.id')
+                ->join('kategorie', 'kategoria_id', '=', 'kategorie.id')
+                ->join('typy', 'typ_id', '=', 'typy.id')
+                ->join('druhy', 'druh_id', '=', 'druhy.id')
+                ->join('stavy', 'stav_id', '=', 'stavy.id')
 //                ->join('fotografie', 'inzerat_id', '=', 'inzeraty.id')
-//                ->join('obce', 'obec_id', '=', 'obce.id')
-                ->where('obce.obec', $request->input('lokalita'))
+                ->join('obce', 'obec_id', '=', 'obce.id')
+                ->where('obce.id', $request->input('obec_id'))
                 ->where('typy.value', $request->input('typ'))
                 ->whereBetween('kategorie.value', array($kategoria_od, $kategoria_do))
                 ->whereBetween('druhy.value', array($druh_od, $druh_do))
                 ->whereBetween('stavy.value', array($stav_od, $stav_do))
-                ->whereBetween('cena', array($cena_od, $cena_do))
-                ->whereBetween('vymera_domu', array($vymera_od, $vymera_do))
+                ->whereBetween('cena', array($request->get('cena_od'), $request->get('cena_do')))
+                ->whereBetween('vymera_domu', array($request->get('vymera_od'), $request->get('vymera_do')))
                 ->getQuery()
                 ->get();
         } else if ($request->input('email')) {

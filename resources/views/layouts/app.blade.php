@@ -99,7 +99,7 @@
                     <li>{{ Auth::user()->email }}</li>
 
                     @if(Auth::user()->rola==1)
-                        <li><a href="{{route('inzeraty_a.index')}}">Spravovať</a></li>
+                        <li><a href="{{route('pouzivatelia_a.index')}}">Spravovať</a></li>
                     @elseif(Auth::user()->rola==2)
                         <li><a href="{{route('inzeraty_r.index')}}">Spravovať</a></li>
                     @endif

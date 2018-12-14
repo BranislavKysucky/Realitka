@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Kontakt;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AdminPouzivateliaController extends Controller
 {
@@ -13,7 +15,9 @@ class AdminPouzivateliaController extends Controller
      */
     public function index()
     {
-        return view('spravovanie.admin.pozivatelia.index');
+        $pouzivatelia = DB::table('pouzivatelia')->where('rola', '1')->get();
+
+        return view('spravovanie.admin.pouzivatelia.index', ['pouzivatelia' => $pouzivatelia]);
     }
 
     /**
@@ -68,7 +72,7 @@ class AdminPouzivateliaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
     }
 
     /**

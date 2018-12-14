@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Kontakt;
+use App\Obec;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AdminInzeratyController extends Controller
 {
@@ -68,7 +71,7 @@ class AdminInzeratyController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
     }
 
     /**

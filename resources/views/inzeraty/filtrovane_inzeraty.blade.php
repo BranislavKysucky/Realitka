@@ -13,12 +13,14 @@
             <form action="{{route('inzeraty.index')}}" method="get">
                 {{csrf_field()}}
 
+                <input type="hidden" id="ID" name="obec_id"/>
+
                 <label for="lokalita">Obec/Mesto</label>
                 <input list="obce" id="lokalita" class="form-control" placeholder="Zadajte lokalitu" name="lokalita"
                        autocomplete="off"/>
                 <datalist id="obce">
                     @foreach($obce as $obec)
-                        <option href="#" id="{{$obec->obec}}">{{$obec->obec}}, okres {{$obec->okres_id}}</option>
+                        <option href="#" id="{{$obec->id}}">{{$obec->obec}}, okres {{$obec->okres_id}}</option>
                     @endforeach
                 </datalist>
 

@@ -17,15 +17,15 @@ class CreateKontaktTable extends Migration
             $table->increments('id');
             $table->string('meno');
             $table->string('priezvisko');
-            $table->string('telefon');
+            $table->integer('telefon');
             $table->string('email');
             $table->string('nazovSpolocnosti');
             $table->string('ulica');
             $table->string('mesto');
-            $table->string('psc');
-            $table->string('ico');
-            $table->string('ic_dph');
-            $table->string('dic');
+            $table->integer('psc');
+            $table->integer('ico');
+            $table->integer('ic_dph');
+            $table->integer('dic');
         });
     }
 

@@ -27,6 +27,7 @@ class CreatePouzivateliaTable extends Migration
             $table->string('email_token')->nullable();
             $table->boolean('status')->default(0);
             $table->string('password')->nullable();
+            $table->integer('blokovany')->nullable();
             $table->rememberToken();
             $table->timestamps();
 /*
