@@ -91,7 +91,7 @@
                                 <label for="cena">Cena(€)</label>
                                 <input  placeholder="cena" class="form-control" type="number" min="0" id="cena"
                                        value=""
-                                       oninput="hideCena_dohodou();" name="cena"/>
+                                       onchange="hideCena_dohodou();" name="cena"/>
 
                             </div>
 

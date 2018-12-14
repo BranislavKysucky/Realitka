@@ -11,7 +11,8 @@ function hideCena_dohodou() {
     var name = $.trim( $('input#cena').val() ); // get the value of the input field
 
 
-    if((name == "") || (name == 0)) {
+
+    if(!$.isNumeric( name ) || name == 0) {
         $("#cena_dohodou").show();
         $('input:radio[name=cena_dohodou]')[0].checked = true;
 

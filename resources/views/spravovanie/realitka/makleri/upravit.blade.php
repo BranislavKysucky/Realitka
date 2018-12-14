@@ -97,7 +97,7 @@
                             <div class="col-md-6">
                                 <input id="telefon_pouzivatel" type="text" class="form-control"
                                        name="telefon_pouzivatel"
-                                       value="{{ $pouzivatel->telefon }}" required autofocus>
+                                       value="{{ $pouzivatel->telefon }}" required >
 
                                 @if ($errors->has('telefon_pouzivatel'))
                                     <span class="help-block">

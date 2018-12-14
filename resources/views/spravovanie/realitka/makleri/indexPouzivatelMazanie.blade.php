@@ -42,7 +42,7 @@
                     <form action="{{action('RealitkaMakleriController@removeMakler', $inzerat->id)}}" method="get">
                         {{csrf_field()}}
                         <input name="_method" type="hidden" value="DELETE">
-                        <button class="btn btn-info" type="submit"><span class="glyphicon glyphicon-remove"></span></button>
+                        <button class="btn btn-info" onclick="return confirm('Prosím potvrdťe zmazanie');" type="submit"><span class="glyphicon glyphicon-remove"></span></button>
                     </form>
 
 
