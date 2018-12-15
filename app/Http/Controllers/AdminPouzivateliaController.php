@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Kontakt;
+use App\Pouzivatel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -15,7 +16,13 @@ class AdminPouzivateliaController extends Controller
      */
     public function index()
     {
-        $pouzivatelia = DB::table('pouzivatelia')->where('rola', '1')->get();
+        $pouzivatelia = DB::table('pouzivatelia')->where('rola', '4')->get();
+
+        foreach ($pouzivatelia as $pouzivatel){
+            if($pouzivatel->blokovany == 0){
+                $pouzivatel->blokovany = 'Nie';
+            }
+        }
 
         return view('spravovanie.admin.pouzivatelia.index', ['pouzivatelia' => $pouzivatelia]);
     }
@@ -83,6 +90,7 @@ class AdminPouzivateliaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Pouzivatel::find($id)->delete();
+        return redirect()->action('AdminPouzivateliaController@index');
     }
 }
