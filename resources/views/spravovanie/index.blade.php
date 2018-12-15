@@ -36,6 +36,8 @@
         <li>
             <a href="/"><i class="icon icon-share-alt"></i>Vrátiť sa späť na stránku</a>
         </li>
+
+
         <li class=""><a href="{{ route('logout') }}"
                         onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -78,6 +80,10 @@
         @elseif(Auth::user()->rola==2)
             <li class="active">
                 <a href=""><i class="icon icon-home"></i> <span>Domov</span></a>
+            </li>
+            <li>
+                <a href="{{action('RealitkaMakleriController@editProfil', Auth::user()->id)}}"><i class="glyphicon glyphicon-edit"></i> <span>Upraviť osobné údaje</span></a>
+                <a href="{{action('RealitkaMakleriController@editFirma', Auth::user()->id)}}"><i class="glyphicon glyphicon-edit"></i> <span>Upraviť firemné údaje</span></a>
             </li>
             <li>
                 <a href="{{route('inzeraty_r.index')}}"><i class="icon icon-list-alt"></i> <span>Inzeráty</span></a>

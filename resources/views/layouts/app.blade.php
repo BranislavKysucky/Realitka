@@ -102,6 +102,9 @@
                         <li><a href="{{route('pouzivatelia_a.index')}}">Spravovať</a></li>
                     @elseif(Auth::user()->rola==2)
                         <li><a href="{{route('inzeraty_r.index')}}">Spravovať</a></li>
+
+                    @elseif(Auth::user()->rola==3)
+                        <li><i class="fas fa-edit fa-lg"></i><a href="{{route('makler.edit',Auth::user()->id)}}"> Profil</a></li>
                     @endif
 
 

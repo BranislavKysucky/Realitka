@@ -14,4 +14,9 @@ class Realitna_kancelaria extends Model
     public function kraj(){
         return $this->belongsTo(Kraj::class);
     }
+
+    public function obec(){
+        return $this->belongsTo(Obec::class);
+    }
+
 }

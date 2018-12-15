@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Pouzivatel;
 use App\Obec;
 use App\Inzerat;
 use App\Druh;
+use App\Realitna_kancelaria;
 use App\Typ;
 use App\Stav;
 use Illuminate\Http\Request;
@@ -145,8 +147,27 @@ class RealitkaMakleriController extends Controller
     }
 
 
+    public function editProfil($id)
+    {
 
 
+
+        $pouzivatel = Pouzivatel::findOrFail($id);
+        $obce = Obec::all();
+        return view('spravovanie.realitka.makleri.upravitProfil')->with(compact('pouzivatel'))
+            ->with(compact('obce'));
+    }
+
+    public function editFirma($id)
+    {
+
+
+
+        $pouzivatel = Realitna_kancelaria::findOrFail($id);
+        $obce = Obec::all();
+        return view('spravovanie.realitka.makleri.upravitFirma')->with(compact('pouzivatel'))
+            ->with(compact('obce'));
+    }
 
 
     /**
@@ -191,6 +212,83 @@ class RealitkaMakleriController extends Controller
 
         return redirect()->action('RealitkaMakleriController@show', $pouzivatel->id);
     }
+    public function updateProfil(Request $request, $id)
+    {
+
+        $pouzivatel = Pouzivatel::findOrFail($id);
+        $obec_nazov = $request->get('lokalita');
+        $semicolonPos = strpos($obec_nazov, ',');
+        $obec = substr($obec_nazov, 0, $semicolonPos);
+        $obecOkres = substr($obec_nazov, $semicolonPos+1, strlen($obec_nazov)+1);
+        $obecOkres = str_replace("okres","",$obecOkres);
+        $obecOkres = substr($obecOkres, 2, strlen($obec_nazov)+1);
+
+
+        $obec_id = DB::table('obce')
+            ->where('obec', '=',$obec)
+            ->where('okres_id','=', $obecOkres)
+            ->value('id');
+
+        $pouzivatel->obec_id = $obec_id;
+        $pouzivatel->meno=$request->get('meno');
+        $pouzivatel->priezvisko=$request->get('priezvisko');
+        $pouzivatel->email=$request->get('email');
+        $pouzivatel->ulica_cislo=$request->get('ulica_pouzivatel');
+        $pouzivatel->PSC=$request->get('psc_pouzivatel');
+        $pouzivatel->telefon=$request->get('telefon_pouzivatel');
+        $pouzivatel->save();
+
+
+
+
+
+
+
+
+        return redirect()->action('RealitkaMakleriController@index');
+    }
+
+    public function updateFirma(Request $request, $id)
+    {
+
+        $pouzivatel = Realitna_kancelaria::findOrFail($id);
+        $obec_nazov = $request->get('lokalita');
+        $semicolonPos = strpos($obec_nazov, ',');
+        $obec = substr($obec_nazov, 0, $semicolonPos);
+        $obecOkres = substr($obec_nazov, $semicolonPos+1, strlen($obec_nazov)+1);
+        $obecOkres = str_replace("okres","",$obecOkres);
+        $obecOkres = substr($obecOkres, 2, strlen($obec_nazov)+1);
+
+
+        $obec_id = DB::table('obce')
+            ->where('obec', '=',$obec)
+            ->where('okres_id','=', $obecOkres)
+            ->value('id');
+
+        $pouzivatel->obec_id = $obec_id;
+        $pouzivatel->nazov=$request->get('nazov');
+        $pouzivatel->ICO=$request->get('ICO');
+        $pouzivatel->DIC=$request->get('DIC');
+        $pouzivatel->kontaktna_osoba=$request->get('kontaktna_osoba');
+        $pouzivatel->email=$request->get('email');
+        $pouzivatel->ulica_cislo=$request->get('ulica_pouzivatel');
+        $pouzivatel->PSC=$request->get('psc_pouzivatel');
+        $pouzivatel->telefon=$request->get('telefon_pouzivatel');
+        $pouzivatel->save();
+
+
+
+
+
+
+
+
+        return redirect()->action('RealitkaMakleriController@index');
+    }
+
+
+
+
     public function editMakler($id)
     {
         $inzerat = Inzerat::findOrFail($id);
@@ -221,6 +319,12 @@ class RealitkaMakleriController extends Controller
             ->with(compact('makleri'));
 
     }
+
+
+
+
+
+
 
 public function updateMakler(Request $request, $id){
     $inzerat = Inzerat::findOrFail($id);

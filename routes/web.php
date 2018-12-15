@@ -43,11 +43,28 @@ Route::middleware(['auth'])->group(function () {
         Route::get('editMakler/{id}','RealitkaMakleriController@editMakler');
         Route::get('removeMakler/{id}','RealitkaMakleriController@removeMakler');
         Route::post('updateMakler/{id}','RealitkaMakleriController@updateMakler');
+        Route::post('updateProfil/{id}','RealitkaMakleriController@updateProfil');
+        Route::get('editProfil/{id}','RealitkaMakleriController@editProfil');
+        Route::post('updateFirma/{id}','RealitkaMakleriController@updateFirma');
+        Route::get('editFirma/{id}','RealitkaMakleriController@editFirma');
 
 
     });
 
+    //routy pre maklera
+    Route::group(['middleware' => 'App\Http\Middleware\Makler'], function () {
+        Route::resource('makler', 'MaklerController');
+
+    });
+
+
+
+
     //routy pre prihlaseneho pouzivatela. Majitel realitky, makler ale aj admin moze mat inzeraty...
     //takze ak je ktokolvek prihlaseny, tak po kliknuti na tlacidlo Moje Inzeraty sa mu zobrazia len jeho inzeraty
     Route::resource('moje_inzeraty_p', 'PrihlasenyInzeratyController');
+
+
+
+
 });
