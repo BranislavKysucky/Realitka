@@ -1,0 +1,1 @@
+Pri poslednom pokuse o editáciu Vášho inzerátu bolo zadané nesprávne heslo, Vaše heslo je : <b>{{$inzerat->heslo}}</b> .

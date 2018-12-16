@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+    @include('popup.error')
     <div class="col-sm-3 col-md-3 col-lg-3 well well-lg" style="margin-left: 35%">
         <h1>Zadajte heslo</h1>
         <form action="/inzeraty/{{$inzerat->id}}/edit" method="get">
@@ -11,4 +12,5 @@
 
         </form>
     </div>
+
 @endsection

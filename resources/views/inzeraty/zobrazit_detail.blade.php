@@ -105,26 +105,26 @@
                 </br>
 
                 <div class="woocommerce-tabs wc-tabs-wrapper">
-                    <ul class="tabs wc-tabs" role="tablist">
-
-                        @if(Auth::check())
-                            @if(Auth::user()->id==$inzerat->pouzivatel_id)
+                    @if($inzerat->crawler==0)
+                        <ul class="tabs wc-tabs" role="tablist">
+                            @if(Auth::check())
+                                @if(Auth::user()->id==$inzerat->pouzivatel_id)
+                                    <li class="description_tab" id="tab-title-description" role="tab"
+                                        aria-controls="tab-description">
+                                        <a href="/inzeraty/{{$inzerat->id}}/edit">Spravovať inzerát</a>
+                                    </li>
+                                @endif
+                            @else
                                 <li class="description_tab" id="tab-title-description" role="tab"
                                     aria-controls="tab-description">
                                     <a href="/inzeraty/{{$inzerat->id}}/edit">Spravovať inzerát</a>
                                 </li>
                             @endif
-                        @else
-                            <li class="description_tab" id="tab-title-description" role="tab"
-                                aria-controls="tab-description">
-                                <a href="/inzeraty/{{$inzerat->id}}/edit">Spravovať inzerát</a>
-                            </li>
-                        @endif
-
-
-                    </ul>
+                        </ul>
+                    @endif
                     <div class="woocommerce-Tabs-panel woocommerce-Tabs-panel--description panel entry-content wc-tab"
-                         id="tab-description" role="tabpanel" aria-labelledby="tab-title-description" style="background: #F8F8F8">
+                         id="tab-description" role="tabpanel" aria-labelledby="tab-title-description"
+                         style="background: #F8F8F8">
 
                         {{--<h2>Popis</h2>--}}
 

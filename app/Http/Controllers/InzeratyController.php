@@ -6,9 +6,11 @@ use App\Fotografia;
 use App\Inzerat;
 use App\Kategoria;
 use App\Kontakt;
+use App\Mail\ZabudnuteHesloMail;
 use App\Obec;
 use App\Pouzivatel;
-use App\Realitna_kancelaria;
+use foo\bar;
+use Illuminate\Support\Facades\Mail;
 use App\Typ;
 use App\Druh;
 use App\Stav;
@@ -151,11 +153,11 @@ class InzeratyController extends Controller
                     ->whereBetween('druhy.value', array($druh_od, $druh_do))
                     ->whereBetween('stavy.value', array($stav_od, $stav_do))
                     ->whereBetween('cena', array($cena_od, $cena_do))
-                    ->whereBetween('vymera_domu', array($vymera_od,$vymera_do))
+                    ->whereBetween('vymera_domu', array($vymera_od, $vymera_do))
                     //->getQuery()
                     ->get();
                 //echo 'ano';
-            }else{
+            } else {
                 $inzeraty = Inzerat::select(DB::raw('inzeraty.*'))
                     ->join('kategorie', 'kategoria_id', '=', 'kategorie.id')
                     ->join('typy', 'typ_id', '=', 'typy.id')
@@ -373,7 +375,7 @@ class InzeratyController extends Controller
         if (Auth::check()) {                    // si lognuty
 
 
-            $mobil = \Auth::user()->telefon;
+            $mobil = Auth::user()->telefon;
 
             $obce = Obec::all();
             $druhy = Druh::all();
@@ -414,7 +416,17 @@ class InzeratyController extends Controller
                         ->with(compact('obce'));
 
 
-                } else return back();                                                       // neni ok
+                } else {
+                    if($inzerat->crawler!=1) {
+                        $pouzivatel = Pouzivatel::where('id', $inzerat->pouzivatel_id)->first();
+                        Mail::to($pouzivatel->email)->send(new ZabudnuteHesloMail($inzerat));
+                        return back()->with('error', 'Zadali ste nesprávne heslo. Heslo bolo odoslané na Vašu emailovú adresu');
+                    }else{
+                        return back();
+                    }
+                }
+
+                // neni ok
 
             } else                                                                          // nezadal si heslo
                 return view('inzeraty.zadaj_heslo', ['inzerat' => $inzerat]);
