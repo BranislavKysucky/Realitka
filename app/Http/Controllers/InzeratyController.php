@@ -38,53 +38,53 @@ class InzeratyController extends Controller
         if ($request->input('lokalita')) {
             $this->validate(request(), [
 //                'lokalita' => 'required',
-                'cena_od' => 'required',
+                /*'cena_od' => 'required',
                 'cena_do' => 'required',
                 'vymera_od' => 'required',
-                'vymera_do' => 'required'
+                'vymera_do' => 'required'*/
             ]);
 
             $kategoria = $request->input('kategoria');
             $druh = $request->input('druh');
             $stav = $request->input('stav');
 
-//            $cena_od = 0;
-//            $cena_do = 0;
-//            $vymera_od = 0;
-//            $vymera_do = 0;
-//
-//            $kategoria_od = 0;
-//            $kategoria_do = 0;
-//
-//            $druh_od = 0;
-//            $druh_do = 0;
-//
-//            $stav_od = 0;
-//            $stav_do = 0;
+            $cena_od = 0;
+            $cena_do = 0;
+            $vymera_od = 0;
+            $vymera_do = 0;
 
-//            if ($request->input('cena_od')) {
-//                $cena_od = $request->input('cena_od');
-//            } else {
-//                $cena_od = 0;
-//            }
-//
-//            if ($request->input('cena_do')) {
-//                $cena_do = $request->input('cena_do');
-//            } else {
-//                $cena_do = 1000000;
-//            }
-//
-//            if ($request->input('vymera_od')) {
-//                $vymera_od = $request->input('vymera_od');
-//            } else {
-//                $vymera_od = 0;
-//            }
-//
-//            if ($request->input('vymera_do')) {
-//                $vymera_do = $request->input('vymera_do');
-//            } else {
-//                $vymera_do = 1000000;
-//            }
+            $kategoria_od = 0;
+            $kategoria_do = 0;
+
+            $druh_od = 0;
+            $druh_do = 0;
+
+            $stav_od = 0;
+            $stav_do = 0;
+
+            if ($request->input('cena_od')) {
+                $cena_od = $request->input('cena_od');
+            } else {
+                $cena_od = 0;
+            }
+
+            if ($request->input('cena_do')) {
+                $cena_do = $request->input('cena_do');
+            } else {
+                $cena_do = 1000000;
+            }
+
+            if ($request->input('vymera_od')) {
+                $vymera_od = $request->input('vymera_od');
+            } else {
+                $vymera_od = 0;
+            }
+
+            if ($request->input('vymera_do')) {
+                $vymera_do = $request->input('vymera_do');
+            } else {
+                $vymera_do = 1000000;
+            }
 
             if ($kategoria == 1) {
                 $kategoria_od = 1;
@@ -136,23 +136,45 @@ class InzeratyController extends Controller
 ////                $kategoria_od, $kategoria_do,
 ////                $request->get('obec_id'),
 ////                $request->get('lokalita'));
-
-            $inzeraty = Inzerat::select(DB::raw('inzeraty.*'))
-                ->join('kategorie', 'kategoria_id', '=', 'kategorie.id')
-                ->join('typy', 'typ_id', '=', 'typy.id')
-                ->join('druhy', 'druh_id', '=', 'druhy.id')
-                ->join('stavy', 'stav_id', '=', 'stavy.id')
+            //var_dump($request->input('cena_od').'-'.$request->input('cena_do'));die;
+            if ($request->filled('vymera_od') || $request->filled('vymera_do')) {
+                $inzeraty = Inzerat::select(DB::raw('inzeraty.*'))
+                    ->join('kategorie', 'kategoria_id', '=', 'kategorie.id')
+                    ->join('typy', 'typ_id', '=', 'typy.id')
+                    ->join('druhy', 'druh_id', '=', 'druhy.id')
+                    ->join('stavy', 'stav_id', '=', 'stavy.id')
 //                ->join('fotografie', 'inzerat_id', '=', 'inzeraty.id')
 //                ->join('obce', 'obec_id', '=', 'obce.id')
-                ->where('obec_id', $request->input('obec_id'))
-                ->where('typy.value', $request->input('typ'))
-                ->whereBetween('kategorie.value', array($kategoria_od, $kategoria_do))
-                ->whereBetween('druhy.value', array($druh_od, $druh_do))
-                ->whereBetween('stavy.value', array($stav_od, $stav_do))
-                ->whereBetween('cena', array($request->get('cena_od'), $request->get('cena_do')))
-                ->whereBetween('vymera_domu', array($request->get('vymera_od'), $request->get('vymera_do')))
-                ->getQuery()
-                ->get();
+                    ->where('obec_id', $request->input('obec_id'))
+                    ->where('typy.value', $request->input('typ'))
+                    ->whereBetween('kategorie.value', array($kategoria_od, $kategoria_do))
+                    ->whereBetween('druhy.value', array($druh_od, $druh_do))
+                    ->whereBetween('stavy.value', array($stav_od, $stav_do))
+                    ->whereBetween('cena', array($cena_od, $cena_do))
+                    ->whereBetween('vymera_domu', array($vymera_od,$vymera_do))
+                    //->getQuery()
+                    ->get();
+                //echo 'ano';
+            }else{
+                $inzeraty = Inzerat::select(DB::raw('inzeraty.*'))
+                    ->join('kategorie', 'kategoria_id', '=', 'kategorie.id')
+                    ->join('typy', 'typ_id', '=', 'typy.id')
+                    ->join('druhy', 'druh_id', '=', 'druhy.id')
+                    ->join('stavy', 'stav_id', '=', 'stavy.id')
+//                ->join('fotografie', 'inzerat_id', '=', 'inzeraty.id')
+//                ->join('obce', 'obec_id', '=', 'obce.id')
+                    ->where('obec_id', $request->input('obec_id'))
+                    ->where('typy.value', $request->input('typ'))
+                    ->whereBetween('kategorie.value', array($kategoria_od, $kategoria_do))
+                    ->whereBetween('druhy.value', array($druh_od, $druh_do))
+                    ->whereBetween('stavy.value', array($stav_od, $stav_do))
+                    ->whereBetween('cena', array($cena_od, $cena_do))
+                    //->getQuery()
+                    ->get();
+                //echo 'nie';
+            }
+            //var_dump($inzeraty);die;
+
         } else if ($request->input('email')) {
             $pouzivatel_id = DB::table('pouzivatelia')->where('email', $request->input('email'))->value('id');
             if ($pouzivatel_id != null) {
@@ -164,7 +186,7 @@ class InzeratyController extends Controller
         } else {
             $inzeraty = Inzerat::all();
         }
-        if ($inzeraty != null) {
+        if ($inzeraty->count()) {
             foreach ($inzeraty as $inzerat) {
                 $inzerat->cena = number_format($inzerat->cena, 2, ",", " ");
                 if ($inzerat->jednaFotografia()->value('url') == null) {
@@ -179,8 +201,7 @@ class InzeratyController extends Controller
     }
 
 
-
-    /**
+    /*
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -352,7 +373,6 @@ class InzeratyController extends Controller
         if (Auth::check()) {                    // si lognuty
 
 
-
             $mobil = \Auth::user()->telefon;
 
             $obce = Obec::all();
@@ -362,23 +382,14 @@ class InzeratyController extends Controller
             $stavy = Stav::all();
 
 
-
             return view('inzeraty.upravit_inzeraty')
                 ->with(compact('inzerat'))
                 ->with(compact('mobil'))
                 ->with(compact('druhy'))
                 ->with(compact('druhy_nazov'))
-
                 ->with(compact('stavy'))
-
                 ->with(compact('typy'))
-
                 ->with(compact('obce'));
-
-
-
-
-
 
 
         } else {                                        // nie si , daj heslo
@@ -394,21 +405,13 @@ class InzeratyController extends Controller
                     $stavy = Stav::all();
 
 
-
                     return view('inzeraty.upravit_inzeraty')
                         ->with(compact('inzerat'))
-
                         ->with(compact('druhy'))
                         ->with(compact('druhy_nazov'))
-
                         ->with(compact('stavy'))
-
                         ->with(compact('typy'))
-
                         ->with(compact('obce'));
-
-
-
 
 
                 } else return back();                                                       // neni ok
@@ -429,7 +432,7 @@ class InzeratyController extends Controller
     public function update(Request $request, $id)
     {
 
-        if($request->file('images')) {
+        if ($request->file('images')) {
             foreach ($request->file('images') as $image) {
                 //ulozenie image, do db ide iba url teda path resp.  /public/images/ + image name
 
@@ -456,12 +459,12 @@ class InzeratyController extends Controller
 
         $inzerat = Inzerat::findOrFail($id);
 
-        $inzerat->nazov=$request->get('nazov');
+        $inzerat->nazov = $request->get('nazov');
         $cena_dohodou = $request->get('cena_dohodou');              // prichadza z radiobuttonu ako true or false
         if ($cena_dohodou == "true" & $request->get('cena') == "") {
             $inzerat->cena_dohodou = 1;
             $inzerat->cena = null;
-        } else if($cena_dohodou == "false" & $request->get('cena') != "") {
+        } else if ($cena_dohodou == "false" & $request->get('cena') != "") {
             $inzerat->cena_dohodou = 0;
             $inzerat->cena = $request->get('cena');
         } else {
@@ -469,45 +472,38 @@ class InzeratyController extends Controller
         }
 
 
-
-
         $obec_nazov = $request->get('lokalita');
         $semicolonPos = strpos($obec_nazov, ',');
         $obec = substr($obec_nazov, 0, $semicolonPos);
-        $obecOkres = substr($obec_nazov, $semicolonPos+1, strlen($obec_nazov)+1);
-        $obecOkres = str_replace("okres","",$obecOkres);
-        $obecOkres = substr($obecOkres, 2, strlen($obec_nazov)+1);
+        $obecOkres = substr($obec_nazov, $semicolonPos + 1, strlen($obec_nazov) + 1);
+        $obecOkres = str_replace("okres", "", $obecOkres);
+        $obecOkres = substr($obecOkres, 2, strlen($obec_nazov) + 1);
 
 
         $obec_id = DB::table('obce')
-            ->where('obec', '=',$obec)
-            ->where('okres_id','=', $obecOkres)
+            ->where('obec', '=', $obec)
+            ->where('okres_id', '=', $obecOkres)
             ->value('id');
-
 
 
         $inzerat->obec_id = $obec_id;
 
 
+        $inzerat->ulica = $request->get('ulica');
+        $inzerat->druh_id = $request->get('druh');
+        $inzerat->typ_id = $request->get('typ');
+        $inzerat->popis = $request->get('popis');
+        $inzerat->vymera_domu = $request->get('vymera_domu');
+        $inzerat->vymera_pozemku = $request->get('vymera_pozemku');
+        $inzerat->uzitkova_plocha = $request->get('uzitkova_plocha');
 
 
+        $inzerat->stav_id = $request->get('stavy');
 
 
-        $inzerat->ulica=$request->get('ulica');
-        $inzerat->druh_id=$request->get('druh');
-        $inzerat->typ_id=$request->get('typ');
-        $inzerat->popis=$request->get('popis');
-        $inzerat->vymera_domu=$request->get('vymera_domu');
-        $inzerat->vymera_pozemku=$request->get('vymera_pozemku');
-        $inzerat->uzitkova_plocha=$request->get('uzitkova_plocha');
+        $inzerat->nazov = $request->get('nazov');
 
-
-        $inzerat->stav_id=$request->get('stavy');
-
-
-        $inzerat->nazov=$request->get('nazov');
-
-        if($request->get('telefon_pouzivatel') != null){
+        if ($request->get('telefon_pouzivatel') != null) {
 
             if (Auth::check()) {                    // si lognuty
 
@@ -520,7 +516,6 @@ class InzeratyController extends Controller
             }
 
         }
-
 
 
         $inzerat->save();
