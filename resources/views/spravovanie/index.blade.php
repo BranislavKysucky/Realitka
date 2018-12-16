@@ -86,7 +86,7 @@
                 <br>
                 <center>                <i class="fa fa-user-secret" style="font-size:36px"></i></center>
 
-                <a href="{{route('makleri_r.index')}}"><i class="icon icon-list-alt"></i> <span>Zobraziť všetkých Maklérov</span></a>
+                <a href="{{route('makleri_r.index')}}"><i class="icon icon-list-alt"></i> <span>Zobraziť všetkých maklérov</span></a>
                 <a href="{{route('makleri_r.create')}}"><i class="fa fa-plus"></i>
                     <span>Pridať makléra</span></a>
             </li>
