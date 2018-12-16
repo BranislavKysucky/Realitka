@@ -147,7 +147,7 @@
     <header id="header" class="hoc clear">
         <!-- ################################################################################################ -->
         <div id="logo" class="one_half first">
-            <h1 class="logoname"><a href=""><span>REA</span>LITKY</a></h1>
+            <h1 class="logoname"><span>REA</span>LITKY</h1>
         </div>
         <div class="one_half">
             <ul class="nospace clear">
