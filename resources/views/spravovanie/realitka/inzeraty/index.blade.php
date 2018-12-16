@@ -1,7 +1,7 @@
 @extends('spravovanie.index')
 @section('supercontent')
 
-
+    <div class="panel-heading"><h1>Naše inzeráty : </h1></div>
 
 
 

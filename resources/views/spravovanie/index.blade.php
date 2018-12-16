@@ -11,52 +11,22 @@
     <link href="{{ URL::asset('font-awesome/css/font-awesome.css')}}" rel="stylesheet"/>
     <link rel="icon" href="{{ URL::asset('images/favicon.ico') }}">
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 </head>
 <body>
 
+
 <!--Header-part-->
-<div id="header">
-    <h1><a href="admin">Admin rozhranie</a></h1>
-</div>
+
 <!--close-Header-part-->
 
 
 <!--top-Header-menu-->
-<div id="user-nav" class="navbar navbar-inverse">
-    <ul class="nav">
-        <!--<li  class="dropdown" id="profile-messages" ><a title="" href="/" data-toggle="dropdown" data-target="#profile-messages" class="dropdown-toggle"><i class="icon icon-share-alt"></i>  <span class="text">Vrátiť sa späť na stránku</span><b class="caret"></b></a>
-            <ul class="dropdown-menu">
-                <li><a href="#"><i class="icon-user"></i> My Profile</a></li>
-                <li class="divider"></li>
-                <li><a href="#"><i class="icon-check"></i> My Tasks</a></li>
-                <li class="divider"></li>
-                <li><a href=""><i class="icon-key"></i> Log Out</a></li>
-            </ul>
-        </li>-->
-        <li>
-            <a href="/"><i class="icon icon-share-alt"></i>Vrátiť sa späť na stránku</a>
-        </li>
 
-
-        <li class=""><a href="{{ route('logout') }}"
-                        onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                Odhlásiť
-            </a>
-
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                {{ csrf_field() }}
-            </form>
-        </li>
-
-    </ul>
-</div>
 <!--close-top-Header-menu-->
 <!--start-top-serch-->
-<div id="search">
-    <input type="text" placeholder="Vyhľadaj..."/>
-    <button type="submit" class="tip-bottom" title="Search"><i class="icon-search icon-white"></i></button>
-</div>
+
 <!--close-top-serch-->
 <!--sidebar-menu-->
 <div id="sidebar"><a href="#" class="visible-phone"><i class="icon icon-home"></i> Admin rozhranie</a>
@@ -78,20 +48,47 @@
                 <a href=""><i class="icon icon-signal"></i> <span>Štatistiky</span></a>
             </li>
         @elseif(Auth::user()->rola==2)
-            <li class="active">
-                <a href=""><i class="icon icon-home"></i> <span>Domov</span></a>
+
+
+
+            <li >
+                <br>
+                <center> <i class="fa fa-user-circle" style="font-size:36px"></i> </center>
+                <a href="{{ route('logout') }}"
+                   onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                    Odhlásiť
+                </a>
+
+                <a href="/"><i class="icon icon-share-alt"></i>Vrátiť sa späť na stránku</a>
+
+
+                <a href="{{action('RealitkaMakleriController@editProfil', Auth::user()->id)}}"><i class="fa fa-edit"></i>
+                    <span>Upraviť osobné údaje</span></a>
+                <a href="{{action('RealitkaMakleriController@editFirma', Auth::user()->id)}}"><i class="fa fa-edit"></i> <span>Upraviť firemné údaje</span></a>
+            </li>
+
+
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    {{ csrf_field() }}
+                </form>
+
+
+            <li >
+                <br>
+                <center>                <i class="fa fa-vcard-o" style="font-size:36px"></i></center>
+
+                <a href="{{route('inzeraty_r.index')}}"><i class="icon icon-list-alt"></i> <span>Zobraziť všetky inzeráty</span></a>
+                <a href="{{route('inzeraty.create')}}"><i class="fa fa-plus"></i>
+                    <span>Pridať inzerát</span></a>
             </li>
             <li>
-                <a href="{{action('RealitkaMakleriController@editProfil', Auth::user()->id)}}"><i class="glyphicon glyphicon-edit"></i> <span>Upraviť osobné údaje</span></a>
-                <a href="{{action('RealitkaMakleriController@editFirma', Auth::user()->id)}}"><i class="glyphicon glyphicon-edit"></i> <span>Upraviť firemné údaje</span></a>
-            </li>
-            <li>
-                <a href="{{route('inzeraty_r.index')}}"><i class="icon icon-list-alt"></i> <span>Inzeráty</span></a>
-                <a href="{{route('inzeraty.create')}}"><i class="glyphicon glyphicon-plus"></i> <span>Pridať inzerát</span></a>
-            </li>
-            <li>
-                <a href="{{route('makleri_r.index')}}"><i class="icon icon-list-alt"></i> <span>Makléri</span></a>
-                <a href="{{route('makleri_r.create')}}"><i class="glyphicon glyphicon-plus"></i> <span>Pridať makléra</span></a>
+                <br>
+                <center>                <i class="fa fa-user-secret" style="font-size:36px"></i></center>
+
+                <a href="{{route('makleri_r.index')}}"><i class="icon icon-list-alt"></i> <span>Zobraziť všetkých Maklérov</span></a>
+                <a href="{{route('makleri_r.create')}}"><i class="fa fa-plus"></i>
+                    <span>Pridať makléra</span></a>
             </li>
             <li>
                 <a href=""><i class="icon icon-list-alt"></i> <span>Štatistiky</span></a>
@@ -100,6 +97,8 @@
         @endif
     </ul>
 </div>
+
+
 <!--sidebar-menu-->
 
 <!--main-container-part-->
@@ -125,6 +124,8 @@
             </ul>
         </div>
     </div>-->
+
+
     @yield('supercontent')
 </div>
 <!--End-Action boxes-->
