@@ -7,7 +7,7 @@
  */
 
 namespace App\Http;
-set_time_limit(300);
+set_time_limit(600);
 
 
 use App\Fotografia;
@@ -15,11 +15,13 @@ use Goutte\Client;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\DomCrawler\Crawler;
 use App\Inzerat;
+use Illuminate\Filesystem\Filesystem;
 
 class Crawlerclass
 {
     public function __construct()
     {
+        $this->clear();
         $this->Crawler();
     }
 
@@ -31,13 +33,16 @@ class Crawlerclass
             //parameter reality-1 v nasledujucom requeste znamena, ze zoberie len prvu stranu z kazdej kategorie (napr jedna strana kde su len garsonky,
             // namiesto jednotky sa moze dat napriklad cislo 2000 a server vrati v url maximalny pocet stranok pre danu kategoriu,
             // pre testovanie ale staci jednotka, aj tak to dlho trva lez sa to spracuje :D, ak by chcel niekto skusit 2000 tak treba
-            // zmenit aj set_time_limit ktory sa nachadza na 10 riadku v tomto subore, momentalne je tam 300 sekund, ak bude crawlovanie
+            // zmenit aj set_time_limit ktory sa nachadza na 10 riadku v tomto subore, momentalne je tam 600 sekund, ak bude crawlovanie
             // trvat dlhsie tak hodi exception)
+            // ak by nesiel crawler, moze mat stranka vypadok http://www.areality.sk/ :D, teda nedaju sa zobrazit detaily inzeratov
             $crawler_init = $client->request('GET', 'http://www.areality.sk/' . $value . '-predaj~(reality-1)?rk=1');
             $pocet_stran = substr($crawler_init->getBaseHref(), 40 + strlen($value),
                 (strpos($crawler_init->getBaseHref(), ')', 40 + strlen($value))) - (40 + strlen($value)));
+            //echo $value . '*' . $pocet_stran;
             if (is_numeric($pocet_stran) && $pocet_stran > 0) {
                 for ($i = 0; $i <= $pocet_stran; $i++) {
+                    //echo 'strana*' . ($i + 1);
                     $crawler = $client->request('GET', 'http://www.areality.sk/' . $value . '-predaj~(reality-' . $i . ')?rk=1');
                     $zakazky = $crawler->filterXPath("//*[@id=\"vypisZakazek\"]");
                     $zakazky->filter("[class='item']")->each(function (Crawler $zakazka) use ($value) {
@@ -137,7 +142,7 @@ class Crawlerclass
                                 }
                             }
 
-                            /*echo
+                            echo
                                 $value . '<br>' .
                                 $adresa . '<br>' .
                                 '|' . $cena . '|' . '<br>' .
@@ -145,7 +150,7 @@ class Crawlerclass
                                 $nazov . '<br>' .
                                 $popis . '<br>'
 
-                                . '<br>';*/
+                                . '<br>';
                         }
                     });
                 }
@@ -154,5 +159,16 @@ class Crawlerclass
             }
 
         }
+    }
+
+    private function clear()
+    {
+        $inzeraty=Inzerat::where('crawler', true)->get();
+        foreach ($inzeraty as $inzerat){
+            Fotografia::where('inzerat_id',$inzerat->id)->delete();
+        }
+        Inzerat::where('crawler', true)->delete();
+        $fileSystem = new Filesystem();
+        $fileSystem->cleanDirectory(public_path('/images/images_test'));
     }
 }
