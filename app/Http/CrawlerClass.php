@@ -72,7 +72,9 @@ class Crawlerclass
                             $typ = substr($content->filterXPath("//*[@id=\"ZakDetailContainer\"]/div/h1")->text(), 0, $poz);
                             $obrazky_content = ($content->filterXPath("//*[@id=\"ZakDetailContainer\"]/div/div[5]/ul")->count())
                                 ? $content->filterXPath("//*[@id=\"ZakDetailContainer\"]/div/div[5]/ul") : null;
-
+                            $kontakt_m = ($content->filterXPath("//*[@id=\"ZakDetailContainer\"]/div/div[3]/div[1]/div[2]")->count())
+                                ? $content->filterXPath("//*[@id=\"ZakDetailContainer\"]/div/div[3]/div[1]/div[2]")->text() : ' ';
+                            $popis=$popis.$kontakt_m;
                             $obec = DB::table('obce')->where('obec', $adresa)->value('id');
                             if (!empty($obec)) {
                                 $inzerat = new Inzerat;

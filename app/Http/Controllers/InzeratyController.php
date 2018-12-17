@@ -339,7 +339,7 @@ class InzeratyController extends Controller
         // detail inzeratu si zobrazite na adrese /inzerat/idInzeratu
 
         $inzerat = Inzerat::findOrFail($id);
-        $cena = number_format($inzerat->cena, 2, ",", " ");
+        $inzerat->cena = number_format($inzerat->cena, 2, ",", " ");
         $kategoria = $inzerat->kategoria()->first();
         $druh = $inzerat->druh()->first();
         $stav = $inzerat->stav()->first();
