@@ -226,11 +226,11 @@
 
 
 
-                        <div id="cena" name="cena">
+                        <div id="cena" >
                             <label for="cena"><strong>Cena (€) </strong></label>
-                            <input placeholder="cena" class="form-control" type="number" min="0" id="cena"
-                                    value="{{$inzerat->cena}}"
-                                    oninput="hideCena_dohodou();" name="cena"/>
+
+                            <input onchange="hideCena_dohodou();" required id="cena" class="form-control" placeholder="cena" value="{{$inzerat->cena}}" name="cena"/>
+
 
                         </div>
 
@@ -476,16 +476,14 @@
                 @if ($inzerat->vymera_domu!=null)
                     <div id="vymera_domu">
                         <label for="vymera_domu">Výmera domu(m<sup>2</sup>)</label>
-                        <input required placeholder="vymera domu" class="form-control" value="{{$inzerat->vymera_domu}}" type="number" min="0"
-                               name="vymera_domu"/>
+                        <input required id="vymera domu" placeholder="vymera domu" class="form-control" value="{{$inzerat->vymera_domu}}"  min="0" name="vymera_domu"/>
 
                     </div>
                 @else
 
                     <div id="vymera_domu">
                         <label for="vymera_domu">Výmera domu(m<sup>2</sup>)</label>
-                        <input required placeholder="vymera domu" class="form-control" value="{{$inzerat->vymera_domu}}" type="number" min="0"
-                               name="vymera_domu"/>
+                        <input required id="vymera domu" placeholder="vymera domu" class="form-control" value="{{$inzerat->vymera_domu}}"  min="0" name="vymera_domu"/>
 
                     </div>
 
@@ -498,8 +496,7 @@
                 @if ($inzerat->vymera_pozemku!=null)
                     <div id="vymera_pozemku">
                         <label for="vymera_pozemku">Výmera pozemku(m<sup>2</sup>)</label>
-                        <input required placeholder="vymera pozemku" class="form-control" value="{{$inzerat->vymera_pozemku}}" type="number" min="0"
-                               name="vymera_pozemku"/>
+                        <input required placeholder="vymera pozemku" class="form-control" value="{{$inzerat->vymera_pozemku}}"  min="0" name="vymera_pozemku"/>
 
                     </div>
 
@@ -507,8 +504,7 @@
 
                     <div id="vymera_pozemku">
                         <label for="vymera_pozemku">Výmera pozemku(m<sup>2</sup>)</label>
-                        <input required placeholder="vymera pozemku" class="form-control" value="{{$inzerat->vymera_pozemku}}" type="number" min="0"
-                               name="vymera_pozemku"/>
+                        <input required placeholder="vymera pozemku" class="form-control" value="{{$inzerat->vymera_pozemku}}"  min="0" name="vymera_pozemku"/>
 
                     </div>
                     <script> $("#vymera_pozemku").hide().find(':input').attr('required', false);</script>
@@ -523,16 +519,14 @@
                 @if ($inzerat->uzitkova_plocha!=null)
                     <div id="uzitkova_plocha">
                         <label for="uzitkova_plocha">Úžitková plocha(m<sup>2</sup>)</label>
-                        <input required placeholder="uzitkova plocha" class="form-control"  value="{{$inzerat->uzitkova_plocha}}" type="number" min="0"
-                               name="uzitkova_plocha"/>
+                        <input required placeholder="uzitkova plocha" class="form-control"  value="{{$inzerat->uzitkova_plocha}}"  min="0" name="uzitkova_plocha"/>
 
                     </div>
 
                 @else
                     <div id="uzitkova_plocha">
                         <label for="uzitkova_plocha">Úžitková plocha(m<sup>2</sup>)</label>
-                        <input required placeholder="uzitkova plocha" class="form-control"  value="{{$inzerat->uzitkova_plocha}}" type="number" min="0"
-                               name="uzitkova_plocha"/>
+                        <input required placeholder="uzitkova plocha" class="form-control"  value="{{$inzerat->uzitkova_plocha}}"  min="0" name="uzitkova_plocha"/>
 
                     </div>
 
