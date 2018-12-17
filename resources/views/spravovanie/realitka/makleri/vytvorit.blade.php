@@ -8,6 +8,7 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
+                    <br>
                     <div class="panel-heading"><h1>Registrácia nového makléra</h1></div>
 
 <br>
@@ -45,7 +46,7 @@
                                 <label for="lokalita" class="col-md-4 control-label"><strong>Obec/Mesto</strong></label>
 
                                 <div class="col-md-6">
-                                    <input list="obce" id="obec_pouzivatel" class="form-control" placeholder="Zadajte lokalitu" name="obec_pouzivatel" autocomplete="off"/>
+                                    <input required list="obce" id="obec_pouzivatel" class="form-control" placeholder="Zadajte lokalitu" name="obec_pouzivatel" autocomplete="off"/>
                                     <datalist id="obce">
                                         @foreach($obce as $obec)
                                             <option href="#" id="{{$obec->obec}}">{{$obec->obec}}, okres {{$obec->okres_id}}</option>

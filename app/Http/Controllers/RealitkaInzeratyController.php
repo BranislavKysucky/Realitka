@@ -136,6 +136,21 @@ class RealitkaInzeratyController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+        $this->validate(request(), [
+
+            'nazov' => 'required|max:25',
+            'popis' => 'required|max:200',
+            'ulica' => 'required|max:20',
+            'lokalita' => 'required',
+            'druh' => 'required',
+            'typ' => 'required',
+            'images' => 'max:10240',                   // je potreba mat povinny image ??
+            'images.*' => 'image|mimes:jpeg,jpg,png' // zatial validacia iba pre typy v buducnosti mozno aj velkost/mnozstvo
+
+        ]);
+
+
         if($request->file('images')) {
             foreach ($request->file('images') as $image) {
                 //ulozenie image, do db ide iba url teda path resp.  /public/images/ + image name

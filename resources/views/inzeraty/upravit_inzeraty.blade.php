@@ -128,7 +128,7 @@
                             <h3>
 
                                 <label for="lokalita"><strong>Obec/Mesto</strong></label>
-                                <input list="obce" id="lokalita" class="form-control" placeholder="Zadajte lokalitu" name="lokalita" value="{{$inzerat->obec->obec.", okres ".$inzerat->obec->okres_id}}" autocomplete="off"/>
+                                <input required list="obce" id="lokalita" class="form-control" placeholder="Zadajte lokalitu" name="lokalita" value="{{$inzerat->obec->obec.", okres ".$inzerat->obec->okres_id}}" autocomplete="off"/>
 
                                 <datalist id="obce">
                                     @foreach($obce as $obec)

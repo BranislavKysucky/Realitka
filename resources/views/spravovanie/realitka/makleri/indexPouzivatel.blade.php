@@ -1,7 +1,7 @@
 @extends('spravovanie.index')
 @section('supercontent')
 
-
+    <div class="panel-heading"><h1>Inzeráty pridané zvoleným maklérom  : </h1></div>
 
 
 

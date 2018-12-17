@@ -10,6 +10,7 @@
                     {{method_field('PUT')}}
                 <div class="col-md-8 col-md-offset-2">
                     <div class="panel panel-default">
+                        <br>
                         <div class="panel-heading"><h1>Úprava údajov o maklérovi</h1></div>
 
                         <br>
@@ -20,7 +21,7 @@
                             <label for="meno" class="col-md-4 control-label"><strong>Meno</strong></label>
 
                             <div class="col-md-6">
-                                <input id="meno" type="text" class="form-control" name="meno" value="{{ $pouzivatel->meno }}" required autofocus>
+                                <input id="meno" type="text" class="form-control" name="meno" value="{{ $pouzivatel->meno }}" required>
 
                                 @if ($errors->has('meno'))
                                     <span class="help-block">
@@ -33,7 +34,7 @@
                             <label for="priezvisko" class="col-md-4 control-label"><strong>Priezvisko</strong></label>
 
                             <div class="col-md-6">
-                                <input id="priezvisko" type="text" class="form-control" name="priezvisko" value="{{ $pouzivatel->priezvisko }}" required autofocus>
+                                <input id="priezvisko" type="text" class="form-control" name="priezvisko" value="{{ $pouzivatel->priezvisko }}" required>
 
                                 @if ($errors->has('priezvisko'))
                                     <span class="help-block">
@@ -45,7 +46,7 @@
 
 
                         <label for="lokalita"><strong>Obec/Mesto</strong></label>
-                        <input list="obce" id="lokalita" class="form-control" placeholder="Zadajte lokalitu" name="lokalita" value="{{$pouzivatel->obec->obec.", okres ".$pouzivatel->obec->okres_id}}" autocomplete="off"/>
+                        <input required list="obce" id="lokalita" class="form-control" placeholder="Zadajte lokalitu" name="lokalita" value="{{$pouzivatel->obec->obec.", okres ".$pouzivatel->obec->okres_id}}" autocomplete="off"/>
 
                         <datalist id="obce">
                             @foreach($obce as $obec)
@@ -66,7 +67,7 @@
 
                             <div class="col-md-6">
                                 <input id="ulica_pouzivatel" type="text" class="form-control" name="ulica_pouzivatel"
-                                       value="{{ $pouzivatel->ulica_cislo }}" required autofocus>
+                                       value="{{ $pouzivatel->ulica_cislo }}" required>
 
                                 @if ($errors->has('ulica_pouzivatel'))
                                     <span class="help-block">
@@ -82,7 +83,7 @@
                             <div class="col-md-6">
                                 <input id="psc_pouzivatel" type="number" min="0" class="form-control"
                                        name="psc_pouzivatel"
-                                       value="{{ $pouzivatel->PSC }}" required autofocus>
+                                       value="{{ $pouzivatel->PSC }}" required>
 
                                 @if ($errors->has('psc_pouzivatel'))
                                     <span class="help-block">

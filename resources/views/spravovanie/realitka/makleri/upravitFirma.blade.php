@@ -10,6 +10,7 @@
 
                 <div class="col-md-8 col-md-offset-2">
                     <div class="panel panel-default">
+                        <br>
                         <div class="panel-heading"><h1>Úprava firemných údajov</h1></div>
 
                         <br>
@@ -18,10 +19,10 @@
 
 
                         <div class="form-group{{ $errors->has('nazov') ? ' has-error' : '' }}">
-                            <label for="nazov" class="col-md-4 control-label"><strong>Nazov</strong></label>
+                            <label for="nazov" class="col-md-4 control-label"><strong>Názov</strong></label>
 
                             <div class="col-md-6">
-                                <input id="nazov" type="text" class="form-control" name="nazov" value="{{ $pouzivatel->nazov }}" required autofocus>
+                                <input id="nazov" type="text" class="form-control" name="nazov" value="{{ $pouzivatel->nazov }}" required>
 
                                 @if ($errors->has('nazov'))
                                     <span class="help-block">
@@ -33,7 +34,7 @@
 
 
                         <label for="lokalita"><strong>Obec/Mesto</strong></label>
-                        <input list="obce" id="lokalita" class="form-control" placeholder="Zadajte lokalitu" name="lokalita" value="{{$pouzivatel->obec->obec.", okres ".$pouzivatel->obec->okres_id}}" autocomplete="off"/>
+                        <input required list="obce" id="lokalita" class="form-control" placeholder="Zadajte lokalitu" name="lokalita" value="{{$pouzivatel->obec->obec.", okres ".$pouzivatel->obec->okres_id}}" autocomplete="off"/>
 
                         <datalist id="obce">
                             @foreach($obce as $obec)
@@ -54,7 +55,7 @@
 
                             <div class="col-md-6">
                                 <input id="ulica_pouzivatel" type="text" class="form-control" name="ulica_pouzivatel"
-                                       value="{{ $pouzivatel->ulica_cislo }}" required autofocus>
+                                       value="{{ $pouzivatel->ulica_cislo }}" required>
 
                                 @if ($errors->has('ulica_pouzivatel'))
                                     <span class="help-block">
@@ -70,7 +71,7 @@
                             <div class="col-md-6">
                                 <input id="psc_pouzivatel" type="number" min="0" class="form-control"
                                        name="psc_pouzivatel"
-                                       value="{{ $pouzivatel->PSC }}" required autofocus>
+                                       value="{{ $pouzivatel->PSC }}" required>
 
                                 @if ($errors->has('psc_pouzivatel'))
                                     <span class="help-block">
@@ -81,10 +82,10 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('kontaktna_osoba') ? ' has-error' : '' }}">
-                            <label for="kontaktna_osoba" class="col-md-4 control-label"><strong>Kontaktna osoba</strong></label>
+                            <label for="kontaktna_osoba" class="col-md-4 control-label"><strong>Kontaktná osoba</strong></label>
 
                             <div class="col-md-6">
-                                <input id="kontaktna_osoba" type="text" class="form-control" name="kontaktna_osoba" value="{{ $pouzivatel->kontaktna_osoba }}" required autofocus>
+                                <input id="kontaktna_osoba" type="text" class="form-control" name="kontaktna_osoba" value="{{ $pouzivatel->kontaktna_osoba }}" required>
 
                                 @if ($errors->has('kontaktna_osoba'))
                                     <span class="help-block">
@@ -126,10 +127,10 @@
                             </div>
                         </div>
                         <div class="form-group{{ $errors->has('ICO') ? ' has-error' : '' }}">
-                            <label for="ICO" class="col-md-4 control-label"><strong>ICO</strong></label>
+                            <label for="ICO" class="col-md-4 control-label"><strong>IČO</strong></label>
 
                             <div class="col-md-6">
-                                <input id="ICO" type="text" class="form-control" name="ICO" value="{{ $pouzivatel->ICO }}" required autofocus>
+                                <input id="ICO" type="text" class="form-control" name="ICO" value="{{ $pouzivatel->ICO }}" required>
 
                                 @if ($errors->has('ICO'))
                                     <span class="help-block">
@@ -139,10 +140,10 @@
                             </div>
                         </div>
                         <div class="form-group{{ $errors->has('DIC') ? ' has-error' : '' }}">
-                            <label for="DIC" class="col-md-4 control-label"><strong>DIC</strong></label>
+                            <label for="DIC" class="col-md-4 control-label"><strong>DIČ</strong></label>
 
                             <div class="col-md-6">
-                                <input id="DIC" type="text" class="form-control" name="DIC" value="{{ $pouzivatel->DIC }}" required autofocus>
+                                <input id="DIC" type="text" class="form-control" name="DIC" value="{{ $pouzivatel->DIC }}" required>
 
                                 @if ($errors->has('DIC'))
                                     <span class="help-block">

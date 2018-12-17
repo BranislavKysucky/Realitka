@@ -2,5 +2,5 @@
 @section('supercontent')
 
 
-<h1> Ano </h1>
+<h1> Pouzite prosim button v lavo pre presmerovanie :) </h1>
 @endsection

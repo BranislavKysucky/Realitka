@@ -1,15 +1,20 @@
 @extends('spravovanie.index')
 @section('supercontent')
-
-        <div class="container" align="center">
+    <br>
+    <center>      <div class="panel-heading"><h1>Profil zvoleného makléra </h1></div>          <i class="fa fa-user-secret" style="font-size:36px"></i></center>
+    <br>
+    <div class="container" align="center">
 
             <div class="row">
                 <div class="col-md-8 col-md-offset-2">
                     <div class="panel panel-default">
-                        <div class="panel-heading"><h1>{{$pouzivatel->meno." ".$pouzivatel->priezvisko}}</h1></div>
 
-                        <br>
+                        <div class="form-group">
 
+                            <label for="meno_priezvisko" class="col-md-4 control-label"><strong><h3>Meno a priezvisko : </h3> {{$pouzivatel->meno." ".$pouzivatel->priezvisko}}</strong></label>
+
+
+                        </div>
 
 
                         <div class="form-group">
@@ -19,7 +24,7 @@
 
                         </div>
                         <div class="form-group">
-                            <label for="priezvisko" class="col-md-4 control-label"><strong><h3>Telefon : </h3>{{$pouzivatel->telefon}}</strong></label>
+                            <label for="priezvisko" class="col-md-4 control-label"><strong><h3>Telefón : </h3>{{$pouzivatel->telefon}}</strong></label>
 
                         </div>
 
@@ -57,7 +62,7 @@
                             <form action="{{action('RealitkaMakleriController@indexPouzivatel', $pouzivatel->id)}}" >
                                 {{csrf_field()}}
                                 {{method_field('GET')}}
-                                <button class="btn btn-info form-control" type="submit">Zobraziť všetky inzeráty tohto použivateľa <span class="glyphicon glyphicon-eye-open"></span></button>
+                                <button class="btn btn-info form-control" type="submit">Zobraziť všetky inzeráty použivateľa <span class="glyphicon glyphicon-eye-open"></span></button>
                             </form>
                            <br>
                             <form action="{{action('RealitkaMakleriController@edit', $pouzivatel->id)}}" >

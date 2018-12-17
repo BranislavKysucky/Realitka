@@ -79,6 +79,20 @@ class RealitkaMakleriController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate(request(), [
+
+            'meno' => 'required|string|max:30',
+            'priezvisko' => 'required|string|max:30',
+            'telefon_pouzivatel' => 'required|string|max:20',
+            'email' => 'required|string|email|max:25|unique:pouzivatelia',
+            'password' => 'required|string|min:6|confirmed',
+            'psc_pouzivatel' => 'required|numeric|min:0',
+            'obec_pouzivatel' => 'required',
+            'ulica_pouzivatel' => 'required|max:20'
+
+
+        ]);
+
 
         $obec_nazov = $request->get('obec_pouzivatel');
         $semicolonPos = strpos($obec_nazov, ',');
@@ -179,7 +193,18 @@ class RealitkaMakleriController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate(request(), [
 
+            'meno' => 'required|string|max:30',
+            'priezvisko' => 'required|string|max:30',
+            'telefon_pouzivatel' => 'required|string|max:20',
+            'email' => 'required|string|email|max:25|unique:pouzivatelia',
+            'psc_pouzivatel' => 'required|numeric|min:0',
+            'obec_pouzivatel' => 'required',
+            'ulica_pouzivatel' => 'required|max:20'
+
+
+        ]);
         $pouzivatel = Pouzivatel::findOrFail($id);
         $obec_nazov = $request->get('lokalita');
         $semicolonPos = strpos($obec_nazov, ',');
@@ -214,7 +239,18 @@ class RealitkaMakleriController extends Controller
     }
     public function updateProfil(Request $request, $id)
     {
+        $this->validate(request(), [
 
+            'meno' => 'required|string|max:30',
+            'priezvisko' => 'required|string|max:30',
+            'telefon_pouzivatel' => 'required|string|max:20',
+            'email' => 'required|string|email|max:25|unique:pouzivatelia',
+            'psc_pouzivatel' => 'required|numeric|min:0',
+            'obec_pouzivatel' => 'required',
+            'ulica_pouzivatel' => 'required|max:20'
+
+
+        ]);
         $pouzivatel = Pouzivatel::findOrFail($id);
         $obec_nazov = $request->get('lokalita');
         $semicolonPos = strpos($obec_nazov, ',');
@@ -250,6 +286,26 @@ class RealitkaMakleriController extends Controller
 
     public function updateFirma(Request $request, $id)
     {
+        $this->validate(request(), [
+
+            'nazov' => 'required|string|max:40',
+            'obec_pouzivatel' => 'required',
+            'ICO' => 'required|string|max:8',
+            'DIC' => 'required|string|max:10',
+            'kontaktna_osoba' => 'required|string|max:20',
+            'email' => 'required|string|email|max:25|unique:pouzivatelia',
+            'ulica_pouzivatel' => 'required|max:20',
+            'psc_pouzivatel' => 'required|numeric|min:0',
+            'telefon_pouzivatel' => 'required|string|max:20'
+
+
+
+
+
+
+
+
+        ]);
 
         $pouzivatel = Realitna_kancelaria::findOrFail($id);
         $obec_nazov = $request->get('lokalita');
@@ -327,6 +383,7 @@ class RealitkaMakleriController extends Controller
 
 
 public function updateMakler(Request $request, $id){
+
     $inzerat = Inzerat::findOrFail($id);
     $idMaklerDelete = $inzerat->pouzivatel_id;
     $inzerat->pouzivatel_id=$request->get('makleri');

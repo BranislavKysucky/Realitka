@@ -277,7 +277,7 @@
                         <h5>
 
                             <label for="lokalita"><strong>Obec/Mesto</strong></label>
-                            <input list="obce" id="lokalita" class="form-control" placeholder="Zadajte lokalitu" name="lokalita" value="{{$inzerat->obec->obec.", okres ".$inzerat->obec->okres_id}}" autocomplete="off"/>
+                            <input required list="obce" id="lokalita" class="form-control" placeholder="Zadajte lokalitu" name="lokalita" value="{{$inzerat->obec->obec.", okres ".$inzerat->obec->okres_id}}" autocomplete="off"/>
 
                             <datalist id="obce">
                                 @foreach($obce as $obec)
@@ -534,7 +534,7 @@
 
                 @endif
 
-
+                @include('errors')
 
             </div>
 
@@ -553,7 +553,7 @@
 
     </div>
         <button href=""  class="btn btn-info form-control" type="submit">Aktualizovať  <span heigth="14px"  name="submit" class="glyphicon glyphicon-edit"></span> </button>
-        @include('errors')
+
     </form>
 
     {{--<form action="{{action('RealitkaInzeratyController@destroy', $inzerat->id)}}" method="post">--}}
