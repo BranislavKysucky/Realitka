@@ -19,16 +19,16 @@ class MainNavController extends Controller
 {
     public function getRealitky(Request $request)
     {
-        if($request->filled('okres')){
+        if ($request->filled('okres')) {
             $realitky = DB::table('realitne_kancelarie')
                 ->select(DB::raw('*'))
                 ->join('obce', 'obec_id', '=', 'obce.id')
                 ->where('obce.okres_id', $request->okres)
                 ->paginate(10);
-        }else if($request->filled('pismeno')){
+        } else if ($request->filled('pismeno')) {
             $realitky = Realitna_kancelaria::where('nazov', 'LIKE', $request->pismeno . '%')
                 ->paginate(10);
-        }else{
+        } else {
             $realitky = Realitna_kancelaria::paginate(10);
         }
 
@@ -96,7 +96,7 @@ class MainNavController extends Controller
         $okresy = [];
         for ($i = 0; $i < count($kraje); $i++) {
             $okresyString = 'okresy' . $kraje[$i]->kraj_id;
-            $okresyVar = eval('return $'. $okresyString . ';');
+            $okresyVar = eval('return $' . $okresyString . ';');
             for ($j = 0; $j < count($okresyVar); $j++) {
                 $okresy[substr($okresyString, -2)][$j] = $okresyVar[$j]['id'];
             }
@@ -111,6 +111,7 @@ class MainNavController extends Controller
         $kontakt = Kontakt::get()->first();
         return view('kontakt.kontakt', ['kontakt' => $kontakt]);
     }
+
     public function getMojeInzeraty()
     {
         return view('inzeraty.moje_inzeraty_dotaz');
@@ -120,22 +121,31 @@ class MainNavController extends Controller
     {
         return view('email.overit_email');
     }
+
     public function overitEmailPost(Request $request)
     {
         $pouzivatel = Pouzivatel::where('email', '=', $request->get('email'))->first();
-        if ($pouzivatel!=null) {
-            $pouzivatel->email_token = Str::random(5);
-            $pouzivatel->save();
+        if ($pouzivatel != null) {
+            if ($pouzivatel->blokovany == 0) {
+                $pouzivatel->email_token = Str::random(5);
+                $pouzivatel->save();
+            }
+            else{
+                return back()->with('error','Tento email je zablokovaný');
+            }
         } else {
             $pouzivatel = new Pouzivatel;
             $pouzivatel->email = $request->get('email');
             $pouzivatel->email_token = Str::random(5);
+            $pouzivatel->rola = 4;
             $pouzivatel->save();
         }
         Mail::to($pouzivatel->email)->send(new OverMail($pouzivatel));
         return redirect(route('inzeraty.create'));
     }
-    public function customerEmailPost(Request $request){
+
+    public function customerEmailPost(Request $request)
+    {
         $this->validate($request, [
             'meno' => 'required',
             'emailReply' => 'required',
@@ -144,7 +154,7 @@ class MainNavController extends Controller
         $emailReply = $request->get('emailReply');
         $meno = $request->get('meno');
         $sprava = $request->get('sprava');
-        Mail::to("realitka.oznamenia@gmail.com")->send(new CustomerMail($sprava,$meno,$emailReply));
+        Mail::to("realitka.oznamenia@gmail.com")->send(new CustomerMail($sprava, $meno, $emailReply));
         return back()->with('success', 'Sprava bolo odoslana !!!');
     }
 }

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-
+@include('popup.error')
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
@@ -27,4 +27,5 @@
     </div>
 
 
+<script src='{{ URL::asset('js/zatvor_popup.js') }}'></script>
 @endsection
