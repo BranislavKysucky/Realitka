@@ -20,12 +20,15 @@ class PrihlasenyInzeratyController extends Controller
         $obce = Obec::all();
         if (Auth::check()) {
             $inzeraty = Inzerat::where('pouzivatel_id', Auth::user()->id)->get();
-            foreach ($inzeraty as $inzerat) {
-                $inzerat->obrazok = DB::table('fotografie')->where('inzerat_id', $inzerat->id)->value('url');
-            }
             $inzeraty = Inzerat::paginate(10);
-
-            return view('inzeraty.filtrovane_inzeraty', ['inzeraty' => $inzeraty, 'widget' => $this->widget(), 'obce' => $obce]);
+            foreach ($inzeraty as $inzerat) {
+                if ($inzerat->jednaFotografia()->value('url') == null) {
+                    $inzerat->obrazok = 'images/demo/no_image.jpg';
+                } else {
+                    $inzerat->obrazok = $inzerat->jednaFotografia()->value('url');
+                }
+            }
+            return view('inzeraty.filtrovane_inzeraty', ['obce' => $obce, 'inzeraty' => $inzeraty, 'widget' => $this->widget()]);
         }
     }
 

@@ -8,6 +8,7 @@ use App\Stav;
 use App\Obec;
 use App\Kategoria;
 use App\Pouzivatel;
+use App\Inzerat;
 
 class InzeratyTableSeeder extends Seeder
 {
@@ -18,39 +19,54 @@ class InzeratyTableSeeder extends Seeder
      */
     public function run()
     {
-        $rVymera = rand(99, 500);
-        $rPozemok = rand(1, 499);
-        $druh = $this->randomDruhId();
 
-        if ($druh <= 10) {
-            $rVymera = null;
-            $rPozemok = null;
-        }
 
         $pouzivatelia = Pouzivatel::all();
         foreach ($pouzivatelia as $pouzivatel) {
             for ($i = 0; $i < 8; $i++) {
-                $heslo='123456';
-                if($pouzivatel->rola!=4){
-                    $heslo=null;
+                $heslo = '123456';
+                if ($pouzivatel->rola != 4) {
+                    $heslo = null;
                 }
-                DB::table('inzeraty')->insert([
-                    'stav_id' => $this->randomStavId(),
-                    'druh_id' => $druh,
-                    'typ_id' => $this->randomTypId(),
-                    'kategoria_id' => $this->randomKategoriaId(),
-                    'pouzivatel_id' => $pouzivatel->id,
-                    'obec_id' => $this->randomObecId(),
-                    'nazov' => 'Inzerat cislo #' . rand(1, 9999),
-                    'popis' => 'Popis inzeratu test test test',
-                    'ulica' => 'Ulica ' . rand(1, 99),
-                    'heslo' => $heslo,
-                    'cena' => rand(49999, 200000),
-                    'vymera_domu' => $rVymera,
-                    'vymera_pozemku' => $rPozemok,
-                    'uzitkova_plocha' => $rVymera,
-                    'cena_dohodou' => 0,
-                    'pocet_zobrazeni' => rand(1, 99999)]);
+                $rVymera = rand(99, 500);
+                $rPozemok = rand(1, 499);
+                $druh = $this->randomDruhId();
+
+                if ($druh <= 10) {
+                    $rVymera = null;
+                    $rPozemok = null;
+                }
+                $inzerat = new Inzerat();
+                $inzerat->stav_id = $this->randomStavId();
+                $inzerat->druh_id = $druh;
+                $inzerat->typ_id = $this->randomTypId();
+                $inzerat->kategoria_id = $this->randomKategoriaId();
+                $inzerat->pouzivatel_id = $pouzivatel->id;
+                $inzerat->obec_id = $this->randomObecId();
+                $inzerat->nazov = 'Inzerat cislo #' . rand(1, 9999);
+                $inzerat->popis = 'Popis inzeratu test test test';
+                $inzerat->ulica = 'Ulica'  . rand(1, 99);
+                $inzerat->heslo = $heslo;
+                $inzerat->cena = rand(49999, 200000);
+                $inzerat->vymera_domu = $rVymera;
+                $inzerat->vymera_pozemku = $rPozemok;
+                $inzerat->uzitkova_plocha = $rVymera;
+                $inzerat->cena_dohodou = 0;
+                $inzerat->pocet_zobrazeni = rand(1, 99999);
+                $inzerat->save();
+
+                DB::table('fotografie')->insert([
+                    'inzerat_id' => $inzerat->id,
+                    'url' => 'images/seed/seed01.jpg'
+                ]);
+                DB::table('fotografie')->insert([
+                    'inzerat_id' => $inzerat->id,
+                    'url' => 'images/seed/seed02.jpg'
+                ]);
+                DB::table('fotografie')->insert([
+                    'inzerat_id' => $inzerat->id,
+                    'url' => 'images/seed/seed03.jpg'
+                ]);
             }
         }
         /*DB::table('inzeraty')->insert([

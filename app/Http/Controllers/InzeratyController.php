@@ -180,7 +180,7 @@ class InzeratyController extends Controller
         } else if ($request->input('email')) {
             $pouzivatel_id = DB::table('pouzivatelia')->where('email', $request->input('email'))->value('id');
             if ($pouzivatel_id != null) {
-                $inzeraty = Inzerat::select(DB::raw('inzeraty.*'))->where('pouzivatel_id', $pouzivatel_id)->get();
+                $inzeraty = Inzerat::select(DB::raw('inzeraty.*'))->where('pouzivatel_id', $pouzivatel_id)->paginate(10);
             } else {
                 $inzeraty = null;
             }
