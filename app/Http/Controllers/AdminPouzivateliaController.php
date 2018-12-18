@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Fotografia;
+use App\Inzerat;
 use App\Kontakt;
 use App\Pouzivatel;
 use Illuminate\Http\Request;
@@ -21,6 +23,8 @@ class AdminPouzivateliaController extends Controller
         foreach ($pouzivatelia as $pouzivatel){
             if($pouzivatel->blokovany == 0){
                 $pouzivatel->blokovany = 'Nie';
+            }else{
+                $pouzivatel->blokovany = 'Áno';
             }
         }
 
@@ -91,6 +95,32 @@ class AdminPouzivateliaController extends Controller
     public function destroy($id)
     {
         Pouzivatel::find($id)->delete();
+
+        $inzeraty = Inzerat::where('pouzivatel_id', $id)->get();
+
+        foreach ($inzeraty as $inzerat){
+            Fotografia::where('inzerat_id', $inzerat->id)->delete();
+        }
+
+        Inzerat::where('pouzivatel_id', $id)->delete();
+
+        return redirect()->action('AdminPouzivateliaController@index');
+    }
+
+    public function blokovat($id)
+    {
+        $pouzivatel = Pouzivatel::find($id);
+        $pouzivatel->blokovany = 1;
+        $pouzivatel->save();
+
+        $inzeraty = Inzerat::where('pouzivatel_id', $id)->get();
+
+        foreach ($inzeraty as $inzerat){
+            Fotografia::where('inzerat_id', $inzerat->id)->delete();
+        }
+
+        Inzerat::where('pouzivatel_id', $id)->delete();
+
         return redirect()->action('AdminPouzivateliaController@index');
     }
 }

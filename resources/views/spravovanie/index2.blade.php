@@ -162,15 +162,15 @@
                 <div class="collapse navbar-collapse">
 
                     <ul class="nav navbar-nav navbar-right">
-                        <li>
+                        <li style="margin: 0">
                             <a href="/">
-                                <p>Späť na úvodnú stránku</p>
+                                <span class="pe-7s-back" style="">   Naspäť</span>
                             </a>
                         </li>
-                        <li class=""><a href="{{ route('logout') }}"
+                        <li style="margin: 0" class=""><a href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                Odhlásiť
+                                <span class="pe-7s-close-circle" style="">   Odhlásiť</span>
                             </a>
 
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -194,6 +194,54 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="delete" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="text-align: center">
+        <div class="modal-content">
+
+            <!-- header modal -->
+            <div class="modal-header">
+                <button id="closeBtn" type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="mySmallModalLabel">Naozaj chcete odstrániť tohto použivateľa?</h4>
+            </div>
+
+            <!-- body modal -->
+            <div class="modal-body text-center">
+                Jeho odstránením vymažete všetky jeho inzeráty.
+                <hr>
+                <form id="delForm" method="post">
+                    {{csrf_field()}}
+                    {{ method_field('DELETE') }}
+                    <button type="submit" value="delete" class="btn btn-danger">Vymazať</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="block" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="text-align: center">
+        <div class="modal-content">
+
+            <!-- header modal -->
+            <div class="modal-header">
+                <button id="closeBtn" type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="mySmallModalLabel">Naozaj chcete blokovať tohto použivateľa?</h4>
+            </div>
+
+            <!-- body modal -->
+            <div class="modal-body text-center">
+                Používateľ s týmto mailom bude trvalo blokovaný.
+                <hr>
+                <form id="blockForm" method="post">
+                    {{csrf_field()}}
+                    {{ method_field('DELETE') }}
+                    <button type="submit" value="delete" class="btn btn-danger">Blokovať</button>
+                </form>
             </div>
         </div>
     </div>

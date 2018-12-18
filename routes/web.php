@@ -33,6 +33,8 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('pouzivatelia_a', 'AdminPouzivateliaController');
         Route::resource('realitky_a', 'AdminRealitkyController');
 
+        Route::delete('blokPouzivatel/{id}','AdminPouzivateliaController@blokovat');
+
     });
     //routy pre majitela realitky
     Route::group(['middleware' => 'App\Http\Middleware\Realitka'], function () {
