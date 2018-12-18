@@ -192,7 +192,7 @@ class InzeratyController extends Controller
             foreach ($inzeraty as $inzerat) {
                 $inzerat->cena = number_format($inzerat->cena, 2, ",", " ");
                 if ($inzerat->jednaFotografia()->value('url') == null) {
-                    $inzerat->obrazok = 'images/demo/348x261.png';
+                    $inzerat->obrazok = 'images/demo/no_image.jpg';
                 } else {
                     $inzerat->obrazok = $inzerat->jednaFotografia()->value('url');
                 }

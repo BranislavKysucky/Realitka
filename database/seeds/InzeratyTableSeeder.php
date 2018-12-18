@@ -1,6 +1,13 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use App\Typ;
+use App\Druh;
+use App\Stav;
+use App\Obec;
+use App\Kategoria;
+use App\Pouzivatel;
 
 class InzeratyTableSeeder extends Seeder
 {
@@ -11,52 +18,96 @@ class InzeratyTableSeeder extends Seeder
      */
     public function run()
     {
+        $rVymera = rand(99, 500);
+        $rPozemok = rand(1, 499);
+        $druh = $this->randomDruhId();
 
-        $rVymera = rand(99,500);
-        DB::table('inzeraty')->insert([
+        if ($druh <= 10) {
+            $rVymera = null;
+            $rPozemok = null;
+        }
+
+        $pouzivatelia = Pouzivatel::all();
+        foreach ($pouzivatelia as $pouzivatel) {
+            for ($i = 0; $i < 8; $i++) {
+                $heslo='123456';
+                if($pouzivatel->rola!=4){
+                    $heslo=null;
+                }
+                DB::table('inzeraty')->insert([
+                    'stav_id' => $this->randomStavId(),
+                    'druh_id' => $druh,
+                    'typ_id' => $this->randomTypId(),
+                    'kategoria_id' => $this->randomKategoriaId(),
+                    'pouzivatel_id' => $pouzivatel->id,
+                    'obec_id' => $this->randomObecId(),
+                    'nazov' => 'Inzerat cislo #' . rand(1, 9999),
+                    'popis' => 'Popis inzeratu test test test',
+                    'ulica' => 'Ulica ' . rand(1, 99),
+                    'heslo' => $heslo,
+                    'cena' => rand(49999, 200000),
+                    'vymera_domu' => $rVymera,
+                    'vymera_pozemku' => $rPozemok,
+                    'uzitkova_plocha' => $rVymera,
+                    'cena_dohodou' => 0,
+                    'pocet_zobrazeni' => rand(1, 99999)]);
+            }
+        }
+        /*DB::table('inzeraty')->insert([
             'stav_id' => $this->randomStavId(),
             'druh_id' => $this->randomDruhId(),
             'typ_id' => $this->randomTypId(),
             'kategoria_id' => $this->randomKategoriaId(),
             'pouzivatel_id' => $this->randomPouzivatelId(),
             'obec_id' => $this->randomObecId(),
-            'nazov' => 'Inzerat cislo #' . rand(1,9999),
+            'nazov' => 'Inzerat cislo #' . rand(1, 9999),
             'popis' => 'Popis inzeratu test test test',
-            'ulica' => 'Ulica ' . rand(1,99),
+            'ulica' => 'Ulica ' . rand(1, 99),
             'heslo' => '123456',
-            'cena' => rand(49999,200000),
+            'cena' => rand(49999, 200000),
             'vymera_domu' => $rVymera,
-            'vymera_pozemku' => rand(1,499),
+            'vymera_pozemku' => rand(1, 499),
             'uzitkova_plocha' => $rVymera,
-            'cena_dohodou' => rand(0,1),
-            'pocet_zobrazeni' => rand(1,99999),
+            'cena_dohodou' => rand(0, 1),
+            'pocet_zobrazeni' => rand(1, 99999),
             'created_at' => date('Y-m-d G:i:s'),
 
-
-        ]);
+        ]);*/
     }
-    private function randomStavId(){
-        $obec = \App\Stav::inRandomOrder()->first();
+
+    private function randomStavId()
+    {
+        $obec = Stav::inRandomOrder()->first();
         return $obec->id;
     }
-    private function randomDruhId(){
-        $druh = \App\Druh::inRandomOrder()->first();
+
+    private function randomDruhId()
+    {
+        $druh = Druh::inRandomOrder()->first();
         return $druh->id;
     }
-    private function randomTypId(){
-        $typ = \App\Typ::inRandomOrder()->first();
+
+    private function randomTypId()
+    {
+        $typ = Typ::inRandomOrder()->first();
         return $typ->id;
     }
-    private function randomKategoriaId(){
-        $kategoria = \App\Kategoria::inRandomOrder()->first();
+
+    private function randomKategoriaId()
+    {
+        $kategoria = Kategoria::inRandomOrder()->first();
         return $kategoria->id;
     }
-    private function randomPouzivatelId(){
-        $pouzivatel = \App\Pouzivatel::inRandomOrder()->first();
+
+    private function randomPouzivatelId()
+    {
+        $pouzivatel = Pouzivatel::inRandomOrder()->first();
         return $pouzivatel->id;
     }
-    private function randomObecId(){
-        $obec = \App\Obec::inRandomOrder()->first();
+
+    private function randomObecId()
+    {
+        $obec = Obec::inRandomOrder()->first();
         return $obec->id;
     }
 }
