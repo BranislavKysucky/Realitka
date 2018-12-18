@@ -23,6 +23,8 @@ class PrihlasenyInzeratyController extends Controller
             foreach ($inzeraty as $inzerat) {
                 $inzerat->obrazok = DB::table('fotografie')->where('inzerat_id', $inzerat->id)->value('url');
             }
+            $inzeraty = Inzerat::paginate(10);
+
             return view('inzeraty.filtrovane_inzeraty', ['inzeraty' => $inzeraty, 'widget' => $this->widget(), 'obce' => $obce]);
         }
     }

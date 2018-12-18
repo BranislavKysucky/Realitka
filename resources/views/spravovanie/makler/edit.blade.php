@@ -34,7 +34,7 @@
                                         <label for="meno" ><strong>Meno</strong></label>
 
 
-                                            <input id="meno" type="text" class="form-control" name="meno" value="{{ $pouzivatel->meno }}" required autofocus>
+                                            <input id="meno" type="text" class="form-control" name="meno" value="{{ $pouzivatel->meno }}" required>
 
                                             @if ($errors->has('meno'))
                                                 <span class="help-block">
@@ -48,7 +48,7 @@
                                         <label for="priezvisko" ><strong>Priezvisko</strong></label>
 
 
-                                            <input id="priezvisko" type="text" class="form-control" name="priezvisko" value="{{ $pouzivatel->priezvisko }}" required autofocus>
+                                            <input id="priezvisko" type="text" class="form-control" name="priezvisko" value="{{ $pouzivatel->priezvisko }}" required>
 
                                             @if ($errors->has('priezvisko'))
 
@@ -59,7 +59,7 @@
 
 
                                     <label for="lokalita"><strong>Obec/Mesto</strong></label>
-                                    <input list="obce" id="lokalita" class="form-control" placeholder="Zadajte lokalitu" name="lokalita" value="{{$pouzivatel->obec->obec.", okres ".$pouzivatel->obec->okres_id}}" autocomplete="off"/>
+                                    <input required list="obce" id="lokalita" class="form-control" placeholder="Zadajte lokalitu" name="lokalita" value="{{$pouzivatel->obec->obec.", okres ".$pouzivatel->obec->okres_id}}" autocomplete="off"/>
 
                                     <datalist id="obce">
                                         @foreach($obce as $obec)
@@ -80,7 +80,7 @@
 
 
                                             <input id="ulica_pouzivatel" type="text" class="form-control" name="ulica_pouzivatel"
-                                                   value="{{ $pouzivatel->ulica_cislo }}" required autofocus>
+                                                   value="{{ $pouzivatel->ulica_cislo }}" required>
 
                                             @if ($errors->has('ulica_pouzivatel'))
                                                 <span class="help-block">
@@ -96,7 +96,7 @@
 
                                             <input id="psc_pouzivatel" type="number" min="0" class="form-control"
                                                    name="psc_pouzivatel"
-                                                   value="{{ $pouzivatel->PSC }}" required autofocus>
+                                                   value="{{ $pouzivatel->PSC }}" required>
 
                                             @if ($errors->has('psc_pouzivatel'))
                                                 <span class="help-block">

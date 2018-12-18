@@ -200,6 +200,8 @@
 
 
                         </div>
+
+                        @if ($inzerat->fotografie->count() > 0)
                         <ul class="preview-thumbnail nav nav-tabs" id="zoznamObrazkov" style="display: none">
                             @foreach ($inzerat->fotografie->all() as $fotka )
                                 <li id="{{$fotka->id}}"><a data-target="#pic-2" data-toggle="tab"><img src="{{$fotka->url}}" /></a></li>
@@ -208,7 +210,7 @@
 
 
                         </ul>
-
+                        @endif
                     </div>
 
 

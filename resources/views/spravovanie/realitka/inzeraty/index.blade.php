@@ -3,6 +3,15 @@
 
     <div class="panel-heading"><h1>Naše inzeráty : </h1></div>
 
+@if ($ibaInzeratyMaklerov == 'nie')
+    <form action="{{action('RealitkaInzeratyController@indexBezMajitela')}}" method="get">
+        {{csrf_field()}}
+        <input name="_method" type="hidden" value="SHOW">
+        <button class="btn btn-info" type="submit"><span class="glyphicon glyphicon-ok"></span> Iba inzeráty maklérov</button>
+    </form>
+
+@endif
+
 
 
     <table class="table table-bordered">

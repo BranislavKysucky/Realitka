@@ -39,16 +39,20 @@ Route::middleware(['auth'])->group(function () {
     //routy pre majitela realitky
     Route::group(['middleware' => 'App\Http\Middleware\Realitka'], function () {
         Route::resource('inzeraty_r', 'RealitkaInzeratyController');
+        Route::get('indexBezMajitela','RealitkaInzeratyController@indexBezMajitela');
+
+
+
         Route::resource('makleri_r', 'RealitkaMakleriController');
         // definuj route a akciu
         Route::get('indexPouzivatel/{id}','RealitkaMakleriController@indexPouzivatel');
-        Route::get('editMakler/{id}','RealitkaMakleriController@editMakler');
-        Route::get('removeMakler/{id}','RealitkaMakleriController@removeMakler');
-        Route::post('updateMakler/{id}','RealitkaMakleriController@updateMakler');
-        Route::post('updateProfil/{id}','RealitkaMakleriController@updateProfil');
-        Route::get('editProfil/{id}','RealitkaMakleriController@editProfil');
-        Route::post('updateFirma/{id}','RealitkaMakleriController@updateFirma');
-        Route::get('editFirma/{id}','RealitkaMakleriController@editFirma');
+        Route::get('editMakler/{id}','RealitkaMakleriController@editMakler');           // metoda pre zobrazenie editu inzeratu pri mazani maklera resp. prideleni inzeratu niekomu inemu
+        Route::get('removeMakler/{id}','RealitkaMakleriController@removeMakler');       // suvisi s tm istym
+        Route::post('updateMakler/{id}','RealitkaMakleriController@updateMakler');      // suvisi s tm istym
+        Route::post('updateProfil/{id}','RealitkaMakleriController@updateProfil');      // updatnutie udajov
+        Route::get('editProfil/{id}','RealitkaMakleriController@editProfil');           // editovanie osobnych udajov majitela realitky
+        Route::post('updateFirma/{id}','RealitkaMakleriController@updateFirma');        // updatnutie udajov
+        Route::get('editFirma/{id}','RealitkaMakleriController@editFirma');             // editovanie udajov o realitke
 
 
     });

@@ -178,7 +178,7 @@
 
 
                         <div class="preview col-md-6">
-
+                            @if ($inzerat->fotografie->count() > 0)
                             <div class="preview-pic tab-content">
 
 
@@ -196,7 +196,7 @@
 
 
                             </ul>
-
+                            @endif
                         </div>
 
 

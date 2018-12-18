@@ -65,7 +65,7 @@
 
                 <a href="{{action('RealitkaMakleriController@editProfil', Auth::user()->id)}}"><i class="fa fa-edit"></i>
                     <span>Upraviť osobné údaje</span></a>
-                <a href="{{action('RealitkaMakleriController@editFirma', Auth::user()->id)}}"><i class="fa fa-edit"></i> <span>Upraviť firemné údaje</span></a>
+                <a href="{{action('RealitkaMakleriController@editFirma', Auth::user()->realitna_kancelaria_id)}}"><i class="fa fa-edit"></i> <span>Upraviť firemné údaje</span></a>
             </li>
 
 

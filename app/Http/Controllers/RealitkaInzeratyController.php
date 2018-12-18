@@ -40,11 +40,30 @@ class RealitkaInzeratyController extends Controller
 
 
 
-        return view('spravovanie.realitka.inzeraty.index', ['inzeraty' => $inzeraty]);
+        return view('spravovanie.realitka.inzeraty.index', ['inzeraty' => $inzeraty, 'ibaInzeratyMaklerov' => 'nie']);
 
     }
 
+    public function indexBezMajitela()
+    {
 
+
+        $inzeraty = DB::table('inzeraty')
+            ->join('pouzivatelia', 'inzeraty.pouzivatel_id', '=', 'pouzivatelia.id' )
+            ->join('obce', 'inzeraty.obec_id', '=', 'obce.id' )
+            ->join('typy', 'inzeraty.typ_id', '=', 'typy.id' )
+            ->select('inzeraty.*', 'pouzivatelia.meno AS meno', 'pouzivatelia.priezvisko AS priezvisko', 'pouzivatelia.email AS email', 'pouzivatelia.telefon AS telefon', 'obce.obec AS obec',
+                'obce.okres_id AS okres',
+                'typy.nazov AS typ')
+            ->where('pouzivatelia.realitna_kancelaria_id', '=', \Auth::user()->realitna_kancelaria_id)
+            ->where('pouzivatelia.rola', '=', '3')
+            ->get();
+
+
+
+        return view('spravovanie.realitka.inzeraty.index', ['inzeraty' => $inzeraty, 'ibaInzeratyMaklerov' => 'ano']);
+
+    }
 
 
 

@@ -77,6 +77,18 @@ class MaklerController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate(request(), [
+
+            'meno' => 'required|string|max:30',
+            'priezvisko' => 'required|string|max:30',
+            'telefon_pouzivatel' => 'required|string|max:20',
+            'email' => 'required|string|email|max:25|unique:pouzivatelia',
+            'psc_pouzivatel' => 'required|numeric|min:0',
+            'lokalita' => 'required',
+            'ulica_pouzivatel' => 'required|max:20'
+
+
+        ]);
         $pouzivatel = Pouzivatel::findOrFail($id);
         $obec_nazov = $request->get('lokalita');
         $semicolonPos = strpos($obec_nazov, ',');
