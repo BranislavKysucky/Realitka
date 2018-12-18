@@ -74,6 +74,14 @@ class Crawlerclass
                                 ? $content->filterXPath("//*[@id=\"ZakDetailContainer\"]/div/div[5]/ul") : null;
                             $kontakt_m = ($content->filterXPath("//*[@id=\"ZakDetailContainer\"]/div/div[3]/div[1]/div[2]")->count())
                                 ? $content->filterXPath("//*[@id=\"ZakDetailContainer\"]/div/div[3]/div[1]/div[2]")->text() : ' ';
+                            if($kontakt_m==' '){
+                                $kontakt_m = ($content->filterXPath("//*[@id=\"ZakDetailContainer\"]/div/div[3]/div[2]/span[2]")->count())
+                                    ? $content->filterXPath("//*[@id=\"ZakDetailContainer\"]/div/div[3]/div[2]/span[2]")->text() : ' ';
+                                $kontakt_mail = ($content->filterXPath("//*[@id=\"ZakDetailContainer\"]/div/div[3]/div[2]/span[3]")->count())
+                                    ? $content->filterXPath("//*[@id=\"ZakDetailContainer\"]/div/div[3]/div[2]/span[3]")->text() : ' ';
+                                $kontakt_m=$kontakt_m.' '.$kontakt_mail;
+                            }
+
                             $popis=$popis.$kontakt_m;
                             $obec = DB::table('obce')->where('obec', $adresa)->value('id');
                             if (!empty($obec)) {
