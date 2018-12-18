@@ -24,12 +24,12 @@ class MainNavController extends Controller
                 ->select(DB::raw('*'))
                 ->join('obce', 'obec_id', '=', 'obce.id')
                 ->where('obce.okres_id', $request->okres)
-                ->get();
+                ->paginate(10);
         }else if($request->filled('pismeno')){
             $realitky = Realitna_kancelaria::where('nazov', 'LIKE', $request->pismeno . '%')
-                ->get();
+                ->paginate(10);
         }else{
-            $realitky = Realitna_kancelaria::all();
+            $realitky = Realitna_kancelaria::paginate(10);
         }
 
         $kraje = DB::table('okresy')

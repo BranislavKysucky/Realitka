@@ -155,7 +155,7 @@ class InzeratyController extends Controller
                     ->whereBetween('cena', array($cena_od, $cena_do))
                     ->whereBetween('vymera_domu', array($vymera_od, $vymera_do))
                     //->getQuery()
-                    ->get();
+                    ->paginate(10);
                 //echo 'ano';
             } else {
                 $inzeraty = Inzerat::select(DB::raw('inzeraty.*'))
@@ -172,7 +172,7 @@ class InzeratyController extends Controller
                     ->whereBetween('stavy.value', array($stav_od, $stav_do))
                     ->whereBetween('cena', array($cena_od, $cena_do))
                     //->getQuery()
-                    ->get();
+                    ->paginate(10);
                 //echo 'nie';
             }
             //var_dump($inzeraty);die;
@@ -186,7 +186,7 @@ class InzeratyController extends Controller
             }
 
         } else {
-            $inzeraty = Inzerat::all();
+            $inzeraty = Inzerat::paginate(10);
         }
         if ($inzeraty->count()) {
             foreach ($inzeraty as $inzerat) {
