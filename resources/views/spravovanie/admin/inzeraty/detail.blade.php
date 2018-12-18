@@ -6,6 +6,9 @@
           {{--href='//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css?ver=1' type='text/css'--}}
           {{--media='all'/>--}}
     {{--<script type='text/javascript' src='{{ URL::asset('js/inzerat_detail.js') }}'></script>--}}
+    <a href="{{ URL::previous() }}">
+        <button style="width: 10%; padding: 0;" type="button" class="btn btn-block btn-default"><span class="pe-7s-back">   Späť</span></button>
+    </a>
 
     <div class="header">
         <h3><i class="pe-7s-home"></i>{{$inzerat->typ->nazov}}, {{$inzerat->druh->podnazov}}, {{$obec->obec}}, okres {{$obec->okres_id}}</h3>
