@@ -198,9 +198,9 @@ class RealitkaMakleriController extends Controller
             'meno' => 'required|string|max:30',
             'priezvisko' => 'required|string|max:30',
             'telefon_pouzivatel' => 'required|string|max:20',
-            'email' => 'required|string|email|max:25|unique:pouzivatelia',
+
             'psc_pouzivatel' => 'required|numeric|min:0',
-            'obec_pouzivatel' => 'required',
+            'lokalita' => 'required',
             'ulica_pouzivatel' => 'required|max:20'
 
 
@@ -222,7 +222,7 @@ class RealitkaMakleriController extends Controller
         $pouzivatel->obec_id = $obec_id;
         $pouzivatel->meno=$request->get('meno');
         $pouzivatel->priezvisko=$request->get('priezvisko');
-        $pouzivatel->email=$request->get('email');
+
         $pouzivatel->ulica_cislo=$request->get('ulica_pouzivatel');
         $pouzivatel->PSC=$request->get('psc_pouzivatel');
         $pouzivatel->telefon=$request->get('telefon_pouzivatel');
@@ -244,9 +244,9 @@ class RealitkaMakleriController extends Controller
             'meno' => 'required|string|max:30',
             'priezvisko' => 'required|string|max:30',
             'telefon_pouzivatel' => 'required|string|max:20',
-            'email' => 'required|string|email|max:25|unique:pouzivatelia',
+
             'psc_pouzivatel' => 'required|numeric|min:0',
-            'obec_pouzivatel' => 'required',
+            'lokalita' => 'required',
             'ulica_pouzivatel' => 'required|max:20'
 
 
@@ -268,7 +268,7 @@ class RealitkaMakleriController extends Controller
         $pouzivatel->obec_id = $obec_id;
         $pouzivatel->meno=$request->get('meno');
         $pouzivatel->priezvisko=$request->get('priezvisko');
-        $pouzivatel->email=$request->get('email');
+
         $pouzivatel->ulica_cislo=$request->get('ulica_pouzivatel');
         $pouzivatel->PSC=$request->get('psc_pouzivatel');
         $pouzivatel->telefon=$request->get('telefon_pouzivatel');
@@ -289,11 +289,11 @@ class RealitkaMakleriController extends Controller
         $this->validate(request(), [
 
             'nazov' => 'required|string|max:40',
-            'obec_pouzivatel' => 'required',
+            'lokalita' => 'required',
             'ICO' => 'required|string|max:8',
             'DIC' => 'required|string|max:10',
             'kontaktna_osoba' => 'required|string|max:20',
-            'email' => 'required|string|email|max:25|unique:pouzivatelia',
+
             'ulica_pouzivatel' => 'required|max:20',
             'psc_pouzivatel' => 'required|numeric|min:0',
             'telefon_pouzivatel' => 'required|string|max:20'
@@ -326,7 +326,7 @@ class RealitkaMakleriController extends Controller
         $pouzivatel->ICO=$request->get('ICO');
         $pouzivatel->DIC=$request->get('DIC');
         $pouzivatel->kontaktna_osoba=$request->get('kontaktna_osoba');
-        $pouzivatel->email=$request->get('email');
+
         $pouzivatel->ulica_cislo=$request->get('ulica_pouzivatel');
         $pouzivatel->PSC=$request->get('psc_pouzivatel');
         $pouzivatel->telefon=$request->get('telefon_pouzivatel');

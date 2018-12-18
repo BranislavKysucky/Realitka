@@ -120,19 +120,7 @@
 
                                     </div>
 
-                                    <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                                        <label for="email" ><strong>E-Mail</strong></label>
 
-
-                                            <input id="email" type="email" class="form-control" name="email" value="{{ $pouzivatel->email }}" required>
-
-                                            @if ($errors->has('email'))
-                                                <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                            @endif
-
-                                    </div>
 
 
 

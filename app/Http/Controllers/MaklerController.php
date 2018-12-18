@@ -82,7 +82,7 @@ class MaklerController extends Controller
             'meno' => 'required|string|max:30',
             'priezvisko' => 'required|string|max:30',
             'telefon_pouzivatel' => 'required|string|max:20',
-            'email' => 'required|string|email|max:25|unique:pouzivatelia',
+
             'psc_pouzivatel' => 'required|numeric|min:0',
             'lokalita' => 'required',
             'ulica_pouzivatel' => 'required|max:20'
@@ -106,7 +106,6 @@ class MaklerController extends Controller
         $pouzivatel->obec_id = $obec_id;
         $pouzivatel->meno=$request->get('meno');
         $pouzivatel->priezvisko=$request->get('priezvisko');
-        $pouzivatel->email=$request->get('email');
         $pouzivatel->ulica_cislo=$request->get('ulica_pouzivatel');
         $pouzivatel->PSC=$request->get('psc_pouzivatel');
         $pouzivatel->telefon=$request->get('telefon_pouzivatel');

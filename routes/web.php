@@ -40,7 +40,7 @@ Route::middleware(['auth'])->group(function () {
     Route::group(['middleware' => 'App\Http\Middleware\Realitka'], function () {
         Route::resource('inzeraty_r', 'RealitkaInzeratyController');
         Route::get('indexBezMajitela','RealitkaInzeratyController@indexBezMajitela');
-
+        Route::get('grafy','RealitkaInzeratyController@grafy');
 
 
         Route::resource('makleri_r', 'RealitkaMakleriController');

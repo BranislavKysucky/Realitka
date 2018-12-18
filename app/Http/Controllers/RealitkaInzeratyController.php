@@ -65,7 +65,20 @@ class RealitkaInzeratyController extends Controller
 
     }
 
+    public function grafy()
+    {
 
+
+
+
+
+        return view('spravovanie.realitka.statistiky.grafy')
+            ;
+
+
+
+
+    }
 
 
     /**

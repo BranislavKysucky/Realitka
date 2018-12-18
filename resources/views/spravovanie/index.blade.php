@@ -91,7 +91,7 @@
                     <span>Pridať makléra</span></a>
             </li>
             <li>
-                <a href=""><i class="icon icon-list-alt"></i> <span>Štatistiky</span></a>
+                <a href="{{action('RealitkaInzeratyController@grafy')}}"><i class="icon icon-list-alt"></i> <span>Štatistiky</span></a>
             </li>
 
         @endif
