@@ -24,7 +24,7 @@ class CreateInzeratyTable extends Migration
             $table->string('nazov');
             $table->longText('popis');
             $table->string('ulica')->nullable();
-            $table->string('heslo',191)->nullable();
+            $table->string('heslo', 191)->nullable();
             $table->integer('cena')->nullable();
             $table->integer('vymera_domu')->nullable();
             $table->integer('vymera_pozemku')->nullable();
@@ -33,14 +33,14 @@ class CreateInzeratyTable extends Migration
             $table->integer('pocet_zobrazeni')->default(1);
             $table->boolean('crawler')->default(false);
             $table->timestamps();
-/*
+
             $table->foreign('stav_id')->references('id')->on('stavy');
             $table->foreign('druh_id')->references('id')->on('druhy');
             $table->foreign('typ_id')->references('id')->on('typy');
             $table->foreign('kategoria_id')->references('id')->on('kategorie');
             $table->foreign('pouzivatel_id')->references('id')->on('pouzivatelia');
-            $table->foreign('kraj_id')->references('id')->on('kraje');
-*/
+            $table->foreign('obec_id')->references('id')->on('obce');
+
         });
     }
 

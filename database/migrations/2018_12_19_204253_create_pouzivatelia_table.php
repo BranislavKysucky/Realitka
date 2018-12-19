@@ -30,10 +30,10 @@ class CreatePouzivateliaTable extends Migration
             $table->integer('blokovany')->default(0);
             $table->rememberToken();
             $table->timestamps();
-/*
-            $table->foreign('kraj_id')->references('id')->on('kraje');
+
+            $table->foreign('obec_id')->references('id')->on('obce');
             $table->foreign('realitna_kancelaria_id')->references('id')->on('realitne_kancelarie');
-*/
+
         });
 
     }
