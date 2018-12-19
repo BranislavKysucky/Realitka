@@ -290,8 +290,8 @@ class RealitkaMakleriController extends Controller
 
             'nazov' => 'required|string|max:40',
             'lokalita' => 'required',
-            'ICO' => 'required|string|max:8',
-            'DIC' => 'required|string|max:10',
+            'ICO' => 'required|string|min:8|max:8',
+            'DIC' => 'required|string|min:10|max:10',
             'kontaktna_osoba' => 'required|string|max:20',
 
             'ulica_pouzivatel' => 'required|max:20',
