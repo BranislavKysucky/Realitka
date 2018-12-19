@@ -71,7 +71,7 @@
         </tbody>
     </table>
 
-
+    <div align="center">{{ $makleri->links() }}</div>
 
 @endsection
 

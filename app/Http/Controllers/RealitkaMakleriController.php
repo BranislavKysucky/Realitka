@@ -29,7 +29,7 @@ class RealitkaMakleriController extends Controller
             ->select('pouzivatelia.id AS id','pouzivatelia.meno AS meno', 'pouzivatelia.priezvisko AS priezvisko', 'pouzivatelia.email AS email', 'pouzivatelia.telefon AS telefon', 'obce.obec AS obec','pouzivatelia.ulica_cislo AS adresa')
             ->where('pouzivatelia.realitna_kancelaria_id', '=', $realitka_id )
             ->where('pouzivatelia.rola', '=', 3 )
-            ->get();
+            ->paginate(10);
 
 
 
@@ -52,7 +52,7 @@ class RealitkaMakleriController extends Controller
                 'typy.nazov AS typ')
             ->where('pouzivatelia.realitna_kancelaria_id', '=', \Auth::user()->realitna_kancelaria_id)
             ->where('pouzivatelia.id', '=', $id )
-            ->get();
+            ->paginate(10);
 
 
 

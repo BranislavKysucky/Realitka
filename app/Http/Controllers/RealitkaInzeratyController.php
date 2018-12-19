@@ -36,7 +36,7 @@ class RealitkaInzeratyController extends Controller
                 'typy.nazov AS typ')
             ->where('pouzivatelia.realitna_kancelaria_id', '=', \Auth::user()->realitna_kancelaria_id)
 
-            ->get();
+            ->paginate(10);
 
 
 
@@ -57,7 +57,7 @@ class RealitkaInzeratyController extends Controller
                 'typy.nazov AS typ')
             ->where('pouzivatelia.realitna_kancelaria_id', '=', \Auth::user()->realitna_kancelaria_id)
             ->where('pouzivatelia.rola', '=', '3')
-            ->get();
+            ->paginate(10);
 
 
 

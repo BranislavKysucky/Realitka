@@ -83,7 +83,7 @@
 
         </tbody>
     </table>
-
+    <div align="center">{{ $inzeraty->links() }}</div>
 
 
 @endsection
