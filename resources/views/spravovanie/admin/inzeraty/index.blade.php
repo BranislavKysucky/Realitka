@@ -1,10 +1,5 @@
 @extends('spravovanie.index2')
 @section('supercontent2')
-    <a href="{{ URL::previous() }}">
-        <button style="width: 10%; padding: 0;" type="button" class="btn btn-block btn-default"><span class="pe-7s-back">   Späť</span></button>
-    </a>
-
-    <br>
     <div class="header">
         <h4 class="title">{{$pouzivatel->email}}</h4>
     </div>
@@ -33,6 +28,9 @@
                 @endforeach
             </tbody>
         </table>
+    </div>
+
+        <div style="text-align: center;">{{ $inzeraty->links() }}</div>
 
         {{--<div id="deleteInzerat" class="modal fade" class="modal-dialog modal-lg" style="background-color: red" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">--}}
             {{--<div class="modal-dialog modal-sm">--}}
@@ -92,6 +90,4 @@
                 });
             });
         </script>
-
-    </div>
 @endsection

@@ -18,7 +18,7 @@ class AdminPouzivateliaController extends Controller
      */
     public function index()
     {
-        $pouzivatelia = DB::table('pouzivatelia')->where('rola', '4')->get();
+        $pouzivatelia = DB::table('pouzivatelia')->where('rola', '4')->paginate(10);
 
         foreach ($pouzivatelia as $pouzivatel){
             if($pouzivatel->blokovany == 0){
@@ -122,5 +122,13 @@ class AdminPouzivateliaController extends Controller
         Inzerat::where('pouzivatel_id', $id)->delete();
 
         return redirect()->action('AdminPouzivateliaController@index');
+    }
+
+    public function zmenaHesla(){
+        return view('spravovanie.admin.realitky.detail');
+    }
+
+    public function overitHeslo(Request $request) {
+        dd('dfsa');
     }
 }

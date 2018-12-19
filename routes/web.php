@@ -34,6 +34,8 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('realitky_a', 'AdminRealitkyController');
 
         Route::delete('blokPouzivatel/{id}','AdminPouzivateliaController@blokovat');
+        Route::get('zmenaHesla','AdminPouzivateliaController@zmenaHesla');
+        Route::post('overitHeslo','AdminPouzivateliaController@OveritHeslo');
 
     });
     //routy pre majitela realitky
