@@ -7,9 +7,9 @@
 
 
 
-    <a href="{{ URL::previous() }}">
-        <button style="width: 10%; padding: 0;" type="button" class="btn btn-block btn-default"><span class="pe-7s-back">   Späť</span></button>
-    </a>
+    {{--<a href="{{ URL::previous() }}">--}}
+        {{--<button style="width: 10%; padding: 0;" type="button" class="btn btn-block btn-default"><span class="pe-7s-back">   Späť</span></button>--}}
+    {{--</a>--}}
 
     <div class="content">
     <form id="form" class="form-horizontal" action="{{action('AdminInzeratyController@update', $inzerat->id)}}" method="POST"

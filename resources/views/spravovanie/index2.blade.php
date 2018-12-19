@@ -82,7 +82,7 @@
             color: black;
             /*padding: 7px 14px;*/
             text-align: center;
-            font-size: 10px;
+            font-size: 15px;
             cursor: pointer;
             border-color: #4CAF50;
             color: green;
