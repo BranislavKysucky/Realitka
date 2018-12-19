@@ -81,7 +81,7 @@
                                 <h3>  <label for="cena"><strong>Cena (€) </strong></label> </h3>
                                 <input placeholder="cena" class="form-control" type="number" step="any" min="0" id="cena"
                                        value="{{$inzerat->cena}}"
-                                       onchange="hideCena_dohodou();" name="cena"/>
+                                       onchange="hideCena_dohodou();" name="cena" onKeyPress="if(this.value.length==10) return false;"/>
 
                             </div>
 

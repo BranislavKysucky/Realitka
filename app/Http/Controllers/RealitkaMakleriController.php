@@ -86,7 +86,7 @@ class RealitkaMakleriController extends Controller
             'telefon_pouzivatel' => 'required|string|max:20',
             'email' => 'required|string|email|max:25|unique:pouzivatelia',
             'password' => 'required|string|min:6|confirmed',
-            'psc_pouzivatel' => 'required|numeric|min:0',
+            'psc_pouzivatel' => 'required|numeric|min:0|digits:5',
             'obec_pouzivatel' => 'required',
             'ulica_pouzivatel' => 'required|max:20'
 
@@ -199,7 +199,7 @@ class RealitkaMakleriController extends Controller
             'priezvisko' => 'required|string|max:30',
             'telefon_pouzivatel' => 'required|string|max:20',
 
-            'psc_pouzivatel' => 'required|numeric|min:0',
+            'psc_pouzivatel' => 'required|numeric|min:0|digits:5',
             'lokalita' => 'required',
             'ulica_pouzivatel' => 'required|max:20'
 
@@ -245,7 +245,7 @@ class RealitkaMakleriController extends Controller
             'priezvisko' => 'required|string|max:30',
             'telefon_pouzivatel' => 'required|string|max:20',
 
-            'psc_pouzivatel' => 'required|numeric|min:0',
+            'psc_pouzivatel' => 'required|numeric|min:0|digits:5',
             'lokalita' => 'required',
             'ulica_pouzivatel' => 'required|max:20'
 
@@ -295,7 +295,7 @@ class RealitkaMakleriController extends Controller
             'kontaktna_osoba' => 'required|string|max:20',
 
             'ulica_pouzivatel' => 'required|max:20',
-            'psc_pouzivatel' => 'required|numeric|min:0',
+            'psc_pouzivatel' => 'required|numeric|min:0|digits:5',
             'telefon_pouzivatel' => 'required|string|max:20'
 
 

@@ -124,7 +124,7 @@
                     </div>
 
                 </div>
-                    @include('errors')
+
                 </form>
                 <br>
 

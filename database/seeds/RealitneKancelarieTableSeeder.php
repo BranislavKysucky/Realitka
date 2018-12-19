@@ -20,8 +20,8 @@ class RealitneKancelarieTableSeeder extends Seeder
                 'kontaktna_osoba' => 'Kontaktna_Osoba' . rand(1, 99),
                 'telefon' => '+421' . rand(100000000, 999999999),
                 'email' => 'testMail' . rand(1, 1000) . '@email.sk',
-                'ICO' => rand(100000000, 999999999),
-                'DIC' => rand(10000000000, 99999999999),
+                'ICO' => rand(10000000, 99999999),
+                'DIC' => rand(1000000000, 9999999999),
                 'url_logo' => '/images/demo/no_image.jpg',
             ]);
         }

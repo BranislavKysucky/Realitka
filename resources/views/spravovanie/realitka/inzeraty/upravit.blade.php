@@ -81,7 +81,7 @@
                         <div id="cena" >
                             <label for="cena"><strong>Cena (€) </strong></label>
 
-                            <input onchange="hideCena_dohodou();" required id="cena" class="form-control" placeholder="cena" value="{{$inzerat->cena}}" name="cena"/>
+                            <input onchange="hideCena_dohodou();" required id="cena" class="form-control" placeholder="cena" value="{{$inzerat->cena}}" name="cena"onKeyPress="if(this.value.length==10) return false;"/>
 
 
                         </div>

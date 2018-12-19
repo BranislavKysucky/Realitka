@@ -83,7 +83,7 @@ class MaklerController extends Controller
             'priezvisko' => 'required|string|max:30',
             'telefon_pouzivatel' => 'required|string|max:20',
 
-            'psc_pouzivatel' => 'required|numeric|min:0',
+            'psc_pouzivatel' => 'required|numeric|min:0|digits:5',
             'lokalita' => 'required',
             'ulica_pouzivatel' => 'required|max:20'
 
