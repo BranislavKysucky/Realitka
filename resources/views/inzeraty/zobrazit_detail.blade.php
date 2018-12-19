@@ -72,7 +72,6 @@
                         <strong id="email">{{$pouzivatel->email}}</strong> <br/>
                     @endif
                 @endif
-
                 <hr>
                 {{--<div class="product_meta">
                     --}}{{--<p> Pridal:{{$pouzivatel->meno}}--}}{{--

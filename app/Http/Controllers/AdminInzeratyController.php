@@ -27,7 +27,7 @@ class AdminInzeratyController extends Controller
         $id = $request->get('pouzivatel_id');
 
         $pouzivatel = Pouzivatel::find($request->get('pouzivatel_id'));
-        $inzeraty = DB::table('inzeraty')->where('pouzivatel_id', $id)->get();
+        $inzeraty = DB::table('inzeraty')->where('pouzivatel_id', $id)->paginate(10);
 
         return view('spravovanie.admin.inzeraty.index', ['inzeraty' => $inzeraty, 'pouzivatel' => $pouzivatel]);
     }

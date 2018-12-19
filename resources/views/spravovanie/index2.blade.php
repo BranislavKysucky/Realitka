@@ -82,7 +82,7 @@
             color: black;
             /*padding: 7px 14px;*/
             text-align: center;
-            font-size: 10px;
+            font-size: 15px;
             cursor: pointer;
             border-color: #4CAF50;
             color: green;
@@ -127,22 +127,28 @@
                         <p>Kontakt</p>
                     </a>
                 </li>
+                <li>
+                    <a href="/zmenaHesla">
+                        <i class="pe-7s-repeat"></i>
+                        <p>Zmena hesla</p>
+                    </a>
+                </li>
                     {{--zmenit ikony--}}
-                @elseif(Auth::user()->rola==2)
-                    <li>
-                        <a href=""><i class="icon icon-home"></i> <p>Domov</p></a>
-                    </li>
-                    <li>
-                        <a href="{{route('inzeraty_r.index')}}"><i class="icon icon-list-alt"></i> <p>Inzeráty</p></a>
-                        <a href="{{route('inzeraty.create')}}"><i class="glyphicon glyphicon-plus"></i> <p>ať inzerát</p></a>
-                    </li>
-                    <li>
-                        <a href="{{route('makleri_r.index')}}"><i class="icon icon-list-alt"></i> <p>Makléri</p></a>
-                        <a href="{{route('makleri_r.create')}}"><i class="glyphicon glyphicon-plus"></i> <p>ať makléra</p></a>
-                    </li>
-                    <li>
-                        <a href=""><i class="icon icon-list-alt"></i> <p>Štatistiky</p></a>
-                    </li>
+                {{--@elseif(Auth::user()->rola==2)--}}
+                    {{--<li>--}}
+                        {{--<a href=""><i class="icon icon-home"></i> <p>Domov</p></a>--}}
+                    {{--</li>--}}
+                    {{--<li>--}}
+                        {{--<a href="{{route('inzeraty_r.index')}}"><i class="icon icon-list-alt"></i> <p>Inzeráty</p></a>--}}
+                        {{--<a href="{{route('inzeraty.create')}}"><i class="glyphicon glyphicon-plus"></i> <p>ať inzerát</p></a>--}}
+                    {{--</li>--}}
+                    {{--<li>--}}
+                        {{--<a href="{{route('makleri_r.index')}}"><i class="icon icon-list-alt"></i> <p>Makléri</p></a>--}}
+                        {{--<a href="{{route('makleri_r.create')}}"><i class="glyphicon glyphicon-plus"></i> <p>ať makléra</p></a>--}}
+                    {{--</li>--}}
+                    {{--<li>--}}
+                        {{--<a href=""><i class="icon icon-list-alt"></i> <p>Štatistiky</p></a>--}}
+                    {{--</li>--}}
                 @endif
             </ul>
         </div>

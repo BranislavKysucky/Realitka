@@ -57,15 +57,15 @@ class InzeratyTableSeeder extends Seeder
 
                 DB::table('fotografie')->insert([
                     'inzerat_id' => $inzerat->id,
-                    'url' => 'images/seed/seed01.jpg'
+                    'url' => '/images/seed/seed01.jpg'
                 ]);
                 DB::table('fotografie')->insert([
                     'inzerat_id' => $inzerat->id,
-                    'url' => 'images/seed/seed02.jpg'
+                    'url' => '/images/seed/seed02.jpg'
                 ]);
                 DB::table('fotografie')->insert([
                     'inzerat_id' => $inzerat->id,
-                    'url' => 'images/seed/seed03.jpg'
+                    'url' => '/images/seed/seed03.jpg'
                 ]);
             }
         }
