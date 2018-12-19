@@ -207,7 +207,7 @@
                         <p style="color:#585858">
                             {{substr($inzerat->popis,0,300)}}...
                         </p>
-                        <p class="pull-right">Pocet zobrazeni: {{$inzerat->pocet_zobrazeni}}x</p>
+                        {{--<p class="pull-right">Pocet zobrazeni: {{$inzerat->pocet_zobrazeni}}x</p>--}}
 
 
                     </div>

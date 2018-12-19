@@ -19,18 +19,6 @@ class MainNavController extends Controller
 {
     public function getRealitky(Request $request)
     {
-        if ($request->filled('okres')) {
-            $realitky = DB::table('realitne_kancelarie')
-                ->select(DB::raw('*'))
-                ->join('obce', 'obec_id', '=', 'obce.id')
-                ->where('obce.okres_id', $request->okres)
-                ->paginate(10);
-        } else if ($request->filled('pismeno')) {
-            $realitky = Realitna_kancelaria::where('nazov', 'LIKE', $request->pismeno . '%')
-                ->paginate(10);
-        } else {
-            $realitky = Realitna_kancelaria::paginate(10);
-        }
 
         $kraje = DB::table('okresy')
             ->select(array(DB::raw('kraj_id, kraje.kraj as kraj, COUNT(kraj_id) as pocet')))
@@ -100,6 +88,31 @@ class MainNavController extends Controller
             for ($j = 0; $j < count($okresyVar); $j++) {
                 $okresy[substr($okresyString, -2)][$j] = $okresyVar[$j]['id'];
             }
+        }
+
+        if ($request->filled('okres')) {
+            $realitky = DB::table('realitne_kancelarie')
+                ->select(DB::raw('*, obce.obec as obecc, obce.okres_id as okress'))
+                ->join('obce', 'obec_id', '=', 'obce.id')
+                ->where('obce.okres_id', $request->okres)
+                ->paginate(10);
+        } else if ($request->filled('pismeno')) {
+//            $realitky = Realitna_kancelaria::where('nazov', 'LIKE', $request->pismeno . '%')
+//                ->paginate(10);
+
+            $realitky = DB::table('realitne_kancelarie')
+                ->select(DB::raw('*, obce.obec as obecc, obce.okres_id as okress'))
+                ->join('obce', 'obec_id', '=', 'obce.id')
+                ->where('nazov', 'LIKE', $request->pismeno . '%')
+                ->paginate(10);
+        } else {
+            $realitky = Realitna_kancelaria::paginate(10);
+
+            $realitky = DB::table('realitne_kancelarie')
+                ->select(DB::raw('*, obce.obec as obecc, obce.okres_id as okress'))
+                ->join('obce', 'obec_id', '=', 'obce.id')
+//                ->where('obce.okres_id', $request->okres)
+                ->paginate(10);
         }
 //        dd($kraje);
 

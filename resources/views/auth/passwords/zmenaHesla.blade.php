@@ -8,7 +8,7 @@
                     <div class="panel-heading">Zmena hesla</div>
 
                     <div class="panel-body">
-                        <form class="form-horizontal" method="POST" action="/ulozit_Heslo">
+                        <form id="target" class="form-horizontal" method="POST" action="/ulozit_Heslo">
                             {{ csrf_field() }}
 
                             <div class="form-group">
@@ -40,7 +40,7 @@
                                 <div class="col-md-6">
                                     <input id="password2" type="password" class="form-control" value=""
                                            name="noveHeslo2"
-                                           placeholder="Zopakujte nové heslo" oninput="check(this)" required>
+                                           placeholder="Zopakujte nové heslo" required>
                                 </div>
                             </div>
 

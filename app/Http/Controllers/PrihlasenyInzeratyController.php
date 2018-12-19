@@ -21,8 +21,7 @@ class PrihlasenyInzeratyController extends Controller
     {
         $obce = Obec::all();
         if (Auth::check()) {
-            $inzeraty = Inzerat::where('pouzivatel_id', Auth::user()->id)->get();
-            $inzeraty = Inzerat::paginate(10);
+            $inzeraty = Inzerat::where('pouzivatel_id', Auth::user()->id)->paginate(10);
             foreach ($inzeraty as $inzerat) {
                 if ($inzerat->jednaFotografia()->value('url') == null) {
                     $inzerat->obrazok = 'images/demo/no_image.jpg';
