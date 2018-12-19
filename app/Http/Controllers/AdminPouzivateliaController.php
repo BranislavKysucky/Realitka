@@ -142,7 +142,7 @@ class AdminPouzivateliaController extends Controller
             $admin->password = bcrypt($request->get('noveHeslo'));
             $admin->save();
             Auth::logout();
-            return view('auth.login');
+            return redirect('/login');
         } else {
             return back();
         }
