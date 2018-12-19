@@ -2,7 +2,7 @@
 @section('supercontent')
 
 
-    <head>
+
         <!--Load the AJAX API-->
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
         <script type="text/javascript">
@@ -32,24 +32,25 @@
 
                 // Set chart options
                 var options = {'title':'How Much Pizza I Ate Last Night',
-                    'width':800,
-                    'height':700};
+                    backgroundColor: '#eeeeee',
+                    'width':500,
+                    'height':400};
 
                 // Instantiate and draw our chart, passing in some options.
                 var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
                 chart.draw(data, options);
             }
         </script>
-    </head>
 
-    <body align="center">
+
+
     <!--Div that will hold the pie chart-->
 
-    <div class="panel-heading"><h1> Grafy : </h1></div>
 
 
-    <div align="center" id="chart_div"></div>
-    </body>
+
+    <div  id="chart_div"></div>
+
 
 
 @endsection
