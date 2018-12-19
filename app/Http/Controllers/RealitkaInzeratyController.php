@@ -68,16 +68,42 @@ class RealitkaInzeratyController extends Controller
     public function grafy()
     {
 
+        $druhy = DB::table('inzeraty')
+            ->select(DB::raw("COUNT(*) as pocet, druhy.nazov"))
+            ->join('druhy', 'inzeraty.druh_id', '=', 'druhy.id' )
+            ->join('pouzivatelia', 'inzeraty.pouzivatel_id', '=', 'pouzivatelia.id' )
+            ->where('pouzivatelia.realitna_kancelaria_id', '=', \Auth::user()->realitna_kancelaria_id)
+            ->groupBy('inzeraty.druh_id')
+            ->get();
+
+        $makleri = DB::table('inzeraty')
+            ->select(DB::raw("COUNT(*) as pocet, pouzivatelia.email AS email"))
+            ->join('pouzivatelia', 'inzeraty.pouzivatel_id', '=', 'pouzivatelia.id' )
+            ->where('pouzivatelia.realitna_kancelaria_id', '=', \Auth::user()->realitna_kancelaria_id)
+            ->groupBy('inzeraty.pouzivatel_id')
+            ->orderByRaw('pocet DESC')
+            ->take(10)
+            ->get();
+
+        $kraje = DB::table('inzeraty')
+            ->select(DB::raw("COUNT(*) as pocet, kraje.kraj AS nazov"))
+            ->join('pouzivatelia', 'inzeraty.pouzivatel_id', '=', 'pouzivatelia.id' )
+            ->join('obce', 'inzeraty.obec_id', '=', 'obce.id' )
+            ->join('okresy', 'obce.okres_id', '=', 'okresy.id' )
+            ->join('kraje', 'okresy.kraj_id', '=', 'kraje.id' )
+
+            ->where('pouzivatelia.realitna_kancelaria_id', '=', \Auth::user()->realitna_kancelaria_id)
+            ->groupBy('kraje.kraj')
+            ->get();
 
 
 
 
         return view('spravovanie.realitka.statistiky.grafy')
+            ->with(compact('druhy'))
+            ->with(compact('makleri'))
+            ->with(compact('kraje'))
             ;
-
-
-
-
     }
 
 
