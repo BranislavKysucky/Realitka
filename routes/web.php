@@ -55,8 +55,6 @@ Route::middleware(['auth'])->group(function () {
         Route::get('editProfil/{id}','RealitkaMakleriController@editProfil');           // editovanie osobnych udajov majitela realitky
         Route::post('updateFirma/{id}','RealitkaMakleriController@updateFirma');        // updatnutie udajov
         Route::get('editFirma/{id}','RealitkaMakleriController@editFirma');             // editovanie udajov o realitke
-
-
     });
 
     //routy pre maklera
@@ -71,8 +69,7 @@ Route::middleware(['auth'])->group(function () {
     //routy pre prihlaseneho pouzivatela. Majitel realitky, makler ale aj admin moze mat inzeraty...
     //takze ak je ktokolvek prihlaseny, tak po kliknuti na tlacidlo Moje Inzeraty sa mu zobrazia len jeho inzeraty
     Route::resource('moje_inzeraty_p', 'PrihlasenyInzeratyController');
-
-
-
+    Route::get('zmena_Hesla','PrihlasenyInzeratyController@zmenaHesla');
+    Route::post('ulozit_Heslo','PrihlasenyInzeratyController@ulozitHeslo');
 
 });

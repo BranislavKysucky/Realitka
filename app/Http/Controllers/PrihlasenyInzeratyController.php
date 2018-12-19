@@ -7,6 +7,8 @@ use App\Inzerat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use App\Pouzivatel;
 
 class PrihlasenyInzeratyController extends Controller
 {
@@ -31,7 +33,26 @@ class PrihlasenyInzeratyController extends Controller
             return view('inzeraty.filtrovane_inzeraty', ['obce' => $obce, 'inzeraty' => $inzeraty, 'widget' => $this->widget()]);
         }
     }
-
+    public function zmenaHesla()
+    {
+        return view('auth.passwords.zmenaHesla');
+    }
+    public function ulozitHeslo(Request $request)
+    {
+        $this->validate(request(), [
+            'noveHeslo' => 'required|string|min:6',
+            'stareHeslo' => 'required'
+        ]);
+        if (Hash::check($request->get('stareHeslo'), Auth::user()->getAuthPassword())) {
+            $admin = Pouzivatel::findOrFail(Auth::user()->id);
+            $admin->password = bcrypt($request->get('noveHeslo'));
+            $admin->save();
+            Auth::logout();
+            return view('auth.login');
+        } else {
+            return back();
+        }
+    }
     /**
      * Show the form for creating a new resource.
      *
