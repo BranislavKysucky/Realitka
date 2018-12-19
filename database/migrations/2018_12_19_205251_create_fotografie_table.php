@@ -18,7 +18,8 @@ class CreateFotografieTable extends Migration
             $table->integer('inzerat_id')->nullable();
             $table->string('url');
             $table->timestamps();
-            $table->foreign('inzerat_id')->references('id')->on('inzeraty');
+
+//            $table->foreign('inzerat_id')->references('id')->on('inzeraty');
 
         });
     }

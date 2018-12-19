@@ -31,8 +31,8 @@ class CreatePouzivateliaTable extends Migration
             $table->rememberToken();
             $table->timestamps();
 
-            $table->foreign('obec_id')->references('id')->on('obce');
-            $table->foreign('realitna_kancelaria_id')->references('id')->on('realitne_kancelarie');
+//            $table->foreign('obec_id')->references('id')->on('obce');
+//            $table->foreign('realitna_kancelaria_id')->references('id')->on('realitne_kancelarie');
 
         });
 

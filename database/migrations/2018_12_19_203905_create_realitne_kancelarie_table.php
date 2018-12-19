@@ -27,7 +27,7 @@ class CreateRealitneKancelarieTable extends Migration
             $table->string('url_logo')->nullable();
             $table->timestamps();
 
-            $table->foreign('obec_id')->references('id')->on('obce');
+//            $table->foreign('obec_id')->references('id')->on('obce');
 
 
         });
