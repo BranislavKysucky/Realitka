@@ -73,7 +73,7 @@ class RealitkaInzeratyController extends Controller
             ->join('druhy', 'inzeraty.druh_id', '=', 'druhy.id' )
             ->join('pouzivatelia', 'inzeraty.pouzivatel_id', '=', 'pouzivatelia.id' )
             ->where('pouzivatelia.realitna_kancelaria_id', '=', \Auth::user()->realitna_kancelaria_id)
-            ->groupBy('inzeraty.druh_id')
+            ->groupBy('druhy.nazov')
             ->get();
 
         $makleri = DB::table('inzeraty')

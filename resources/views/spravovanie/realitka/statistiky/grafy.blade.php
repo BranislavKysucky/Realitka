@@ -1,14 +1,7 @@
 @extends('spravovanie.index')
 @section('supercontent')
 
-<style>
 
-    .container {
-        display: flex;
-        width: 100%;
-        height: 150px;
-    }
-    </style>
 
         <!--Load the AJAX API-->
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -187,11 +180,14 @@
 
         </td>
     </tr>
+
+
+
 </table>
 
 
 
-
+<br><br><br><br>
 
 
 
