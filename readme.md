@@ -1,58 +1,49 @@
-<p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
+Stručný popis projektu: 
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+Účelom projektu je vytvorenie realitného portálu. Aplikácia musí byť schopná zvládnuť 3 úrovne prístupu:
 
-## About Laravel
+    Anonymný - používateľ, ktorý prichádza za účelom hľadania nehnuteľnosti
+    Realitná kancelária - realitná kancelária á záujem o vkladanie inzerátov, ich managment a sledovanie štatistických informácií ako napríklad kto si prezrel moje inzeráty
+    Prístup administrátora - administrátor a jeho schopnosti v rámci uvedeného prístupu sú čisto na autoroch systému. Je dobré sa riadiť heslo, čím viac tým lepšie
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as:
+Jedná sa o koncepčne jednoduchú úlohu, ktorý na komerčnom trhu doma aj v zahraničí bola zvládnutá stovky krát, rôznymi spôsobmi. Dôležitými časťami projektu je anonymné rozhranie, lebo od toho sa odvíja návštevnosť portálu. Zároveň je veľmi dôležité zabezpečiť, čo najväčší počet kanálov, ktorými budú jednotlivé inzeráty na portál pribúdať. Bežné spôsoby sú nasledovné:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+    Súkromná inzercia - súkromná osoba vyplní formulár a uverejní svoj inzerát
+    Realitná kancelária sa zaregistruje a manuálne nahadzuje svoje inzeráty
+    Realitná kancelária sa zaregistruje a poskytne výstup zo svojho systému vo formáte JSON alebo XML pričom vytvorený systém bude pravidelne tieto inzeráty sťahovať
+    Realitná kancelária sa nezaregistruje, avšak systém za pomoci technológií ako cURL a XPath grabbuje/crawluje príslušný web a bez vedomia realitnej kancelárie šíry jej inzeráty
 
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications.
 
-## Learning Laravel
+Základné funkčné požiadavky
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of any modern web application framework, making it a breeze to get started learning the framework.
+    Aplikácia musí obsahovať vyhľadávanie inzerátov podľa stanovených kritérií
+    Aplikácia musí zobraziť detail inzerátu
+    Aplikácia musí obsahovať úvodnú stránku s vyhľadávaním, navigačným menu a doplnkovými widgetmi ako napríklad najlacnejšie byty atď.
+    Aplikácia musí obsahovať funkcionalitu umožňujúcu pridávať inzeráty od neregistrovaných osôb
+    Aplikácia musí obsahovať rozhranie pre realitné kancelárie
+    Aplikácia musí obsahovať rozhranie pre administrátora
 
-If you're not in the mood to read, [Laracasts](https://laracasts.com) contains over 1100 video tutorials on a range of topics including Laravel, modern PHP, unit testing, JavaScript, and more. Boost the skill level of yourself and your entire team by digging into our comprehensive video library.
 
-## Laravel Sponsors
+Nefunkčné požiadavky
 
-We would like to extend our thanks to the following sponsors for helping fund on-going Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell):
+- Projekt musí byť zobraziteľný na všetkých štandardizovaných zariadeniach - musí byť responzívny
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-- [CodeBrisk](https://codebrisk.com)
-- [1Forge](https://1forge.com)
-- [TECPRESSO](https://tecpresso.co.jp/)
-- [Pulse Storm](http://www.pulsestorm.net/)
-- [Runtime Converter](http://runtimeconverter.com/)
-- [WebL'Agence](https://weblagence.com/)
+- Projekt musí fungovať ako webová aplikácia
 
-## Contributing
+- Projekt musí byť naprogramovaný v Laravel 5.5
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+- Projekt musí byť spustiteľný na servery Apache 2.4
 
-## Security Vulnerabilities
+- Projekt musí byť kompatibilný s minimálne PHP 7.0.*
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+- Ako databázová platforma musí byť využitá MySQL 5.7.* alebo MariaDB 10.1.* a viac
 
-## License
+- Je povolené používať cachovací mechanizmus v podobe Redisu
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Príklady existujúcich riešení
+
+https://www.nehnutelnosti.sk/
+https://www.reality.sk/
+https://reality.bazar.sk/
+https://www.topreality.sk/
+https://ringo.topky.sk/
